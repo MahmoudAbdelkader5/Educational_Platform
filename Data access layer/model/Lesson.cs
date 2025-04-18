@@ -19,7 +19,9 @@ namespace Data_access_layer.model
         public string Title { get; set; }
 
         [StringLength(255)]
+
         public string VideoURL { get; set; }
+        public string TaskFileName { get; set; }
 
         public string SupportingFiles { get; set; }
 

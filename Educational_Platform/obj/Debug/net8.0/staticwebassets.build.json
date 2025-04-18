@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LtHUmwKbk6qKlpVZ4FsnOgDG2fhSkhyra4OiUooksBg=",
+  "Hash": "EYG/2VGpvVjnJAxixo1OdBnW64dlzCvhabu32Sb5fLw=",
   "Source": "Educational_Platform",
   "BasePath": "_content/Educational_Platform",
   "Mode": "Default",
@@ -164,6 +164,27 @@
       "OriginalItemSpec": "wwwroot\\files\\file\\296292863_1433791107118268_212438576613793957_n.jpg"
     },
     {
+      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\Educational Platform (3).pdf",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/file/Educational Platform (3)#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7iw2rkbcoy",
+      "Integrity": "D4xbRo6AvwMxC3S3N85fABpHTrtMvaBPtgp7POoj/UY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\file\\Educational Platform (3).pdf"
+    },
+    {
       "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\Entities and Attributes-2 (4).pdf",
       "SourceId": "Educational_Platform",
       "SourceType": "Discovered",
@@ -183,6 +204,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\file\\Entities and Attributes-2 (4).pdf"
+    },
+    {
+      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (1).pdf",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/file/mahmoudMohamed(CV) (1) (1)#[.{fingerprint}]?.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mu9d16kj72",
+      "Integrity": "HuztY0ju/tIjVU/ZpfaJXpEIPekMXTYlLvWjUAxYx8o=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (1).pdf"
     },
     {
       "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (2).pdf",
@@ -206,12 +248,12 @@
       "OriginalItemSpec": "wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (2).pdf"
     },
     {
-      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\cat-2.jpg",
+      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\MahmoudMohamedCV.pdf",
       "SourceId": "Educational_Platform",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
       "BasePath": "_content/Educational_Platform",
-      "RelativePath": "files/imgCourse/cat-2#[.{fingerprint}]?.jpg",
+      "RelativePath": "files/file/MahmoudMohamedCV#[.{fingerprint}]?.pdf",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -220,11 +262,32 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "09j97sxrlm",
-      "Integrity": "TA9tI3HUgUjdVTXnU1U3GZmo0YpvNPLWnv2CcsL+Qlk=",
+      "Fingerprint": "8u7je5kusk",
+      "Integrity": "kI+xFlgyZI3Z3mWZZqX0xWRQcfuYPif6NHvr5s3bAUU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\imgCourse\\cat-2.jpg"
+      "OriginalItemSpec": "wwwroot\\files\\file\\MahmoudMohamedCV.pdf"
+    },
+    {
+      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\carousel-2.jpg",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/imgCourse/carousel-2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "v2tpaccm93",
+      "Integrity": "iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\imgCourse\\carousel-2.jpg"
     },
     {
       "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\cat-4.jpg",
@@ -8657,6 +8720,88 @@
       ]
     },
     {
+      "Route": "files/file/Educational Platform (3).7iw2rkbcoy.pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\Educational Platform (3).pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73418"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D4xbRo6AvwMxC3S3N85fABpHTrtMvaBPtgp7POoj/UY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "7iw2rkbcoy"
+        },
+        {
+          "Name": "label",
+          "Value": "files/file/Educational Platform (3).pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D4xbRo6AvwMxC3S3N85fABpHTrtMvaBPtgp7POoj/UY="
+        }
+      ]
+    },
+    {
+      "Route": "files/file/Educational Platform (3).pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\Educational Platform (3).pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73418"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D4xbRo6AvwMxC3S3N85fABpHTrtMvaBPtgp7POoj/UY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-D4xbRo6AvwMxC3S3N85fABpHTrtMvaBPtgp7POoj/UY="
+        }
+      ]
+    },
+    {
       "Route": "files/file/Entities and Attributes-2 (4).pdf",
       "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\Entities and Attributes-2 (4).pdf",
       "Selectors": [],
@@ -8735,6 +8880,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-XWyxQ8+YAs0GNuRWClHhoe1Xql4nI0P8qxA5RtUTqOo="
+        }
+      ]
+    },
+    {
+      "Route": "files/file/mahmoudMohamed(CV) (1) (1).mu9d16kj72.pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (1).pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87686"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuztY0ju/tIjVU/ZpfaJXpEIPekMXTYlLvWjUAxYx8o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 20:06:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mu9d16kj72"
+        },
+        {
+          "Name": "label",
+          "Value": "files/file/mahmoudMohamed(CV) (1) (1).pdf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-HuztY0ju/tIjVU/ZpfaJXpEIPekMXTYlLvWjUAxYx8o="
+        }
+      ]
+    },
+    {
+      "Route": "files/file/mahmoudMohamed(CV) (1) (1).pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\mahmoudMohamed(CV) (1) (1).pdf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87686"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"HuztY0ju/tIjVU/ZpfaJXpEIPekMXTYlLvWjUAxYx8o=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 20:06:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-HuztY0ju/tIjVU/ZpfaJXpEIPekMXTYlLvWjUAxYx8o="
         }
       ]
     },
@@ -8821,8 +9048,8 @@
       ]
     },
     {
-      "Route": "files/imgCourse/cat-2.09j97sxrlm.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\cat-2.jpg",
+      "Route": "files/file/MahmoudMohamedCV.8u7je5kusk.pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\MahmoudMohamedCV.pdf",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8831,19 +9058,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "31096"
+          "Value": "86198"
         },
         {
           "Name": "Content-Type",
-          "Value": "image/jpeg"
+          "Value": "application/pdf"
         },
         {
           "Name": "ETag",
-          "Value": "\"TA9tI3HUgUjdVTXnU1U3GZmo0YpvNPLWnv2CcsL+Qlk=\""
+          "Value": "\"kI+xFlgyZI3Z3mWZZqX0xWRQcfuYPif6NHvr5s3bAUU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 17:22:27 GMT"
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8853,21 +9080,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "09j97sxrlm"
+          "Value": "8u7je5kusk"
         },
         {
           "Name": "label",
-          "Value": "files/imgCourse/cat-2.jpg"
+          "Value": "files/file/MahmoudMohamedCV.pdf"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-TA9tI3HUgUjdVTXnU1U3GZmo0YpvNPLWnv2CcsL+Qlk="
+          "Value": "sha256-kI+xFlgyZI3Z3mWZZqX0xWRQcfuYPif6NHvr5s3bAUU="
         }
       ]
     },
     {
-      "Route": "files/imgCourse/cat-2.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\cat-2.jpg",
+      "Route": "files/file/MahmoudMohamedCV.pdf",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\MahmoudMohamedCV.pdf",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8876,7 +9103,44 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "31096"
+          "Value": "86198"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/pdf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kI+xFlgyZI3Z3mWZZqX0xWRQcfuYPif6NHvr5s3bAUU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kI+xFlgyZI3Z3mWZZqX0xWRQcfuYPif6NHvr5s3bAUU="
+        }
+      ]
+    },
+    {
+      "Route": "files/imgCourse/carousel-2.jpg",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\carousel-2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "57163"
         },
         {
           "Name": "Content-Type",
@@ -8884,11 +9148,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"TA9tI3HUgUjdVTXnU1U3GZmo0YpvNPLWnv2CcsL+Qlk=\""
+          "Value": "\"iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 17:22:27 GMT"
+          "Value": "Fri, 18 Apr 2025 19:46:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8898,7 +9162,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-TA9tI3HUgUjdVTXnU1U3GZmo0YpvNPLWnv2CcsL+Qlk="
+          "Value": "sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="
+        }
+      ]
+    },
+    {
+      "Route": "files/imgCourse/carousel-2.v2tpaccm93.jpg",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\carousel-2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "57163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 18 Apr 2025 19:46:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v2tpaccm93"
+        },
+        {
+          "Name": "label",
+          "Value": "files/imgCourse/carousel-2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="
         }
       ]
     },
@@ -8925,7 +9234,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 17:23:42 GMT"
+          "Value": "Fri, 18 Apr 2025 20:06:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8962,7 +9271,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 17:23:42 GMT"
+          "Value": "Fri, 18 Apr 2025 20:06:10 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9089,7 +9398,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 02:43:04 GMT"
+          "Value": "Fri, 18 Apr 2025 20:06:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9134,7 +9443,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 02:43:04 GMT"
+          "Value": "Fri, 18 Apr 2025 20:06:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9253,7 +9562,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 15:24:38 GMT"
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9298,7 +9607,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 15:24:38 GMT"
+          "Value": "Fri, 18 Apr 2025 20:07:53 GMT"
         },
         {
           "Name": "Cache-Control",

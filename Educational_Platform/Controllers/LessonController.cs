@@ -46,14 +46,18 @@ namespace Educational_Platform.Controllers
             try
             {
                 var lesson = await _unitOfWork.Lesson.GetByIdAsync(id);
-               ViewBag.Courses = await _unitOfWork.Course.GetAllAsync();
+                ViewBag.Courses = await _unitOfWork.Course.GetAllAsync();
+
                 if (lesson == null)
                 {
                     TempData["ErrorMessage"] = "Lesson not found.";
                     return RedirectToAction(nameof(Index));
                 }
 
-                return View(lesson);
+                // Map the Lesson entity to LessonViewModel
+                var lessonViewModel = _mapper.Map<LessonViewModel>(lesson);
+
+                return View(lessonViewModel);
             }
             catch (Exception ex)
             {
@@ -61,6 +65,7 @@ namespace Educational_Platform.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -98,7 +103,10 @@ namespace Educational_Platform.Controllers
                 {
                     lesson.SupportingFiles = Helper.Helper.uploadfile(lessonVm.Files, "file");
                 }
-
+                if (lessonVm.TaskFile != null)
+                {
+                    lesson.TaskFileName = Helper.Helper.uploadfile(lessonVm.TaskFile, "file");
+                }
                 if (lessonVm.videoFile != null)
                 {
                     lesson.VideoURL = Helper.Helper.uploadfile(lessonVm.videoFile, "video");
@@ -117,6 +125,7 @@ namespace Educational_Platform.Controllers
                 return View(lessonVm);
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -162,7 +171,15 @@ namespace Educational_Platform.Controllers
                     return View(lessonViewModel);
                 }
 
-                var lesson = _mapper.Map<Lesson>(lessonViewModel);
+                var lesson = await _unitOfWork.Lesson.GetByIdAsync(id);
+                if (lesson == null)
+                {
+                    TempData["ErrorMessage"] = "Lesson not found.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Map updated properties from ViewModel to the Lesson entity
+                _mapper.Map(lessonViewModel, lesson);
 
                 // Handle file uploads if new files are provided
                 if (lessonViewModel.Files != null)
@@ -185,6 +202,16 @@ namespace Educational_Platform.Controllers
                     lesson.VideoURL = Helper.Helper.uploadfile(lessonViewModel.videoFile, "video");
                 }
 
+                if (lessonViewModel.TaskFile != null)
+                {
+                    // Delete old task file if exists
+                    if (!string.IsNullOrEmpty(lesson.TaskFileName))
+                    {
+                        Helper.Helper.deletefile(lesson.TaskFileName, "file");
+                    }
+                    lesson.TaskFileName = Helper.Helper.uploadfile(lessonViewModel.TaskFile, "file");
+                }
+
                 _unitOfWork.Lesson.UpdateAsync(lesson);
                 await _unitOfWork.Save();
 
@@ -198,6 +225,7 @@ namespace Educational_Platform.Controllers
                 return View(lessonViewModel);
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)

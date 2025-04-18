@@ -39,6 +39,16 @@
                                 <span asp-validation-for="Files" class="text-danger small"></span>
                             </div>
                         </div>
+                        <!-- Task Files -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Task File</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="TaskFile" class="form-control"
+                                       accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
+                                <div class="form-text">Accepted formats: PDF, Word, Excel, PowerPoint, Text, ZIP (Max 10MB)</div>
+                                <span asp-validation-for="TaskFile" class="text-danger small"></span>
+                            </div>
+                        </div>
 
                         <!-- Video URL -->
                         <!-- Video Upload -->

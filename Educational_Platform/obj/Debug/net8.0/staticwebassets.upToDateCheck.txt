@@ -3,9 +3,12 @@ wwwroot\css\site.css
 wwwroot\css\style.css
 wwwroot\favicon.ico
 wwwroot\files\file\296292863_1433791107118268_212438576613793957_n.jpg
+wwwroot\files\file\Educational Platform (3).pdf
 wwwroot\files\file\Entities and Attributes-2 (4).pdf
+wwwroot\files\file\mahmoudMohamed(CV) (1) (1).pdf
 wwwroot\files\file\mahmoudMohamed(CV) (1) (2).pdf
-wwwroot\files\imgCourse\cat-2.jpg
+wwwroot\files\file\MahmoudMohamedCV.pdf
+wwwroot\files\imgCourse\carousel-2.jpg
 wwwroot\files\imgCourse\cat-4.jpg
 wwwroot\files\imgCourse\course-1.jpg
 wwwroot\files\video\modelcourse.mp4

@@ -25,7 +25,8 @@
                             <input asp-for="Title" class="form-control" placeholder="Enter lesson title" required />
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
-                        <!-- File Upload -->
+
+                        <!-- Supporting Files -->
                         <div class="mb-4">
                             <label class="form-label fw-bold">Supporting Files</label>
                             <div class="file-upload-wrapper">
@@ -34,7 +35,7 @@
                                 {
                                     <div class="mt-2">
                                         <small class="text-muted">Current file:</small>
-                                        <a href="@Model.Files" target="_blank" class="d-block">
+                                        <a href="@Model.SupportingFiles" target="_blank" class="d-block">
                                             <i class="fas fa-file me-1"></i> @System.IO.Path.GetFileName(Model.SupportingFiles)
                                         </a>
                                     </div>
@@ -43,6 +44,23 @@
                             </div>
                         </div>
 
+                        <!-- Task File -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Task File</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="TaskFile" class="form-control" />
+                                @if (!string.IsNullOrEmpty(Model.TaskFileName))
+                                {
+                                    <div class="mt-2">
+                                        <small class="text-muted">Current task file:</small>
+                                        <a href="@Model.TaskFileName" target="_blank" class="d-block">
+                                            <i class="fas fa-file me-1"></i> @System.IO.Path.GetFileName(Model.TaskFileName)
+                                        </a>
+                                    </div>
+                                }
+                                <span asp-validation-for="TaskFile" class="text-danger small"></span>
+                            </div>
+                        </div>
 
                         <!-- Video Upload -->
                         <div class="mb-4">
@@ -53,12 +71,12 @@
                                 {
                                     <div class="mt-2">
                                         <small class="text-muted">Current video:</small>
-                                        <a href="@Model.Files" target="_blank" class="d-block">
+                                        <a href="@Model.VideoURL" target="_blank" class="d-block">
                                             <i class="fas fa-video me-1"></i> @System.IO.Path.GetFileName(Model.VideoURL)
                                         </a>
                                     </div>
                                 }
-                                <span asp-validation-for="VideoURL" class="text-danger small"></span>
+                                <span asp-validation-for="videoFile" class="text-danger small"></span>
                             </div>
                         </div>
 

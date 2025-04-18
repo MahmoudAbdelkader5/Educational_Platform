@@ -19,8 +19,11 @@ namespace Educational_Platform.ViewModel
             public IFormFile videoFile { get; set; } // For uploading video files
             public string SupportingFiles { get; set; }
             public IFormFile Files { get; set; } // For uploading supporting files
+            public string TaskFileName { get; set; }
+            public IFormFile TaskFile { get; set; }
 
-            public DateTime Create_date { get; set; }
+
+        public DateTime Create_date { get; set; }
             // Navigation properties
             public int CourseID { get; set; }
 
