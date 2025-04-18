@@ -46,3 +46,19 @@ D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Business logic layer\obj\Debug\net8.0\refint\Business logic layer.dll
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.pdb
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Business logic layer\obj\Debug\net8.0\ref\Business logic layer.dll
+F:\AI\gproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.deps.json
+F:\AI\gproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.dll
+F:\AI\gproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.pdb
+F:\AI\gproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Data access layer.dll
+F:\AI\gproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Data access layer.pdb
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.csproj.AssemblyReference.cache
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.GeneratedMSBuildEditorConfig.editorconfig
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.AssemblyInfoInputs.cache
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.AssemblyInfo.cs
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.csproj.CoreCompileInputs.cache
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.sourcelink.json
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business.078143C5.Up2Date
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.dll
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\refint\Business logic layer.dll
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.pdb
+F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\ref\Business logic layer.dll

@@ -43,3 +43,18 @@ D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.pdb
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.genruntimeconfig.cache
 D:\ITI .NET\Graduation Project\Educational Platform updated\Educational_Platform\Data access layer\obj\Debug\net8.0\ref\Data access layer.dll
+F:\AI\gproject\Educational_Platform\Data access layer\bin\Debug\net8.0\Data access layer.deps.json
+F:\AI\gproject\Educational_Platform\Data access layer\bin\Debug\net8.0\Data access layer.runtimeconfig.json
+F:\AI\gproject\Educational_Platform\Data access layer\bin\Debug\net8.0\Data access layer.dll
+F:\AI\gproject\Educational_Platform\Data access layer\bin\Debug\net8.0\Data access layer.pdb
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.csproj.AssemblyReference.cache
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.GeneratedMSBuildEditorConfig.editorconfig
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.AssemblyInfoInputs.cache
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.AssemblyInfo.cs
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.csproj.CoreCompileInputs.cache
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.sourcelink.json
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.dll
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\refint\Data access layer.dll
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.pdb
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\Data access layer.genruntimeconfig.cache
+F:\AI\gproject\Educational_Platform\Data access layer\obj\Debug\net8.0\ref\Data access layer.dll

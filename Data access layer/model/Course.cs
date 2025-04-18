@@ -32,7 +32,7 @@ namespace Data_access_layer.model
         public string status { get; set; }
 
        
-        //public string Image { get; set; }
+        public string Image { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; } = new List<Lesson>();
         public virtual ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
         public virtual ICollection<Exam> Exams { get; set; } = new List<Exam>();

@@ -20,7 +20,7 @@ namespace Educational_Platform
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IunitofWork, unitOfWork>();
-            builder.Services.AddAutoMapper(m => m.AddProfiles(new List<Profile> { new RevisionMapping(), new LessonMapping() }));
+            builder.Services.AddAutoMapper(m => m.AddProfiles(new List<Profile> { new RevisionMapping(), new LessonMapping(),new mappingCourse() }));
 
             builder.Services.AddIdentity<Data_access_layer.model.ApplicationUser, IdentityRole>
                 (option =>
