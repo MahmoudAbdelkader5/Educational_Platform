@@ -1,49 +1,303 @@
-﻿﻿@using Educational_Platform.ViewModel
+﻿@using Educational_Platform.ViewModel
 @model RegisterInstructorViewModel
 
 @{
-    ViewData["Title"] = "Register Instructor";
+    ViewData["Title"] = "Instructor Registration";
 }
 
-<h1>Register</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Registration Progress Bar -->
+            <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Registration Progress</span>
+                    <span><span id="completionPercentage">0</span>% Complete</span>
+                </div>
+                <div class="progress" style="height: 8px;">
+                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 0%"></div>
+                </div>
+            </div>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RegisterInstructor" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-header bg-gradient-primary text-white py-3">
+                    <h3 class="mb-0 text-center"><i class="fa fa-chalkboard-teacher me-2"></i>Join As An Instructor</h3>
+                    <p class="text-center mb-0 small">Create your instructor account to share your knowledge and expertise</p>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    <form id="registrationForm" asp-action="RegisterInstructor" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger mb-4 alert alert-danger py-2" style="display: none;" id="validationSummary"></div>
+
+                        <!-- Personal Information Section -->
+                        <div class="registration-section mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100">Personal Information</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="FirstName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> First Name</label>
+                                    <input asp-for="FirstName" class="form-control form-control-lg" placeholder="Enter your first name" data-field="required" />
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="LastName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> Last Name</label>
+                                    <input asp-for="LastName" class="form-control form-control-lg" placeholder="Enter your last name" data-field="required" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information Section -->
+                        <div class="registration-section mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-address-book"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100">Contact Information</h5>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label fw-semibold"><i class="fa fa-envelope me-1"></i> Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="fa fa-envelope"></i></span>
+                                    <input asp-for="Email" class="form-control form-control-lg" placeholder="name@example.com" autocomplete="email" data-field="required" />
+                                </div>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <small class="form-text text-muted">This will be your login username and primary contact</small>
+                            </div>
+                        </div>
+
+                        <!-- Profile & Security Section -->
+                        <div class="registration-section mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-shield-alt"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100">Profile & Security</h5>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label fw-semibold"><i class="fa fa-lock me-1"></i> Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
+                                    <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Create a secure password" data-field="required" />
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('Password')"><i class="fa fa-eye"></i></button>
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                                <div class="mt-2">
+                                    <div class="password-strength-meter progress" style="height: 8px;">
+                                        <div id="passwordStrength" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                    </div>
+                                    <small id="passwordStrengthText" class="form-text">Password strength: Too weak</small>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label asp-for="ConfirmPassword" class="form-label fw-semibold"><i class="fa fa-lock me-1"></i> Confirm Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
+                                    <input asp-for="ConfirmPassword" class="form-control form-control-lg" type="password" placeholder="Confirm your password" data-field="required" />
+                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('ConfirmPassword')"><i class="fa fa-eye"></i></button>
+                                </div>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mb-4">
+                            <div class="d-flex">
+                                <div class="me-3">
+                                    <i class="fa fa-info-circle fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">Important Information</h6>
+                                    <p class="mb-0">Your application will be reviewed by our team. Once approved, you'll be able to create courses and connect with students.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="termsCheck" required data-field="required">
+                                <label class="form-check-label" for="termsCheck">
+                                    I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">privacy policy</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg py-3">
+                                <i class="fa fa-chalkboard-teacher me-2"></i>Submit Instructor Application
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-light py-3 text-center">
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
+                        <span>Already have an account?</span>
+                        <a asp-action="Login" asp-controller="Account" class="btn btn-outline-primary">
+                            <i class="fa fa-sign-in-alt me-2"></i>Sign in
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+
+            <div class="text-center mt-3">
+                <p class="small text-muted">Need help? <a href="#" class="text-decoration-none">Contact Support</a></p>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="termsModalLabel">Instructor Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                <h6>1. Introduction</h6>
+                <p>By registering as an instructor, you agree to comply with and be bound by these terms and conditions.</p>
+
+                <h6>2. Content Ownership</h6>
+                <p>You retain ownership of your content, but grant us license to display and distribute it on our platform.</p>
+
+                <h6>3. Professional Standards</h6>
+                <p>You agree to maintain professional teaching standards and provide quality educational content.</p>
+
+                <h6>4. Payment and Fees</h6>
+                <p>Details about compensation, payment schedules, and platform fees are provided in a separate agreement.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.getElementById('termsCheck').checked = true;">I Agree</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                <h6>1. Information Collection</h6>
+                <p>We collect personal and professional information to verify your credentials and showcase your expertise.</p>
+
+                <h6>2. How We Use Your Information</h6>
+                <p>Your information is used to manage your instructor account, connect you with students, and process payments.</p>
+
+                <h6>3. Information Security</h6>
+                <p>We implement appropriate security measures to protect your personal information from unauthorized access or disclosure.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function() {
+            // Auto-focus on first name field
+            $("#FirstName").focus();
+
+            // Update progress bar as user completes fields
+            updateProgressBar();
+            $('[data-field="required"]').on('change keyup', function() {
+                updateProgressBar();
+            });
+
+            // Password strength meter
+            $('#Password').on('keyup', function() {
+                checkPasswordStrength($(this).val());
+            });
+
+            // Show validation summary if there are any
+            if ($('#validationSummary ul li').length > 0) {
+                $('#validationSummary').show();
+            }
+        });
+
+        function updateProgressBar() {
+            const requiredFields = $('[data-field="required"]').length;
+            const filledFields = $('[data-field="required"]').filter(function() {
+                return $(this).val() !== "";
+            }).length;
+
+            const percentage = Math.round((filledFields / requiredFields) * 100);
+            $('#progressBar').css('width', percentage + '%');
+            $('#completionPercentage').text(percentage);
+
+            // Update progress bar color based on completion
+            if (percentage < 30) {
+                $('#progressBar').removeClass('bg-warning bg-primary').addClass('bg-danger');
+            } else if (percentage < 70) {
+                $('#progressBar').removeClass('bg-danger bg-primary').addClass('bg-warning');
+            } else {
+                $('#progressBar').removeClass('bg-danger bg-warning').addClass('bg-primary');
+            }
+        }
+
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const fieldType = passwordField.getAttribute('type');
+
+            if (fieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                $(event.target).removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordField.setAttribute('type', 'password');
+                $(event.target).removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        }
+
+        function checkPasswordStrength(password) {
+            // Password strength logic
+            let strength = 0;
+
+            if (password.length >= 6) strength += 20;
+            if (password.length >= 8) strength += 10;
+            if (/[A-Z]/.test(password)) strength += 20;
+            if (/[a-z]/.test(password)) strength += 20;
+            if (/[0-9]/.test(password)) strength += 20;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 10;
+
+            // Update the UI
+            $('#passwordStrength').css('width', strength + '%');
+
+            if (strength < 40) {
+                $('#passwordStrength').removeClass('bg-warning bg-primary').addClass('bg-danger');
+            } else if (strength < 70) {
+                $('#passwordStrength').removeClass('bg-danger bg-primary').addClass('bg-warning');
+            } else {
+                $('#passwordStrength').removeClass('bg-danger bg-warning').addClass('bg-primary');
+            }
+        }
+    </script>
+}
