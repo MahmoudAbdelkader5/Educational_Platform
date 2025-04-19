@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,7 +22,7 @@ namespace Data_access_layer.model
         [StringLength(20)]
         public string PhoneNumber { get; set; }
         [StringLength(20)]
-        public string? fatherPhone { get; set; }
+        public string FatherPhone { get; set; }
 
 
         [Required]
@@ -30,10 +30,10 @@ namespace Data_access_layer.model
         public string Name { get; set; }
 
         [StringLength(50)]
-        public string? GradeLevel { get; set; }
+        public string GradeLevel { get; set; }
 
         [StringLength(255)]
-        public string? ProfilePicture { get; set; }
+        public string ProfilePicture { get; set; }
 
         public string UserId { get; set; }
 
