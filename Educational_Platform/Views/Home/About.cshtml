@@ -13,49 +13,62 @@
     <title>About</title>
 
     @Html.Partial("Styling") <!-- Include shared styles here -->
+    <style>
+        .fo {
+            font-family: "Cairo", sans-serif;
+        }
+    </style>
 </head>
 <body>
 @Html.Partial("_Header")
-<!-- About Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="row g-5">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                <div class="position-relative h-100">
-                    <img class="img-fluid position-absolute w-100 h-100" src="~/img/about.jpg" alt="" style="object-fit: cover;">
-                </div>
+    <!-- About Start -->
+    <div class="container-xxl py-5" dir="rtl">
+        <div class="container">
+            <div class="text-center wow fadeInUp pb-5" data-wow-delay="0.1s">
+                <h6 class="section-title bg-white text-center text-primary px-3 fo">من نحن</h6>
             </div>
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
-                <h1 class="mb-4">Welcome to eLEARNING</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                <div class="row gy-2 gx-4 mb-4">
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Online Classes</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>International Certificate</p>
+            <div class="row g-5">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="img-fluid position-absolute w-100 h-100" src="~/img/about.jpg" alt="" style="object-fit: cover;">
                     </div>
                 </div>
-                <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <h1 class="mb-4 fo">مرحبًا بك في منصة مفهوم التعليمية</h1>
+                    <p class="mb-4">
+                        نحن نؤمن بأن التعليم يجب أن يكون متاحًا وسهلًا للجميع. لذلك أنشأنا منصة متكاملة تقدم محتوى تعليمي عالي الجودة للطلاب في مختلف المراحل الدراسية.
+                    </p>
+                    <p class="mb-4">
+                        تقدم المنصة دروسًا تفاعلية، فيديوهات تعليمية، تدريبات واختبارات دورية، تُمكنك من المذاكرة بطريقة منظمة تساعدك على التفوق والنجاح.
+                    </p>
+                    <div class="row gy-2 gx-4 mb-4">
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>مراجعات شهرية</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>دروس أونلاين مباشرة</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>تواصل مع المستر دايما</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>اختبارات تقييمية مستمرة</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>شروحات مبسطة ومنظمة</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>متابعة دورية لمستوى الطالب</p>
+                        </div>
+                    </div>
+                    @Html.ActionLink("انضم الينا الان!", "RegisterStudent", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none d-lg-block" })
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- About End -->
+
+
+    <!-- About End -->
 @Html.Partial("_Footer") 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

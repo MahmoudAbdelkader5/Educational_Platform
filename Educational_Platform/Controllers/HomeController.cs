@@ -1,21 +1,25 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Educational_Platform.Models;
+using Business_logic_layer.interfaces;
+using Data_access_layer.model;
 
 namespace Educational_Platform.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IunitofWork _unitOfWork;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IunitofWork unitOfWork)
     {
-        _logger = logger;
+        _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
     }
-
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        IEnumerable<Course> courses;  
+        courses = await _unitOfWork.Course.GetAllAsync();
+        
+        return View(courses);
     }
    
     public IActionResult About()
@@ -26,9 +30,12 @@ public class HomeController : Controller
     {
         return View();
     }
-    public IActionResult Courses()
+    public async Task<IActionResult> Courses()
     {
-        return View();
+        IEnumerable<Course> courses;
+        courses = await _unitOfWork.Course.GetAllAsync();
+
+        return View(courses);
     }
    
     public IActionResult Privacy()

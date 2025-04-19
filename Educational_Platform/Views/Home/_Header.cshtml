@@ -3,10 +3,40 @@
 *@
 @{
 }
+<style>
+    .arfont{
+        font-family: "Cairo", sans-serif;
+        font-size:larger;
+    }
+
+    .logo {
+        font-family: 'Cairo', sans-serif;
+        font-size: 2rem;
+        color: #06BBCC; /* Bootstrap primary blue */
+        display: inline-flex;
+        align-items: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        transition: color 0.3s ease;
+    }
+
+        .logo i {
+            font-size: 1.6rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            color: #035F69; /* Darker on hover */
+        }
+
+            .logo:hover i {
+                transform: rotate(15deg) translateY(-2px);
+            }
+</style>
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>eLEARNING</h2>
+        <h1 class="m-0 logo ">مفهوم <i class="fa fa-book me-3"></i></h1>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -15,70 +45,22 @@
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <ul class="navbar-nav ms-auto p-4 p-lg-0">
                 <li class="nav-item">
-                    @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    @Html.ActionLink("الرئيسية", "Index", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("About", "About", "Home", null, new { @class = "nav-link" })
+                    @Html.ActionLink("من نحن", "About", "Home", null, new { @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Courses", "Courses", "Home", null, new { @class = "nav-link" })
+                    @Html.ActionLink("الكورسات", "Courses", "Home", null, new { @class = "nav-link" })
                 </li>
+                <li class="nav-item">
+                    @Html.ActionLink("تواصل معنا", "Contact", "Home", null, new { @class = "nav-link" })
+
+                    </li>
 
             </ul>
 
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                <div class="dropdown-menu fade-down m-0">
-                    <a href="team.html" class="dropdown-item">Our Team</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a class="dropdown-item ">
-                        @Html.ActionLink("Error", "Error", "Home", null, new { @class = "dropdown-item" })
-
-                    </a>
-                </div>
-            </div>
-            <a class="nav-item ">
-                @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
-            </a>
-             @if (User.Identity.IsAuthenticated)
- {
-     <div class="dropdown">
-         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-             @if (!string.IsNullOrEmpty(User.FindFirst("ProfilePicture")?.Value))
-             {
-                 <img src="~/images/profiles/@User.FindFirst("ProfilePicture").Value" alt="Profile"
-                      class="rounded-circle me-2" width="32" height="32" style="object-fit: cover;">
-             }
-             else
-             {
-                 <img src="~/images/profiles/default.png" alt="Profile"
-                      class="rounded-circle me-2" width="32" height="32">
-             }
-             <span class="d-none d-md-inline">@User.FindFirst("FullName")?.Value</span>
-         </a>
-         <ul class="dropdown-menu dropdown-menu-end">
-             <li class="dropdown-item-text">
-                 <div class="d-flex flex-column">
-                     <span class="fw-bold">@User.FindFirst("FullName")?.Value</span>
-                     <small class="text-muted">@User.Identity.Name</small>
-                 </div>
-             </li>
-             <li><hr class="dropdown-divider"></li>
-             <li><a class="dropdown-item" href="@Url.Action("Dashboard", "Student")"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
-             <li><a class="dropdown-item" href="@Url.Action("EditStudentProfile", "Account")"><i class="fa fa-user me-2"></i>My Profile</a></li>
-             <li><hr class="dropdown-divider"></li>
-             <li><a class="dropdown-item text-danger" href="@Url.Action("SignOut", "Account")"><i class="fa fa-sign-out-alt me-2"></i>Sign Out</a></li>
-         </ul>
-     </div>
- }
- else
- {
-     <div class="d-flex justify-content-center">
-         <a asp-controller="Account" asp-action="Login" class="btn btn-primary py-2 px-4">
-             <i class="fa fa-sign-in-alt me-2"></i>Join Now
-         </a>
-     </div>
- }
+            @Html.ActionLink("انضم الينا", "RegisterStudent", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none d-lg-block" })
 
         </div>
      
