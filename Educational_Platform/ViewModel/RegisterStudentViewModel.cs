@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Educational_Platform.ViewModel
 {
@@ -20,7 +20,21 @@ namespace Educational_Platform.ViewModel
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        [Required]
+        [Display(Name = "Father Phone Number")]
+        public string FatherPhoneNumber { get; set; }
+        [Required]
+        [Display(Name = "Grade Level")]
+        public string GradeLevel { get; set; }
+        [Display(Name = "Profile Picture")]
+        public IFormFile? ProfilePictureFile { get; set; }  // For uploading the file
+
+        [Display(Name = "Profile Picture")]
+        public string? ProfilePicture { get; set; } = "default.png";  // For storing the path
+        [Required]
+        [StringLength(100, ErrorMessage = "The password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -29,9 +43,5 @@ namespace Educational_Platform.ViewModel
         [Display(Name = "Confirm Password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; set; }
     }
 }
