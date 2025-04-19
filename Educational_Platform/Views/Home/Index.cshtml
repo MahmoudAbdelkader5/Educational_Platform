@@ -5,253 +5,245 @@
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
 }
-@Html.Partial("_Header")
-<style>
-        .fo{
-            font-family: "Cairo", sans-serif; 
-        }
-</style>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewData["Title"] - مفهوم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
+
+    @Html.Partial("_Header")
+
+    <style>
+        .fo {
+            font-family: "Cairo", sans-serif;
+        }
+
+        .course-card {
+            transition: transform 0.3s ease;
+        }
+
+            .course-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+        .teacher-img-container {
+            margin-top: -50px;
+        }
+
+        .teacher-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid #fff;
+        }
+    </style>
 
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
-
-      
-            <!-- Slide 2 -->
+            <!-- Slide 1 -->
             <div class="owl-carousel-item position-relative">
-                <img src="@Url.Content("~/img/carousel-2.jpg")" class="img-fluid" alt="">
-
+                <img src="@Url.Content("~/img/carousel-2.jpg")" class="img-fluid" alt="منصة مفهوم التعليمية">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                     <div class="container">
                         <div class="row justify-content-end text-end">
                             <div class="col-sm-10 col-lg-8">
-                                <h5 class="text-primary fo mb-3 animated slideInDown"> كورسات مميزة لكل مراحل الثانوية العامة </h5>
+                                <h5 class="text-primary fo mb-3 animated slideInDown">كورسات مميزة لكل مراحل الثانوية العامة</h5>
                                 <h1 class="display-3 fo text-white animated slideInDown">تعلم بسهولة من راحة منزلك</h1>
                                 <p class="fs-5 text-white fo mb-4 pb-2">محتوى تعليمي شامل يغطي كل ما تحتاجه لتحقيق تميزك في الثانوية العامة</p>
-                                @Html.ActionLink("اقرأ المزيد", "About", "Home", null, new { @class = "btn btn-primary fo py-md-3 px-md-5 ms-3 animated slideInLeft" })
+
+                                <div class="d-flex justify-content-end gap-3 flex-wrap">
+                                    @Html.ActionLink("اقرأ المزيد", "About", "Home", null, new { @class = "btn btn-primary fo py-md-3 px-md-5 animated slideInLeft" })
+
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <a asp-controller="Account" asp-action="Login" class="btn btn-light fo py-md-3 px-md-5 animated slideInRight">
+                                            سجل دخول
+                                        </a>
+                                    }
 
                                     @Html.ActionLink("ابدأ الآن", "RegisterStudent", "Account", null, new { @class = "btn btn-light fo py-md-3 px-md-5 animated slideInRight" })
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- Carousel End -->
-   
     <!-- About Start -->
-    <div class="container-xxl py-5" dir="rtl">
+    <div class="container-xxl py-5">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5 align-items-center">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="~/img/about.jpg" alt="" style="object-fit: cover;">
+                    <div class="position-relative h-100 rounded overflow-hidden">
+                        <img class="img-fluid position-absolute w-100 h-100" src="~/img/about.jpg" alt="منصة مفهوم التعليمية" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                     <h1 class="mb-4 fo">مرحبًا بك في منصة مفهوم التعليمية</h1>
-                    <p class="mb-4">
+                    <p class="mb-4 fo">
                         نحن نؤمن بأن التعليم يجب أن يكون متاحًا وسهلًا للجميع. لذلك أنشأنا منصة متكاملة تقدم محتوى تعليمي عالي الجودة للطلاب في مختلف المراحل الدراسية.
                     </p>
-                    <p class="mb-4">
+                    <p class="mb-4 fo">
                         تقدم المنصة دروسًا تفاعلية، فيديوهات تعليمية، تدريبات واختبارات دورية، تُمكنك من المذاكرة بطريقة منظمة تساعدك على التفوق والنجاح.
                     </p>
                     <div class="row gy-2 gx-4 mb-4">
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>مراجعات شهرية</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>مراجعات شهرية</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>دروس أونلاين مباشرة</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>دروس أونلاين مباشرة</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>تواصل مع المستر دايما</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>تواصل مع المعلم مباشرة</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>اختبارات تقييمية مستمرة</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>اختبارات تقييمية مستمرة</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>شروحات مبسطة ومنظمة</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>شروحات مبسطة ومنظمة</p>
                         </div>
                         <div class="col-sm-6">
-                            <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>متابعة دورية لمستوى الطالب</p>
+                            <p class="mb-0 fo"><i class="fa fa-arrow-left text-primary me-2"></i>متابعة دورية لمستوى الطالب</p>
                         </div>
                     </div>
-                    <a class="btn btn-primary fo py-3 px-5 mt-2" href="#">اعرف المزيد</a>
+                    <a class="btn btn-primary fo py-3 px-5 mt-2" href="@Url.Action("About", "Home")">اعرف المزيد</a>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Service Start -->
+    <!-- About End -->
+    <!-- Features Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item text-center pt-3">
+                    <div class="service-item text-center pt-3 h-100">
                         <div class="p-4">
                             <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
                             <h5 class="mb-3 fo">خبرة في التدريس</h5>
-                            <p>خبرة عالية في شرح وتبسيط المناهج الدراسية بأسلوب سهل وسلس وتقديم أمثلة واقعية تساعد على الفهم  </p>
+                            <p class="fo">خبرة عالية في شرح وتبسيط المناهج الدراسية بأسلوب سهل وسلس وتقديم أمثلة واقعية تساعد على الفهم</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item text-center pt-3">
+                    <div class="service-item text-center pt-3 h-100">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                            <h5 class="mb-3 fo">حصص اونلاين </h5>
-                            <p>دروس مباشرة وتفاعلية مع مراجعات شاملة واختبارات تدريبية تُحاكي الامتحانات الفعلية</p>
+                            <i class="fa fa-3x fa-video text-primary mb-4"></i>
+                            <h5 class="mb-3 fo">حصص اونلاين</h5>
+                            <p class="fo">دروس مباشرة وتفاعلية مع مراجعات شاملة واختبارات تدريبية تُحاكي الامتحانات الفعلية</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item text-center pt-3">
+                    <div class="service-item text-center pt-3 h-100">
                         <div class="p-4">
                             <i class="fa fa-3x fa-home text-primary mb-4"></i>
                             <h5 class="mb-3 fo">وفر وقتك</h5>
-                            <p> تابع دروسك من البيت في أي وقت يناسبك مع محتوى شامل من شرح وواجبات واختبارات دورية</p>
+                            <p class="fo">تابع دروسك من البيت في أي وقت يناسبك مع محتوى شامل من شرح وواجبات واختبارات دورية</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item text-center pt-3">
+                    <div class="service-item text-center pt-3 h-100">
                         <div class="p-4">
-                            <i class="fa fa-3x fa-book-open text-primary mb-4"></i>
+                            <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
                             <h5 class="mb-3 fo">اعرف مستواك</h5>
-                            <p>اختبارات تقييمية دورية تساعدك على معرفة نقاط قوتك وضعفك وتحسين مستواك باستمرار</p>
+                            <p class="fo">اختبارات تقييمية دورية تساعدك على معرفة نقاط قوتك وضعفك وتحسين مستواك باستمرار</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Service End -->
-    <!-- Team Start -->
-    <div class="container-xxl py-5">
+    <!-- Features End -->
+    <!-- Teacher Section -->
+    <div class="container-xxl py-5 bg-light">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3 fo">مع خبير اللغة العربية</h6>
+                <h6 class="section-title bg-light text-center text-primary px-3 fo">مع خبير اللغة العربية</h6>
                 <h1 class="mb-5 fo">م/ علاء الدين عبدالحميد</h1>
             </div>
             <div class="row justify-content-center">
-                <!-- تم إضافة justify-content-center -->
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="team-item bg-light">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="~/img/team-1.jpg" alt="">
-                        </div>
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
-                            <div class="bg-light d-flex justify-content-center pt-2 px-1">
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-sm-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                <div class="col-md-8 col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body text-center p-5">
+                            <div class="teacher-img-container">
+                                <img class="teacher-img rounded-circle shadow" src="~/img/team-1.jpg" alt="م/ علاء الدين عبدالحميد">
                             </div>
-                        </div>
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">م/ علاء الدين عبدالحميد</h5>
-                            <small>مدرس أول لغة عربية</small>
+                            <h4 class="mt-3 fo">م/ علاء الدين عبدالحميد</h4>
+                            <p class="text-muted fo">مدرس أول لغة عربية</p>
+                            <p class="fo">خبرة أكثر من 15 عامًا في تدريس اللغة العربية بمنهجية مميزة تساعد الطلاب على الفهم والتفوق</p>
+                            <div class="d-flex justify-content-center gap-2">
+                                <a class="btn btn-square btn-primary" href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary" href="#"><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-square btn-primary" href="#"><i class="fab fa-whatsapp"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   
+    <!-- Teacher End -->
     <!-- Courses Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-primary px-3 fo">كورساتنا</h6>
-                <h1 class="mb-5 fo"> احدث الكورسات  </h1>
+                <h1 class="mb-5 fo">أحدث الكورسات</h1>
             </div>
             <div class="row g-4 justify-content-center">
-               
-
-                @foreach (var course in Model)
+                @foreach (var course in Model.Take(3))
                 {
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="course-item bg-light">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="course-item bg-light course-card h-100">
                             <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" src="~/img/course-3.jpg" alt="Course Image">
+                                <img class="img-fluid w-100" src="@Url.Content("~/img/course-3.jpg")" alt="@course.Title" style="height: 200px; object-fit: cover;">
                                 <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
-                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary fo px-3 border-end" style="border-radius: 30px 0 0 30px;">اقرا المزيد</a>
-                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary fo px-3" style="border-radius: 0 30px 30px 0;">اشترك</a>
+                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary fo px-3 border-end" style="border-radius: 30px 0 0 30px;">اقرأ المزيد</a>
+                                    <a href="#" class="flex-shrink-0 btn btn-sm btn-primary fo px-3" style="border-radius: 0 30px 30px 0;">اشترك الآن</a>
                                 </div>
                             </div>
                             <div class="text-center p-4 pb-0">
-                                <h3 class="mb-0">@course.Price.ToString("C")</h3>
-                                
-                                <h5 class="mb-4 fo">@course.Title</h5>
-								<p class="mb-4 fo">@course.Description</p>
+                                <h4 class="text-primary fo">@course.Price ج.م</h4>
+                                <div class="mb-2">
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                    <small class="fa fa-star text-primary"></small>
+                                </div>
+                                <h5 class="mb-3 fo">@course.Title</h5>
+                                <p class="fo">@course.Description</p>
                             </div>
                             <div class="d-flex border-top">
-                                <small class="flex-fill text-center border-end py-2">
+                                <small class="flex-fill text-center border-end py-2 fo">
                                     <i class="fa fa-user-tie text-primary me-2"></i>م/ علاء الدين
                                 </small>
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-clock  text-primary me-2"></i>@course.Duration اسابيع
+                                <small class="flex-fill text-center border-end py-2 fo">
+                                    <i class="fa fa-clock text-primary me-2"></i>@course.Duration أسابيع
                                 </small>
-                                <small class="flex-fill text-center py-2">
-                                    <i class="fa fa-user text-primary me-2"></i> متوفر
+                                <small class="flex-fill text-center py-2 fo">
+                                    <i class="fa fa-user text-primary me-2"></i>متوفر
                                 </small>
                             </div>
                         </div>
                     </div>
                 }
             </div>
+            <div class="text-center mt-5">
+                <a href="@Url.Action("Courses", "Home")" class="btn btn-primary fo py-3 px-5">عرض جميع الكورسات</a>
+            </div>
         </div>
     </div>
     <!-- Courses End -->
-   
-
-    <!-- Team End -->
-    @* <!-- Testimonial Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center">
-                <h6 class="section-title bg-white text-center text-primary px-3">Testimonial</h6>
-                <h1 class="mb-5">Our Students Say!</h1>
-            </div>
-            <div class="owl-carousel testimonial-carousel position-relative">
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="~/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-                <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">Client Name</h5>
-                    <p>Profession</p>
-                    <div class="testimonial-text bg-light text-center p-4">
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> *@
-    <!-- Testimonial End -->
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -264,4 +256,6 @@
     <script src="~/js/main.js" asp-append-version="true"></script>
 
 </body>
-@Html.Partial("_Footer") 
+</html>
+
+@Html.Partial("_Footer")

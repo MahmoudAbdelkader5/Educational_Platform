@@ -47,10 +47,18 @@ namespace Educational_Platform.Controllers
                     {
                         List<Claim> claims = new List<Claim>();
                         claims.Add(new Claim("FullName", user.FullName));
-                        claims.Add(new Claim("IsActive",user.IsActive? "1" : "0"));
-                        claims.Add(new Claim("ProfilePicture", user.ProfilePicture??""));
+                        claims.Add(new Claim("IsActive", user.IsActive ? "1" : "0"));
+                        claims.Add(new Claim("ProfilePicture", user.ProfilePicture ?? ""));
 
-                        return RedirectToAction("Index", "Home");
+                        if (User.IsInRole("Student"))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else if (User.IsInRole("Instructor"))
+                        {
+
+                            return RedirectToAction("Index", "Lesson");
+                        }
                     }
                     else
                     {

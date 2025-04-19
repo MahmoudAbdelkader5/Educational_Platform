@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dOF88qxM+ilE/JosEPhQCihjFy/ELY6XLWG/2FOUkBw=",
+  "Hash": "WUFBEZnrmO5gp4XziIZM1ROyGwxuqDwfclfUpYa1qaw=",
   "Source": "Educational_Platform",
   "BasePath": "_content/Educational_Platform",
   "Mode": "Default",
@@ -309,27 +309,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\imgCourse\\carousel-2.jpg"
-    },
-    {
-      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\course-1.jpg",
-      "SourceId": "Educational_Platform",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
-      "BasePath": "_content/Educational_Platform",
-      "RelativePath": "files/imgCourse/course-1#[.{fingerprint}]?.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "ylo9guokvo",
-      "Integrity": "1qzlj50Nrdh82bOjl3nNvxMH0gVjEnVCwJveq/U8z0A=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\imgCourse\\course-1.jpg"
     },
     {
       "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\modelcourse.mp4",
@@ -9311,88 +9290,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="
-        }
-      ]
-    },
-    {
-      "Route": "files/imgCourse/course-1.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\course-1.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "19656"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"1qzlj50Nrdh82bOjl3nNvxMH0gVjEnVCwJveq/U8z0A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 23:59:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-1qzlj50Nrdh82bOjl3nNvxMH0gVjEnVCwJveq/U8z0A="
-        }
-      ]
-    },
-    {
-      "Route": "files/imgCourse/course-1.ylo9guokvo.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\course-1.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "19656"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"1qzlj50Nrdh82bOjl3nNvxMH0gVjEnVCwJveq/U8z0A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 18 Apr 2025 23:59:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "ylo9guokvo"
-        },
-        {
-          "Name": "label",
-          "Value": "files/imgCourse/course-1.jpg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-1qzlj50Nrdh82bOjl3nNvxMH0gVjEnVCwJveq/U8z0A="
         }
       ]
     },

@@ -10,7 +10,6 @@ wwwroot\files\file\mahmoudMohamed(CV) (1) (2).pdf
 wwwroot\files\file\mahmoudmohamed(resume).pdf
 wwwroot\files\file\MahmoudMohamedCV.pdf
 wwwroot\files\imgCourse\carousel-2.jpg
-wwwroot\files\imgCourse\course-1.jpg
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4
 wwwroot\files\video\nader.mp4

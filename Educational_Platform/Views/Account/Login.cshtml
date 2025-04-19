@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Sign In";
-    Layout = "_Layout";
+    Layout = "_AuthLayout";
 }
 
 <div class="container py-5">
@@ -114,9 +114,6 @@
                                 <a href="#" class="btn btn-outline-secondary btn-lg">
                                     <i class="fab fa-google me-2"></i>Continue with Google
                                 </a>
-                                <a href="#" class="btn btn-outline-secondary btn-lg">
-                                    <i class="fab fa-microsoft me-2"></i>Continue with Microsoft
-                                </a>
                             </div>
                         </div>
 
@@ -125,9 +122,6 @@
                             <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
                                 <a asp-action="RegisterStudent" asp-controller="Account" class="btn btn-outline-primary">
                                     <i class="fa fa-user-graduate me-1"></i>Sign Up as Student
-                                </a>
-                                <a asp-action="RegisterInstructor" asp-controller="Account" class="btn btn-outline-primary">
-                                    <i class="fa fa-chalkboard-teacher me-1"></i>Sign Up as Instructor
                                 </a>
                             </div>
                         </div>
