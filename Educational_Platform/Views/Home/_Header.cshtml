@@ -40,7 +40,45 @@
             <a class="nav-item ">
                 @Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "nav-link" })
             </a>
-            <a class="btn btn-primary   d-none ">@Html.ActionLink("Join Now", "RegisterStudent", "Account", null, new { @class = "btn btn-primary py-4 px-lg-5 d-none d-lg-block" })</a>
+             @if (User.Identity.IsAuthenticated)
+ {
+     <div class="dropdown">
+         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             @if (!string.IsNullOrEmpty(User.FindFirst("ProfilePicture")?.Value))
+             {
+                 <img src="~/images/profiles/@User.FindFirst("ProfilePicture").Value" alt="Profile"
+                      class="rounded-circle me-2" width="32" height="32" style="object-fit: cover;">
+             }
+             else
+             {
+                 <img src="~/images/profiles/default.png" alt="Profile"
+                      class="rounded-circle me-2" width="32" height="32">
+             }
+             <span class="d-none d-md-inline">@User.FindFirst("FullName")?.Value</span>
+         </a>
+         <ul class="dropdown-menu dropdown-menu-end">
+             <li class="dropdown-item-text">
+                 <div class="d-flex flex-column">
+                     <span class="fw-bold">@User.FindFirst("FullName")?.Value</span>
+                     <small class="text-muted">@User.Identity.Name</small>
+                 </div>
+             </li>
+             <li><hr class="dropdown-divider"></li>
+             <li><a class="dropdown-item" href="@Url.Action("Dashboard", "Student")"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a></li>
+             <li><a class="dropdown-item" href="@Url.Action("EditStudentProfile", "Account")"><i class="fa fa-user me-2"></i>My Profile</a></li>
+             <li><hr class="dropdown-divider"></li>
+             <li><a class="dropdown-item text-danger" href="@Url.Action("SignOut", "Account")"><i class="fa fa-sign-out-alt me-2"></i>Sign Out</a></li>
+         </ul>
+     </div>
+ }
+ else
+ {
+     <div class="d-flex justify-content-center">
+         <a asp-controller="Account" asp-action="Login" class="btn btn-primary py-2 px-4">
+             <i class="fa fa-sign-in-alt me-2"></i>Join Now
+         </a>
+     </div>
+ }
 
         </div>
      
