@@ -1,9 +1,13 @@
-using AutoMapper;
 using Business_logic_layer.interfaces;
 using Business_logic_layer.Repository;
 using Educational_Platform.MappingModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using Microsoft.Extensions.Options;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace Educational_Platform
 {
@@ -14,26 +18,52 @@ namespace Educational_Platform
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddControllersWithViews()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization()
+                .AddViewLocalization(); // Ensure view localization is enabled
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IunitofWork, unitOfWork>();
-            builder.Services.AddAutoMapper(m => m.AddProfiles(new List<Profile> { new RevisionMapping(), new LessonMapping(),new mappingCourse() }));
+            builder.Services.AddAutoMapper(m => m.AddProfiles(new List<Profile> {
+                new RevisionMapping(),
+                new LessonMapping(),
+                new mappingCourse()
+            }));
 
-            builder.Services.AddIdentity<Data_access_layer.model.ApplicationUser, IdentityRole>
-                (option =>
+            builder.Services.AddIdentity<Data_access_layer.model.ApplicationUser, IdentityRole>(option =>
+            {
+                option.Password.RequiredLength = 6;
+                option.Password.RequireDigit = false;
+                option.Password.RequireLowercase = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequireNonAlphanumeric = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // Configure request localization
+            var supportedCultures = new[]
+            {
+                new CultureInfo("en-US"),
+                new CultureInfo("ar")
+            };
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("ar");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders = new List<IRequestCultureProvider>
                 {
-                    option.Password.RequiredLength = 6;
-                    option.Password.RequireDigit = false;
-                    option.Password.RequireLowercase = false;
-                    option.Password.RequireUppercase = false;
-                    option.Password.RequireNonAlphanumeric = false;
-                }
-                )
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                ;
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider(),
+                    new AcceptLanguageHeaderRequestCultureProvider()
+                };
+            });
 
             var app = builder.Build();
 
@@ -41,7 +71,6 @@ namespace Educational_Platform
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -51,8 +80,11 @@ namespace Educational_Platform
             app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
+
+            // Use localization (must be after routing and before endpoints)
+            var localizationOptions = app.Services.GetService<IOptions<RequestLocalizationOptions>>()?.Value;
+            app.UseRequestLocalization(localizationOptions);
 
             app.MapControllerRoute(
                 name: "default",
@@ -61,5 +93,4 @@ namespace Educational_Platform
             app.Run();
         }
     }
-
 }

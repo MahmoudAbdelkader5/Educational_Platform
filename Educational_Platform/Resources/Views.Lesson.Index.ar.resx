@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="PageTitle" xml:space="preserve">
+    <value>إدارة الدروس</value>
+  </data>
+  <data name="AddNewLesson" xml:space="preserve">
+    <value>إضافة درس جديد</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>ابحث عن درس...</value>
+  </data>
+  <data name="FilterButton" xml:space="preserve">
+    <value>تصفية</value>
+  </data>
+  <data name="NoFiles" xml:space="preserve">
+    <value>لا توجد ملفات</value>
+  </data>
+  <data name="NoVideo" xml:space="preserve">
+    <value>لا يوجد فيديو</value>
+  </data>
+  <data name="DeleteConfirmation" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف {0}؟</value>
+  </data>
+</root>

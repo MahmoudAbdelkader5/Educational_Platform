@@ -1,0 +1,15 @@
+﻿@using Azure.Core
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Localization
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Data_access_layer.model
+@using Educational_Platform.ViewModel
+
+@inject IViewLocalizer Localizer
+
+@inject IViewLocalizer Localizer
+
+@inject IViewLocalizer Localizer
+
+@inject IViewLocalizer Localizer

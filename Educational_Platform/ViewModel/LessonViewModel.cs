@@ -21,7 +21,7 @@ namespace Educational_Platform.ViewModel
             public IFormFile Files { get; set; } // For uploading supporting files
             public string TaskFileName { get; set; }
             public IFormFile TaskFile { get; set; }
-
+            public string Image { get; set; } // Add this property to store the lesson image path
 
         public DateTime Create_date { get; set; }
             // Navigation properties

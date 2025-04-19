@@ -1,0 +1,182 @@
+﻿@model CourseDetailsViewModel
+@{
+    ViewData["Title"] = "تفاصيل الدورة مع الدروس";
+    Layout = "~/Views/Shared/instructorLayout.cshtml";
+    bool isRTL = true;
+}
+
+<div class="container my-5" dir="@(isRTL ? "rtl" : "ltr")">
+    <!-- Course Details Section (unchanged) -->
+    <!-- ... previous course details code ... -->
+    <!-- Enhanced Video Player Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalTitle">عرض الدرس</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="ratio ratio-16x9">
+                        <video id="lessonVideoPlayer" controls controlsList="nodownload" class="w-100">
+                            <source id="videoSource" src="" type="video/mp4">
+                            <track kind="captions" label="العربية" srclang="ar">
+                            <div class="video-fallback alert alert-warning m-2">
+                                <p class="mb-0">عذراً، متصفحك لا يدعم تشغيل الفيديو. الرجاء استخدام أحد المتصفحات الحديثة.</p>
+                            </div>
+                        </video>
+                    </div>
+                    <div id="videoLoading" class="text-center p-4" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">جاري التحميل...</span>
+                        </div>
+                        <p class="mt-2">جاري تحميل الفيديو، الرجاء الانتظار...</p>
+                    </div>
+                    <div id="videoError" class="alert alert-danger m-2" style="display: none;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary" id="retryVideo">إعادة المحاولة</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lessons Section (unchanged) -->
+    <!-- ... previous lessons list code ... -->
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Video player elements
+            const videoPlayer = document.getElementById('lessonVideoPlayer');
+            const videoSource = document.getElementById('videoSource');
+            const videoModal = new bootstrap.Modal('#videoModal');
+            const videoLoading = $('#videoLoading');
+            const videoError = $('#videoError');
+
+            // Handle video lesson click
+            $('.play-video').click(function(e) {
+                e.preventDefault();
+                const lessonItem = $(this).closest('.lesson-item');
+                const videoUrl = lessonItem.data('video-url');
+                const lessonTitle = lessonItem.data('lesson-title');
+
+                // Reset player state
+                videoPlayer.pause();
+                videoError.hide();
+                videoLoading.show();
+                $('#retryVideo').hide();
+
+                // Set video source and title
+                $('#videoModalTitle').text(lessonTitle);
+
+                // Construct correct video path (adjust this according to your server setup)
+                const fullVideoPath = '/files/lessons/videos/' + encodeURIComponent(videoUrl);
+                videoSource.src = fullVideoPath;
+
+                // Load the video
+                videoPlayer.load();
+
+                // Show modal
+                videoModal.show();
+            });
+
+            // Video event handlers
+            videoPlayer.addEventListener('loadeddata', function() {
+                videoLoading.hide();
+                this.play().catch(e => {
+                    videoError.text('تعذر التشغيل التلقائي: ' + e.message).show();
+                });
+            });
+
+            videoPlayer.addEventListener('error', function() {
+                videoLoading.hide();
+                let errorMessage = 'حدث خطأ أثناء تحميل الفيديو';
+
+                switch(videoPlayer.error.code) {
+                    case 1:
+                        errorMessage = 'تم إلغاء تحميل الفيديو';
+                        break;
+                    case 2:
+                        errorMessage = 'خطأ في الشبكة، الرجاء التحقق من اتصال الإنترنت';
+                        break;
+                    case 3:
+                        errorMessage = 'خطأ في فك تشفير الفيديو';
+                        break;
+                    case 4:
+                        errorMessage = 'تنسيق الفيديو غير مدعوم أو الملف تالف';
+                        break;
+                }
+
+                videoError.html(`<i class="fas fa-exclamation-triangle me-2"></i>${errorMessage}`).show();
+                $('#retryVideo').show();
+            });
+
+            // Retry button handler
+            $('#retryVideo').click(function() {
+                videoPlayer.load();
+                videoLoading.show();
+                videoError.hide();
+                $(this).hide();
+            });
+
+            // Clean up when modal closes
+            $('#videoModal').on('hidden.bs.modal', function() {
+                videoPlayer.pause();
+                videoSource.src = '';
+                videoError.hide();
+                $('#retryVideo').hide();
+            });
+        });
+    </script>
+}
+
+<style>
+    /* Previous styles... */
+
+    /* Enhanced video player styles */
+    #lessonVideoPlayer {
+        background-color: #000;
+    }
+
+    .video-fallback {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #videoLoading {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.7);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #videoError {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+    }
+
+    [dir="rtl"] #videoError {
+        right: 20px;
+        left: 20px;
+        text-align: right;
+    }
+</style>

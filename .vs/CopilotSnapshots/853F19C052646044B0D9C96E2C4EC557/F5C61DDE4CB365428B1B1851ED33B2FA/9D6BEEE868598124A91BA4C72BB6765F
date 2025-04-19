@@ -1,0 +1,4 @@
+﻿@{
+    Layout = "_Layout";
+    var culture = System.Globalization.CultureInfo.CurrentCulture.Name;
+}

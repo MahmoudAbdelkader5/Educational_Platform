@@ -45,12 +45,12 @@
       "PackagePath": "staticwebassets\\files\\file\\mahmoudMohamed(CV) (1) (2).pdf"
     },
     {
-      "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\carousel-2.jpg",
-      "PackagePath": "staticwebassets\\files\\imgCourse\\carousel-2.jpg"
+      "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\file\\mahmoudmohamed(resume).pdf",
+      "PackagePath": "staticwebassets\\files\\file\\mahmoudmohamed(resume).pdf"
     },
     {
-      "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\cat-4.jpg",
-      "PackagePath": "staticwebassets\\files\\imgCourse\\cat-4.jpg"
+      "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\carousel-2.jpg",
+      "PackagePath": "staticwebassets\\files\\imgCourse\\carousel-2.jpg"
     },
     {
       "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\course-1.jpg",
@@ -67,6 +67,10 @@
     {
       "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\nader.mp4",
       "PackagePath": "staticwebassets\\files\\video\\nader.mp4"
+    },
+    {
+      "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\revision.mp4",
+      "PackagePath": "staticwebassets\\files\\video\\revision.mp4"
     },
     {
       "Id": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\about.jpg",

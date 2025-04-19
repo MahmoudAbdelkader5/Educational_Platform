@@ -7,13 +7,14 @@ wwwroot\files\file\Educational Platform (3).pdf
 wwwroot\files\file\Entities and Attributes-2 (4).pdf
 wwwroot\files\file\mahmoudMohamed(CV) (1) (1).pdf
 wwwroot\files\file\mahmoudMohamed(CV) (1) (2).pdf
+wwwroot\files\file\mahmoudmohamed(resume).pdf
 wwwroot\files\file\MahmoudMohamedCV.pdf
 wwwroot\files\imgCourse\carousel-2.jpg
-wwwroot\files\imgCourse\cat-4.jpg
 wwwroot\files\imgCourse\course-1.jpg
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4
 wwwroot\files\video\nader.mp4
+wwwroot\files\video\revision.mp4
 wwwroot\img\about.jpg
 wwwroot\img\carousel-1.jpg
 wwwroot\img\carousel-2.jpg

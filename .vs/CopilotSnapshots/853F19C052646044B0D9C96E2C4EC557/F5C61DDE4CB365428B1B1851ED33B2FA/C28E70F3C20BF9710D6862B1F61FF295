@@ -1,0 +1,154 @@
+﻿html {
+    /* Course Details Styling */
+    .card {
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+
+    .card img {
+        object-fit: cover;
+        height: 100%;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    /* Lessons Section Styling */
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .card-footer {
+        background-color: #f8f9fa;
+        font-size: 0.875rem;
+        text-align: right;
+    }
+
+    .btn-sm {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .card img {
+            height: auto;
+        }
+    }
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Course Details Styling */
+.card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.card img {
+    object-fit: cover;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+/* Lessons Section Styling */
+.card-body {
+    padding: 1rem;
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    font-size: 0.875rem;
+    text-align: right;
+}
+
+.btn-sm {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card img {
+        height: auto;
+    }
+}
+
+/* Course Image Styling */
+.course-image {
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+/* Lesson Image Styling */
+.lesson-image {
+    max-height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+}
+
+.card-img-top {
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Add RTL support */
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="rtl"] .me-1 {
+    margin-left: 0.25rem !important;
+    margin-right: 0 !important;
+}
+
+[dir="rtl"] .me-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0 !important;
+}
+
+[dir="rtl"] .me-3 {
+    margin-left: 1rem !important;
+    margin-right: 0 !important;
+}
+
+[dir="rtl"] .ms-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}

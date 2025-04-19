@@ -91,6 +91,42 @@ namespace Educational_Platform.Controllers
             return View(courseViewModel);
         }
 
+        public async Task<IActionResult> DetailsWithLessons(int id)
+        {
+            var course = await _unitOfWork.Course.GetByIdAsync(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            var lessons = await _unitOfWork.Lesson.GetAllAsync();
+            var courseLessons = lessons.Where(l => l.CourseID == id);
+
+            var courseDetailsViewModel = new CourseDetailsViewModel
+            {
+                ID = course.ID,
+                Title = course.Title,
+                Description = course.Description,
+                Duration = course.Duration,
+                Image = course.Image, // Ensure the image is passed to the view
+                Lessons = courseLessons.Select(l => new LessonViewModel
+                {
+                    ID = l.ID,
+                    Title = l.Title,
+                    VideoURL = l.VideoURL,
+                    SupportingFiles = l.SupportingFiles,
+                    TaskFileName = l.TaskFileName,
+                    Create_date = l.Create_date,
+                }).ToList()
+            };
+
+            return View(courseDetailsViewModel); // Ensure this returns the correct view
+        }
+
+      
+  
+
+
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
