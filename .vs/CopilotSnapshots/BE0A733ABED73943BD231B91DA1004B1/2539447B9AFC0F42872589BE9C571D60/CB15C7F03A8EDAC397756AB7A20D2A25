@@ -1,0 +1,166 @@
+﻿@model LessonViewModel
+@{
+    ViewData["Title"] = "Edit Lesson";
+    Layout = "~/Views/Shared/instructorLayout.cshtml";
+
+    // Populate courses for the dropdown
+    var courses = new SelectList(ViewBag.Courses, "ID", "Title");
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm my-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0 text-center"><i class="fas fa-edit me-2"></i>Edit Lesson: @Model.Title</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                        <input type="hidden" asp-for="ID" />
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <!-- Title -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Title" class="form-label">Title*</label>
+                            <input asp-for="Title" class="form-control" placeholder="Enter lesson title" required />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+
+                        <!-- Supporting Files -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Supporting Files</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="Files" class="form-control" />
+                                @if (!string.IsNullOrEmpty(Model.SupportingFiles))
+                                {
+                                    <div class="mt-2">
+                                        <small class="text-muted">Current file:</small>
+                                        <a href="@Model.SupportingFiles" target="_blank" class="d-block">
+                                            <i class="fas fa-file me-1"></i> @System.IO.Path.GetFileName(Model.SupportingFiles)
+                                        </a>
+                                    </div>
+                                }
+                                <span asp-validation-for="Files" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Task File -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Task File</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="TaskFile" class="form-control" />
+                                @if (!string.IsNullOrEmpty(Model.TaskFileName))
+                                {
+                                    <div class="mt-2">
+                                        <small class="text-muted">Current task file:</small>
+                                        <a href="@Model.TaskFileName" target="_blank" class="d-block">
+                                            <i class="fas fa-file me-1"></i> @System.IO.Path.GetFileName(Model.TaskFileName)
+                                        </a>
+                                    </div>
+                                }
+                                <span asp-validation-for="TaskFile" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Video Upload -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Video File</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" asp-for="videoFile" class="form-control" />
+                                @if (!string.IsNullOrEmpty(Model.VideoURL))
+                                {
+                                    <div class="mt-2">
+                                        <small class="text-muted">Current video:</small>
+                                        <a href="@Model.VideoURL" target="_blank" class="d-block">
+                                            <i class="fas fa-video me-1"></i> @System.IO.Path.GetFileName(Model.VideoURL)
+                                        </a>
+                                    </div>
+                                }
+                                <span asp-validation-for="videoFile" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Schedule Date -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Create_date" class="form-label">Schedule Date</label>
+                            <input asp-for="Create_date" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Create_date" class="text-danger"></span>
+                        </div>
+
+                        <!-- Course Selection -->
+                        <div class="form-group mb-3">
+                            <label asp-for="CourseID" class="form-label">Course*</label>
+                            <select asp-for="CourseID" class="form-select" asp-items="@courses">
+                                <option value="">--- Select Course ---</option>
+                            </select>
+                            <span asp-validation-for="CourseID" class="text-danger"></span>
+                        </div>
+
+                        <!-- Form Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn btn-primary me-md-2">
+                                <i class="fas fa-save me-1"></i>Update Lesson
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-1"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        (function () {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}
+
+<style>
+    .form-control, .form-select {
+        border-radius: 0.375rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .card {
+        border: none;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+        padding: 1.25rem 1.5rem;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1.25rem;
+        font-weight: 500;
+    }
+</style>

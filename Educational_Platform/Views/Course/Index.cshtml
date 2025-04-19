@@ -81,6 +81,9 @@
                                 <th scope="col" class="py-3 text-uppercase small fw-bold text-end">Price</th>
                                 <th scope="col" class="py-3 text-uppercase small fw-bold text-center">Status</th>
                                 <th scope="col" class="pe-4 py-3 text-uppercase small fw-bold text-end">Actions</th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.First().Title)
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -146,6 +149,8 @@
                                                 </button>
                                             </form>
                                         </div>
+                                    </td>
+                                    <td>
                                     </td>
                                 </tr>
                             }

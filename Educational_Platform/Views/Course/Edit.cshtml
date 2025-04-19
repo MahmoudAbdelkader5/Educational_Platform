@@ -1,4 +1,11 @@
 ﻿@model CourseViewModel
+<!-- ...existing code... -->
+<div class="form-group">
+    <label asp-for="Title" class="control-label"></label>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+<!-- ...existing code... -->
 @{
     ViewData["Title"] = "Edit Course";
     ViewBag.Layout = "~/Views/Shared/instructorLayout.cshtml";

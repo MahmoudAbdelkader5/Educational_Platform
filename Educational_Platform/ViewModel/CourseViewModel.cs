@@ -8,6 +8,7 @@ namespace Educational_Platform.ViewModel
         [Key]
         public int ID { get; set; }
 
+        // ...existing code...
         [Required(ErrorMessage = "Course title is required.")]
         [StringLength(255, ErrorMessage = "Title must be less than 255 characters.")]
         [Display(Name = "Course Title")]

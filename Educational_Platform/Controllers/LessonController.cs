@@ -88,6 +88,14 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                // Validate CourseID
+                if (lessonVm.CourseID <= 0)
+                {
+                    TempData["ErrorMessage"] = "Course selection is required.";
+                    await PopulateCoursesViewBag();
+                    return View(lessonVm);
+                }
+
                 // Manual validation example
                 if (string.IsNullOrWhiteSpace(lessonVm.Title))
                 {
@@ -126,6 +134,7 @@ namespace Educational_Platform.Controllers
             }
         }
 
+        
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
@@ -163,6 +172,14 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                // Validate CourseID
+                if (lessonViewModel.CourseID <= 0)
+                {
+                    TempData["ErrorMessage"] = "Course selection is required.";
+                    await PopulateCoursesViewBag();
+                    return View(lessonViewModel);
+                }
+
                 // Manual validation example
                 if (string.IsNullOrWhiteSpace(lessonViewModel.Title))
                 {

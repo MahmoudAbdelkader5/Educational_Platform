@@ -8,10 +8,12 @@ namespace Educational_Platform.MappingModel
     {
         public LessonMapping()
         {
+            CreateMap<Lesson, LessonViewModel>()
+                .ForMember(dest => dest.CourseID, opt => opt.MapFrom(src => src.CourseID)); // Map CourseID
             CreateMap<LessonViewModel, Lesson>()
-                .ReverseMap();
-
+                .ForMember(dest => dest.CourseID, opt => opt.MapFrom(src => src.CourseID)); // Map CourseID
         }
     }
-   
 }
+
+// ...existing code...

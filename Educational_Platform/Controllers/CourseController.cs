@@ -113,7 +113,7 @@ namespace Educational_Platform.Controllers
                 {
                     ID = l.ID,
                     Title = l.Title,
-                    VideoURL = l.VideoURL,
+                    VideoURL = l.VideoURL, // Ensure this is correctly mapped
                     SupportingFiles = l.SupportingFiles,
                     TaskFileName = l.TaskFileName,
                     Create_date = l.Create_date,
@@ -174,7 +174,7 @@ namespace Educational_Platform.Controllers
 
                 if (res > 0)
                 {
-                    TempData["SuccessMessage"] = $"course '{courses.Title}' updated successfully!";
+                    TempData["SuccessMessage"] = $"Course '{courses.Title}' updated successfully!";
                     return RedirectToAction(nameof(Index));
                 }
                 return View(course);

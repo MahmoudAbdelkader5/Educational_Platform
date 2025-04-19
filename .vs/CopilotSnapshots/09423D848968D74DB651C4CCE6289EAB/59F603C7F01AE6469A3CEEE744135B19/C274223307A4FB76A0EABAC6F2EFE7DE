@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Data_access_layer.model
+{
+    // Course.cs
+    public class Course
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+
+        // Add navigation property for lessons if needed
+        public ICollection<Lesson> Lessons { get; set; }
+    }
+}

@@ -1,0 +1,386 @@
+﻿@model IEnumerable<CourseViewModel>
+@{
+    ViewData["Title"] = "Course Management";
+    ViewBag.Layout = "~/Views/Shared/instructorLayout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <!-- Flash Message -->
+
+    <!-- Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div class="mb-3 mb-md-0">
+            <h1 class="h2 mb-1">
+                <i class="fas fa-book me-2 text-primary"></i>Course Management
+            </h1>
+            <p class="text-muted mb-0">View and manage all course records</p>
+        </div>
+        <div>
+            <a class="btn btn-primary btn-hover-shadow" asp-action="Create">
+                <i class="fas fa-plus-circle me-2"></i>Add New Course
+            </a>
+        </div>
+    </div>
+
+    <!-- Search and Filter Card -->
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-4">
+            <form asp-action="Index" class="row g-3 align-items-end">
+                <div class="col-md-6 col-lg-4">
+                    <label class="form-label small text-uppercase fw-bold text-muted mb-1">Search Courses</label>
+                    <div class="input-group input-group-merged">
+                        <span class="input-group-text bg-transparent">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="search" class="form-control form-control-lg"
+                               placeholder="Search by title or description..."
+                               name="search" aria-label="Search courses">
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <label class="form-label small text-uppercase fw-bold text-muted mb-1">Filter by Status</label>
+                    <select class="form-select form-select-lg" name="status">
+                        <option value="">All Statuses</option>
+                        <option value="Active">Active</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Archived">Archived</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <label class="form-label small text-uppercase fw-bold text-muted mb-1">Sort By</label>
+                    <select class="form-select form-select-lg" name="sortOrder">
+                        <option value="title_asc">Title (A-Z)</option>
+                        <option value="title_desc">Title (Z-A)</option>
+                        <option value="price_asc">Price (Low-High)</option>
+                        <option value="price_desc">Price (High-Low)</option>
+                        <option value="date_desc">Newest First</option>
+                        <option value="date_asc">Oldest First</option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-lg-2 d-grid">
+                    <button class="btn btn-primary btn-lg btn-hover-shadow" type="submit">
+                        <i class="fas fa-filter me-1"></i>Apply
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Course Table Card -->
+    <div class="card shadow-sm border-0 overflow-hidden">
+        <div class="card-body p-0">
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" class="ps-4 py-3 text-uppercase small fw-bold">Course</th>
+                                <th scope="col" class="py-3 text-uppercase small fw-bold">Description</th>
+                                <th scope="col" class="py-3 text-uppercase small fw-bold text-center">Duration</th>
+                                <th scope="col" class="py-3 text-uppercase small fw-bold text-end">Price</th>
+                                <th scope="col" class="py-3 text-uppercase small fw-bold text-center">Status</th>
+                                <th scope="col" class="pe-4 py-3 text-uppercase small fw-bold text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var course in Model)
+                            {
+                                <tr class="position-relative">
+                                    <td class="ps-4">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-shrink-0 me-3">
+                                                <img src="~/files/imgCourse/@course.Image"
+                                                     class="rounded-circle object-fit-cover"
+                                                     width="40" height="40"
+                                                     alt="@course.Title"
+                                                     onerror="this.onerror=null;this.src='https://via.placeholder.com/40?text=No+Image';">
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-0 fw-semibold">@course.Title</h6>
+                                                <small class="text-muted">ID: #@course.ID</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(course.Description))
+                                        {
+                                            <div class="text-truncate" style="max-width: 250px;"
+                                                 data-bs-toggle="tooltip" data-bs-placement="top"
+                                                 title="@course.Description">
+                                                @course.Description
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted small">No description</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-dark">@course.Duration</span>
+                                    </td>
+                                    <td class="text-end fw-semibold">
+                                        @course.Price.ToString("C")
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge @GetStatusBadgeClass(course.status) rounded-pill px-3 py-2">
+                                            @course.status
+                                        </span>
+                                    </td>
+                                    <td class="pe-4 text-end">
+                                        <div class="btn-group btn-group-sm shadow-sm" role="group">
+                                            <a asp-action="Details" asp-route-id="@course.ID"
+                                               class="btn btn-light border" data-bs-toggle="tooltip" title="View Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@course.ID"
+                                               class="btn btn-light border" data-bs-toggle="tooltip" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="Delete" asp-route-id="@course.ID" method="post" class="d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-light border"
+                                                        data-bs-toggle="tooltip" title="Delete"
+                                                        onclick="return confirm('Are you sure you want to delete @course.Title?')">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="card-footer bg-transparent border-top px-4 py-3">
+                    <nav aria-label="Course pagination">
+                        <ul class="pagination justify-content-center mb-0">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="mb-3">
+                        <i class="fas fa-book-open fa-4x text-muted opacity-25"></i>
+                    </div>
+                    <h5 class="text-muted">No courses found</h5>
+                    <p class="text-muted mb-4">Try adjusting your search or add a new course</p>
+                    <a asp-action="Create" class="btn btn-primary btn-lg px-4 btn-hover-shadow">
+                        <i class="fas fa-plus-circle me-2"></i>Create First Course
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Active" => "bg-success bg-opacity-10 text-success",
+            "Draft" => "bg-secondary bg-opacity-10 text-secondary",
+            "Archived" => "bg-warning bg-opacity-10 text-warning",
+            _ => "bg-info bg-opacity-10 text-info"
+        };
+    }
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Flash message auto-dismiss
+            const flashMsg = document.getElementById('flashMessage');
+            if (flashMsg) {
+                setTimeout(() => {
+                    flashMsg.classList.add('fade');
+                    setTimeout(() => flashMsg.remove(), 150);
+                }, 5000);
+            }
+
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl, {
+                    trigger: 'hover'
+                });
+            });
+
+            // Add row hover effect
+            const tableRows = document.querySelectorAll('.table-hover tbody tr');
+            tableRows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.transform = 'translateY(-2px)';
+                    row.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.08)';
+                });
+                row.addEventListener('mouseleave', () => {
+                    row.style.transform = '';
+                    row.style.boxShadow = '';
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+    :root {
+        --primary-hover: #0b5ed7;
+        --shadow-hover: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+
+    /* Base styles */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    /* Card styling */
+    .card {
+        border-radius: 0.75rem;
+        border: none;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .card-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Button enhancements */
+    .btn-hover-shadow {
+        transition: all 0.3s ease;
+    }
+
+        .btn-hover-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+    /* Table styling */
+    .table {
+        --bs-table-bg: transparent;
+        margin-bottom: 0;
+    }
+
+        .table th {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background-color: #f8f9fa;
+        }
+
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+    .table-hover tbody tr {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    /* Badge styling */
+    .badge {
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        padding: 0.35em 0.65em;
+    }
+
+    /* Input group styling */
+    .input-group-merged .input-group-text {
+        border-right: none;
+        background-color: transparent;
+    }
+
+    .input-group-merged .form-control {
+        border-left: none;
+    }
+
+    /* Image styling */
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+    /* Pagination */
+    .page-item.active .page-link {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    .page-link {
+        color: #0d6efd;
+    }
+
+    /* Empty state */
+    .empty-state {
+        padding: 3rem 0;
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        .table-responsive {
+            border: 0;
+        }
+
+        .table thead {
+            display: none;
+        }
+
+        .table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+        }
+
+        .table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            border-bottom: 1px solid #eee;
+            padding: 0.75rem;
+        }
+
+            .table td:before {
+                content: attr(data-label);
+                font-weight: 600;
+                margin-right: 1rem;
+                color: #495057;
+            }
+
+            .table td:last-child {
+                border-bottom: 0;
+            }
+
+        .btn-group {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+</style>
