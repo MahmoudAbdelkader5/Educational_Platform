@@ -7,18 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\files\image\**" />
+    <Compile Remove="wwwroot\files\vedio\**" />
+    <Compile Remove="wwwroot\sass\**" />
+    <Content Remove="wwwroot\files\image\**" />
+    <Content Remove="wwwroot\files\vedio\**" />
+    <Content Remove="wwwroot\sass\**" />
+    <EmbeddedResource Remove="wwwroot\files\image\**" />
+    <EmbeddedResource Remove="wwwroot\files\vedio\**" />
+    <EmbeddedResource Remove="wwwroot\sass\**" />
+    <None Remove="wwwroot\files\image\**" />
+    <None Remove="wwwroot\files\vedio\**" />
+    <None Remove="wwwroot\sass\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Business logic layer\Business logic layer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\files\image\" />
-    <Folder Include="wwwroot\files\vedio\" />
     <Folder Include="wwwroot\video\" />
     <Folder Include="wwwroot\wwwroot\video\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\sass\.sass-cache\deff34d1f5b7167181b556002c25068d6adc024d\styles.scssc" />
   </ItemGroup>
 
   <ItemGroup>
