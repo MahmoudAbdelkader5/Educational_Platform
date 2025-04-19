@@ -15,15 +15,18 @@
     @Html.Partial("Styling") <!-- Include shared styles here -->
     <style>
         .fo {
-            font-family: "Cairo", sans-serif;
+        font-family: "Cairo", sans-serif;
         }
     </style>
 </head>
 <body>
-@Html.Partial("_Header")
+    @Html.Partial("_Header")
     <!-- About Start -->
     <div class="container-xxl py-5" dir="rtl">
         <div class="container">
+
+
+
             <div class="text-center wow fadeInUp pb-5" data-wow-delay="0.1s">
                 <h6 class="section-title bg-white text-center text-primary px-3 fo">من نحن</h6>
             </div>
@@ -61,7 +64,11 @@
                             <p class="mb-0"><i class="fa fa-arrow-right text-primary ms-2"></i>متابعة دورية لمستوى الطالب</p>
                         </div>
                     </div>
-                    @Html.ActionLink("انضم الينا الان!", "RegisterStudent", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none d-lg-block" })
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("انضم الينا الان!", "RegisterStudent", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none d-lg-block" })
+
+                    }
                 </div>
             </div>
         </div>

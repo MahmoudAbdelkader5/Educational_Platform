@@ -1,81 +1,80 @@
-@using Educational_Platform.ViewModel
+﻿@using Educational_Platform.ViewModel
 @model RegisterStudentViewModel
 
 @{
     ViewData["Title"] = "Student Registration";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+
     Layout = "_AuthLayout";
 }
 
-<div class="container py-5">
+<style>
+    .fo {
+        font-family: "Cairo", sans-serif;
+    }
+
+</style>
+<div class="container py-5" dir="rtl">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <!-- Registration Progress Bar -->
-            <div class="mb-4">
-                <div class="d-flex justify-content-between mb-1">
-                    <span>Registration Progress</span>
-                    <span><span id="completionPercentage">0</span>% Complete</span>
-                </div>
-                <div class="progress" style="height: 8px;">
-                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 0%"></div>
-                </div>
-            </div>
+            
 
             <div class="card shadow-lg border-0 rounded-lg">
-                <div class="card-header bg-gradient-primary text-white py-3">
-                    <h3 class="mb-0 text-center"><i class="fa fa-user-plus me-2"></i>Join Our Learning Community</h3>
-                    <p class="text-center mb-0 small">Create your student account to access courses and learning materials</p>
+                <div class="  btn-primary text-white py-3">
+                    <h3 class="mb-0 text-center fo"><i class="fa fa-user-plus me-2 "></i>  انضم إلى منصة مفهوم</h3>
+
                 </div>
 
                 <div class="card-body p-4 p-lg-5">
                     <form id="registrationForm" asp-action="RegisterStudent" method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="All" class="text-danger mb-4 alert alert-danger py-2" style="display: none;" id="validationSummary"></div>
 
-                        <!-- Personal Information Section -->
+                        <!-- المعلومات الشخصية -->
                         <div class="registration-section mb-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
-                                    <i class="fa fa-user"></i>
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-shield-alt"></i>
                                 </div>
-                                <h5 class="mb-0 border-bottom pb-2 w-100">Personal Information</h5>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo">المعلومات الشخصية</h5>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label asp-for="FirstName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> First Name</label>
-                                    <input asp-for="FirstName" class="form-control form-control-lg" placeholder="Enter your first name" data-field="required" />
+                                    <label asp-for="FirstName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> الاسم الأول</label>
+                                    <input asp-for="FirstName" class="form-control form-control-lg" placeholder="أدخل الاسم الأول" data-field="required" />
                                     <span asp-validation-for="FirstName" class="text-danger"></span>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label asp-for="LastName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> Last Name</label>
-                                    <input asp-for="LastName" class="form-control form-control-lg" placeholder="Enter your last name" data-field="required" />
+                                    <label asp-for="LastName" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> اسم العائلة</label>
+                                    <input asp-for="LastName" class="form-control form-control-lg" placeholder="أدخل اسم العائلة" data-field="required" />
                                     <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Contact Information Section -->
+                        <!-- معلومات التواصل -->
                         <div class="registration-section mb-4">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
-                                    <i class="fa fa-address-book"></i>
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-shield-alt"></i>
                                 </div>
-                                <h5 class="mb-0 border-bottom pb-2 w-100">Contact Information</h5>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo">معلومات التواصل</h5>
                             </div>
 
                             <div class="mb-3">
-                                <label asp-for="Email" class="form-label fw-semibold"><i class="fa fa-envelope me-1"></i> Email Address</label>
+                                <label asp-for="Email" class="form-label fw-semibold"><i class="fa fa-envelope me-1"></i> البريد الإلكتروني</label>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="fa fa-envelope"></i></span>
                                     <input asp-for="Email" class="form-control form-control-lg" placeholder="name@example.com" autocomplete="email" data-field="required" />
                                 </div>
                                 <span asp-validation-for="Email" class="text-danger"></span>
-                                <small class="form-text text-muted">We'll send a verification link to this email</small>
+                                <small class="form-text text-muted">سوف نرسل رابط التحقق إلى هذا البريد</small>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label asp-for="PhoneNumber" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> Phone Number</label>
+                                    <label asp-for="PhoneNumber" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> رقم الهاتف</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light">+20</span>
                                         <input asp-for="PhoneNumber" class="form-control form-control-lg" placeholder="1XXXXXXXXX" data-field="required" />
@@ -84,7 +83,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label asp-for="FatherPhoneNumber" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> Parent/Guardian Phone</label>
+                                    <label asp-for="FatherPhoneNumber" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> رقم ولي الأمر</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-light">+20</span>
                                         <input asp-for="FatherPhoneNumber" class="form-control form-control-lg" placeholder="1XXXXXXXXX" data-field="required" />
@@ -93,180 +92,179 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Academic Information Section -->
-                        <div class="registration-section mb-4">
+                        <!-- قسم المعلومات الأكاديمية -->
+                        <div class="registration-section mb-4" dir="rtl">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
                                     <i class="fa fa-graduation-cap"></i>
                                 </div>
-                                <h5 class="mb-0 border-bottom pb-2 w-100">Academic Information</h5>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo">المعلومات الأكاديمية</h5>
                             </div>
 
                             <div class="mb-3">
-                                <label asp-for="GradeLevel" class="form-label fw-semibold"><i class="fa fa-graduation-cap me-1"></i> Grade Level</label>
+                                <label asp-for="GradeLevel" class="form-label fw-semibold">
+                                    <i class="fa fa-graduation-cap ms-1"></i> المرحلة الدراسية
+                                </label>
                                 <select asp-for="GradeLevel" class="form-select form-select-lg" data-field="required">
-                                    <option value="" selected disabled>Select your grade level</option>
+                                    <option value="" selected disabled>اختر المرحلة الدراسية</option>
 
-                                    <optgroup label="Preparatory Education (Middle School)">
-                                        <option value="First_Preparatory">First Preparatory (Grade 7)</option>
-                                        <option value="Second_Preparatory">Second Preparatory (Grade 8)</option>
-                                        <option value="Third_Preparatory">Third Preparatory (Grade 9)</option>
+                                    <optgroup label="المرحلة الإعدادية (المدرسة المتوسطة)">
+                                        <option value="First_Preparatory">الصف الأول الإعدادي (الصف السابع)</option>
+                                        <option value="Second_Preparatory">الصف الثاني الإعدادي (الصف الثامن)</option>
+                                        <option value="Third_Preparatory">الصف الثالث الإعدادي (الصف التاسع)</option>
                                     </optgroup>
 
-                                    <optgroup label="Secondary Education (High School)">
-                                        <option value="First_Secondary">First Secondary (Grade 10)</option>
-                                        <option value="Second_Secondary">Second Secondary (Grade 11)</option>
-                                        <option value="Third_Secondary">Third Secondary (Grade 12)</option>
+                                    <optgroup label="المرحلة الثانوية (المدرسة الثانوية)">
+                                        <option value="First_Secondary">الصف الأول الثانوي (الصف العاشر)</option>
+                                        <option value="Second_Secondary">الصف الثاني الثانوي (الصف الحادي عشر)</option>
+                                        <option value="Third_Secondary">الصف الثالث الثانوي (الصف الثاني عشر)</option>
                                     </optgroup>
                                 </select>
                                 <span asp-validation-for="GradeLevel" class="text-danger"></span>
-                                <small class="form-text text-muted">This helps us recommend appropriate courses for you</small>
+                                <small class="form-text text-muted">سيساعدنا هذا في ترشيح الدورات المناسبة لك</small>
                             </div>
                         </div>
 
-                        <!-- Profile & Security Section -->
-                        <div class="registration-section mb-4">
+                        <!-- قسم الملف الشخصي والأمان -->
+                        <div class="registration-section mb-4" dir="rtl">
                             <div class="d-flex align-items-center mb-3">
-                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 32px; height: 32px;">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
                                     <i class="fa fa-shield-alt"></i>
                                 </div>
-                                <h5 class="mb-0 border-bottom pb-2 w-100">Profile & Security</h5>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo">الملف الشخصي والأمان</h5>
                             </div>
 
                             <div class="mb-4">
-                                <label asp-for="ProfilePicture" class="form-label fw-semibold"><i class="fa fa-image me-1"></i> Profile Picture</label>
+                                <label asp-for="ProfilePicture" class="form-label fw-semibold">
+                                    <i class="fa fa-image ms-1"></i> صورة الملف الشخصي
+                                </label>
                                 <div class="text-center mb-3">
-                                    <img id="imagePreview" src="/images/avatar-placeholder.png" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;" />
+                                    <img id="imagePreview" src="~/img/avatar.png" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;" />
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="fa fa-upload"></i></span>
                                     <input asp-for="ProfilePicture" type="file" class="form-control" accept="image/*" onchange="previewImage(this)" />
                                 </div>
-                                <small class="form-text text-muted">Upload a profile picture (JPEG or PNG, max 2MB)</small>
+                                <small class="form-text text-muted">قم برفع صورة للملف الشخصي (JPEG أو PNG، بحد أقصى 2 ميجابايت)</small>
                             </div>
+                        </div>
+                        <!-- قسم كلمة السر ن -->
 
-                            <div class="mb-3">
-                                <label asp-for="Password" class="form-label fw-semibold"><i class="fa fa-lock me-1"></i> Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
-                                    <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="Create a secure password" data-field="required" />
-                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('Password')"><i class="fa fa-eye"></i></button>
-                                </div>
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                                <div class="mt-2">
-                                    <div class="password-strength-meter progress" style="height: 8px;">
-                                        <div id="passwordStrength" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                                    </div>
-                                    <small id="passwordStrengthText" class="form-text">Password strength: Too weak</small>
-                                </div>
+                        <div class="mb-3" dir="rtl">
+                            <label asp-for="Password" class="form-label fw-semibold"><i class="fa fa-lock ms-1"></i> كلمة المرور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
+                                <input asp-for="Password" class="form-control form-control-lg" type="password" placeholder="أنشئ كلمة مرور قوية" data-field="required" />
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('Password')"><i class="fa fa-eye"></i></button>
                             </div>
-
-                            <div class="mb-4">
-                                <label asp-for="ConfirmPassword" class="form-label fw-semibold"><i class="fa fa-lock me-1"></i> Confirm Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
-                                    <input asp-for="ConfirmPassword" class="form-control form-control-lg" type="password" placeholder="Confirm your password" data-field="required" />
-                                    <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('ConfirmPassword')"><i class="fa fa-eye"></i></button>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="mt-2">
+                                <div class="password-strength-meter progress" style="height: 8px;">
+                                    <div id="passwordStrength" class="progress-bar" role="progressbar" style="width: 0%"></div>
                                 </div>
-                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                <small id="passwordStrengthText" class="form-text">قوة كلمة المرور: ضعيفة جدًا</small>
                             </div>
                         </div>
 
-                        <div class="alert alert-info mb-4">
-                            <div class="d-flex">
-                                <div class="me-3">
-                                    <i class="fa fa-info-circle fa-2x"></i>
-                                </div>
-                                <div>
-                                    <h6 class="mb-1">Almost done!</h6>
-                                    <p class="mb-0">Please review your information before submitting. After registration, you'll need to verify your email address.</p>
-                                </div>
+                        <div class="mb-4" dir="rtl">
+                            <label asp-for="ConfirmPassword" class="form-label fw-semibold"><i class="fa fa-lock ms-1"></i> تأكيد كلمة المرور</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fa fa-lock"></i></span>
+                                <input asp-for="ConfirmPassword" class="form-control form-control-lg" type="password" placeholder="أكد كلمة المرور الخاصة بك" data-field="required" />
+                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('ConfirmPassword')"><i class="fa fa-eye"></i></button>
                             </div>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-4">
-                            <div class="form-check">
+
+
+                        <div class="mb-4" dir="rtl">
+                            <div class="form-check d-flex align-items-center">
                                 <input class="form-check-input" type="checkbox" id="termsCheck" required data-field="required">
                                 <label class="form-check-label" for="termsCheck">
-                                    I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">privacy policy</a>
+                                    أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط والأحكام</a> و <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">سياسة الخصوصية</a>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg py-3">
-                                <i class="fa fa-user-plus me-2"></i>Create Student Account
+                        <div class="d-grid gap-2" dir="rtl">
+                            <button type="submit" class="btn btn-primary btn-lg py-3 fo">
+                                <i class="fa fa-user-plus ms-2"></i>إنشاء حساب طالب
                             </button>
                         </div>
+
+
                     </form>
                 </div>
-                <div class="card-footer bg-light py-3 text-center">
-                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
-                        <span>Already have an account?</span>
-                        <a asp-action="Login" asp-controller="Account" class="btn btn-outline-primary">
-                            <i class="fa fa-sign-in-alt me-2"></i>Sign in
+                <div class="card-footer bg-light py-3 text-center " dir="rtl">
+                    <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 ">
+                        <span>لديك حساب بالفعل؟</span>
+                        <a asp-action="Login" asp-controller="Account" class="btn btn-outline-primary fo">
+                            <i class="fa fa-sign-in-alt ms-2"></i>تسجيل الدخول
                         </a>
                     </div>
                 </div>
+
             </div>
 
-            <div class="text-center mt-3">
-                <p class="small text-muted">Need help? <a href="#" class="text-decoration-none">Contact Support</a></p>
+            <div class="text-center mt-3" dir="rtl">
+                <p class="small text-muted">هل تحتاج إلى مساعدة؟ <a href="#" class="text-decoration-none">اتصل بالدعم الفني</a></p>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!-- شروط الاستخدام -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true" dir="rtl">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title" id="termsModalLabel">شروط الاستخدام</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+            </div>
+            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                <h6>١. المقدمة</h6>
+                <p>من خلال تسجيلك في الموقع، فإنك توافق على الالتزام بهذه الشروط والأحكام.</p>
+
+                <h6>٢. التسجيل وحماية الحساب</h6>
+                <p>أنت مسؤول عن الحفاظ على سرية حسابك وكلمة المرور الخاصة بك، وتتحمل كامل المسؤولية عن جميع الأنشطة التي تتم باستخدام حسابك.</p>
+
+                <h6>٣. المحتوى التعليمي</h6>
+                <p>جميع المحتويات المقدمة هي لأغراض تعليمية فقط. وتتعهد بعدم نسخها أو توزيعها أو إعادة استخدامها دون إذن.</p>
+
+                <h6>٤. قواعد السلوك</h6>
+                <p>تتعهد باستخدام المنصة بطريقة محترمة وبنّاءة، وتجنب أي نشاط مسيء أو ضار.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.getElementById('termsCheck').checked = true;">أوافق</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Terms and Conditions Modal -->
-<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+<!-- سياسة الخصوصية -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true" dir="rtl">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-light">
-                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="privacyModalLabel">سياسة الخصوصية</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
             </div>
             <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                <h6>1. Introduction</h6>
-                <p>By registering for an account, you agree to comply with and be bound by these terms and conditions.</p>
+                <h6>١. جمع المعلومات</h6>
+                <p>نقوم بجمع معلومات شخصية مثل الاسم، والبريد الإلكتروني، وبيانات الاتصال لتقديم خدمات تعليمية.</p>
 
-                <h6>2. Account Registration and Security</h6>
-                <p>You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account.</p>
+                <h6>٢. كيفية استخدام المعلومات</h6>
+                <p>تُستخدم معلوماتك لإدارة حسابك وتوفير الوصول إلى الدورات وتحسين خدماتنا التعليمية.</p>
 
-                <h6>3. Educational Content</h6>
-                <p>All content provided is for educational purposes only. You agree not to reproduce, distribute, or create derivative works without proper authorization.</p>
-
-                <h6>4. Code of Conduct</h6>
-                <p>You agree to use the platform in a respectful and constructive manner, refraining from any disruptive or harmful activities.</p>
+                <h6>٣. أمان المعلومات</h6>
+                <p>نستخدم تدابير أمنية مناسبة لحماية معلوماتك الشخصية من الوصول أو الكشف غير المصرح به.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.getElementById('termsCheck').checked = true;">I Agree</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Privacy Policy Modal -->
-<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bg-light">
-                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
-                <h6>1. Information Collection</h6>
-                <p>We collect personal information such as name, email, and contact details to provide educational services.</p>
-
-                <h6>2. How We Use Your Information</h6>
-                <p>Your information is used to manage your account, provide access to courses, and improve our educational services.</p>
-
-                <h6>3. Information Security</h6>
-                <p>We implement appropriate security measures to protect your personal information from unauthorized access or disclosure.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
             </div>
         </div>
     </div>

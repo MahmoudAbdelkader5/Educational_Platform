@@ -9,13 +9,13 @@ wwwroot\files\file\mahmoudMohamed(CV) (1) (2).pdf
 wwwroot\files\file\mahmoudmohamed(resume).pdf
 wwwroot\files\file\MahmoudMohamedCV.pdf
 wwwroot\files\imgCourse\carousel-2.jpg
-wwwroot\files\imgCourse\cat-1.jpg
-wwwroot\files\imgCourse\cat-2.jpg
+wwwroot\files\imgCourse\sddefault.jpg
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4
 wwwroot\files\video\nader.mp4
 wwwroot\files\video\revision.mp4
 wwwroot\img\about.jpg
+wwwroot\img\avatar.png
 wwwroot\img\carousel-1.jpg
 wwwroot\img\carousel-2.jpg
 wwwroot\img\cat-1.jpg
@@ -33,6 +33,7 @@ wwwroot\img\testimonial-1.jpg
 wwwroot\img\testimonial-2.jpg
 wwwroot\img\testimonial-3.jpg
 wwwroot\img\testimonial-4.jpg
+wwwroot\img\Webinar-pana.png
 wwwroot\js\main.js
 wwwroot\js\site.js
 wwwroot\lib\animate\animate.css

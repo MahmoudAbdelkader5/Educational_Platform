@@ -50,14 +50,18 @@ namespace Educational_Platform.Controllers
                         claims.Add(new Claim("IsActive", user.IsActive ? "1" : "0"));
                         claims.Add(new Claim("ProfilePicture", user.ProfilePicture ?? ""));
 
-                        if (User.IsInRole("Student"))
+                        if (await _userManager.IsInRoleAsync(user, "Student"))
                         {
                             return RedirectToAction("Index", "Home");
                         }
-                        else if (User.IsInRole("Instructor"))
+                        else if (await _userManager.IsInRoleAsync(user, "Instructor"))
                         {
-
                             return RedirectToAction("Index", "Lesson");
+                        }
+                        else
+                        {
+                            // Default fallback if no role matches
+                            return RedirectToAction("Index", "Home");
                         }
                     }
                     else
@@ -219,7 +223,7 @@ namespace Educational_Platform.Controllers
                     await _userManager.UpdateAsync(user);
 
                     // Redirect to profile completion
-                    return RedirectToAction("EditInstructorProfile");
+                    return RedirectToAction("Login");
                 }
 
                 foreach (var error in result.Errors)
