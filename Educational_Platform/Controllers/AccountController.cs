@@ -1,4 +1,4 @@
-﻿using Data_access_layer.model;
+using Data_access_layer.model;
 using Educational_Platform.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -78,6 +78,28 @@ namespace Educational_Platform.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Set default profile picture path
+                string profilePicturePath = "default.png";
+
+                // Process profile picture if uploaded
+                if (model.ProfilePictureFile != null && model.ProfilePictureFile.Length > 0)
+                {
+                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images/profiles");
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfilePictureFile.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    // Ensure directory exists
+                    Directory.CreateDirectory(uploadsFolder);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ProfilePictureFile.CopyToAsync(fileStream);
+                    }
+
+                    profilePicturePath = uniqueFileName;
+                }
+
+                // Create user with all required fields
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -85,6 +107,7 @@ namespace Educational_Platform.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     PhoneNumber = model.PhoneNumber,
+                    ProfilePicture = profilePicturePath,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
                 };
@@ -100,13 +123,15 @@ namespace Educational_Platform.Controllers
                     }
                     await _userManager.AddToRoleAsync(user, "Student");
 
-                    // Create Student entity
+                    // Create Student entity with all fields from the form
                     var student = new Student
                     {
-
                         Email = model.Email,
                         Name = $"{model.FirstName} {model.LastName}",
                         PhoneNumber = model.PhoneNumber,
+                        FatherPhone = model.FatherPhoneNumber, // Save father's phone number
+                        GradeLevel = model.GradeLevel, // Save grade level
+                        ProfilePicture = profilePicturePath, // Save profile picture
                         UserId = user.Id
                     };
 
@@ -117,8 +142,14 @@ namespace Educational_Platform.Controllers
                     user.StudentId = student.ID;
                     await _userManager.UpdateAsync(user);
 
-                    // Redirect to profile completion
-                    return RedirectToAction("EditStudentProfile");
+                    // Sign in the user after registration
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    // Show success message
+                    TempData["SuccessMessage"] = "Your account has been created successfully!";
+
+                    // Redirect to profile completion or dashboard
+                    return RedirectToAction("Login", "Account");
                 }
 
                 foreach (var error in result.Errors)
@@ -127,6 +158,7 @@ namespace Educational_Platform.Controllers
                 }
             }
 
+            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -209,7 +241,7 @@ namespace Educational_Platform.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = user.PhoneNumber,
-                FatherPhone = student.fatherPhone,
+                FatherPhone = student.FatherPhone,
                 GradeLevel = student.GradeLevel,
                 CurrentProfilePicture = user.ProfilePicture
             };
@@ -245,7 +277,7 @@ namespace Educational_Platform.Controllers
 
             student.Name = $"{model.FirstName} {model.LastName}";
             student.PhoneNumber = model.PhoneNumber;
-            student.fatherPhone = model.FatherPhone;
+            student.FatherPhone = model.FatherPhone;
             student.GradeLevel = model.GradeLevel;
 
             await _userManager.UpdateAsync(user);
