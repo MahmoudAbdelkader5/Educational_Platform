@@ -1151,8 +1151,8 @@
       ]
     },
     {
-      "Route": "files/imgCourse/sddefault.jpg",
-      "AssetFile": "files/imgCourse/sddefault.jpg",
+      "Route": "files/imgCourse/ds-image.jpg",
+      "AssetFile": "files/imgCourse/ds-image.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1165,7 +1165,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "47074"
+          "Value": "34042"
         },
         {
           "Name": "Content-Type",
@@ -1173,23 +1173,23 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY=\""
+          "Value": "\"8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 20:57:42 GMT"
+          "Value": "Sun, 20 Apr 2025 10:48:04 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY="
+          "Value": "sha256-8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co="
         }
       ]
     },
     {
-      "Route": "files/imgCourse/sddefault.scze9jcg9j.jpg",
-      "AssetFile": "files/imgCourse/sddefault.jpg",
+      "Route": "files/imgCourse/ds-image.nvcrijgg52.jpg",
+      "AssetFile": "files/imgCourse/ds-image.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1202,7 +1202,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "47074"
+          "Value": "34042"
         },
         {
           "Name": "Content-Type",
@@ -1210,25 +1210,25 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY=\""
+          "Value": "\"8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 19 Apr 2025 20:57:42 GMT"
+          "Value": "Sun, 20 Apr 2025 10:48:04 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "scze9jcg9j"
+          "Value": "nvcrijgg52"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY="
+          "Value": "sha256-8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co="
         },
         {
           "Name": "label",
-          "Value": "files/imgCourse/sddefault.jpg"
+          "Value": "files/imgCourse/ds-image.jpg"
         }
       ]
     },

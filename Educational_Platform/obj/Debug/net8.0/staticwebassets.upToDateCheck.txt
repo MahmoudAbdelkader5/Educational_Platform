@@ -11,7 +11,7 @@ wwwroot\files\file\mahmoudmohamed(resume).pdf
 wwwroot\files\file\MahmoudMohamedCV.pdf
 wwwroot\files\file\me.png
 wwwroot\files\imgCourse\carousel-2.jpg
-wwwroot\files\imgCourse\sddefault.jpg
+wwwroot\files\imgCourse\ds-image.jpg
 wwwroot\files\video\finalang.mp4
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4

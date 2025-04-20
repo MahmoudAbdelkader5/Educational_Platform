@@ -252,23 +252,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\carousel-2.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\sddefault.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\ds-image.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>Educational_Platform</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/Educational_Platform</BasePath>
-      <RelativePath>files/imgCourse/sddefault.jpg</RelativePath>
+      <RelativePath>files/imgCourse/ds-image.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>scze9jcg9j</Fingerprint>
-      <Integrity>fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY=</Integrity>
+      <Fingerprint>nvcrijgg52</Fingerprint>
+      <Integrity>8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\sddefault.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\ds-image.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\video\finalang.mp4'))">
       <SourceType>Package</SourceType>

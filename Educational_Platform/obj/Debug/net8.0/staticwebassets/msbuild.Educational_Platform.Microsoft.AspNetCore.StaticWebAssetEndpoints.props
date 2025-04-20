@@ -168,17 +168,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"v2tpaccm93"},{"Name":"integrity","Value":"sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="},{"Name":"label","Value":"_content/Educational_Platform/files/imgCourse/carousel-2.jpg"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"57163"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=\u0022"},{"Name":"Last-Modified","Value":"Fri, 18 Apr 2025 19:46:18 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Educational_Platform/files/imgCourse/sddefault.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\sddefault.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/Educational_Platform/files/imgCourse/ds-image.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\ds-image.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"47074"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 19 Apr 2025 20:57:42 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-8/ec3wDPwNs2k\u002Bb/ddPxboXGd/ZRfuGiHf8gz8FB1co="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"34042"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u00228/ec3wDPwNs2k\u002Bb/ddPxboXGd/ZRfuGiHf8gz8FB1co=\u0022"},{"Name":"Last-Modified","Value":"Sun, 20 Apr 2025 10:48:04 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Educational_Platform/files/imgCourse/sddefault.scze9jcg9j.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\sddefault.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/Educational_Platform/files/imgCourse/ds-image.nvcrijgg52.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\ds-image.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"scze9jcg9j"},{"Name":"integrity","Value":"sha256-fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY="},{"Name":"label","Value":"_content/Educational_Platform/files/imgCourse/sddefault.jpg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"47074"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022fD/J78qa54wJi8Hlj3pKviJPSITcQdqKrgznepjdwOY=\u0022"},{"Name":"Last-Modified","Value":"Sat, 19 Apr 2025 20:57:42 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"nvcrijgg52"},{"Name":"integrity","Value":"sha256-8/ec3wDPwNs2k\u002Bb/ddPxboXGd/ZRfuGiHf8gz8FB1co="},{"Name":"label","Value":"_content/Educational_Platform/files/imgCourse/ds-image.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"34042"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u00228/ec3wDPwNs2k\u002Bb/ddPxboXGd/ZRfuGiHf8gz8FB1co=\u0022"},{"Name":"Last-Modified","Value":"Sun, 20 Apr 2025 10:48:04 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Educational_Platform/files/video/finalang.4d1y2mhhwq.mp4">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\video\finalang.mp4'))</AssetFile>

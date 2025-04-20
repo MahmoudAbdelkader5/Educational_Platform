@@ -1,5 +1,4 @@
 ﻿@using Educational_Platform.ViewModel
-// ...existing code...
 
 @model RegisterStudentViewModel
 
@@ -29,8 +28,10 @@
 
                 <div class="card-body p-4 p-lg-5">
                     <form id="registrationForm" asp-action="RegisterStudent" method="post" enctype="multipart/form-data">
-                        <div asp-validation-summary="All" class="text-danger mb-4 alert alert-danger py-2" style="display: none;" id="validationSummary"></div>
-
+                        @if (ViewData.ModelState.IsValid == false)
+                        {
+                            <div asp-validation-summary="All" class="text-danger mb-4 alert alert-danger py-2" id="validationSummary"></div>
+                        }
                         <!-- المعلومات الشخصية -->
                         <div class="registration-section mb-4">
                             <div class="d-flex align-items-center mb-3">
