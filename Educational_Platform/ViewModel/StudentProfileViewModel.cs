@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Educational_Platform.ViewModel
 {
     public class StudentProfileViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Email { get; set; }
 
         [Required]
@@ -27,8 +28,9 @@ namespace Educational_Platform.ViewModel
         public string GradeLevel { get; set; }
 
         [Display(Name = "Profile Picture")]
-        public IFormFile ProfilePictureFile { get; set; }
-
         public string CurrentProfilePicture { get; set; }
+
+        [Display(Name = "Enrolled Courses")]
+        public List<CourseViewModel> EnrolledCourses { get; set; }
     }
 }

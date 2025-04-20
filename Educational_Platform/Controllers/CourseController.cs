@@ -2,6 +2,7 @@
 using Business_logic_layer.interfaces;
 using Data_access_layer.model;
 using Educational_Platform.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Educational_Platform.Controllers
 {
+
     public class CourseController : Controller
     {
         private readonly IunitofWork _unitOfWork;
@@ -19,6 +21,7 @@ namespace Educational_Platform.Controllers
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
+        [Authorize(Roles = "Instructor")]
 
         public async Task<IActionResult> Index(string search)
         {
@@ -44,6 +47,8 @@ namespace Educational_Platform.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Instructor")]
+
         public async Task<IActionResult> Create()
         {
             return View();
@@ -52,6 +57,8 @@ namespace Educational_Platform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Instructor")]
+
         public async Task<IActionResult> Create(CourseViewModel courseVm)
         {
             try
@@ -78,6 +85,7 @@ namespace Educational_Platform.Controllers
 
 
         }
+        [Authorize(Roles = "Instructor")]
 
 
         public async Task<IActionResult> Details(int id)
@@ -91,6 +99,7 @@ namespace Educational_Platform.Controllers
             return View(courseViewModel);
         }
 
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> DetailsWithLessons(int id)
         {
             var course = await _unitOfWork.Course.GetByIdAsync(id);
@@ -123,9 +132,10 @@ namespace Educational_Platform.Controllers
             return View(courseDetailsViewModel); // Ensure this returns the correct view
         }
 
-      
-  
 
+
+
+        [Authorize(Roles = "Instructor")]
 
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
@@ -147,6 +157,8 @@ namespace Educational_Platform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Instructor")]
+
         public async Task<IActionResult> Edit(CourseViewModel course)
         {
 
@@ -189,6 +201,8 @@ namespace Educational_Platform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Instructor")]
+
         public async Task<IActionResult> Delete(int id)
         {
             var course = await _unitOfWork.Course.GetByIdAsync(id);

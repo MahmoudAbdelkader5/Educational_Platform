@@ -35,10 +35,8 @@
 </style>
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-        <h1 asp-controller="Home" asp-action="Index" class="m-0 logo">
-            <i class="fa fa-book ms-3"></i> مفهوم
-        </h1>
+    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h1 class="m-0 logo">مفهوم <i class="fa fa-book me-3"></i></h1>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
@@ -71,11 +69,12 @@
                         @User.Identity.Name
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>@Html.ActionLink("Profile", "StudentProfile", "Student", null, new { @class = "dropdown-item" })</li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>@Html.ActionLink("Logout", "SignOut", "Account", null, new { @class = "dropdown-item" })</li>
                     </ul>
+
                 </div>
             }
             else

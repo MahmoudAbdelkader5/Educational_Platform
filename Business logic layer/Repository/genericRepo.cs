@@ -28,24 +28,25 @@ namespace Business_logic_layer.Repository
             _context.Remove(item);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes)
+        public async Task<IEnumerable<T>> GetAllAsync(
+     Expression<Func<T, bool>> filter = null,
+     string includeProperties = "")
         {
-            var query = _context.Set<T>().AsQueryable();
+            IQueryable<T> query = _context.Set<T>();
 
-            // Handle specific entity types that need eager loading
-            if (typeof(T) == typeof(Revision) || typeof(T) == typeof(Lesson))
+            if (filter != null)
             {
-                query = _context.Set<T>().Include("Course");
+                query = query.Where(filter);
             }
 
-            // Apply additional includes if provided
-            foreach (var include in includes)
+            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                query = query.Include(include);
+                query = query.Include(includeProperty);
             }
 
             return await query.ToListAsync();
         }
+
 
         public async Task<T> GetByIdAsync(int id)
         {

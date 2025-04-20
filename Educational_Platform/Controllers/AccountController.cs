@@ -1,5 +1,7 @@
 using Data_access_layer.model;
 using Educational_Platform.ViewModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,11 +47,21 @@ namespace Educational_Platform.Controllers
                     var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, model.RememberMe);
                     if (result.Succeeded)
                     {
-                        List<Claim> claims = new List<Claim>();
-                        claims.Add(new Claim("FullName", user.FullName));
-                        claims.Add(new Claim("IsActive", user.IsActive ? "1" : "0"));
-                        claims.Add(new Claim("ProfilePicture", user.ProfilePicture ?? ""));
+                        // THIS LINE IS CRITICAL - actually sign in the user and create the auth cookie
+                        await _signInManager.SignInAsync(user, model.RememberMe);
 
+                        // Build custom claims if needed
+                        var userClaims = new List<Claim>
+                {
+                    new Claim("FullName", user.FullName),
+                    new Claim("IsActive", user.IsActive ? "1" : "0"),
+                    new Claim("ProfilePicture", user.ProfilePicture ?? "")
+                };
+
+                        // Add these claims to the user
+                        await _userManager.AddClaimsAsync(user, userClaims);
+
+                        // Now redirect based on role
                         if (await _userManager.IsInRoleAsync(user, "Student"))
                         {
                             return RedirectToAction("Index", "Home");
@@ -60,7 +72,6 @@ namespace Educational_Platform.Controllers
                         }
                         else
                         {
-                            // Default fallback if no role matches
                             return RedirectToAction("Index", "Home");
                         }
                     }
@@ -76,6 +87,7 @@ namespace Educational_Platform.Controllers
             }
             return View(model);
         }
+
         // Registration for Students
         [HttpGet]
 
@@ -235,70 +247,70 @@ namespace Educational_Platform.Controllers
             return View(model);
         }
 
-        // Edit Student Profile
-        [HttpGet]
-        [Authorize(Roles = "Student")]
-        public async Task<IActionResult> EditStudentProfile()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return NotFound();
+        //// Edit Student Profile
+        //[HttpGet]
+        //[Authorize(Roles = "Student")]
+        //public async Task<IActionResult> EditStudentProfile()
+        //{
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null) return NotFound();
 
-            var student = _context.Students.FirstOrDefault(s => s.ID == user.StudentId);
-            if (student == null) return NotFound();
+        //    var student = _context.Students.FirstOrDefault(s => s.ID == user.StudentId);
+        //    if (student == null) return NotFound();
 
-            var model = new StudentProfileViewModel
-            {
-                Id = user.Id,
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                PhoneNumber = user.PhoneNumber,
-                FatherPhone = student.FatherPhone,
-                GradeLevel = student.GradeLevel,
-                CurrentProfilePicture = user.ProfilePicture
-            };
+        //    var model = new StudentProfileViewModel
+        //    {
+        //        Id = user.Id,
+        //        Email = user.Email,
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        PhoneNumber = user.PhoneNumber,
+        //        FatherPhone = student.FatherPhone,
+        //        GradeLevel = student.GradeLevel,
+        //        CurrentProfilePicture = user.ProfilePicture
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
-        [HttpPost]
-        [Authorize(Roles = "Student")]
-        public async Task<IActionResult> EditStudentProfile(StudentProfileViewModel model)
-        {
-            if (!ModelState.IsValid) return View(model);
+        //[HttpPost]
+        //[Authorize(Roles = "Student")]
+        //public async Task<IActionResult> EditStudentProfile(StudentProfileViewModel model)
+        //{
+        //    if (!ModelState.IsValid) return View(model);
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null) return NotFound();
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null) return NotFound();
 
-            var student = _context.Students.FirstOrDefault(s => s.ID == user.StudentId);
-            if (student == null) return NotFound();
+        //    var student = _context.Students.FirstOrDefault(s => s.ID == user.StudentId);
+        //    if (student == null) return NotFound();
 
-            // Update profile picture if uploaded
-            if (model.ProfilePictureFile != null)
-            {
-                string uniqueFileName = await ProcessProfilePictureAsync(model.ProfilePictureFile);
-                user.ProfilePicture = uniqueFileName;
-                student.ProfilePicture = uniqueFileName;
-            }
+        //    // Update profile picture if uploaded
+        //    if (model.ProfilePictureFile != null)
+        //    {
+        //        string uniqueFileName = await ProcessProfilePictureAsync(model.ProfilePictureFile);
+        //        user.ProfilePicture = uniqueFileName;
+        //        student.ProfilePicture = uniqueFileName;
+        //    }
 
-            // Update user and student details
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.PhoneNumber = model.PhoneNumber;
-            user.UpdatedAt = DateTime.UtcNow;
+        //    // Update user and student details
+        //    user.FirstName = model.FirstName;
+        //    user.LastName = model.LastName;
+        //    user.PhoneNumber = model.PhoneNumber;
+        //    user.UpdatedAt = DateTime.UtcNow;
 
-            student.Name = $"{model.FirstName} {model.LastName}";
-            student.PhoneNumber = model.PhoneNumber;
-            student.FatherPhone = model.FatherPhone;
-            student.GradeLevel = model.GradeLevel;
+        //    student.Name = $"{model.FirstName} {model.LastName}";
+        //    student.PhoneNumber = model.PhoneNumber;
+        //    student.FatherPhone = model.FatherPhone;
+        //    student.GradeLevel = model.GradeLevel;
 
-            await _userManager.UpdateAsync(user);
-            _context.Update(student);
-            await _context.SaveChangesAsync();
+        //    await _userManager.UpdateAsync(user);
+        //    _context.Update(student);
+        //    await _context.SaveChangesAsync();
 
-            TempData["StatusMessage"] = "Profile updated successfully.";
-            return RedirectToAction("Index", "Student");
-        }
+        //    TempData["StatusMessage"] = "Profile updated successfully.";
+        //    return RedirectToAction("Index", "Student");
+        //}
 
         // Edit Instructor Profile
         [HttpGet]
@@ -387,8 +399,26 @@ namespace Educational_Platform.Controllers
         }
         public async Task<IActionResult> SignOut()
         {
+            // Sign out from Identity
             await _signInManager.SignOutAsync();
-            return View("Login");
+
+            // Clear authentication cookies
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // Clear session if available
+            try
+            {
+                if (HttpContext.Session != null)
+                {
+                    HttpContext.Session.Clear();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                // Sessions not configured, just continue
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

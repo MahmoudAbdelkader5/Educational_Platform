@@ -8,6 +8,7 @@ using System.Globalization;
 using Microsoft.Extensions.Options;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Educational_Platform
 {
@@ -44,6 +45,13 @@ namespace Educational_Platform
                 option.Password.RequireNonAlphanumeric = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+    options.SlidingExpiration = true;
+});
 
             // Configure request localization
             var supportedCultures = new[]

@@ -38,10 +38,7 @@
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-2 border-0"
                                 aria-labelledby="courseActions">
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-edit me-2 text-primary"></i>تعديل الدورة</a></li>
-                                <li><a class="dropdown-item py-2" href="#"><i class="fas fa-plus me-2 text-success"></i>إضافة درس</a></li>
-                                <li><hr class="dropdown-divider my-1"></li>
-                                <li><a class="dropdown-item py-2 text-danger" href="#"><i class="fas fa-trash me-2"></i>حذف الدورة</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -116,7 +113,6 @@
                 <i class="fas fa-list-ul me-2"></i> دروس الدورة
             </h5>
             <a asp-action="Create" asp-route-courseId="@Model.ID" class="btn btn-light btn-sm px-3 rounded-2">
-                <i class="fas fa-plus me-1"></i> إضافة درس جديد
             </a>
         </div>
         <div class="list-group list-group-flush">
@@ -164,14 +160,7 @@
             }
             else
             {
-                <div class="list-group-item text-center py-5 border-0">
-                    <i class="fas fa-book-open fa-3x text-muted mb-3 opacity-25"></i>
-                    <h5 class="text-muted mb-2">لا توجد دروس متاحة</h5>
-                    <p class="text-muted mb-3">أضف أول درس لتبدأ رحلة التعلم</p>
-                    <a asp-action="Create" asp-route-courseId="@Model.ID" class="btn btn-primary px-4 rounded-2">
-                        <i class="fas fa-plus me-1"></i> إنشاء درس جديد
-                    </a>
-                </div>
+                
             }
         </div>
     </div>
@@ -182,11 +171,9 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-3">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title">حذف الدرس</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>هل أنت متأكد أنك تريد حذف هذا الدرس؟ لا يمكن التراجع عن هذا الإجراء.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary rounded-2" data-bs-dismiss="modal">إلغاء</button>

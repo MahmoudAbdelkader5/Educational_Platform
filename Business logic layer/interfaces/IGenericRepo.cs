@@ -10,10 +10,12 @@ namespace Business_logic_layer.interfaces
 {
     public interface IGenericRepo<T>
     {
-         Task<IEnumerable<T>> GetAllAsync(params Expression<Func<T, object>>[] includes);
-
+        // Fixed syntax errors and ensured valid collection type for params
+        public Task<IEnumerable<T>> GetAllAsync(
+             Expression<Func<T, bool>> filter = null,
+             string includeProperties = "");
         Task<T> GetByIdAsync(int id);
-        Task AddAsync(T entity);  
+        Task AddAsync(T entity);
 
         void UpdateAsync(T entity);
 

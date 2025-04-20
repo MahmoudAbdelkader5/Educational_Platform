@@ -3,12 +3,14 @@ using Business_logic_layer.interfaces;
 using Business_logic_layer.Repository;
 using Data_access_layer.model;
 using Educational_Platform.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace Educational_Platform.Controllers
 {
+    [Authorize(Roles = "Instructor")]
     public class LessonController : Controller
     {
         private readonly IunitofWork _unitOfWork;

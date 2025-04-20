@@ -13,16 +13,16 @@ namespace Business_logic_layer.Repository
         private readonly ApplicationDbContext dbcontext;
         public ICourseRepo Course { get;  set; }
         public ILessonRepo Lesson { get; set; }
-
+        public IstudentRepo Student { get; set; }
         public IRevisionRepo Revision { get; set; }
-
-
+        public Istudent_CourseRepo student_CourseRepo { get; set; }
         public unitOfWork(ApplicationDbContext dbcontext)
         {
             Course = new CourseRepo(dbcontext);
             Lesson = new LessonRepo(dbcontext);
             Revision = new RevisionRepo(dbcontext);
-
+            Student = new studentRepo(dbcontext);
+            student_CourseRepo = new student_CourseRepo(dbcontext);
             this.dbcontext = dbcontext;
         }
 
