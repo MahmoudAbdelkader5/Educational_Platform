@@ -19,6 +19,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        .alert {
+            font-family: "Cairo", sans-serif;
+            font-size: 1rem;
+            margin-top: 20px;
+        }
+
+
         .card {
             border: none;
             border-radius: 10px;
@@ -87,6 +94,21 @@
                 </div>
             </div>
         </div>
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["Success"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
 
         <div class="row justify-content-center mt-4">
             <div class="col-md-8">
@@ -105,8 +127,8 @@
                                             <h6 class="mb-0">@course.Title</h6>
                                             <small class="text-muted">@course.Description</small>
                                         </div>
-                                        <a asp-controller="Course" asp-action="Details" asp-route-id="@course.ID" class="btn btn-sm btn-primary">
-                                            View Details
+                                        <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID" class="btn btn-sm btn-primary">
+                                            Go to Course
                                         </a>
                                     </li>
                                 }

@@ -3,6 +3,7 @@ using Business_logic_layer.interfaces;
 using Data_access_layer.model;
 using Educational_Platform.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace Educational_Platform.Controllers
     public class CourseController : Controller
     {
         private readonly IunitofWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
         public IMapper Mapper { get; }
 
-        public CourseController(IunitofWork unitOfWork, IMapper mapper)
+        public CourseController(IunitofWork unitOfWork, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
         [Authorize(Roles = "Instructor")]
 
@@ -33,7 +36,7 @@ namespace Educational_Platform.Controllers
             }
             else
             {
-                courses =  _unitOfWork.Course.searchCourseBytitle(search); // Ensure this is async  
+                courses =  _unitOfWork.Course.searchCourseBytitle(search); 
             }
 
             if (courses == null || !courses.Any())
@@ -54,18 +57,15 @@ namespace Educational_Platform.Controllers
             return View();
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Instructor")]
-
         public async Task<IActionResult> Create(CourseViewModel courseVm)
         {
             try
             {
                 var courses = Mapper.Map<Course>(courseVm);
 
-                // Handle file uploads
                 if (courseVm.ImageFile != null)
                 {
                     courses.Image = Helper.Helper.uploadfile(courseVm.ImageFile, "imgCourse");
@@ -86,8 +86,6 @@ namespace Educational_Platform.Controllers
 
         }
         [Authorize(Roles = "Instructor")]
-
-
         public async Task<IActionResult> Details(int id)
         {
             var course = await _unitOfWork.Course.GetByIdAsync(id);
@@ -117,22 +115,20 @@ namespace Educational_Platform.Controllers
                 Title = course.Title,
                 Description = course.Description,
                 Duration = course.Duration,
-                Image = course.Image, // Ensure the image is passed to the view
+                Image = course.Image, 
                 Lessons = courseLessons.Select(l => new LessonViewModel
                 {
                     ID = l.ID,
                     Title = l.Title,
-                    VideoURL = l.VideoURL, // Ensure this is correctly mapped
+                    VideoURL = l.VideoURL, 
                     SupportingFiles = l.SupportingFiles,
                     TaskFileName = l.TaskFileName,
                     Create_date = l.Create_date,
                 }).ToList()
             };
 
-            return View(courseDetailsViewModel); // Ensure this returns the correct view
+            return View(courseDetailsViewModel); 
         }
-
-
 
 
         [Authorize(Roles = "Instructor")]
@@ -161,17 +157,12 @@ namespace Educational_Platform.Controllers
 
         public async Task<IActionResult> Edit(CourseViewModel course)
         {
-
-
-
             try
             {
                 var courses = Mapper.Map<Course>(course);
 
-                // Handle file uploads if new files are provided
                 if (course.ImageFile != null)
                 {
-                    // Delete old file if exists
                     if (!string.IsNullOrEmpty(courses.Image))
                     {
                         Helper.Helper.deletefile(courses.Image, "imgCourse");
@@ -229,5 +220,57 @@ namespace Educational_Platform.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> EnrollInCourse(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["Error"] = "يرجى تسجيل الدخول أولاً";
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (user.StudentId == null)
+            {
+                TempData["Error"] = "لم يتم العثور على ملف الطالب";
+                return RedirectToAction("StudentProfile", "Student");
+            }
+
+            // Retrieve the student and course
+            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+            var course = await _unitOfWork.Course.GetByIdAsync(id);
+
+            if (student == null || course == null)
+            {
+                TempData["Error"] = "لم يتم العثور على الطالب أو الكورس";
+                return RedirectToAction("StudentProfile", "Student");
+            }
+
+            var existingEnrollment = (await _unitOfWork.student_CourseRepo
+                .GetAllAsync(e => e.StudentID == student.ID && e.CourseID == course.ID))
+                .FirstOrDefault();
+
+            if (existingEnrollment != null)
+            {
+                TempData["Error"] = "أنت بالفعل مشترك في هذا الكورس";
+                return RedirectToAction("StudentProfile", "Student");
+            }
+
+            var enrollment = new student_Course
+            {
+                StudentID = student.ID,
+                CourseID = course.ID,
+                PaymentStatus = "Paid"
+            };
+
+            await _unitOfWork.student_CourseRepo.AddAsync(enrollment);
+            await _unitOfWork.Save();
+
+            TempData["Success"] = "لقد اشتركت في هذا الكورس بنجاح";
+            return RedirectToAction("StudentProfile", "Student");
+        }
+
     }
+
 }

@@ -63,7 +63,7 @@
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @if (!string.IsNullOrEmpty(User.FindFirst("ProfilePicture")?.Value))
                         {
-                            <img src="~/images/profiles/@User.FindFirst("ProfilePicture").Value" alt="Profile"
+                            <img src="~/files/studentImage/@User.FindFirst("ProfilePicture")?.Value" alt="Profile"
                                  class="rounded-circle me-2" width="32" height="32" style="object-fit: cover;">
                         }
                         @User.Identity.Name
@@ -79,7 +79,7 @@
             }
             else
             {
-                @Html.ActionLink("انضم الينا", "Login", "Account", null, new { @class = "arfont btn btn-primary py-2 px-4 ms-3 d-lg-inline-flex" })
+                @Html.ActionLink("انضم الينا", "Login", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none d-lg-block" })
             }
         </div>
     </div>

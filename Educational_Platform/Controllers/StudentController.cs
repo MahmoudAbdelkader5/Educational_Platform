@@ -76,10 +76,7 @@ namespace Educational_Platform.Controllers
             return View(studentProfileViewModel);
         }
 
-
-
-
-
+       
         public IActionResult Index()
         {
             return View();
