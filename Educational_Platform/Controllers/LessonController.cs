@@ -26,8 +26,8 @@ namespace Educational_Platform.Controllers
         {
             try
             {
-                var lessons = await _unitOfWork.Lesson.GetAllAsync();
-
+                var lessons = await _unitOfWork.Lesson
+                                    .GetAllAsync(includeProperties: "Course");
                 if (!string.IsNullOrEmpty(searchString))
                 {
                     lessons = _unitOfWork.Lesson.searchCourseBytitle(searchString);

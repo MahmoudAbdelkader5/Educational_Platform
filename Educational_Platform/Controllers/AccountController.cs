@@ -100,30 +100,32 @@ namespace Educational_Platform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterStudent(RegisterStudentViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // Set default profile picture path
-                string profilePicturePath = "default.png";
+                return View(model);
+            }
 
+            // Start a transaction as we'll be making multiple database operations
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
+            {
                 // Process profile picture if uploaded
+                string profilePicturePath = model.ProfilePicture;
                 if (model.ProfilePictureFile != null && model.ProfilePictureFile.Length > 0)
                 {
-                    string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images/profiles");
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfilePictureFile.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    // Ensure directory exists
-                    Directory.CreateDirectory(uploadsFolder);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    try
                     {
-                        await model.ProfilePictureFile.CopyToAsync(fileStream);
+                        profilePicturePath = Helper.Helper.uploadfile(model.ProfilePictureFile, "studentImage");
                     }
-
-                    profilePicturePath = uniqueFileName;
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("ProfilePictureFile", "Failed to upload profile picture");
+                        return View(model);
+                    }
                 }
 
-                // Create user with all required fields
+                // Create user
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -138,54 +140,65 @@ namespace Educational_Platform.Controllers
 
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    // Assign Student role
-                    if (!await _roleManager.RoleExistsAsync("Student"))
+                    foreach (var error in result.Errors)
                     {
-                        await _roleManager.CreateAsync(new IdentityRole("Student"));
+                        ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    await _userManager.AddToRoleAsync(user, "Student");
-
-                    // Create Student entity with all fields from the form
-                    var student = new Student
-                    {
-                        Email = model.Email,
-                        Name = $"{model.FirstName} {model.LastName}",
-                        PhoneNumber = model.PhoneNumber,
-                        FatherPhone = model.FatherPhoneNumber, // Save father's phone number
-                        GradeLevel = model.GradeLevel, // Save grade level
-                        ProfilePicture = profilePicturePath, // Save profile picture
-                        UserId = user.Id
-                    };
-
-                    _context.Students.Add(student);
-                    await _context.SaveChangesAsync();
-
-                    // Link ApplicationUser to Student
-                    user.StudentId = student.ID;
-                    await _userManager.UpdateAsync(user);
-
-                    // Sign in the user after registration
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-
-                    // Show success message
-                    TempData["SuccessMessage"] = "Your account has been created successfully!";
-
-                    // Redirect to profile completion or dashboard
-                    return RedirectToAction("Login", "Account");
+                    return View(model);
                 }
 
-                foreach (var error in result.Errors)
+                // Ensure Student role exists
+                if (!await _roleManager.RoleExistsAsync("Student"))
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    await _roleManager.CreateAsync(new IdentityRole("Student"));
                 }
+
+                // Assign Student role
+                var roleResult = await _userManager.AddToRoleAsync(user, "Student");
+                if (!roleResult.Succeeded)
+                {
+                    // Continue anyway as this might be handled later by an admin
+                }
+
+                // Create Student entity
+                var student = new Student
+                {
+                    Email = model.Email,
+                    Name = $"{model.FirstName} {model.LastName}",
+                    PhoneNumber = model.PhoneNumber,
+                    FatherPhone = model.FatherPhoneNumber,
+                    GradeLevel = model.GradeLevel,
+                    ProfilePicture = profilePicturePath,
+                    UserId = user.Id
+                };
+
+                _context.Students.Add(student);
+                await _context.SaveChangesAsync();
+
+                // Link ApplicationUser to Student
+                user.StudentId = student.ID;
+                await _userManager.UpdateAsync(user);
+
+                // Commit transaction if everything succeeded
+                await transaction.CommitAsync();
+
+                // Send confirmation email (example - implement SendConfirmationEmailAsync)
+
+                // Show success message
+                TempData["SuccessMessage"] = "Your account has been created successfully! Please check your email to verify your account.";
+
+                // Don't sign in automatically - require email confirmation first
+                return RedirectToAction("Login", "Account");
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                ModelState.AddModelError(string.Empty, "An error occurred while registering. Please try again.");
+                return View(model);
+            }
         }
-
         // Registration for Instructors
         [HttpGet]
         public IActionResult RegisterInstructor()

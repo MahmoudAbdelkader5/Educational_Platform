@@ -1,6 +1,4 @@
 ﻿@using Educational_Platform.ViewModel
-// ...existing code...
-
 @model RegisterStudentViewModel
 
 @{
@@ -145,7 +143,7 @@
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-text bg-light"><i class="fa fa-upload"></i></span>
-                                    <input asp-for="ProfilePictureFile" type="file" class="form-control" accept="image/*" onchange="previewImage(this)" />
+                                    <input asp-for="ProfilePicture" type="file" class="form-control" accept="image/*" onchange="previewImage(this)" />
                                 </div>
                                 <small class="form-text text-muted">قم برفع صورة للملف الشخصي (JPEG أو PNG، بحد أقصى 2 ميجابايت)</small>
                             </div>

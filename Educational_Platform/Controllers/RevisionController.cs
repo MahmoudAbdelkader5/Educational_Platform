@@ -29,7 +29,8 @@ namespace Educational_Platform.Controllers
 
             if (string.IsNullOrEmpty(search))
             {
-                revisions = await _unitOfWork.Revision.GetAllAsync();
+                revisions = await _unitOfWork.Revision
+                    .GetAllAsync(includeProperties: "Course");
             }
             else
             {

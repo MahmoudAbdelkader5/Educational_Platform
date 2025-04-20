@@ -30,6 +30,7 @@ namespace Educational_Platform.ViewModel
         [Display(Name = "Profile Picture")]
         public string CurrentProfilePicture { get; set; }
 
+
         [Display(Name = "Enrolled Courses")]
         public List<CourseViewModel> EnrolledCourses { get; set; }
     }
