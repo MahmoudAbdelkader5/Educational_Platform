@@ -1,8 +1,0 @@
-﻿@using Azure.Core
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.Extensions.Localization
-@inject IStringLocalizer<SharedResource> Localizer
-
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using Data_access_layer.model
-@using Educational_Platform.ViewModel

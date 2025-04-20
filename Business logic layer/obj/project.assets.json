@@ -3036,23 +3036,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\master\\.nuget\\packages\\": {},
+    "C:\\Users\\youssef\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
+      "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Business logic layer\\Business logic layer.csproj",
       "projectName": "Business logic layer",
-      "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
-      "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
-      "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\obj\\",
+      "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Business logic layer\\Business logic layer.csproj",
+      "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
+      "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Business logic layer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\master\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -3061,15 +3061,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj": {
-              "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj"
+            "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Data access layer\\Data access layer.csproj": {
+              "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Data access layer\\Data access layer.csproj"
             }
           }
         }
