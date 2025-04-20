@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "74FiY8evbkdfbPHWVCIkQkUxQuLZJwGYc6amsa0cFU4=",
+  "Hash": "4NWRcE8nHTSLZBREaq6b+ZpAInT+plZ04UYJ3CthuYg=",
   "Source": "Educational_Platform",
   "BasePath": "_content/Educational_Platform",
   "Mode": "Default",
@@ -332,12 +332,12 @@
       "OriginalItemSpec": "wwwroot\\files\\imgCourse\\carousel-2.jpg"
     },
     {
-      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\ds-image.jpg",
+      "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\Untitled-design-38.webp",
       "SourceId": "Educational_Platform",
       "SourceType": "Discovered",
       "ContentRoot": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
       "BasePath": "_content/Educational_Platform",
-      "RelativePath": "files/imgCourse/ds-image#[.{fingerprint}]?.jpg",
+      "RelativePath": "files/imgCourse/Untitled-design-38#[.{fingerprint}]?.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -346,11 +346,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "nvcrijgg52",
-      "Integrity": "8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=",
+      "Fingerprint": "6fxx0fbq1a",
+      "Integrity": "cvM4Vzn7pWwpqZvOvk04+iNvqdmrE049KyEPm+67VfU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\files\\imgCourse\\ds-image.jpg"
+      "OriginalItemSpec": "wwwroot\\files\\imgCourse\\Untitled-design-38.webp"
     },
     {
       "Identity": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\finalang.mp4",
@@ -9481,8 +9481,8 @@
       ]
     },
     {
-      "Route": "files/imgCourse/ds-image.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\ds-image.jpg",
+      "Route": "files/imgCourse/Untitled-design-38.6fxx0fbq1a.webp",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\Untitled-design-38.webp",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -9491,56 +9491,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "34042"
+          "Value": "80092"
         },
         {
           "Name": "Content-Type",
-          "Value": "image/jpeg"
+          "Value": "image/webp"
         },
         {
           "Name": "ETag",
-          "Value": "\"8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=\""
+          "Value": "\"cvM4Vzn7pWwpqZvOvk04+iNvqdmrE049KyEPm+67VfU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 10:48:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co="
-        }
-      ]
-    },
-    {
-      "Route": "files/imgCourse/ds-image.nvcrijgg52.jpg",
-      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\ds-image.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "34042"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 20 Apr 2025 10:48:04 GMT"
+          "Value": "Sun, 20 Apr 2025 11:18:02 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -9550,15 +9513,52 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "nvcrijgg52"
+          "Value": "6fxx0fbq1a"
         },
         {
           "Name": "label",
-          "Value": "files/imgCourse/ds-image.jpg"
+          "Value": "files/imgCourse/Untitled-design-38.webp"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8/ec3wDPwNs2k+b/ddPxboXGd/ZRfuGiHf8gz8FB1co="
+          "Value": "sha256-cvM4Vzn7pWwpqZvOvk04+iNvqdmrE049KyEPm+67VfU="
+        }
+      ]
+    },
+    {
+      "Route": "files/imgCourse/Untitled-design-38.webp",
+      "AssetFile": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\imgCourse\\Untitled-design-38.webp",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "80092"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/webp"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cvM4Vzn7pWwpqZvOvk04+iNvqdmrE049KyEPm+67VfU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 11:18:02 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cvM4Vzn7pWwpqZvOvk04+iNvqdmrE049KyEPm+67VfU="
         }
       ]
     },

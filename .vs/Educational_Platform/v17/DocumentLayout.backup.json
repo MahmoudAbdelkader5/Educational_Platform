@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "F:\\AI\\gproject\\Educational_Platform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\views\\account\\registerstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\views\\account\\registerstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E25710B1-0E59-4BD0-BF56-323543D78DB2}|Business logic layer\\Business logic layer.csproj|f:\\ai\\gproject\\educational_platform\\business logic layer\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E25710B1-0E59-4BD0-BF56-323543D78DB2}|Business logic layer\\Business logic layer.csproj|solutionrelative:business logic layer\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\views\\account\\registerstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\views\\account\\registerstudent.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -50,10 +62,6 @@
       "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\viewmodel\\lessonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\viewmodel\\lessonviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -66,20 +74,12 @@
       "RelativeMoniker": "D:0:0:{E25710B1-0E59-4BD0-BF56-323543D78DB2}|Business logic layer\\Business logic layer.csproj|solutionrelative:business logic layer\\interfaces\\igenericrepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\viewmodel\\studentprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\viewmodel\\studentprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\views\\student\\studentprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\views\\student\\studentprofile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|solutionrelative:educational_platform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{74BC37E4-EBCB-439D-89B7-BDB1457E00A5}|Educational_Platform\\Educational_Platform.csproj|f:\\ai\\gproject\\educational_platform\\educational_platform\\views\\lesson\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -250,7 +250,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
@@ -287,7 +287,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AccountController.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\AccountController.cs",
@@ -300,29 +300,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Educational_Platform\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Educational_Platform\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "RegisterStudent.cshtml",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
+              "RelativeDocumentMoniker": "Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
+              "RelativeToolTip": "Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-19T22:31:41.29Z",
+              "WhenOpened": "2025-04-19T11:32:58.677Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "unitOfWork.cs",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\Repository\\unitOfWork.cs",
+              "RelativeDocumentMoniker": "Business logic layer\\Repository\\unitOfWork.cs",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\Repository\\unitOfWork.cs",
+              "RelativeToolTip": "Business logic layer\\Repository\\unitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T23:16:06.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\CourseController.cs",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "Educational_Platform\\Controllers\\CourseController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAhwFYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T19:16:53.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\HomeController.cs",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Educational_Platform\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T14:41:51.026Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Index (1).cshtml",
-              "DocumentMoniker": "C:\\Users\\master\\Downloads\\Index (1).cshtml",
-              "ToolTip": "C:\\Users\\master\\Downloads\\Index (1).cshtml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-20T10:31:20.642Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "Index.cshtml",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Instructor\\Index.cshtml",
               "RelativeDocumentMoniker": "Educational_Platform\\Views\\Instructor\\Index.cshtml",
@@ -335,33 +365,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RegisterStudent.cshtml",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
-              "RelativeDocumentMoniker": "Educational_Platform\\Views\\Account\\RegisterStudent.cshtml",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Account\\RegisterStudent.cshtml*",
-              "RelativeToolTip": "Educational_Platform\\Views\\Account\\RegisterStudent.cshtml*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-19T11:32:58.677Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "unitOfWork.cs",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\Repository\\unitOfWork.cs",
-              "RelativeDocumentMoniker": "Business logic layer\\Repository\\unitOfWork.cs",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\Repository\\unitOfWork.cs",
-              "RelativeToolTip": "Business logic layer\\Repository\\unitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Program.cs",
+              "RelativeDocumentMoniker": "Educational_Platform\\Program.cs",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Program.cs",
+              "RelativeToolTip": "Educational_Platform\\Program.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAIA3wB0AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T23:16:06.9Z",
+              "WhenOpened": "2025-04-18T19:23:03.515Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
+              "Title": "Index (1).cshtml",
+              "DocumentMoniker": "C:\\Users\\master\\Downloads\\Index (1).cshtml",
+              "ToolTip": "C:\\Users\\master\\Downloads\\Index (1).cshtml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-20T10:31:20.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Educational_Platform\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Educational_Platform\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-19T22:31:41.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "_Header.cshtml",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Home\\_Header.cshtml",
               "RelativeDocumentMoniker": "Educational_Platform\\Views\\Home\\_Header.cshtml",
@@ -373,20 +412,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "CourseController.cs",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\CourseController.cs",
-              "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\CourseController.cs",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\CourseController.cs",
-              "RelativeToolTip": "Educational_Platform\\Controllers\\CourseController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACMAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T19:16:53.536Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "genericRepo.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\Repository\\genericRepo.cs",
               "RelativeDocumentMoniker": "Business logic layer\\Repository\\genericRepo.cs",
@@ -398,7 +424,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "IGenericRepo.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Business logic layer\\interfaces\\IGenericRepo.cs",
               "RelativeDocumentMoniker": "Business logic layer\\interfaces\\IGenericRepo.cs",
@@ -410,7 +436,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "InstructorProfileViewModel.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\ViewModel\\InstructorProfileViewModel.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\ViewModel\\InstructorProfileViewModel.cs",
@@ -423,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "InstructorController.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\InstructorController.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\InstructorController.cs",
@@ -436,7 +462,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "DetailsWithLessons.cshtml",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Course\\DetailsWithLessons.cshtml",
               "RelativeDocumentMoniker": "Educational_Platform\\Views\\Course\\DetailsWithLessons.cshtml",
@@ -448,7 +474,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "lessonCourseDetailsLayout.cshtml",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Shared\\lessonCourseDetailsLayout.cshtml",
               "RelativeDocumentMoniker": "Educational_Platform\\Views\\Shared\\lessonCourseDetailsLayout.cshtml",
@@ -460,7 +486,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "LessonController.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\LessonController.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\LessonController.cs",
@@ -472,19 +498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Educational_Platform\\Controllers\\HomeController.cs",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Educational_Platform\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAswCAAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-19T14:41:51.026Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "LessonViewModel.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\ViewModel\\LessonViewModel.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\ViewModel\\LessonViewModel.cs",
@@ -496,7 +510,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "StudentProfileViewModel.cs",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\ViewModel\\StudentProfileViewModel.cs",
               "RelativeDocumentMoniker": "Educational_Platform\\ViewModel\\StudentProfileViewModel.cs",
@@ -545,18 +559,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 19,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Program.cs",
-              "RelativeDocumentMoniker": "Educational_Platform\\Program.cs",
-              "ToolTip": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Program.cs",
-              "RelativeToolTip": "Educational_Platform\\Program.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAIA3wB0AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-18T19:23:03.515Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
               "Title": "StudentProfile.cshtml",
               "DocumentMoniker": "F:\\AI\\gproject\\Educational_Platform\\Educational_Platform\\Views\\Student\\StudentProfile.cshtml",
               "RelativeDocumentMoniker": "Educational_Platform\\Views\\Student\\StudentProfile.cshtml",
