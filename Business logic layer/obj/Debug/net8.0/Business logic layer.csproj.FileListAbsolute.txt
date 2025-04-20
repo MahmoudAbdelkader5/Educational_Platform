@@ -62,3 +62,19 @@ F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Busine
 F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\refint\Business logic layer.dll
 F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.pdb
 F:\AI\gproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\ref\Business logic layer.dll
+F:\AI\prproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.deps.json
+F:\AI\prproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.dll
+F:\AI\prproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Business logic layer.pdb
+F:\AI\prproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Data access layer.dll
+F:\AI\prproject\Educational_Platform\Business logic layer\bin\Debug\net8.0\Data access layer.pdb
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.csproj.AssemblyReference.cache
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.GeneratedMSBuildEditorConfig.editorconfig
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.AssemblyInfoInputs.cache
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.AssemblyInfo.cs
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.csproj.CoreCompileInputs.cache
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.sourcelink.json
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business.078143C5.Up2Date
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.dll
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\refint\Business logic layer.dll
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\Business logic layer.pdb
+F:\AI\prproject\Educational_Platform\Business logic layer\obj\Debug\net8.0\ref\Business logic layer.dll

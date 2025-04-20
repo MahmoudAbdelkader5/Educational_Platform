@@ -65,7 +65,7 @@
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         @if (!string.IsNullOrEmpty(User.FindFirst("ProfilePicture")?.Value))
                         {
-                            <img src="~/images/profiles/@User.FindFirst("ProfilePicture").Value" alt="Profile"
+                            <img src="~/files/studentImage/@Model.CurrentProfilePicture"
                                  class="rounded-circle me-2" width="32" height="32" style="object-fit: cover;">
                         }
                         @User.Identity.Name

@@ -270,6 +270,60 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\imgCourse\Untitled-design-38.webp'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\03218593-d805-4f24-a90e-25d58577209b.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Educational_Platform</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Educational_Platform</BasePath>
+      <RelativePath>files/studentImage/03218593-d805-4f24-a90e-25d58577209b.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>af1pdkwyib</Fingerprint>
+      <Integrity>dlDIBxuO+klquIN56fLh6Sfd0Gv1+EUz61J55xS/iT8=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\03218593-d805-4f24-a90e-25d58577209b.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Educational_Platform</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Educational_Platform</BasePath>
+      <RelativePath>files/studentImage/ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>gqib6f6vic</Fingerprint>
+      <Integrity>mLUXVVAQwh0hGx5z0SMIFwpm9cALZeUx9SUmU/AGuuE=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\elaosboa78413.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Educational_Platform</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Educational_Platform</BasePath>
+      <RelativePath>files/studentImage/elaosboa78413.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>34pwlzdf8z</Fingerprint>
+      <Integrity>3YccyBSJd4SDSPdDq2zwyhqCoWufrS4IR2kHpymJE54=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\studentImage\elaosboa78413.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\files\video\finalang.mp4'))">
       <SourceType>Package</SourceType>
       <SourceId>Educational_Platform</SourceId>

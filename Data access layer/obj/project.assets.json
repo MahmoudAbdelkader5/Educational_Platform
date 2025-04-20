@@ -4316,11 +4316,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\AI\\gproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
+      "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
       "projectName": "Data access layer",
-      "projectPath": "F:\\AI\\gproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
+      "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
       "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
-      "outputPath": "F:\\AI\\gproject\\Educational_Platform\\Data access layer\\obj\\",
+      "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

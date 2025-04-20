@@ -12,6 +12,9 @@ wwwroot\files\file\MahmoudMohamedCV.pdf
 wwwroot\files\file\me.png
 wwwroot\files\imgCourse\carousel-2.jpg
 wwwroot\files\imgCourse\Untitled-design-38.webp
+wwwroot\files\studentImage\03218593-d805-4f24-a90e-25d58577209b.jpg
+wwwroot\files\studentImage\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif
+wwwroot\files\studentImage\elaosboa78413.jpg
 wwwroot\files\video\finalang.mp4
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4
