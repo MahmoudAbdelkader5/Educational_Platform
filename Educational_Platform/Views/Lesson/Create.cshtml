@@ -1,147 +1,196 @@
 ﻿@model LessonViewModel
 @{
-    ViewData["Title"] = "Create Lesson";
-    Layout = "~/Views/Shared/instructorLayout.cshtml";
+    ViewData["Title"] = "إنشاء درس جديد";
+    ViewBag.Layout = "~/Views/Shared/_Layout";
     var courses = new SelectList(ViewBag.Courses, "ID", "Title");
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm my-4">
-                <div class="card-header bg-primary text-white py-3">
-                    <h3 class="mb-0 text-center"><i class="fas fa-book me-2"></i>Create New Lesson</h3>
-                </div>
-                <div class="card-body p-4">
-                    <form asp-action="Create" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - النظام التعليمي</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: right;
+        }
 
-                        <!-- Title -->
-                        <div class="mb-4">
-                            <label asp-for="Title" class="form-label required">Title</label>
-                            <input asp-for="Title" class="form-control" placeholder="Enter Lesson title" required />
-                            <span asp-validation-for="Title" class="text-danger small"></span>
-                        </div>
+        .required:after {
+            content: " *";
+            color: red;
+        }
 
-                        <!-- Supporting Files -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Supporting Files</label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="Files" class="form-control"
-                                       accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
-                                <div class="form-text">Accepted formats: PDF, Word, Excel, PowerPoint, Text, ZIP (Max 10MB)</div>
-                                <span asp-validation-for="Files" class="text-danger small"></span>
+        .file-upload-wrapper {
+            margin-bottom: 1rem;
+        }
+
+        .form-text {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        /* RTL specific styles */
+        .me-1 {
+            margin-left: 0.25rem !important;
+            margin-right: 0 !important;
+        }
+
+        .me-2 {
+            margin-left: 0.5rem !important;
+            margin-right: 0 !important;
+        }
+
+        .text-end {
+            text-align: left !important;
+        }
+
+        .text-start {
+            text-align: right !important;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: row-reverse;
+        }
+
+        .d-flex.justify-content-end {
+            flex-direction: row-reverse;
+            justify-content: flex-start !important;
+        }
+
+        .d-md-flex.justify-content-md-between {
+            flex-direction: row-reverse;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm my-4">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h3 class="mb-0 text-center"><i class="fas fa-book me-2"></i>إنشاء درس جديد</h3>
+                    </div>
+                    <div class="card-body p-4">
+                        <form asp-action="Create" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+
+                            <!-- Title -->
+                            <div class="mb-4">
+                                <label asp-for="Title" class="form-label required">عنوان الدرس</label>
+                                <input asp-for="Title" class="form-control" placeholder="أدخل عنوان الدرس" required />
+                                <span asp-validation-for="Title" class="text-danger small"></span>
                             </div>
-                        </div>
 
-                        <!-- Task Files -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Task File</label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="TaskFile" class="form-control"
-                                       accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
-                                <div class="form-text">Accepted formats: PDF, Word, Excel, PowerPoint, Text, ZIP (Max 10MB)</div>
-                                <span asp-validation-for="TaskFile" class="text-danger small"></span>
+                            <!-- Supporting Files -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">الملفات المساندة</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" asp-for="Files" class="form-control"
+                                           accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
+                                    <div class="form-text">الصيغ المقبولة: PDF، Word، Excel، PowerPoint، نص، ZIP (الحد الأقصى 10MB)</div>
+                                    <span asp-validation-for="Files" class="text-danger small"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Video Upload -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Video File</label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="videoFile" class="form-control"
-                                       accept="video/*,.mp4,.mov,.avi,.wmv" />
-                                <div class="form-text">Accepted formats: MP4, MOV, AVI, WMV (Max 50MB)</div>
-                                <span asp-validation-for="videoFile" class="text-danger small"></span>
+                            <!-- Task Files -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">ملف المهمة</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" asp-for="TaskFile" class="form-control"
+                                           accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
+                                    <div class="form-text">الصيغ المقبولة: PDF، Word، Excel، PowerPoint، نص، ZIP (الحد الأقصى 10MB)</div>
+                                    <span asp-validation-for="TaskFile" class="text-danger small"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Schedule Date -->
-                        <div class="mb-4">
-                            <label asp-for="Create_date" class="form-label">Schedule Date</label>
-                            <input asp-for="Create_date" type="datetime-local" class="form-control" />
-                            <span asp-validation-for="Create_date" class="text-danger small"></span>
-                        </div>
+                            <!-- Video Upload -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">ملف الفيديو</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" asp-for="videoFile" class="form-control"
+                                           accept="video/*,.mp4,.mov,.avi,.wmv" />
+                                    <div class="form-text">الصيغ المقبولة: MP4، MOV، AVI، WMV (الحد الأقصى 50MB)</div>
+                                    <span asp-validation-for="videoFile" class="text-danger small"></span>
+                                </div>
+                            </div>
 
-                        <!-- Course Selection -->
-                        <div class="form-group mb-4">
-                            <label asp-for="CourseID" class="control-label">Course</label>
-                            <select asp-for="CourseID" class="form-control" asp-items="courses">
-                                <option value="">-- Select a Course --</option>
-                            </select>
-                            <span asp-validation-for="CourseID" class="text-danger"></span>
-                        </div>
+                            <!-- Schedule Date -->
+                            <div class="mb-4">
+                                <label asp-for="Create_date" class="form-label">تاريخ الجدولة</label>
+                                <input asp-for="Create_date" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="Create_date" class="text-danger small"></span>
+                            </div>
 
-                        <!-- Form Buttons -->
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-plus-circle me-2"></i>Create Lesson
-                            </button>
-                            <a asp-action="Index" class="btn btn-secondary btn-lg">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Lessons
-                            </a>
-                        </div>
-                    </form>
+                            <!-- Course Selection -->
+                            <div class="form-group mb-4">
+                                <label asp-for="CourseID" class="control-label">المقرر الدراسي</label>
+                                <select asp-for="CourseID" class="form-control" asp-items="courses">
+                                    <option value="">-- اختر مقررًا --</option>
+                                </select>
+                                <span asp-validation-for="CourseID" class="text-danger"></span>
+                            </div>
+
+                            <!-- Form Buttons -->
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                                <a asp-action="Index" class="btn btn-secondary btn-lg">
+                                    <i class="fas fa-arrow-left me-2"></i>العودة للدروس
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-plus-circle me-2"></i>إنشاء الدرس
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
 
-    <script>
-        // Client-side validation for file sizes
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const videoFile = document.querySelector('input[type="file"][name="videoFile"]');
-            const supportingFiles = document.querySelector('input[type="file"][name="Files"]');
-            const taskFile = document.querySelector('input[type="file"][name="TaskFile"]');
+        <script>
+            // Client-side validation for file sizes
+            document.querySelector('form').addEventListener('submit', function(e) {
+                const videoFile = document.querySelector('input[type="file"][name="videoFile"]');
+                const supportingFiles = document.querySelector('input[type="file"][name="Files"]');
+                const taskFile = document.querySelector('input[type="file"][name="TaskFile"]');
 
-            // Video file size validation (max 50MB)
-            if(videoFile.files.length > 0 && videoFile.files[0].size > 50 * 1024 * 1024) {
-                alert('Video file size must be less than 50MB');
-                e.preventDefault();
-                return false;
-            }
+                // Video file size validation (max 50MB)
+                if(videoFile.files.length > 0 && videoFile.files[0].size > 50 * 1024 * 1024) {
+                    alert('يجب أن يكون حجم ملف الفيديو أقل من 50 ميجابايت');
+                    e.preventDefault();
+                    return false;
+                }
 
-            // Supporting files size validation (max 10MB each)
-            if(supportingFiles.files.length > 0) {
-                for(let file of supportingFiles.files) {
-                    if(file.size > 10 * 1024 * 1024) {
-                        alert('Supporting files must be less than 10MB each');
-                        e.preventDefault();
-                        return false;
+                // Supporting files size validation (max 10MB each)
+                if(supportingFiles.files.length > 0) {
+                    for(let file of supportingFiles.files) {
+                        if(file.size > 10 * 1024 * 1024) {
+                            alert('يجب أن يكون حجم الملفات المساندة أقل من 10 ميجابايت لكل ملف');
+                            e.preventDefault();
+                            return false;
+                        }
                     }
                 }
-            }
 
-            // Task file size validation (max 10MB)
-            if(taskFile.files.length > 0 && taskFile.files[0].size > 10 * 1024 * 1024) {
-                alert('Task file size must be less than 10MB');
-                e.preventDefault();
-                return false;
-            }
+                // Task file size validation (max 10MB)
+                if(taskFile.files.length > 0 && taskFile.files[0].size > 10 * 1024 * 1024) {
+                    alert('يجب أن يكون حجم ملف المهمة أقل من 10 ميجابايت');
+                    e.preventDefault();
+                    return false;
+                }
 
-            return true;
-        });
-    </script>
-}
-
-<style>
-    .required:after {
-        content: " *";
-        color: red;
+                return true;
+            });
+        </script>
     }
-
-    .file-upload-wrapper {
-        margin-bottom: 1rem;
-    }
-
-    .form-text {
-        font-size: 0.875rem;
-        color: #6c757d;
-    }
-</style>
+</body>
+</html>

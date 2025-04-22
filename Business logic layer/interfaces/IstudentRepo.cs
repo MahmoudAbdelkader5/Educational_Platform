@@ -9,5 +9,7 @@ namespace Business_logic_layer.interfaces
 {
    public  interface IstudentRepo : IGenericRepo<Student>
     {
+        Task<int> GetCountAsync();
+
     }
 }

@@ -14,13 +14,18 @@ wwwroot\files\imgCourse\carousel-2.jpg
 wwwroot\files\imgCourse\Untitled-design-38.webp
 wwwroot\files\studentImage\03218593-d805-4f24-a90e-25d58577209b.jpg
 wwwroot\files\studentImage\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif
+wwwroot\files\studentImage\alaaphote.jpg
+wwwroot\files\studentImage\carousel-2.jpg
 wwwroot\files\studentImage\elaosboa78413.jpg
+wwwroot\files\studentImage\testimonial-3.jpg
+wwwroot\files\studentImage\مجهول.png
 wwwroot\files\video\finalang.mp4
 wwwroot\files\video\modelcourse.mp4
 wwwroot\files\video\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4
 wwwroot\files\video\nader.mp4
 wwwroot\files\video\revision.mp4
 wwwroot\img\about.jpg
+wwwroot\img\alaaphote.jpg
 wwwroot\img\avatar.png
 wwwroot\img\carousel-1.jpg
 wwwroot\img\carousel-2.jpg

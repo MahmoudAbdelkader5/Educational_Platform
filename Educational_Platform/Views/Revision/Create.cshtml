@@ -1,207 +1,263 @@
 ﻿@model RevisionModelView
 @{
-    ViewData["Title"] = "Create Revision";
-    Layout = "~/Views/Shared/instructorLayout.cshtml";
+    ViewData["Title"] = "إنشاء مراجعة جديدة";
+    ViewBag.Layout = "~/Views/Shared/_Layout";
     var courses = new SelectList(ViewBag.Courses, "ID", "Title");
 }
 
-<div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <!-- Status Messages -->
-           
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - النظام التعليمي</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: right;
+        }
 
-            <div class="card shadow-lg">
-                <div class="card-header bg-primary text-white py-3">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0"><i class="fas fa-book-open me-2"></i>Create New Revision</h3>
-                        <a asp-action="Index" class="btn btn-outline-light btn-sm">
-                            <i class="fas fa-arrow-left me-1"></i>Back to List
-                        </a>
+        .card {
+            border-radius: 0.5rem;
+            border: none;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+        }
+
+        .card-header {
+            border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
+
+        .form-control, .form-select {
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+            text-align: right;
+        }
+
+            .form-control:focus, .form-select:focus {
+                border-color: #86b7fe;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            float: right;
+        }
+
+        .required:after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+        }
+
+        .file-info {
+            margin-top: 0.25rem;
+            text-align: right;
+        }
+
+        .invalid-feedback {
+            display: none;
+            margin-top: 0.25rem;
+            font-size: 0.875em;
+            text-align: right;
+        }
+
+        .was-validated .form-control:invalid ~ .invalid-feedback,
+        .was-validated .form-select:invalid ~ .invalid-feedback {
+            display: block;
+        }
+
+        /* RTL specific styles */
+        .me-1 {
+            margin-left: 0.25rem !important;
+            margin-right: 0 !important;
+        }
+
+        .me-2 {
+            margin-left: 0.5rem !important;
+            margin-right: 0 !important;
+        }
+
+        .me-3 {
+            margin-left: 1rem !important;
+            margin-right: 0 !important;
+        }
+
+        .ms-auto {
+            margin-right: auto !important;
+            margin-left: 0 !important;
+        }
+
+        .text-end {
+            text-align: left !important;
+        }
+
+        .text-start {
+            text-align: right !important;
+        }
+
+        .d-flex.justify-content-between {
+            flex-direction: row-reverse;
+        }
+
+        .d-flex.justify-content-end {
+            flex-direction: row-reverse;
+            justify-content: flex-start !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="mb-0"><i class="fas fa-book-open me-2"></i>إنشاء مراجعة جديدة</h3>
+                            <a asp-action="Index" class="btn btn-outline-light btn-sm">
+                                <i class="fas fa-arrow-left me-1"></i>العودة للقائمة
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="card-body p-4">
-                    <form asp-action="Create" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4">
-                            <i class="fas fa-exclamation-triangle me-2"></i>Please fix the errors below
-                        </div>
-
-                        <!-- Title Field -->
-                        <div class="mb-4">
-                            <label asp-for="Title" class="form-label fw-bold required">Revision Title</label>
-                            <input asp-for="Title" class="form-control form-control-lg" placeholder="Enter revision title" required />
-                            <div class="invalid-feedback">
-                                Please provide a title for the revision.
+                    <div class="card-body p-4">
+                        <form asp-action="Create" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4">
+                                <i class="fas fa-exclamation-triangle me-2"></i>الرجاء تصحيح الأخطاء التالية
                             </div>
-                            <span asp-validation-for="Title" class="text-danger small"></span>
-                        </div>
 
-                        <!-- File Upload -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Supporting Files</label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="File" class="form-control"
-                                       accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
-                                <div class="form-text">Accepted formats: PDF, Word, Excel, PowerPoint, Text, ZIP (Max 10MB)</div>
-                                <span asp-validation-for="File" class="text-danger small"></span>
+                            <!-- Title Field -->
+                            <div class="mb-4">
+                                <label asp-for="Title" class="form-label fw-bold required">عنوان المراجعة</label>
+                                <input asp-for="Title" class="form-control form-control-lg" placeholder="أدخل عنوان المراجعة" required />
+                                <div class="invalid-feedback">
+                                    الرجاء إدخال عنوان للمراجعة.
+                                </div>
+                                <span asp-validation-for="Title" class="text-danger small"></span>
                             </div>
-                        </div>
 
-                        <!-- Video Upload -->
-                        <div class="mb-4">
-                            <label class="form-label fw-bold">Video File</label>
-                            <div class="file-upload-wrapper">
-                                <input type="file" asp-for="VideoFile" class="form-control"
-                                       accept="video/*,.mp4,.mov,.avi,.wmv" />
-                                <div class="form-text">Accepted formats: MP4, MOV, AVI, WMV (Max 50MB)</div>
-                                <span asp-validation-for="VideoFile" class="text-danger small"></span>
+                            <!-- File Upload -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">ملفات الدعم</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" asp-for="File" class="form-control"
+                                           accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.txt,.zip" />
+                                    <div class="form-text">الملفات المقبولة: PDF، Word، Excel، PowerPoint، نص، ZIP (الحد الأقصى 10MB)</div>
+                                    <span asp-validation-for="File" class="text-danger small"></span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Schedule Date -->
-                        <div class="mb-4">
-                            <label asp-for="ScheduleDate" class="form-label fw-bold required">Schedule Date & Time</label>
-                            <input asp-for="ScheduleDate" type="datetime-local" class="form-control" required />
-                            <div class="invalid-feedback">
-                                Please select a date and time.
+                            <!-- Video Upload -->
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">ملف الفيديو</label>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" asp-for="VideoFile" class="form-control"
+                                           accept="video/*,.mp4,.mov,.avi,.wmv" />
+                                    <div class="form-text">الصيغ المقبولة: MP4، MOV، AVI، WMV (الحد الأقصى 50MB)</div>
+                                    <span asp-validation-for="VideoFile" class="text-danger small"></span>
+                                </div>
                             </div>
-                            <span asp-validation-for="ScheduleDate" class="text-danger small"></span>
-                        </div>
 
-                        <!-- Course Selection -->
-                        <div class="mb-4">
-                            <label asp-for="CourseID" class="form-label fw-bold required">Associated Course</label>
-                            <select asp-for="CourseID" asp-items="courses" class="form-select" required>
-                                <option value="">-- Select Course --</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a course.
+                            <!-- Schedule Date -->
+                            <div class="mb-4">
+                                <label asp-for="ScheduleDate" class="form-label fw-bold required">تاريخ ووقت الجدولة</label>
+                                <input asp-for="ScheduleDate" type="datetime-local" class="form-control" required />
+                                <div class="invalid-feedback">
+                                    الرجاء تحديد التاريخ والوقت.
+                                </div>
+                                <span asp-validation-for="ScheduleDate" class="text-danger small"></span>
                             </div>
-                            <span asp-validation-for="CourseID" class="text-danger small"></span>
-                        </div>
 
-                        <!-- Form Actions -->
-                        <div class="d-flex justify-content-end mt-5 pt-3 border-top">
-                            <button type="reset" class="btn btn-outline-secondary me-3">
-                                <i class="fas fa-undo me-1"></i>Reset
-                            </button>
-                            <button type="submit" class="btn btn-primary px-4">
-                                <i class="fas fa-save me-1"></i>Create Revision
-                            </button>
-                        </div>
-                    </form>
+                            <!-- Course Selection -->
+                            <div class="mb-4">
+                                <label asp-for="CourseID" class="form-label fw-bold required">المقرر الدراسي</label>
+                                <select asp-for="CourseID" asp-items="courses" class="form-select" required>
+                                    <option value="">-- اختر المقرر --</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    الرجاء اختيار مقرر دراسي.
+                                </div>
+                                <span asp-validation-for="CourseID" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Form Actions -->
+                            <div class="d-flex justify-content-end mt-5 pt-3 border-top">
+                                <button type="submit" class="btn btn-primary px-4">
+                                    <i class="fas fa-save me-1"></i>إنشاء المراجعة
+                                </button>
+                                <button type="reset" class="btn btn-outline-secondary me-3">
+                                    <i class="fas fa-undo me-1"></i>إعادة تعيين
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    <script>
-        $(document).ready(function() {
-            // Initialize Bootstrap validation
-            (function() {
-                'use strict';
-                const forms = document.querySelectorAll('.needs-validation');
-
-                Array.prototype.slice.call(forms)
-                    .forEach(function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (!form.checkValidity()) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-            })();
-
-            // Set default datetime to now if empty
-            const datetimeInput = document.getElementById('ScheduleDate');
-            if (datetimeInput && !datetimeInput.value) {
-                const now = new Date();
-                const timezoneOffset = now.getTimezoneOffset() * 60000;
-                const localISOTime = new Date(now - timezoneOffset).toISOString().slice(0, 16);
-                datetimeInput.value = localISOTime;
-            }
-
-            // Auto-dismiss alerts after 5 seconds
-            $(".alert").delay(5000).fadeOut("slow", function() {
-                $(this).alert('close');
-            });
-
-            // File input styling
-            $('input[type="file"]').change(function() {
-                var fileName = $(this).val().split('\\').pop();
-                if (fileName) {
-                    $(this).next('.form-text').before(
-                        '<div class="file-info small text-success mb-1">' +
-                        '<i class="fas fa-file-upload me-1"></i>' + fileName +
-                        '</div>'
-                    );
-                }
-            });
-        });
-    </script>
-}
-
-<style>
-    .card {
-        border-radius: 0.5rem;
-        border: none;
-        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
-    }
-
-    .card-header {
-        border-radius: 0.5rem 0.5rem 0 0 !important;
-    }
-
-    .form-control, .form-select {
-        border-radius: 0.375rem;
-        padding: 0.75rem 1rem;
-        transition: all 0.2s ease;
-    }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #86b7fe;
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
+        <script>
+            $(document).ready(function() {
+                // Initialize Bootstrap validation
+                (function() {
+                    'use strict';
+                    const forms = document.querySelectorAll('.needs-validation');
 
-    .form-label {
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-    }
+                    Array.prototype.slice.call(forms)
+                        .forEach(function(form) {
+                            form.addEventListener('submit', function(event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                })();
 
-    .required:after {
-        content: " *";
-        color: #dc3545;
-    }
+                // Set default datetime to now if empty
+                const datetimeInput = document.getElementById('ScheduleDate');
+                if (datetimeInput && !datetimeInput.value) {
+                    const now = new Date();
+                    const timezoneOffset = now.getTimezoneOffset() * 60000;
+                    const localISOTime = new Date(now - timezoneOffset).toISOString().slice(0, 16);
+                    datetimeInput.value = localISOTime;
+                }
 
-    .btn {
-        padding: 0.5rem 1.5rem;
-        font-weight: 500;
-        border-radius: 0.375rem;
-    }
+                // Auto-dismiss alerts after 5 seconds
+                $(".alert").delay(5000).fadeOut("slow", function() {
+                    $(this).alert('close');
+                });
 
-    .file-upload-wrapper {
-        position: relative;
+                // File input styling
+                $('input[type="file"]').change(function() {
+                    var fileName = $(this).val().split('\\').pop();
+                    if (fileName) {
+                        $(this).next('.form-text').before(
+                            '<div class="file-info small text-success mb-1">' +
+                            '<i class="fas fa-file-upload me-1"></i>' + fileName +
+                            '</div>'
+                        );
+                    }
+                });
+            });
+        </script>
     }
-
-    .file-info {
-        margin-top: 0.25rem;
-    }
-
-    .invalid-feedback {
-        display: none;
-        margin-top: 0.25rem;
-        font-size: 0.875em;
-    }
-
-    .was-validated .form-control:invalid ~ .invalid-feedback,
-    .was-validated .form-select:invalid ~ .invalid-feedback {
-        display: block;
-    }
-</style>
+</body>
+</html>

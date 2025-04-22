@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tSZdprArQ6H+BZLRLb6koj1JpUTFWX+lpkXgBku2iq4=",
+  "Hash": "QjWdM3HjA3FvG5ijnTEglxNVzB1sEmexWuc93HBY4HA=",
   "Source": "Educational_Platform",
   "BasePath": "_content/Educational_Platform",
   "Mode": "Default",
@@ -395,6 +395,48 @@
       "OriginalItemSpec": "wwwroot\\files\\studentImage\\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif"
     },
     {
+      "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\alaaphote.jpg",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/studentImage/alaaphote#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x5iz18opoo",
+      "Integrity": "tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\studentImage\\alaaphote.jpg"
+    },
+    {
+      "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\carousel-2.jpg",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/studentImage/carousel-2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "v2tpaccm93",
+      "Integrity": "iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\studentImage\\carousel-2.jpg"
+    },
+    {
       "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\elaosboa78413.jpg",
       "SourceId": "Educational_Platform",
       "SourceType": "Discovered",
@@ -414,6 +456,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\files\\studentImage\\elaosboa78413.jpg"
+    },
+    {
+      "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\testimonial-3.jpg",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/studentImage/testimonial-3#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "d2587veb1l",
+      "Integrity": "W1EYirz8mmXhF3xFaZcUTT/Qh5S8+YQDiYPnXvS7s7c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\studentImage\\testimonial-3.jpg"
+    },
+    {
+      "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\مجهول.png",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "files/studentImage/مجهول#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "k73inb2uzw",
+      "Integrity": "wAM811BsszU/K9JkYChGYb/vjg60FY/5IfZQJ825tNQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\files\\studentImage\\مجهول.png"
     },
     {
       "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\finalang.mp4",
@@ -540,6 +624,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\about.jpg"
+    },
+    {
+      "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\alaaphote.jpg",
+      "SourceId": "Educational_Platform",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\",
+      "BasePath": "_content/Educational_Platform",
+      "RelativePath": "img/alaaphote#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x5iz18opoo",
+      "Integrity": "tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\alaaphote.jpg"
     },
     {
       "Identity": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\avatar.png",
@@ -9790,6 +9895,170 @@
       ]
     },
     {
+      "Route": "files/studentImage/alaaphote.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\alaaphote.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "141901"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 22 Apr 2025 00:05:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/alaaphote.x5iz18opoo.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\alaaphote.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "141901"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 22 Apr 2025 00:05:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x5iz18opoo"
+        },
+        {
+          "Name": "label",
+          "Value": "files/studentImage/alaaphote.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/carousel-2.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\carousel-2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "57163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 23:45:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/carousel-2.v2tpaccm93.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\carousel-2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "57163"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 23:45:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v2tpaccm93"
+        },
+        {
+          "Name": "label",
+          "Value": "files/studentImage/carousel-2.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iWYq2aHtyEygi74z/7tDBVYi4NNePHaVZcULnMHSmbo="
+        }
+      ]
+    },
+    {
       "Route": "files/studentImage/elaosboa78413.34pwlzdf8z.jpg",
       "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\elaosboa78413.jpg",
       "Selectors": [],
@@ -9868,6 +10137,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-3YccyBSJd4SDSPdDq2zwyhqCoWufrS4IR2kHpymJE54="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/testimonial-3.d2587veb1l.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\testimonial-3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3066"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W1EYirz8mmXhF3xFaZcUTT/Qh5S8+YQDiYPnXvS7s7c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 20:27:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d2587veb1l"
+        },
+        {
+          "Name": "label",
+          "Value": "files/studentImage/testimonial-3.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-W1EYirz8mmXhF3xFaZcUTT/Qh5S8+YQDiYPnXvS7s7c="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/testimonial-3.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\testimonial-3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3066"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"W1EYirz8mmXhF3xFaZcUTT/Qh5S8+YQDiYPnXvS7s7c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 20:27:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-W1EYirz8mmXhF3xFaZcUTT/Qh5S8+YQDiYPnXvS7s7c="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/مجهول.k73inb2uzw.png",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\مجهول.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2674"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wAM811BsszU/K9JkYChGYb/vjg60FY/5IfZQJ825tNQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 22:54:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "k73inb2uzw"
+        },
+        {
+          "Name": "label",
+          "Value": "files/studentImage/مجهول.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wAM811BsszU/K9JkYChGYb/vjg60FY/5IfZQJ825tNQ="
+        }
+      ]
+    },
+    {
+      "Route": "files/studentImage/مجهول.png",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\مجهول.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2674"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wAM811BsszU/K9JkYChGYb/vjg60FY/5IfZQJ825tNQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 21 Apr 2025 22:54:03 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wAM811BsszU/K9JkYChGYb/vjg60FY/5IfZQJ825tNQ="
         }
       ]
     },
@@ -10360,6 +10793,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Q/A50IkK5baDXnwzb1MpzQrHDgIrbb883/JX406rieI="
+        }
+      ]
+    },
+    {
+      "Route": "img/alaaphote.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\alaaphote.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "141901"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 22:02:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko="
+        }
+      ]
+    },
+    {
+      "Route": "img/alaaphote.x5iz18opoo.jpg",
+      "AssetFile": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\alaaphote.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "141901"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 20 Apr 2025 22:02:13 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x5iz18opoo"
+        },
+        {
+          "Name": "label",
+          "Value": "img/alaaphote.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tceNXlbai7lKeAFofUVLk9rT0rU9qPvAdIQjpf6N9Ko="
         }
       ]
     },

@@ -25,25 +25,34 @@ namespace Educational_Platform.Controllers
 
         public async Task<IActionResult> Index(string search)
         {
-            IEnumerable<Revision> revisions;
+            try
+            {
+                IEnumerable<Revision> revisions;
 
-            if (string.IsNullOrEmpty(search))
-            {
-                revisions = await _unitOfWork.Revision
-                    .GetAllAsync(includeProperties: "Course");
-            }
-            else
-            {
-                revisions = await Task.Run(() => _unitOfWork.Revision.searchCourseBytitle(search).ToList());
-            }
+                if (string.IsNullOrEmpty(search))
+                {
+                    revisions = await _unitOfWork.Revision
+                        .GetAllAsync(includeProperties: "Course");
+                }
+                else
+                {
+                    revisions =  _unitOfWork.Revision.searchCourseBytitle(search);
+                }
 
-            if (revisions == null || !revisions.Any())
+                ViewData["RevisionCount"] = await _unitOfWork.Revision.GetCountAsync();
+
+                if (!revisions.Any())
+                {
+                    ViewData["RevisionCount"] = 0;
+                }
+
+                return View(revisions);
+            }
+            catch (Exception ex)
             {
-                TempData["Message"] = "No revisions found.";
+                TempData["ErrorMessage"] = "An error occurred while loading revisions.";
                 return View(new List<Revision>());
             }
-
-            return View(revisions);
         }
 
         [HttpGet]

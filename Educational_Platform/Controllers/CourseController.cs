@@ -38,6 +38,8 @@ namespace Educational_Platform.Controllers
             {
                 courses =  _unitOfWork.Course.searchCourseBytitle(search); 
             }
+            var courseCount = courses.Count();
+            ViewData["CourseCount"] = courseCount;
 
             if (courses == null || !courses.Any())
             {
@@ -270,6 +272,8 @@ namespace Educational_Platform.Controllers
             TempData["Success"] = "لقد اشتركت في هذا الكورس بنجاح";
             return RedirectToAction("StudentProfile", "Student");
         }
+
+      
 
     }
 

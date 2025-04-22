@@ -9,6 +9,7 @@ namespace Business_logic_layer.interfaces
 {
    public interface IunitofWork
     {
+       public IquestionRepo questions { get; set; }
         public ICourseRepo Course { get;  set; }
        public ILessonRepo Lesson { get; set; }
         public IRevisionRepo Revision { get; set; }

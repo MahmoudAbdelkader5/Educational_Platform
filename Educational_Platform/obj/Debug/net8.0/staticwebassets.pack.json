@@ -69,8 +69,24 @@
       "PackagePath": "staticwebassets\\files\\studentImage\\ac34e4bb-7a94-411b-8d4c-554c0ef96624.jfif"
     },
     {
+      "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\alaaphote.jpg",
+      "PackagePath": "staticwebassets\\files\\studentImage\\alaaphote.jpg"
+    },
+    {
+      "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\carousel-2.jpg",
+      "PackagePath": "staticwebassets\\files\\studentImage\\carousel-2.jpg"
+    },
+    {
       "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\elaosboa78413.jpg",
       "PackagePath": "staticwebassets\\files\\studentImage\\elaosboa78413.jpg"
+    },
+    {
+      "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\testimonial-3.jpg",
+      "PackagePath": "staticwebassets\\files\\studentImage\\testimonial-3.jpg"
+    },
+    {
+      "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\studentImage\\مجهول.png",
+      "PackagePath": "staticwebassets\\files\\studentImage\\مجهول.png"
     },
     {
       "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\files\\video\\MUSliM - Etnaset _ Music Video - 2021 _ مسلم - اتنسيت.mp4",
@@ -99,6 +115,10 @@
     {
       "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\about.jpg",
       "PackagePath": "staticwebassets\\img\\about.jpg"
+    },
+    {
+      "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\alaaphote.jpg",
+      "PackagePath": "staticwebassets\\img\\alaaphote.jpg"
     },
     {
       "Id": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\wwwroot\\img\\avatar.png",

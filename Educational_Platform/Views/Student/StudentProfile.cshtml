@@ -74,78 +74,42 @@
 <body>
     <!-- Include Header -->
     @Html.Partial("~/Views/Shared/_Header.cshtml")
-
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card shadow-sm">
                     <div class="card-body text-center">
-                        <!-- Profile Picture -->
-                        <img src="~/files/studentImage/@Model.CurrentProfilePicture"
-                             class="profile-picture mb-3"
-                             alt="Profile Picture"
-                             onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
+                        <!-- Profile Picture with Upload Option -->
+                        <div class="position-relative d-inline-block">
+                            @if (string.IsNullOrEmpty(Model.CurrentProfilePicture))
+                            {
+                                <img src="~/files/studentImage/مجهول.png"
+                                     class="profile-picture mb-3"
+                                     alt="Unknown Profile Picture"
+                                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
+                            }
+                            else
+                            {
+                                <img src="~/files/studentImage/@Model.CurrentProfilePicture"
+                                     class="profile-picture mb-3"
+                                     alt="Profile Picture"
+                                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
+                            }
+                          
+                        </div>
 
                         <!-- Student Info -->
-                        <h4 class="mb-1">@Model.FirstName</h4>
-                        <p class="text-muted mb-1">@Model.Email</p>
-                        <p class="text-muted">Grade Level: @Model.GradeLevel</p>
+                        <h4 class="mb-1">@Model.FirstName @Model.LastName</h4>
+                        <p class="text-muted mb-1"><i class="fas fa-envelope"></i> @Model.Email</p>
+                        <p class="text-muted"><i class="fas fa-graduation-cap"></i> Grade Level: @Model.GradeLevel</p>
+
+                      
                     </div>
                 </div>
             </div>
         </div>
-        @if (TempData["Success"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                @TempData["Success"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                @TempData["Error"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-8">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">Enrolled Courses</h5>
-                    </div>
-                    <div class="card-body">
-                        @if (Model.EnrolledCourses != null && Model.EnrolledCourses.Any())
-                        {
-                            <ul class="list-group">
-                                @foreach (var course in Model.EnrolledCourses)
-                                {
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="mb-0">@course.Title</h6>
-                                            <small class="text-muted">@course.Description</small>
-                                        </div>
-                                        <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID" class="btn btn-sm btn-primary">
-                                            Go to Course
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
-                        }
-                        else
-                        {
-                            <p class="text-muted">No courses enrolled.</p>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Include Footer -->
-
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

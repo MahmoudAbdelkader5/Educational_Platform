@@ -28,7 +28,7 @@ namespace Educational_Platform.ViewModel
         public string GradeLevel { get; set; }
 
         [Display(Name = "Profile Picture")]
-        public string CurrentProfilePicture { get; set; }
+        public string CurrentProfilePicture { get; set; } = "مجهول.png";
 
 
         [Display(Name = "Enrolled Courses")]

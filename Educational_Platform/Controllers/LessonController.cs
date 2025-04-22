@@ -26,13 +26,15 @@ namespace Educational_Platform.Controllers
         {
             try
             {
-                var lessons = await _unitOfWork.Lesson
-                                    .GetAllAsync(includeProperties: "Course");
-                if (!string.IsNullOrEmpty(searchString))
-                {
-                    lessons = _unitOfWork.Lesson.searchCourseBytitle(searchString);
-                }
+                IEnumerable<Lesson> lessons;
 
+
+
+                lessons = await _unitOfWork.Lesson
+                        .GetAllAsync(includeProperties: "Course");
+
+                ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+               
                 return View(lessons);
             }
             catch (Exception ex)

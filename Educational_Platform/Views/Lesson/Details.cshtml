@@ -1,73 +1,135 @@
 ﻿@model LessonViewModel
 @{
-    ViewData["Title"] = "Lesson Details";
-    Layout = "~/Views/Shared/instructorLayout.cshtml";
+    ViewData["Title"] = "تفاصيل الدرس";
+    ViewBag.Layout = "~/Views/Shared/_Layout";
 }
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm my-4">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0 text-center"><i class="fas fa-info-circle me-2"></i>Lesson Details</h3>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - النظام التعليمي</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: right;
+        }
+
+        /* RTL specific styles */
+        .me-1 {
+            margin-left: 0.25rem !important;
+            margin-right: 0 !important;
+        }
+
+        .me-2 {
+            margin-left: 0.5rem !important;
+            margin-right: 0 !important;
+        }
+
+        .text-end {
+            text-align: left !important;
+        }
+
+        .text-start {
+            text-align: right !important;
+        }
+
+        .row {
+            flex-direction: row-reverse;
+        }
+
+        .col-sm-4 {
+            text-align: left !important;
+        }
+
+        .col-sm-8 {
+            text-align: right !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm my-4">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0 text-center"><i class="fas fa-info-circle me-2"></i>تفاصيل الدرس</h3>
+                    </div>
+                    <div class="card-body">
+                        <dl class="row">
+                            <!-- Title -->
+                            <dt class="col-sm-4">العنوان</dt>
+                            <dd class="col-sm-8">@Model.Title</dd>
+
+                            <!-- Supporting Files -->
+                            <dt class="col-sm-4">الملفات المساندة</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.SupportingFiles))
+                                {
+                                    <a href="@Model.SupportingFiles" target="_blank" class="text-decoration-none">
+                                        <i class="fas fa-file-download me-1"></i>@System.IO.Path.GetFileName(Model.SupportingFiles)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">لا توجد ملفات مساندة</span>
+                                }
+                            </dd>
+
+                            <!-- Task File -->
+                            <dt class="col-sm-4">ملف المهمة</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.TaskFileName))
+                                {
+                                    <a href="@Model.TaskFileName" target="_blank" class="text-decoration-none">
+                                        <i class="fas fa-file-download me-1"></i>@System.IO.Path.GetFileName(Model.TaskFileName)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">لا يوجد ملف مهمة</span>
+                                }
+                            </dd>
+
+                            <!-- Video URL -->
+                            <dt class="col-sm-4">الفيديو</dt>
+                            <dd class="col-sm-8">
+                                @if (!string.IsNullOrEmpty(Model.VideoURL))
+                                {
+                                    <a href="@Model.VideoURL" target="_blank" class="text-decoration-none">
+                                        <i class="fas fa-video me-1"></i>@System.IO.Path.GetFileName(Model.VideoURL)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">لا يوجد فيديو</span>
+                                }
+                            </dd>
+
+                            <!-- Creation Date -->
+                            <dt class="col-sm-4">تاريخ الإنشاء</dt>
+                            <dd class="col-sm-8">@Model.Create_date.ToString("dd MMM yyyy hh:mm tt", new System.Globalization.CultureInfo("ar-SA"))</dd>
+
+                            <!-- Course -->
+                            <dt class="col-sm-4">المقرر الدراسي</dt>
+                            <dd class="col-sm-8">@Model.Course?.Title</dd>
+                        </dl>
+                        <div class="form-group text-center mt-4">
+                            <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning me-2">
+                                <i class="fas fa-edit me-1"></i>تعديل
+                            </a>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>العودة للقائمة
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <dl class="row">
-                        <!-- Title -->
-                        <dt class="col-sm-4">Title</dt>
-                        <dd class="col-sm-8">@Model.Title</dd>
-
-                        <!-- Supporting Files -->
-                        <dt class="col-sm-4">Supporting Files</dt>
-                        <dd class="col-sm-8">
-                            @if (!string.IsNullOrEmpty(Model.SupportingFiles))
-                            {
-                                <a href="@Model.SupportingFiles" target="_blank" class="text-decoration-none">
-                                    <i class="fas fa-file-download me-1"></i>@System.IO.Path.GetFileName(Model.SupportingFiles)
-                                </a>
-                            }
-                            else
-                            {
-                                <span class="text-muted">No supporting files</span>
-                            }
-                        </dd>
-
-                        <!-- Task File -->
-                        <dt class="col-sm-4">Task File</dt>
-                        <dd class="col-sm-8">
-                            @if (!string.IsNullOrEmpty(Model.TaskFileName))
-                            {
-                                <a href="@Model.TaskFileName" target="_blank" class="text-decoration-none">
-                                    <i class="fas fa-file-download me-1"></i>@System.IO.Path.GetFileName(Model.TaskFileName)
-                                </a>
-                            }
-                            else
-                            {
-                                <span class="text-muted">No task file</span>
-                            }
-                        </dd>
-
-                        <!-- Video URL -->
-                        <dt class="col-sm-4">Video</dt>
-                        <dd class="col-sm-8">
-                            @if (!string.IsNullOrEmpty(Model.VideoURL))
-                            {
-                                <a href="@Model.VideoURL" target="_blank" class="text-decoration-none">
-                                    <i class="fas fa-video me-1"></i>@System.IO.Path.GetFileName(Model.VideoURL)
-                                </a>
-                            }
-                            else
-                            {
-                                <span class="text-muted">No video</span>
-                            }
-                        </dd>
-
-                        <!-- Creation Date -->
-                        <dt class="col-sm-4">Creation Date</dt>
-                        <dd class="col-sm-8">@Model.Create_date.ToString("dd MMM yyyy hh:mm tt")</dd>
-
-                        <!-- Course -->
-                        <dt class="col-sm-4">Course</dt>
-                        <dd class="col-sm-8">@Model.Course?.Title</dd>
-                    </dl>
-                    <div class="form-group
+            </div>
+        </div>
+    </div>
+</body>
+</html>

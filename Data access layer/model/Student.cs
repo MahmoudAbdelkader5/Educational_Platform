@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,7 +33,7 @@ namespace Data_access_layer.model
         public string GradeLevel { get; set; }
 
         [StringLength(255)]
-        public string ProfilePicture { get; set; }
+        public string ProfilePicture { get; set; } = "مجهول.png";
 
         public string UserId { get; set; }
 

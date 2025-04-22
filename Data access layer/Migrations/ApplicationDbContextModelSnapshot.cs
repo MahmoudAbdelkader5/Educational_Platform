@@ -253,14 +253,14 @@ namespace Data_access_layer.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 2)");
 
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -495,7 +495,13 @@ namespace Data_access_layer.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("FatherPhone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("GradeLevel")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
@@ -510,16 +516,13 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ProfilePicture")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("fatherPhone")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("ID");
 
@@ -909,7 +912,7 @@ namespace Data_access_layer.Migrations
             modelBuilder.Entity("Data_access_layer.model.Assignment", b =>
                 {
                     b.HasOne("Data_access_layer.model.Course", "Course")
-                        .WithMany("Assignments")
+                        .WithMany()
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -960,7 +963,7 @@ namespace Data_access_layer.Migrations
             modelBuilder.Entity("Data_access_layer.model.Exam", b =>
                 {
                     b.HasOne("Data_access_layer.model.Course", "Course")
-                        .WithMany("Exams")
+                        .WithMany()
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1002,7 +1005,7 @@ namespace Data_access_layer.Migrations
             modelBuilder.Entity("Data_access_layer.model.Revision", b =>
                 {
                     b.HasOne("Data_access_layer.model.Course", "Course")
-                        .WithMany("Revisions")
+                        .WithMany()
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1119,7 +1122,7 @@ namespace Data_access_layer.Migrations
             modelBuilder.Entity("Data_access_layer.model.student_Course", b =>
                 {
                     b.HasOne("Data_access_layer.model.Course", "Course")
-                        .WithMany("student_Course")
+                        .WithMany()
                         .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1218,15 +1221,7 @@ namespace Data_access_layer.Migrations
 
             modelBuilder.Entity("Data_access_layer.model.Course", b =>
                 {
-                    b.Navigation("Assignments");
-
-                    b.Navigation("Exams");
-
                     b.Navigation("Lessons");
-
-                    b.Navigation("Revisions");
-
-                    b.Navigation("student_Course");
                 });
 
             modelBuilder.Entity("Data_access_layer.model.Exam", b =>

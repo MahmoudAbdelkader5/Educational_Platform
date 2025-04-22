@@ -1,59 +1,47 @@
 ﻿@model IEnumerable<Lesson>
 
 <!-- Page Header -->
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
-    <div class="mb-3 mb-md-0">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4" dir="rtl">
+    <div class="mb-3 mb-md-0 text-end">
         <h1 class="h2 mb-1">
-            <i class="fas fa-users me-2 text-primary"></i>Lesson Management
+            <i class="fas fa-book-open me-2 text-primary"></i>إدارة الدروس
         </h1>
-        <p class="text-muted mb-0">View and manage all Lesson records</p>
+        <p class="text-muted mb-0">عرض وإدارة جميع الدروس التعليمية</p>
     </div>
     <div>
         <a class="btn btn-primary" asp-action="Create">
-            <i class="fas fa-plus-circle me-2"></i>Add New Lesson
+            <i class="fas fa-plus-circle me-2"></i>إضافة درس جديد
         </a>
     </div>
 </div>
-
-<!-- Search and Filter Card -->
-<div class="card shadow-sm mb-4">
-    <div class="card-body">
-        <form asp-action="Index" class="row g-3">
-            <div class="col-md-8">
-                <div class="input-group">
-                    <span class="input-group-text bg-transparent">
-                        <i class="fas fa-search text-muted"></i>
-                    </span>
-                    <input type="search" class="form-control" placeholder="Search lesson..." name="search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-filter me-1"></i>Filter
-                    </button>
-                </div>
-            </div>
-        </form>
+<div class="col-md-4">
+    <div class="card shadow-sm bg-light">
+        <div class="card-body p-3 text-center">
+            <span class="badge bg-primary rounded-pill">@Model.Count() درس</span>
+        </div>
     </div>
 </div>
 
-
+<!-- Table -->
 <div class="table-responsive">
     <table class="table table-hover mb-0">
         <thead class="table-light">
             <tr>
-                <th class="ps-4">ID</th>
-                <th>Title</th>
-                <th>Supporting Files</th>
-                <th>Task Files</th>
-                <th>Video URL</th>
-                <th>Creation Date</th>
-                <th>Course</th>
-                <th class="text-end pe-4">Actions</th>
+                <th class="pe-4">#</th>
+                <th>عنوان الدرس</th>
+                <th>الملفات المساعدة</th>
+                <th>ملفات المهام</th>
+                <th>رابط الفيديو</th>
+                <th>تاريخ الإنشاء</th>
+                <th>الدورة</th>
+                <th class="text-start ps-4">الإجراءات</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var lesson in Model)
             {
                 <tr>
-                    <td class="ps-4 fw-semibold align-middle">#@lesson.ID</td>
+                    <td class="pe-4 fw-semibold align-middle">#@lesson.ID</td>
                     <td class="align-middle">
                         <div class="fw-semibold">@lesson.Title</div>
                     </td>
@@ -66,7 +54,7 @@
                         }
                         else
                         {
-                            <span class="text-muted">No files</span>
+                            <span class="text-muted">لا توجد ملفات</span>
                         }
                     </td>
                     <td class="align-middle">
@@ -78,7 +66,7 @@
                         }
                         else
                         {
-                            <span class="text-muted">No files</span>
+                            <span class="text-muted">لا توجد ملفات</span>
                         }
                     </td>
                     <td class="align-middle">
@@ -90,31 +78,31 @@
                         }
                         else
                         {
-                            <span class="text-muted">No video</span>
+                            <span class="text-muted">لا يوجد فيديو</span>
                         }
                     </td>
                     <td class="align-middle">@lesson.Create_date</td>
                     <td class="align-middle">
                         <span class="badge bg-light text-dark">
-                            @(lesson.Course?.Title ?? "N/A")
+                            @(lesson.Course?.Title ?? "غير محدد")
                         </span>
                     </td>
                     <!-- Action Buttons -->
-                    <td class="text-end pe-4 align-middle">
+                    <td class="text-start ps-4 align-middle">
                         <div class="btn-group btn-group-sm" role="group">
                             <a asp-action="Details" asp-route-id="@lesson.ID"
-                               class="btn btn-outline-primary" data-bs-toggle="tooltip" title="View Details" aria-label="View Details">
+                               class="btn btn-outline-primary" data-bs-toggle="tooltip" title="عرض التفاصيل" aria-label="عرض التفاصيل">
                                 <i class="fas fa-eye"></i>
                             </a>
                             <a asp-action="Edit" asp-route-id="@lesson.ID"
-                               class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Edit" aria-label="Edit">
+                               class="btn btn-outline-warning" data-bs-toggle="tooltip" title="تعديل" aria-label="تعديل">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <form asp-action="Delete" asp-route-id="@lesson.ID" method="post" class="d-inline">
                                 @Html.AntiForgeryToken()
                                 <button type="submit" class="btn btn-outline-danger"
-                                        data-bs-toggle="tooltip" title="Delete" aria-label="Delete"
-                                        onclick="return confirm('Are you sure you want to delete @lesson.Title?')">
+                                        data-bs-toggle="tooltip" title="حذف" aria-label="حذف"
+                                        onclick="return confirm('هل أنت متأكد من رغبتك في حذف الدرس @lesson.Title؟')">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>
@@ -125,3 +113,75 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl, {
+                    trigger: 'hover'
+                });
+            });
+        });
+    </script>
+}
+
+<style>
+    /* RTL Adjustments */
+    [dir="rtl"] .fa-edit,
+    [dir="rtl"] .fa-eye,
+    [dir="rtl"] .fa-trash-alt {
+        margin-left: 0;
+        margin-right: 0.25rem;
+    }
+
+    [dir="rtl"] .btn-group {
+        margin-right: 0;
+        margin-left: -0.5rem;
+    }
+
+    [dir="rtl"] .text-truncate {
+        text-align: right;
+    }
+
+    [dir="rtl"] .table th {
+        text-align: right;
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        [dir="rtl"] .table-responsive {
+            border: 0;
+        }
+
+        [dir="rtl"] .table thead {
+            display: none;
+        }
+
+        [dir="rtl"] .table tr {
+            margin-bottom: 1rem;
+            display: block;
+            border: 1px solid #dee2e6;
+        }
+
+        [dir="rtl"] .table td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+            [dir="rtl"] .table td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                margin-left: 1rem;
+            }
+
+        [dir="rtl"] .btn-group {
+            justify-content: flex-start;
+        }
+    }
+</style>

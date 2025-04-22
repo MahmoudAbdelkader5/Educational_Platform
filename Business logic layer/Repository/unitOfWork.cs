@@ -16,8 +16,11 @@ namespace Business_logic_layer.Repository
         public IstudentRepo Student { get; set; }
         public IRevisionRepo Revision { get; set; }
         public Istudent_CourseRepo student_CourseRepo { get; set; }
+        public IquestionRepo questions { get; set; }
+
         public unitOfWork(ApplicationDbContext dbcontext)
         {
+            questions = new QuestionRepo(dbcontext);
             Course = new CourseRepo(dbcontext);
             Lesson = new LessonRepo(dbcontext);
             Revision = new RevisionRepo(dbcontext);
