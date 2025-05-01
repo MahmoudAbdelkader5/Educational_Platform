@@ -1,16 +1,42 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model Data_access_layer.model.Message
 @{
     ViewData["Title"] = "Contact";
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
 }
 @Html.Partial("_Header")
+@if (TempData["ContactSuccess"] != null)
+{
+    <div class="alert alert-success" style="direction:rtl;">
+        @TempData["ContactSuccess"]
+    </div>
+}
+@if (TempData["ContactError"] != null)
+{
+    <div class="alert alert-danger" style="direction:rtl;">
+        @TempData["ContactError"]
+    </div>
+}
+
 <style>
     .fo {
         font-family: "Cairo", sans-serif;
     }
+    .form-floating > .form-control:dir(rtl),
+    .form-floating > .form-control-plaintext:dir(rtl),
+    .form-floating > .form-select:dir(rtl) {
+        text-align: right;
+    }
+
+    .form-floating > label:dir(rtl) {
+        right: 0;
+        left: auto;
+        transform-origin: right top;
+    }
+
 </style>
 <div class="container-xxl py-5">
     <div class="container">
@@ -20,37 +46,46 @@
         </div>
         <div class="row justify-content-center g-4">
             <div class="col-lg-6 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                <form>
+                <form asp-action="Contact" method="post">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="text" class="form-control fo" id="name" placeholder="الاسم" dir="rtl" style="text-align: right;">
-                                <label for="name">الاسم</label>
+                                <input asp-for="Name" class="form-control fo" id="name" placeholder="الاسم" dir="rtl" style="text-align: right; direction:rtl;" />
+                                <label for="name" class="fo" dir="rtl" style="text-align: right; direction:rtl;">الاسم</label>
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating">
-                                <input type="email" class="form-control fo" id="email" placeholder="البريد الإلكتروني" dir="rtl" style="text-align: right;">
-                                <label for="email">البريد الإلكتروني</label>
+                                <input asp-for="Email" class="form-control fo" id="email" placeholder="البريد الإلكتروني" dir="rtl" style="text-align: right;" />
+                                <label for="email" dir="rtl" style="text-align: right; direction:rtl;">البريد الإلكتروني</label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating">
+                                <input asp-for="Subject" class="form-control fo" id="subject" placeholder="الموضوع" dir="rtl" style="text-align: right;" />
+                                <label for="subject" dir="rtl" style="text-align: right; direction:rtl;">الموضوع</label>
+                                <span asp-validation-for="Subject" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-floating">
-                                <input type="text" class="form-control fo" id="subject" placeholder="الموضوع" dir="rtl" style="text-align: right;">
-                                <label for="subject">الموضوع</label>
+                                <textarea asp-for="MessageBody" class="form-control" id="message" placeholder="اكتب رسالتك هنا" style="height: 150px; text-align: right;" dir="rtl"></textarea>
+                                <label for="message" dir="rtl" style="text-align: right; direction:rtl;">الرسالة</label>
+                                <span asp-validation-for="MessageBody" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="اكتب رسالتك هنا" id="message" style="height: 150px; text-align: right;" dir="rtl"></textarea>
-                                <label for="message">الرسالة</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn btn-primary w-100 py-3 fo" type="submit">إرسال الرسالة</button>
+                            <button type="submit" class="btn btn-primary w-100 py-3 fo">إرسال الرسالة</button>
                         </div>
                     </div>
                 </form>
+
+                @section Scripts {
+                    <partial name="_ValidationScriptsPartial" />
+                }
+
             </div>
 
 

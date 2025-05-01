@@ -52,15 +52,14 @@
         position: sticky;
         top: 0;
         z-index: 1030;
-        direction: ltr; /* Force LTR layout */
+        direction: rtl;
     }
 
     /* Navigation Links */
     .nav-link {
         font-family: 'Cairo', sans-serif;
         font-weight: 600;
-        padding: 0.75rem 1.25rem;
-        margin: 0 0.15rem;
+       
         color: var(--text-color) !important;
         transition: all 0.25s ease;
         position: relative;
@@ -70,7 +69,6 @@
         .nav-link:hover,
         .nav-link:focus {
             color: var(--primary-color) !important;
-            background-color: rgba(6, 187, 204, 0.08);
         }
 
         .nav-link:after {
@@ -156,7 +154,6 @@
 
     /* Buttons */
     .auth-btn {
-        padding: 0.75rem 2rem;
         border-radius: 50px;
         font-weight: 600;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -211,17 +208,18 @@
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-    <div class="container">
+    <div class="container" >
         <a href="@Url.Action("Index", "Home")" class="navbar-brand d-flex align-items-center">
-            <h1 class="m-0 logo"><i class="fa fa-book me-3"></i>مفهوم</h1>
+            <h1 class="m-0 logo"><i class="fa fa-book me-3"></i> مفهوم </h1>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+        <div class="collapse navbar-collapse flex-grow-1 " style="direction:rtl;" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item @(ViewContext.RouteData.Values["Action"].ToString() == "Index" ? "active" : "")">
                     @Html.ActionLink("الرئيسية", "Index", "Home", null, new { @class = "nav-link arfont" })
                 </li>
@@ -285,7 +283,7 @@
                 else
                 {
                     <li class="nav-item">
-                        @Html.ActionLink("انضم الينا", "Login", "Account", null, new { @class = "btn btn-primary auth-btn arfont" })
+                        @Html.ActionLink("انضم الينا", "Login", "Account", null, new { @class = "arfont btn btn-primary py-4 px-lg-5 d-none auth-btn d-lg-block" })
                     </li>
                 }
             </ul>

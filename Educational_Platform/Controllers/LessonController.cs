@@ -33,8 +33,11 @@ namespace Educational_Platform.Controllers
                 lessons = await _unitOfWork.Lesson
                         .GetAllAsync(includeProperties: "Course");
 
+                ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+                ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+                ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
                 ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-               
+                ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
                 return View(lessons);
             }
             catch (Exception ex)

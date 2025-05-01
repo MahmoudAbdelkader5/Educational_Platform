@@ -582,12 +582,31 @@
                         <span class="badge bg-info me-auto">@(ViewData["RevisionCount"] ?? 0)</span>
                     </a>
                 </li>
+               
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Student" asp-action="Index">
+                    <a class="nav-link" asp-controller="Question" asp-action="Index">
                         <i class="fas fa-users"></i>
-                        <span class="nav-link-text">الطلاب</span>
-                        <span class="badge bg-primary me-auto">@(ViewData["StudentCount"] ?? 0)</span>
+                        <span class="nav-link-text">الاسئلة</span>
+                        <span class="badge bg-primary me-auto">@(ViewData["questionCount"] ?? 0)</span>
+
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="exam" asp-action="Index">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span class="nav-link-text">الامتحانات</span>
+                        <span class="badge bg-info me-auto">@(ViewData["ExamCount"] ?? 0)</span>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Message" asp-action="Index">
+                        <i class="fa-solid fa-message"></i>
+                        <span class="nav-link-text">رسائل الصفحة</span>
+                        <span class="badge bg-info me-auto">@(ViewData["messagesCount"] ?? 0)</span>
+
+                    </a>
+
                 </li>
                 <li class="nav-item mt-4">
                     <a class="nav-link text-danger" asp-controller="Account" asp-action="SignOut">
@@ -611,9 +630,7 @@
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">لوحة تحكم المدرب</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-download fa-sm text-white-50 me-1"></i> تصدير تقرير
-                </a>
+                
             </div>
 
             <!-- Content Row -->
@@ -772,6 +789,8 @@
             animateCardsOnScroll();
         });
     </script>
+    @RenderSection("Styles", required: false)
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

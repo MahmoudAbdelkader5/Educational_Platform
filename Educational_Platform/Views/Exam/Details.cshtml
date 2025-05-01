@@ -1,0 +1,147 @@
+﻿@model Data_access_layer.model.Exam
+@{
+    ViewData["Title"] = "تفاصيل الامتحان";
+}
+
+<!-- Add Font Awesome in head section -->
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+}
+
+<div class="container text-right" dir="rtl">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">تفاصيل الامتحان</h1>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">
+                <i class="fas fa-edit"></i> تعديل
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> العودة
+            </a>
+        </div>
+    </div>
+    <hr />
+
+    <!-- Exam Basic Info -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>معلومات أساسية</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">عنوان الامتحان:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Title)</dd>
+
+                <dt class="col-sm-3">المادة الدراسية:</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Course != null)
+                    {
+                        <span class="badge bg-info">@Model.Course.Title</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">غير معين</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">مدة الامتحان:</dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-primary">
+                        @Html.DisplayFor(model => model.duration) دقيقة
+                    </span>
+                </dd>
+
+                
+            </dl>
+        </div>
+    </div>
+
+    <!-- Exam Questions Section -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-question-circle me-2"></i>أسئلة الامتحان</h5>
+            <span class="badge bg-success">@Model.ExamQuestions.Count سؤال</span>
+        </div>
+
+        <div class="card-body">
+            @if (Model.ExamQuestions != null && Model.ExamQuestions.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="5%">#</th>
+                                <th width="60%">نص السؤال</th>
+                                <th width="20%">الإجابة الصحيحة</th>
+                                <th width="15%">الدرجة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var examQuestion in Model.ExamQuestions)
+                            {
+                                <tr>
+                                    <td>@(Model.ExamQuestions.ToList().IndexOf(examQuestion) + 1)</td>
+                                    <td>@examQuestion.Question.QuestionText</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            @examQuestion.Question.Answer
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-primary">
+                                            @examQuestion.mark نقطة
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Total Marks -->
+                <div class="alert alert-info mt-3">
+                    <strong>المجموع الكلي:</strong>
+                    @Model.ExamQuestions.Sum(q => q.mark) نقطة
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning text-center py-4">
+                    <i class="fas fa-exclamation-circle fa-2x mb-3"></i>
+                    <h5>لا توجد أسئلة مضافة لهذا الامتحان</h5>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning mt-2">
+                        <i class="fas fa-plus"></i> إضافة أسئلة
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-between mt-4">
+        <div>
+            <button class="btn btn-outline-primary me-2" onclick="window.print()">
+                <i class="fas fa-print"></i> طباعة
+            </button>
+            <a href="#" class="btn btn-outline-secondary">
+                <i class="fas fa-share"></i> مشاركة
+            </a>
+        </div>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> العودة للقائمة
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add any JavaScript functionality needed
+        $(document).ready(function() {
+            // Example: Add confirmation for delete if you add that functionality
+            $('.delete-btn').click(function() {
+                return confirm('هل أنت متأكد من حذف هذا السؤال؟');
+            });
+        });
+    </script>
+}

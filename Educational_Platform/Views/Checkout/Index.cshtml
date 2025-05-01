@@ -1,0 +1,137 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "إتمام الدفع";
+
+    // Fix: Make sure we're working with decimal values, not strings
+    decimal originalAmount = ViewBag.Amount != null ? Convert.ToDecimal(ViewBag.Amount) : 0m;
+    var exchangeRate = 51.0m;
+    decimal amountInUSD = originalAmount / exchangeRate;
+
+    // Format for display only
+    string amountDisplay = originalAmount.ToString("0.00", CultureInfo.InvariantCulture);
+    string amountInUSDDisplay = amountInUSD.ToString("0.00", CultureInfo.InvariantCulture);
+
+    var courseTitle = ViewBag.CourseTitle ?? "الدورة التدريبية";
+    var courseDescription = ViewBag.CourseDescription ?? "وصف الدورة التدريبية";
+    Layout = "_AuthLayout";
+}
+
+<script src="https://www.paypal.com/sdk/js?client-id=@(ViewBag.PaypalClientId)&currency=USD"></script>
+
+<div class="container py-5" dir="rtl">
+    <div class="row g-4 justify-content-center">
+        <!-- First Container -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="mb-0 fo">@courseTitle</h2>
+                        <span class="badge bg-primary rounded-pill fs-6 px-3 py-2">@amountDisplay ج.م</span>
+                    </div>
+                    <p class="text-muted mb-4">@courseDescription</p>
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fa fa-graduation-cap ms-2"></i>
+                        <span>الوصول الكامل للدورة</span>
+                    </div>
+                    <div class="d-flex align-items-center text-muted mb-2">
+                        <i class="fa fa-infinity ms-2"></i>
+                        <span>الوصول مدى الحياة</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Container -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-white py-3">
+                    <h3 class="mb-0 fo">إتمام الطلب</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">المبلغ الإجمالي</label>
+                        <input type="hidden" id="actualAmountUSD" value="@amountInUSD" />
+
+                        <div class="input-group">
+                            <span class="input-group-text bg-light">ج.م</span>
+                            <input class="form-control" type="text" id="totalAmount" value="@amountDisplay" readonly />
+                        </div>
+                        <div class="form-text text-muted">
+                            سيتم معالجة الدفع بالدولار الأمريكي: $@amountInUSDDisplay
+                        </div>
+                    </div>
+
+                    <div id="notification-container" class="mb-4"></div>
+
+                    <div class="py-2">
+                        <div id="paypal-button-container" class="mb-3"></div>
+                        <p class="text-center text-muted small">
+                            <i class="fa fa-lock ms-1"></i>
+                            معلومات الدفع الخاصة بك آمنة. نحن لا نخزن تفاصيل بطاقتك.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color: 'blue',
+            shape: 'rect',
+            label: 'paypal'
+        },
+        async createOrder() {
+            const response = await fetch("@Url.ActionLink("CreateOrder", "Checkout")", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    amount: @amountInUSDDisplay
+                })
+            });
+
+            const order = await response.json();
+            return order.id;
+        },
+        async onApprove(data) {
+            document.getElementById("notification-container").innerHTML =
+                `<div class="alert alert-info text-center">
+                    <div class="spinner-border spinner-border-sm text-primary ms-2" role="status">
+                        <span class="visually-hidden">جاري معالجة الدفع...</span>
+                    </div>
+                    جاري معالجة الدفع...
+                </div>`;
+
+            // Capture the funds from the transaction
+            const response = await fetch("@Url.ActionLink("CompleteOrder", "Checkout")", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    orderID: data.orderID
+                })
+            });
+
+            const details = await response.json();
+            if (details == "success") {
+                const amount = document.getElementById("actualAmountUSD").value;
+                window.location.href = "@Url.Action("Success", "Checkout")?orderId=" + data.orderID+"&amount=" + amount;
+            } else {
+                window.location.href = "@Url.Action("Failure", "Checkout")";
+            }
+        },
+        onCancel(data) {
+            window.location.href = "@Url.Action("Failure", "Checkout", new { reason = "canceled" })";
+        },
+        onError(err) {
+            window.location.href = "@Url.Action("Failure", "Checkout", new { reason = "error" })";
+        }
+    }).render('#paypal-button-container');
+</script>
+

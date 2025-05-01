@@ -5,6 +5,7 @@ using Educational_Platform.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,10 +37,15 @@ namespace Educational_Platform.Controllers
             }
             else
             {
-                courses =  _unitOfWork.Course.searchCourseBytitle(search); 
+                courses = _unitOfWork.Course.searchCourseBytitle(search);
             }
             var courseCount = courses.Count();
             ViewData["CourseCount"] = courseCount;
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+
 
             if (courses == null || !courses.Any())
             {
@@ -99,10 +105,10 @@ namespace Educational_Platform.Controllers
             return View(courseViewModel);
         }
 
-        [Authorize(Roles = "Student")]
         public async Task<IActionResult> DetailsWithLessons(int id)
         {
             var course = await _unitOfWork.Course.GetByIdAsync(id);
+            var Lesson = await _unitOfWork.Lesson.GetByIdAsync(id);
             if (course == null)
             {
                 return NotFound();
@@ -111,26 +117,51 @@ namespace Educational_Platform.Controllers
             var lessons = await _unitOfWork.Lesson.GetAllAsync();
             var courseLessons = lessons.Where(l => l.CourseID == id);
 
+            // Retrieve comments for the course's lessons
+            var comments = await _unitOfWork.Comment.GetAllAsync(
+                c => courseLessons.Select(l => l.ID).Contains(c.LessonID),
+                includeProperties: "Student,Instructor"
+            );
+
             var courseDetailsViewModel = new CourseDetailsViewModel
             {
                 ID = course.ID,
                 Title = course.Title,
                 Description = course.Description,
                 Duration = course.Duration,
-                Image = course.Image, 
+                Image = course.Image,
                 Lessons = courseLessons.Select(l => new LessonViewModel
                 {
                     ID = l.ID,
                     Title = l.Title,
-                    VideoURL = l.VideoURL, 
+                    VideoURL = l.VideoURL,
                     SupportingFiles = l.SupportingFiles,
                     TaskFileName = l.TaskFileName,
                     Create_date = l.Create_date,
+                }).ToList(),
+                Comments = comments.Select(c => new CommentViewModel
+                {
+                    LessonID = c.LessonID,
+                    StudentID = c.StudentID ?? 0,
+                    Content = c.Content,
+                    CommentDate = c.CommentDate,
+                    StudentName = c.Student != null
+                        ? c.Student.Name
+                        : c.Instructor != null
+                            ? c.Instructor.Name
+                            : "Unknown",
+                    StudentPhoto = c.Student != null
+                        ? (string.IsNullOrEmpty(c.Student.ProfilePicture) ? "default.png" : c.Student.ProfilePicture)
+                        : c.Instructor != null
+                            ? "/img/alaaphote.jpg"
+                            : "img/default-instructor.png"
                 }).ToList()
             };
 
-            return View(courseDetailsViewModel); 
+            return View(courseDetailsViewModel);
         }
+
+
 
 
         [Authorize(Roles = "Instructor")]
@@ -183,7 +214,7 @@ namespace Educational_Platform.Controllers
                     return RedirectToAction(nameof(Index));
                 }
                 return View(course);
-                
+
             }
             catch (Exception ex)
             {
@@ -207,7 +238,7 @@ namespace Educational_Platform.Controllers
             try
             {
                 var mappedCourse = Mapper.Map<Course>(course);
-                 _unitOfWork.Course.DeleteAsync(mappedCourse); // Await this async operation  
+                _unitOfWork.Course.DeleteAsync(mappedCourse); // Await this async operation  
                 var res = await _unitOfWork.Save();
 
                 if (res > 0 && mappedCourse.Image != null)
@@ -223,7 +254,6 @@ namespace Educational_Platform.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize(Roles = "Student")]
         public async Task<IActionResult> EnrollInCourse(int id)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -273,7 +303,73 @@ namespace Educational_Platform.Controllers
             return RedirectToAction("StudentProfile", "Student");
         }
 
-      
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddComment(CommentViewModel model)
+        {
+            // Get the currently logged-in user
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to post a comment.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Check if the user is a student or an instructor
+            if (user.StudentId == null && user.InstructorId == null)
+            {
+                TempData["ErrorMessage"] = "User profile not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                // Create a new Comment object
+                var comment = new Comment
+                {
+                    LessonID = model.LessonID,
+                    Content = model.Content,
+                    CommentDate = DateTime.Now
+                };
+
+                // If the user is a student, associate the comment with the student
+                if (user.StudentId != null)
+                {
+                    var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+                    if (student == null)
+                    {
+                        TempData["ErrorMessage"] = "Student profile not found.";
+                        return RedirectToAction("StudentProfile", "Student");
+                    }
+                    comment.StudentID = student.ID;
+                }
+                // If the user is an instructor, associate the comment with the instructor
+                else if (user.InstructorId != null)
+                {
+                    var instructor = await _unitOfWork.Instructor.GetByIdAsync(user.InstructorId.Value);
+                    if (instructor == null)
+                    {
+                        TempData["ErrorMessage"] = "Instructor profile not found.";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    comment.InstructorID = instructor.ID;
+                }
+
+                // Save the comment to the database
+                await _unitOfWork.Comment.AddAsync(comment);
+                await _unitOfWork.SaveAsync();
+
+                TempData["SuccessMessage"] = "Comment added successfully!";
+                // Redirect to the same course page
+                var courseId = await _unitOfWork.Lesson.GetCourseIdByLessonIdAsync(model.LessonID);
+                return RedirectToAction("DetailsWithLessons", new { id = courseId });
+            }
+
+            TempData["ErrorMessage"] = "Failed to post the comment. Please try again.";
+            var fallbackCourseId = await _unitOfWork.Lesson.GetCourseIdByLessonIdAsync(model.LessonID);
+            return RedirectToAction("DetailsWithLessons", new { id = fallbackCourseId });
+        }
 
     }
 

@@ -9,8 +9,10 @@ namespace Business_logic_layer.interfaces
 {
     public interface IquestionRepo : IGenericRepo<Questions>
     {
-        
+        Task<int> GetCountAsync();
+
+
     }
-    
-    
+
+
 }

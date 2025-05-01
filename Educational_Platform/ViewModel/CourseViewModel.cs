@@ -37,7 +37,8 @@ namespace Educational_Platform.ViewModel
 
         // For file upload
         
-        public IFormFile ImageFile { get; set; }
+        public IFormFile? ImageFile { get; set; }
+        public bool? IsEnrolled { get; set; } = false;
     }
 
     // Custom validation attribute for file extensions

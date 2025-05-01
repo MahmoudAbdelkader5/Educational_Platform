@@ -1,0 +1,121 @@
+﻿@{
+    ViewData["Title"] = "تم الدفع بنجاح";
+    var orderId = ViewBag.OrderId ?? "غير متوفر";
+    var amount = ViewBag.Amount ?? "0.00";
+    var courseId = TempData["CourseId"];
+    var courseTitle = ViewBag.CourseTitle ?? "الدورة التدريبية";
+    Layout = "_AuthLayout";
+}
+
+<style>
+    :root {
+        --success: #06BBCC;
+        --success-light: #e9f9fa;
+    }
+
+    .success-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(6, 187, 204, 0.15);
+        animation: pulse 2s infinite;
+    }
+
+        .success-icon i {
+            font-size: 50px;
+            color: var(--success);
+        }
+
+    @@keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(6, 187, 204, 0.4);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(6, 187, 204, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(6, 187, 204, 0);
+        }
+    }
+
+    .purchase-details {
+        background-color: var(--success-light);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .btn-refined {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.5rem;
+        line-height: 1.5;
+        border-radius: 0.3rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-refined i {
+            font-size: 1rem;
+        }
+
+    .btn-turquoise {
+        background-color: #40E0D0;
+        border-color: #40E0D0;
+        color: #fff;
+    }
+
+        .btn-turquoise:hover {
+            background-color: #3ACAC0;
+            border-color: #3ACAC0;
+            color: #fff;
+        }
+</style>
+
+<div class="container py-5" dir="rtl">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-5 text-center">
+                    <div class="success-icon mb-4">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+
+                    <h1 class="display-5 mb-4 fw-bold text-success">تم الدفع بنجاح!</h1>
+                    <p class="lead mb-4">شكرًا لشرائك. تم معالجة دفعتك بنجاح.</p>
+
+                    <div class="purchase-details mb-4 text-end">
+                        <div class="row mb-2">
+                            <div class="col-6 text-muted">رقم الطلب:</div>
+                            <div class="col-6 fw-bold">@orderId</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 text-muted">التاريخ:</div>
+                            <div class="col-6 fw-bold">@DateTime.Now.ToString("MMM dd, yyyy")</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p>تم إرسال بريد إلكتروني للتأكيد إلى عنوان بريدك الإلكتروني.</p>
+                    </div>
+
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                        <a href="@Url.Action("DetailsWithLessons", "Course", new { id = courseId })"
+                           class="btn btn-turquoise btn-refined w-100">
+                            <i class="fa fa-book-open ms-2"></i>الذهاب إلى الدورة
+                        </a>
+                        <a href="@Url.Action("Index", "Home")"
+                           class="btn btn-outline-secondary btn-refined w-100">
+                            <i class="fa fa-home ms-2"></i>العودة إلى الصفحة الرئيسية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

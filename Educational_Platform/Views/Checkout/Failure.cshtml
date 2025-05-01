@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "فشل الدفع";
+    var reason = ViewBag.Reason ?? "غير معروف";
+    var errorMessage = ViewBag.ErrorMessage ?? "لم نتمكن من معالجة الدفع الخاص بك.";
+    Layout = "_AuthLayout";
+}
+
+<style>
+    .failure-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(220, 53, 69, 0.15);
+    }
+
+        .failure-icon i {
+            font-size: 50px;
+            color: #dc3545;
+        }
+
+    .error-container {
+        background-color: #fff9fa;
+        border-radius: 10px;
+        padding: 20px;
+        border-right: 4px solid #dc3545; /* Adjusted for RTL */
+    }
+
+    :root {
+        --turquoise: #06BBCC;
+        --turquoise-dark: #05a8b6;
+    }
+
+    .btn-refined {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.5rem;
+        line-height: 1.5;
+        border-radius: 0.3rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-refined i {
+            font-size: 1rem;
+        }
+
+    .btn-turquoise {
+        background-color: var(--turquoise);
+        border-color: var(--turquoise);
+        color: #fff;
+    }
+
+        .btn-turquoise:hover {
+            background-color: var(--turquoise-dark);
+            border-color: var(--turquoise-dark);
+            color: #fff;
+        }
+</style>
+
+<div class="container py-5" dir="rtl">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            <div class="card border-0 shadow-sm rounded-3">
+                <div class="card-body p-5 text-center">
+                    <div class="failure-icon mb-4">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+
+                    <h1 class="display-5 mb-4 fw-bold text-danger">فشل الدفع</h1>
+                    <p class="lead mb-4">نأسف، لم نتمكن من إتمام عملية الدفع الخاصة بك.</p>
+
+                    <div class="error-container mb-4 text-end">
+                        <h5 class="mb-3">ما الخطأ الذي حدث؟</h5>
+                        @if (reason == "canceled")
+                        {
+                            <p>لقد قمت بإلغاء عملية الدفع. لم يتم خصم أي رسوم من حسابك.</p>
+                        }
+                        else
+                        {
+                            <p>@errorMessage</p>
+                            <p>يرجى المحاولة مرة أخرى أو استخدام طريقة دفع مختلفة.</p>
+                        }
+                    </div>
+
+                    <div class="d-grid gap-3 d-md-flex justify-content-md-center">
+                        <a href="@Url.Action("Index", "Checkout", new { amount = ViewBag.Amount, courseId = ViewBag.CourseId })"
+                           class="btn btn-turquoise btn-refined w-100">
+                            <i class="fa fa-redo ms-2"></i>حاول مرة أخرى
+                        </a>
+                        <a href="@Url.Action("Index", "Home")"
+                           class="btn btn-outline-secondary btn-refined w-100">
+                            <i class="fa fa-home ms-2"></i>العودة إلى الصفحة الرئيسية
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

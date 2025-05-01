@@ -10,7 +10,7 @@ namespace Business_logic_layer.interfaces
     {
         public IQueryable<Lesson> searchCourseBytitle(string search);
         Task<int> GetCountAsync();
-
+        Task<int> GetCourseIdByLessonIdAsync(int lessonId);
 
     }
 }

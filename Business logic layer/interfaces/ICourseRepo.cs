@@ -10,6 +10,8 @@ namespace Business_logic_layer.interfaces
     public interface ICourseRepo : IGenericRepo<Course>
     {
         public IQueryable<Course> searchCourseBytitle(string search);
+        Task<int> GetCountAsync();
+
 
     }
 }

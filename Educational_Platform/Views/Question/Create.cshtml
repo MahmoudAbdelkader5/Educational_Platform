@@ -1,0 +1,156 @@
+﻿@model Data_access_layer.model.Questions
+
+@{
+    ViewData["Title"] = "إنشاء سؤال جديد";
+}
+
+<div class="container mt-4" dir="rtl">
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <form asp-action="Create" id="questionForm">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <!-- Question Text -->
+                <div class="form-group mb-4">
+                    <label asp-for="QuestionText" class="control-label font-weight-bold">نص السؤال</label>
+                    <textarea asp-for="QuestionText" class="form-control" rows="4" placeholder="ادخل نص السؤال هنا..."></textarea>
+                    <span asp-validation-for="QuestionText" class="text-danger small"></span>
+                </div>
+
+                <!-- Options -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white">أ</span>
+                            </div>
+                            <input asp-for="q1" class="form-control" placeholder="الخيار أ" />
+                        </div>
+                        <span asp-validation-for="q1" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white">ب</span>
+                            </div>
+                            <input asp-for="q2" class="form-control" placeholder="الخيار ب" />
+                        </div>
+                        <span asp-validation-for="q2" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white">ج</span>
+                            </div>
+                            <input asp-for="q3" class="form-control" placeholder="الخيار ج" />
+                        </div>
+                        <span asp-validation-for="q3" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary text-white">د</span>
+                            </div>
+                            <input asp-for="q4" class="form-control" placeholder="الخيار د" />
+                        </div>
+                        <span asp-validation-for="q4" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <!-- Correct Answer -->
+                <div class="form-group mb-4">
+                    <label asp-for="Answer" class="control-label font-weight-bold">الإجابة الصحيحة</label>
+                    <select asp-for="Answer" class="form-control custom-select">
+                        <option value="" disabled selected>-- اختر الخيار الصحيح --</option>
+                        <option value="A">الخيار أ</option>
+                        <option value="B">الخيار ب</option>
+                        <option value="C">الخيار ج</option>
+                        <option value="D">الخيار د</option>
+                    </select>
+                    <span asp-validation-for="Answer" class="text-danger small"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary mr-2">
+                        <i class="fas fa-save mr-2"></i>إنشاء السؤال
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left mr-2"></i>العودة إلى القائمة
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <!-- Font Awesome (latest version) -->
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function() {
+            // Enhanced client-side validation
+            $('#questionForm').submit(function(e) {
+                const selectedAnswer = $('#Answer').val();
+                const optionA = $('#q1').val().trim();
+                const optionB = $('#q2').val().trim();
+                const optionC = $('#q3').val().trim();
+                const optionD = $('#q4').val().trim();
+
+                if (!selectedAnswer) {
+                    alert('يرجى اختيار الإجابة الصحيحة');
+                    e.preventDefault();
+                    return;
+                }
+
+                // Check if all options are filled
+                if (!optionA || !optionB || !optionC || !optionD) {
+                    alert('يرجى تعبئة جميع الخيارات');
+                    e.preventDefault();
+                    return;
+                }
+
+                // Check if options are unique
+                const options = [optionA.toLowerCase(), optionB.toLowerCase(), optionC.toLowerCase(), optionD.toLowerCase()];
+                const uniqueOptions = [...new Set(options)];
+
+                if (uniqueOptions.length !== options.length) {
+                    alert('يجب أن تكون الخيارات فريدة');
+                    e.preventDefault();
+                }
+            });
+
+            // Add character counter for question text
+            $('textarea[maxlength]').each(function() {
+                const $this = $(this);
+                const maxLength = parseInt($this.attr('maxlength'));
+                $this.after(`<small class="form-text text-muted"><span id="counter">0</span>/${maxLength} حرف</small>`);
+
+                $this.on('input', function() {
+                    const currentLength = $this.val().length;
+                    $('#counter').text(currentLength);
+
+                    if (currentLength >= maxLength) {
+                        $('#counter').addClass('text-danger');
+                    } else {
+                        $('#counter').removeClass('text-danger');
+                    }
+                });
+            });
+        });
+    </script>
+}  

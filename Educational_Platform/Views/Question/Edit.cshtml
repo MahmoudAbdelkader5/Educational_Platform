@@ -1,0 +1,204 @@
+﻿@model Data_access_layer.model.Questions
+
+@{
+    ViewData["Title"] = "تعديل السؤال | Edit Question";
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+}
+
+<div class="container mt-4" dir="@(isRTL ? "rtl" : "ltr")">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="@(isRTL ? "text-right" : "text-left")">
+            <i class="fas fa-edit"></i> @(isRTL ? "تعديل السؤال" : "تعديل السؤال")
+        </h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas @(isRTL ? "fa-arrow-right" : "fa-arrow-left")"></i>
+            @(isRTL ? "العودة إلى القائمة" : "العودة إلى القائمة")
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <form asp-action="Edit" method="post" id="questionForm">
+                <input type="hidden" asp-for="QuestionID" />
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-question-circle"></i>
+                            @(isRTL ? "معلومات السؤال" : "معلومات السؤال")
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- Question Text -->
+                        <div class="form-group">
+                            <label asp-for="QuestionText" class="font-weight-bold">
+                                @(isRTL ? "نص السؤال" : "Question Text")
+                            </label>
+                            <textarea asp-for="QuestionText" class="form-control" rows="4"
+                                      placeholder="@(isRTL ? "أدخل نص السؤال هنا..." : "Enter question text here...")"></textarea>
+                            <span asp-validation-for="QuestionText" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Options -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-bold">@(isRTL ? "الخيارات" : "الخيارات")</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">@(isRTL ? "أ" : "A")</span>
+                                    </div>
+                                    <input asp-for="q1" class="form-control" placeholder="@(isRTL ? "أدخل الخيار الأول" : "Enter first option")" />
+                                </div>
+                                <span asp-validation-for="q1" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="font-weight-bold d-none d-md-block">&nbsp;</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">@(isRTL ? "ب" : "B")</span>
+                                    </div>
+                                    <input asp-for="q2" class="form-control" placeholder="@(isRTL ? "أدخل الخيار الثاني" : "Enter second option")" />
+                                </div>
+                                <span asp-validation-for="q2" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">@(isRTL ? "ج" : "C")</span>
+                                    </div>
+                                    <input asp-for="q3" class="form-control" placeholder="@(isRTL ? "أدخل الخيار الثالث" : "Enter third option")" />
+                                </div>
+                                <span asp-validation-for="q3" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-primary text-white">@(isRTL ? "د" : "D")</span>
+                                    </div>
+                                    <input asp-for="q4" class="form-control" placeholder="@(isRTL ? "أدخل الخيار الرابع" : "Enter fourth option")" />
+                                </div>
+                                <span asp-validation-for="q4" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Correct Answer -->
+                        <div class="form-group">
+                            <label asp-for="Answer" class="font-weight-bold">
+                                @(isRTL ? "الإجابة الصحيحة" : "الإجابة الصحيحة")
+                            </label>
+                            <select asp-for="Answer" class="form-control">
+                                <option value="">@(isRTL ? "-- اختر الإجابة الصحيحة --" : "-- Select Correct Answer --")</option>
+                                <option value="A">@(isRTL ? "أ: " : "A: ") @Model.q1</option>
+                                <option value="B">@(isRTL ? "ب: " : "B: ") @Model.q2</option>
+                                <option value="C">@(isRTL ? "ج: " : "C: ") @Model.q3</option>
+                                <option value="D">@(isRTL ? "د: " : "D: ") @Model.q4</option>
+                            </select>
+                            <span asp-validation-for="Answer" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="form-group d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> @(isRTL ? "حفظ التعديلات" : "حفظ التعديلات")
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas @(isRTL ? "fa-arrow-right" : "fa-arrow-left")"></i>
+                        @(isRTL ? "إلغاء والعودة" : "إلغاء والعودة")
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* RTL specific styles */
+        html[dir="rtl"] .input-group-prepend {
+            border-radius: 0 0.25rem 0.25rem 0 !important;
+        }
+
+        html[dir="rtl"] .input-group > .form-control {
+            border-radius: 0.25rem 0 0 0.25rem !important;
+        }
+
+        /* General styles */
+        .card {
+            border-radius: 0.5rem;
+        }
+
+        .card-header {
+            border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+    </style>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script>
+        $(document).ready(function() {
+            // Set the correct answer in the dropdown
+            $('#Answer').val('@Model.Answer');
+
+            // Form validation
+            $('#questionForm').submit(function(e) {
+                const selectedAnswer = $('#Answer').val();
+                const options = [
+                    $('#q1').val().trim(),
+                    $('#q2').val().trim(),
+                    $('#q3').val().trim(),
+                    $('#q4').val().trim()
+                ];
+
+                // Validate correct answer is selected
+                if (!selectedAnswer) {
+                    alert('@(isRTL ? "الرجاء اختيار الإجابة الصحيحة" : "Please select the correct answer")');
+                    e.preventDefault();
+                    return;
+                }
+
+                // Validate all options are filled
+                if (options.some(opt => !opt)) {
+                    alert('@(isRTL ? "الرجاء تعبئة جميع الخيارات" : "Please fill all options")');
+                    e.preventDefault();
+                    return;
+                }
+
+                // Validate options are unique (case insensitive)
+                const uniqueOptions = new Set(options.map(opt => opt.toLowerCase()));
+                if (uniqueOptions.size !== options.length) {
+                    alert('@(isRTL ? "يجب أن تكون الخيارات فريدة" : "Options must be unique")');
+                    e.preventDefault();
+                }
+            });
+
+            // Update option labels when inputs change
+            $('input[name^="q"]').on('input', function() {
+                const index = $(this).attr('name').substring(1);
+                const value = $(this).val();
+                $(`#Answer option[value="${index}"]`).text(
+                    `${String.fromCharCode(64 + parseInt(index))}: ${value}`
+                );
+            });
+        });
+    </script>
+}

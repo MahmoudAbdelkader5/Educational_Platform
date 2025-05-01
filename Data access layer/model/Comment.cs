@@ -22,7 +22,7 @@ namespace Data_access_layer.model
 
         public DateTime CommentDate { get; set; } 
 
-        public string Reply { get; set; }
+        public string? Reply { get; set; }
 
         // Navigation properties
         [ForeignKey(nameof(LessonID))]

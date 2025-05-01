@@ -1,6 +1,7 @@
 ﻿using Business_logic_layer.interfaces;
 using Data_access_layer.model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,5 +58,24 @@ namespace Business_logic_layer.Repository
         {
             _context.Update(item);
         }
+            public async Task<T> FindFirstAsync(
+        Expression<Func<T, bool>> predicate,
+        Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+         bool disableTracking = true)
+       {
+        IQueryable<T> query = _context.Set<T>();
+
+        if (disableTracking)
+        {
+            query = query.AsNoTracking();
+        }
+
+        if (include != null)
+        {
+            query = include(query);
+        }
+
+        return await query.FirstOrDefaultAsync(predicate);
+    }
     }
 }

@@ -1,0 +1,216 @@
+﻿@model IEnumerable<Data_access_layer.model.Exam>
+@{
+    ViewData["Title"] = "الامتحانات";
+    Layout = "_Layout";
+    var isRTL = true;
+}
+
+<div class="container-fluid py-4" dir="rtl">
+    <div class="card shadow-lg">
+        <!-- Enhanced Card Header with gradient -->
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="h4 mb-0 text-center text-white">
+                        <i class="fas fa-clipboard-list ml-2"></i>قائمة الامتحانات
+                    </h2>
+                </div>
+                <div class="col-auto">
+                    <a asp-action="Create" class="btn btn-light btn-rounded">
+                        <i class="fas fa-plus"></i> إنشاء امتحان جديد
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center rounded-lg">
+                    <i class="fas fa-info-circle fa-lg"></i> لا توجد امتحانات متاحة حالياً
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive rounded-lg">
+                    <table class="table table-hover table-bordered table-striped" id="examsTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th width="5%" class="text-center">#</th>
+                                <th width="25%">العنوان</th>
+                                <th width="20%">المادة</th>
+                                <th width="15%" class="text-center">المدة (دقيقة)</th>
+                                <th width="20%" class="text-center">الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var (item, index) in Model.Select((item, index) => (item, index + 1)))
+                            {
+                                <tr class="transition-all">
+                                    <th scope="row" class="text-center align-middle">@index</th>
+                                    <td class="align-middle font-weight-bold">@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td class="align-middle">
+                                        @if (item.Course != null)
+                                        {
+                                            <span class="badge badge-pill badge-primary py-2 px-3">@item.Course.Title</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">غير معين</span>
+                                        }
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <span class="badge badge-info p-2">@Html.DisplayFor(modelItem => item.duration)</span>
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <div class="d-flex justify-content-center">
+                                            <a asp-action="Details" asp-route-id="@item.Id"
+                                               class="btn btn-info btn-icon mx-1 rounded-circle"
+                                               data-toggle="tooltip"
+                                               title="تفاصيل الامتحان">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id"
+                                               class="btn btn-warning btn-icon mx-1 rounded-circle"
+                                               data-toggle="tooltip"
+                                               title="تعديل الامتحان">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-icon mx-1 rounded-circle"
+                                                        data-toggle="tooltip"
+                                                        title="حذف الامتحان"
+                                                        onclick="return confirm('هل أنت متأكد من حذف هذا الامتحان؟')">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        @if (Model.Any())
+        {
+            <div class="card-footer bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p class="mb-0 text-muted">
+                            <i class="fas fa-clipboard-check mr-2"></i> إجمالي الامتحانات: <strong class="text-primary">@Model.Count()</strong>
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(45, 206, 137, 0.05);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(45, 206, 137, 0.1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rounded-lg {
+            border-radius: 12px !important;
+        }
+
+        .btn-rounded {
+            border-radius: 50px !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize tooltips with animation
+            $('[data-toggle="tooltip"]').tooltip({
+                placement: 'top',
+                trigger: 'hover',
+                animation: true
+            });
+
+            // Print functionality
+            $('#printBtn').click(function () {
+                // Print only the table
+                var printContents = document.getElementById('examsTable').outerHTML;
+                var originalContents = document.body.innerHTML;
+                document.body.innerHTML =
+                    '<h2 class="text-center mb-4">قائمة الامتحانات</h2>' + printContents;
+                window.print();
+                document.body.innerHTML = originalContents;
+            });
+
+            // Enhanced export functionality
+            $('#exportBtn').click(function () {
+                // Create a temporary table for export
+                let table = document.getElementById("examsTable").cloneNode(true);
+
+                // Remove action buttons from export
+                $(table).find('td:last-child, th:last-child').remove();
+
+                // Create Excel file
+                let html = table.outerHTML;
+                let blob = new Blob(["\uFEFF" + html], {type: "application/vnd.ms-excel"});
+                let url = URL.createObjectURL(blob);
+
+                // Create download link
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = "الامتحانات_" + new Date().toLocaleDateString() + ".xls";
+                document.body.appendChild(a);
+                a.click();
+
+                // Clean up
+                setTimeout(function() {
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                }, 100);
+            });
+
+            // Auto-dismiss alerts with animation
+            setTimeout(function () {
+                $('.alert').fadeOut(500, function() {
+                    $(this).alert('close');
+                });
+            }, 5000);
+        });
+    </script>
+}

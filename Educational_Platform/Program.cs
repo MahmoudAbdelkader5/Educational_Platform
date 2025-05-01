@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Business_logic_layer.Service;
 
 namespace Educational_Platform
 {
@@ -52,6 +53,9 @@ namespace Educational_Platform
     options.ExpireTimeSpan = TimeSpan.FromDays(1);
     options.SlidingExpiration = true;
 });
+            builder.Services.Configure<EmailSettings>(
+            builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             // Configure request localization
             var supportedCultures = new[]
@@ -78,6 +82,7 @@ namespace Educational_Platform
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
+                builder.Services.AddTransient<IStartupFilter, EmailConfigurationValidator>();
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }

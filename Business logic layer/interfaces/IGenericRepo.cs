@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Update;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.EntityFrameworkCore.Update;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace Business_logic_layer.interfaces
         void UpdateAsync(T entity);
 
         void DeleteAsync(T entity);
+        Task<T> FindFirstAsync(
+        Expression<Func<T, bool>> predicate,
+        Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null,
+        bool disableTracking = true);
     }
 
 }

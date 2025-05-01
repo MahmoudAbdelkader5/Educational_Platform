@@ -11,22 +11,17 @@ namespace Data_access_layer.model
         public int Id { get; set; }  // Changed from ID to Id for consistency
 
         [ForeignKey(nameof(Course))]
-        public int CourseId { get; set; }  // Changed from CourseID to CourseId
+        public int ? CourseId { get; set; }  // Changed from CourseID to CourseId
 
         [Required]
         [StringLength(255)]
         public string Title { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Type { get; set; }  // Consider using an enum here if types are finite
+       
 
-        public int Duration { get; set; } // in minutes
+        public int duration { get; set; }
 
-        [Column(TypeName = "decimal(5, 2)")]
-        public decimal MaxGrade { get; set; }
 
-        public bool IsTimed { get; set; } = false;
 
 
         // Navigation properties

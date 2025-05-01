@@ -22,5 +22,10 @@ namespace Business_logic_layer.Repository
         {
             return await context.Students.CountAsync();
         }
+
+        void IstudentRepo.Update(Student student)
+        {
+            context.Students.Update(student);
+        }
     }
 }

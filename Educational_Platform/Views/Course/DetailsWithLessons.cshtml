@@ -1,438 +1,515 @@
 ﻿@model CourseDetailsViewModel
 @{
-    ViewData["Title"] = "تفاصيل الدورة مع الدروس";
-    Layout = "~/Views/Shared/lessonCourseDetailsLayout.cshtml";
-    bool isRTL = true;
+    ViewData["Title"] = "تفاصيل الدورة";
+    Layout = null;
     string baseVideoPath = "/files/video/";
     string baseSupportingPath = "/files/file/";
 }
 
-<div class="container my-5" dir="@(isRTL ? "rtl" : "ltr")">
-    <!-- Course Details Section -->
-    <div class="card shadow-sm mb-4 border-0 rounded-3 overflow-hidden">
-        <div class="row g-0">
-            <div class="col-md-4 bg-light">
-                @if (!string.IsNullOrEmpty(Model.Image))
-                {
-                    <img src="~/files/imgCourse/@Model.Image" alt="@Model.Title"
-                         class="img-fluid h-100 object-fit-cover"
-                         style="min-height: 250px; object-position: center;">
-                }
-                else
-                {
-                    <div class="d-flex align-items-center justify-content-center h-100" style="min-height: 250px;">
-                        <i class="fas fa-book-open fa-5x text-muted opacity-25"></i>
-                    </div>
-                }
-            </div>
-            <div class="col-md-8">
-                <div class="card-body p-4">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <h1 class="card-title text-primary fw-bold mb-3 fs-2">
-                            @Model.Title
-                        </h1>
-                        <div class="dropdown">
-                            <button class="btn btn-outline-secondary rounded-pill px-3 py-2 dropdown-toggle"
-                                    type="button" id="courseActions" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                            
-                        </div>
-                    </div>
-                    <p class="card-text text-muted mb-4 lh-lg">
-                        @Model.Description
-                    </p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span class="badge bg-info bg-opacity-10 text-dark fw-normal py-2 px-3 border-0">
-                            <i class="fas fa-users me-1 text-info"></i> 25 طالب
-                        </span>
-                        <span class="badge bg-light bg-opacity-25 text-dark fw-normal py-2 px-3 border">
-                            <i class="fas fa-clock me-1 text-secondary"></i> @Model.Lessons.Count درس
-                        </span>
-                        <span class="badge bg-light bg-opacity-25 text-dark fw-normal py-2 px-3 border">
-                            <i class="fas fa-star me-1 text-warning"></i> 4.8
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+    <style>
+        :root {
+            --sidebar-width: 320px;
+            --transition-speed: 0.3s;
+            --text-light: #ffffff;
+            --text-lighter: rgba(255, 255, 255, 0.8);
+            --header-height: 60px; /* Adjust this to match your header height */
+        }
 
-    <!-- Enhanced Video Player Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg rounded-3 overflow-hidden">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="videoModalTitle">عرض الدرس</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body p-0">
-                    <div class="ratio ratio-16x9 bg-dark position-relative">
-                        <video id="lessonVideoPlayer" controls class="w-100" preload="metadata">
-                            <source id="videoSource" src="" type="video/mp4">
-                            <track kind="captions" label="العربية" srclang="ar">
-                        </video>
-                        <div id="videoFallback" class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center text-white p-4 d-none">
-                            <i class="fas fa-exclamation-triangle fa-3x mb-3 text-warning"></i>
-                            <h5>متصفحك لا يدعم تشغيل الفيديو</h5>
-                            <p class="text-center mb-0">الرجاء استخدام أحد المتصفحات الحديثة مثل Chrome أو Firefox</p>
-                        </div>
-                        <div id="videoLoading" class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-dark bg-opacity-75 text-white d-none">
-                            <div class="spinner-border text-primary mb-3" role="status">
-                                <span class="visually-hidden">جاري التحميل...</span>
-                            </div>
-                            <p class="mb-0">جاري تحميل الفيديو، الرجاء الانتظار...</p>
-                        </div>
-                    </div>
-                    <div id="videoError" class="alert alert-danger m-3 rounded-2 d-none">
-                        <i class="fas fa-exclamation-circle me-2"></i>
-                        <span id="errorMessage"></span>
-                    </div>
-                </div>
-                <div class="modal-footer bg-light">
-                    <div class="w-100 d-flex justify-content-between align-items-center">
-                        <div id="videoProgress" class="text-muted small d-none">
-                            <span id="loadedProgress">0%</span> من <span id="totalSize">0MB</span>
-                        </div>
-                        <button type="button" class="btn btn-secondary px-4 rounded-2" data-bs-dismiss="modal">
-                            <i class="fas fa-times me-2"></i>إغلاق
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        body {
+            font-family: 'Cairo', sans-serif;
+          
+        }
 
-    <!-- Enhanced Lessons Section -->
-    <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
-            <h5 class="mb-0 fw-semibold">
-                <i class="fas fa-list-ul me-2"></i> دروس الدورة
-            </h5>
-           
+        .fo {
+            font-family: "Cairo", sans-serif;
+        }
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 100px;
+            right: 0;
+            height: calc(100vh - var(--header-height));
+            width: var(--sidebar-width);
+            background: #06BBCC;
+            overflow-y: auto;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+            calc(100vh - var(--header-height));
+        }
+
+            .sidebar.collapsed {
+                transform: translateX(var(--sidebar-width));
+            }
+
+            .sidebar .logo {
+                padding: 20px;
+                color: var(--text-light);
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin-bottom: 10px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidebar .list-group-item {
+                background: transparent;
+                color: var(--text-lighter);
+                border-right: 3px solid transparent;
+                padding: 12px 20px;
+                margin-bottom: 2px;
+                transition: all var(--transition-speed) ease;
+                text-align: right;
+            }
+
+                .sidebar .list-group-item:hover,
+                .sidebar .list-group-item.active {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: var(--text-light);
+                    border-right: 3px solid rgba(255, 255, 255, 0.5);
+                }
+
+                .sidebar .list-group-item.active {
+                    background: rgba(255, 255, 255, 0.2);
+                    border-right: 3px solid #fff;
+                    font-weight: 500;
+                }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            transition: margin-right var(--transition-speed) ease;
+            background-color: #f8f9fa;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+            .main-content.collapsed {
+                margin-right: 0;
+            }
+
+        /* Responsive fixes */
+        @@media (max-width: 991.98px) {
+            .sidebar
+
+        {
+            transform: translateX(var(--sidebar-width));
+            /* Hide sidebar by default on mobile */
+            display: none;
+        }
+
+        .sidebar.show-mobile {
+            /* Show when toggle button is clicked */
+            display: block;
+            transform: translateX(0);
+            width: 280px; /* Slightly narrower for mobile */
+            height: calc(100vh - var(--header-height));
+            top: var(--header-height);
+            right: 0;
+            z-index: 1050; /* Above content but below header */
+        }
+
+        .main-content {
+            margin-right: 0;
+            width: 100%;
+        }
+
+        /* Overlay when sidebar is open */
+        .sidebar-overlay {
+            position: fixed;
+            top: var(--header-height);
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1040;
+            display: none;
+        }
+
+            .sidebar-overlay.active {
+                display: block;
+            }
+
+        /* Adjust toggle button position */
+        #toggleSidebarBtn {
+            position: fixed;
+            top: calc(var(--header-height) + 10px);
+            right: 10px;
+            z-index: 1060;
+        }
+
+        }
+
+        /* Animation for lesson content */
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #lessonContent > .card-body > div:not(.d-none) {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    @Html.Partial("~/Views/Shared/_Header.cshtml")
+
+    <!-- Sidebar for Lessons -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo text-center text-white py-3 d-flex justify-content-start">
+            <i class="fas fa-book-open me-2 p-1"></i> 
+            <span class="logo-text">دروس الدورة </span>
         </div>
-        <div class="list-group list-group-flush">
-            @if (Model.Lessons != null && Model.Lessons.Any())
+        <div class="list-group rounded-0 border-0">
+            @foreach (var lesson in Model.Lessons)
             {
-                foreach (var lesson in Model.Lessons)
-                {
-                    <div class="list-group-item p-3 lesson-item border-0 border-bottom"
-                         data-video-url="@lesson.VideoURL"
-                         data-lesson-title="@lesson.Title"
-                         data-lesson-id="@lesson.ID">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <div class="d-flex align-items-center flex-grow-1">
-                                <div class="bg-light rounded p-2 me-3 d-flex align-items-center justify-content-center flex-shrink-0"
-                                     style="width: 50px; height: 50px;">
-                                    <i class="fas fa-play-circle text-primary fa-lg"></i>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <a href="#" class="text-decoration-none fw-bold text-dark hover-primary play-video d-block mb-1">
-                                        @lesson.Title
-                                    </a>
-                                    <div class="text-muted small d-flex flex-wrap mb-2">
-                                        <span class="me-3"><i class="far fa-clock me-1"></i> 15 دقيقة</span>
-                                        <span class="me-3"><i class="far fa-eye me-1"></i> فيديو</span>
-                                        <span><i class="far fa-calendar me-1"></i> @lesson.Create_date.ToString("yyyy/MM/dd")</span>
-                                    </div>
+                <a href="#" class="list-group-item list-group-item-action lesson-link border-0 rounded-0 py-3 px-4"
+                   data-lesson-id="@lesson.ID"
+                   data-video-url="@lesson.VideoURL"
+                   data-title="@lesson.Title"
+                   data-supporting-files="@lesson.SupportingFiles"
+                   data-task-file="@lesson.TaskFileName">
+                    <i class="fas fa-play-circle me-2"></i> @lesson.Title
+                </a>
+            }
+        </div>
+    </div>
+    <!-- Overlay (place this right after sidebar) -->
+    <div class="sidebar-overlay"></div>
 
-                                    <!-- Supporting Files Section -->
-                                    @if (!string.IsNullOrEmpty(lesson.SupportingFiles))
-                                    {
-                                        <div class="mt-2 p-3 bg-light rounded-2">
+
+    <!-- Main Content -->
+    <div class="main-content" style="direction:rtl;">
+        <div class="container-fluid px-xxl-4 px-lg-3 px-md-2 px-sm-1 py-4">
+            <button id="toggleSidebarBtn" class="btn btn-primary mb-3 d-lg-none">
+                <i class="fas fa-bars me-2"></i>عرض الدروس
+            </button>
+
+            <div class="row justify-content-center mx-0">
+                <div class="col-xxl-10">
+                    <!-- Course Details Section -->
+                    <div class="card shadow-sm mb-4 border-0 rounded-4 overflow-hidden">
+                        <div class="row g-0">
+                            <div class="col-md-4 bg-light position-relative">
+                                @if (!string.IsNullOrEmpty(Model.Image))
+                                {
+                                    <img src="~/files/imgCourse/@Model.Image" alt="@Model.Title"
+                                         class="img-fluid w-100 h-100 object-fit-cover"
+                                         style="min-height: 250px;">
+                                }
+                                else
+                                {
+                                    <div class="d-flex align-items-center justify-content-center h-100 bg-gradient-primary" style="min-height: 250px;">
+                                        <i class="fas fa-book-open fa-5x text-white opacity-25"></i>
+                                    </div>
+                                }
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <span class="badge bg-white text-primary fs-6 fw-semibold py-2 px-3 shadow-sm">
+                                        <i class="fas fa-clock me-2"></i>@Model.Duration
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body p-4 p-lg-5">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h1 class="card-title text-dark fw-bold mb-0 display-6">
+                                            @Model.Title
+                                        </h1>
+                                        <span class="badge bg-primary bg-opacity-10 text-white fs-6 fw-semibold py-2 px-3">
+                                            @Model.Lessons.Count دروس
+                                        </span>
+                                    </div>
+                                    <p class="card-text text-muted mb-4 lh-lg fs-5 text-wrap">
+                                        @Model.Description
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lesson Content Section -->
+                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+                        <div class="card-header bg-white border-0 py-3 px-4">
+                            <h3 class="text-dark mb-0 fw-bold fs-4" id="lessonTitle">اختر درسًا للبدء</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="card-body p-4">
+                                <!-- Video Player Section -->
+                                <div id="lessonVideo" class="mb-5 d-none">
+                                    <div class="ratio ratio-16x9 rounded-3 overflow-hidden shadow-sm bg-black">
+                                        <video controls class="w-100" id="videoPlayer">
+                                            <source id="videoSource" src="" type="video/mp4">
+                                            متصفحك لا يدعم تشغيل الفيديو.
+                                        </video>
+                                    </div>
+                                </div>
+
+                            <!-- Default State (No Lesson Selected) -->
+                            <div id="defaultContent" class="text-center py-5">
+                                <div class="mb-4">
+                                    <i class="fas fa-play-circle text-muted opacity-10" style="font-size: 5rem;"></i>
+                                </div>
+                                <h4 class="text-muted mb-3">اختر درسًا من القائمة الجانبية</h4>
+                                <p class="text-muted mb-4">اختر أي درس لعرض محتوى الفيديو والملفات والمهام الخاصة به.</p>
+                            </div>
+
+                                <!-- Supporting Files Section -->
+                                <div class="alert alert-primary border-0 shadow-sm list-group-item p-3">
+                                    <div id="lessonFiles" class="d-none">
+                                        <!-- Title and file in one row -->
+                                        <div class="d-flex justify-content-between align-items-start mb-3" style="direction: rtl">
+                                            <!-- Title and description -->
+                                            <div>
+                                                <h5 class="fw-bold m-0 d-flex align-items-center fo">
+                                                    <i class="fas fa-paperclip ms-2 text-primary "></i>الملفات المساندة
+                                                </h5>
+                                                <small class="text-muted">قم بتحميل الملف المساند، فهو يحتوي على تلخيص لشرح المدرس يساعدك على مراجعة وفهم الدرس بسهولة</small>
+                                            </div>
+
+                                         
+                                        </div>
+
+                                        <!-- Additional files would appear here -->
+                                        <div class="row g-3 mx-0" id="supportingFilesList" style="direction: rtl">
+                                            <!-- More files would be dynamically inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Task File Section -->
+                                <div id="lessonTask" class="d-none">
+                                    <div class="alert alert-primary border-0 shadow-sm list-group-item">
+                                        <div class="d-flex justify-content-between align-items-center" style="direction: rtl">
                                             <div class="d-flex align-items-center">
-                                                <i class="fas fa-paperclip text-muted me-2"></i>
+                                                <i class="fas fa-tasks fa-2x text-primary ms-3"></i>
                                                 <div>
-                                                    <a href="@(baseSupportingPath + lesson.SupportingFiles)"
-                                                       class="text-decoration-none text-primary fw-bold"
-                                                       download="@($"Lesson_{lesson.ID}_SupportingFile{System.IO.Path.GetExtension(lesson.SupportingFiles)}")">
-                                                        @lesson.SupportingFiles
-                                                    </a>
-                                                    <div class="text-muted small mt-1">
-                                                        <span class="me-2"><i class="fas fa-file me-1"></i> @System.IO.Path.GetExtension(lesson.SupportingFiles).ToUpper().TrimStart('.')</span>
-                                                        @if (ViewBag.FileSizes != null && ViewBag.FileSizes.ContainsKey(lesson.SupportingFiles))
-                                                        {
-                                                            <span><i class="fas fa-download me-1"></i> @ViewBag.FileSizes[lesson.SupportingFiles]</span>
-                                                        }
-                                                    </div>
+                                                    <div class="fw-bold fo">واجب الدرس</div>
+                                                    <small class="text-muted d-block">قم بتنزيل ملف الواجب وإكمال الواجب لهذا الدرس</small>
                                                 </div>
                                             </div>
+                                            <a id="taskFileLink" href="#" class="btn btn-primary rounded-pill shadow-sm fo" download>
+                                                <i class="fas fa-download me-2"></i>تنزيل المهمة
+                                            </a>
                                         </div>
-                                    }
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="dropdown flex-shrink-0">
-                                <button class="btn btn-sm btn-outline-secondary rounded-circle" type="button"
-                                        id="lessonActions-@lesson.ID" data-bs-toggle="dropdown"
-                                        aria-expanded="false" style="width: 36px; height: 36px;">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-sm rounded-2 border-0"
-                                    aria-labelledby="lessonActions-@lesson.ID">
-                                    <li><a class="dropdown-item py-2" asp-action="Edit" asp-route-id="@lesson.ID"><i class="fas fa-edit me-2 text-primary"></i>تعديل</a></li>
-                                    <li><a class="dropdown-item py-2 text-danger" href="#" data-bs-toggle="modal" data-bs-target="#deleteLessonModal" data-lesson-id="@lesson.ID"><i class="fas fa-trash me-2"></i>حذف</a></li>
-                                    <li><a class="dropdown-item py-2" href="#"><i class="fas fa-share me-2 text-info"></i>مشاركة</a></li>
-                                </ul>
-                            </div>
+                        
+                                <!-- Comment Section -->
+                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+                                    <div class="card-header bg-white border-0 py-3 px-4">
+                                        <h3 class="text-dark mb-0 fw-bold fs-4 fo">التعليقات</h3>
+                                    </div>
+										<div class="card-body p-4">
+											
+                                        <!-- Display Comments -->
+                                        <div id="commentsList">
+                                            @if (Model.Comments != null && Model.Comments.Any())
+                                            {
+                                                var lessonComments = Model.Comments.Where(c => c.LessonID == Model.ID).ToList();
+                                                if (lessonComments.Any())
+                                                {
+                                                    foreach (var comment in lessonComments)
+                                                    {
+                                                        <div class="mb-3">
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="~/files/studentImage/@(comment.StudentPhoto ?? "/img/alaaphote.jpg")"
+                                                                     alt="@comment.StudentName"
+                                                                     class="rounded-circle me-3"
+                                                                     style="width: 50px; height: 50px; object-fit: cover;" . />
+                                                                <div>
+                                                                    <h6 class="mb-0 fo">@comment.StudentName</h6>
+                                                                    <small class="text-muted">@comment.CommentDate.ToString("g")</small>
+                                                                </div>
+                                                            </div>
+                                                            <p class="mt-2">@comment.Content</p>
+                                                            <hr />
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p class="text-muted">لا توجد تعليقات بعد. كن أول من يعلق!</p>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p class="text-muted">لا توجد تعليقات بعد. كن أول من يعلق!</p>
+                                            }
+
+                                        </div>
+
+
+                                        <!-- Add Comment Form -->
+                                        <form id="addCommentForm" method="post" action="/Course/AddComment">
+                                            <input type="hidden" name="LessonID" value="@Model.ID" />
+                                            <div class="mb-3">
+                                                <textarea class="form-control" name="Content" rows="3" placeholder="اكتب تعليقك هنا..." required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary fo">نشر التعليق</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                          @*       <!-- Send Feedback Button -->
+                                <div class="d-flex justify-content-start mt-3">
+                                    <a href="mailto:AddMailHere?subject=ملاحظات على الدرس&body=عزيزي المدرّس،%0D%0A%0D%0A"
+                                       class="btn btn-outline-success px-4 py-2 rounded-pill fw-semibold shadow-sm">
+                                        <i class="fas fa-envelope me-2"></i>إرسال ملاحظات
+                                    </a>
+                                </div> *@
+                          
                         </div>
                     </div>
-                }
-            }
-            else
-            {
-                <div class="text-center py-5">
-                    <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
-                    <h5 class="text-muted">لا توجد دروس متاحة</h5>
-                    <p class="text-muted">يمكنك إضافة دروس جديدة باستخدام زر "إضافة درس" بالأعلى</p>
                 </div>
-            }
-        </div>
-    </div>
-</div>
-
-<!-- Delete Lesson Confirmation Modal -->
-<div class="modal fade" id="deleteLessonModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-3">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title"><i class="fas fa-exclamation-triangle me-2"></i>تأكيد الحذف</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>هل أنت متأكد أنك تريد حذف هذا الدرس؟ هذا الإجراء لا يمكن التراجع عنه.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary rounded-2" data-bs-dismiss="modal">إلغاء</button>
-                <form id="deleteLessonForm" method="post">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-danger rounded-2">
-                        <i class="fas fa-trash me-1"></i>حذف
-                    </button>
-                </form>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
     <script>
-        $(document).ready(function() {
-            // Initialize video player and modal
-            const videoModal = new bootstrap.Modal('#videoModal');
-            const videoPlayer = document.getElementById('lessonVideoPlayer');
-            const deleteLessonModal = new bootstrap.Modal('#deleteLessonModal');
-            let currentLessonId = null;
+                    $(document).ready(function() {
+                // Toggle sidebar on button click
+                $('#toggleSidebarBtn').click(function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    $('#sidebar').toggleClass('show-mobile');
+                    $('.sidebar-overlay').toggleClass('active');
 
-            // Handle video lesson click
-            $('.play-video').click(function(e) {
-                e.preventDefault();
-                const lessonItem = $(this).closest('.lesson-item');
-                const videoUrl = lessonItem.data('video-url');
-                const lessonTitle = lessonItem.data('lesson-title');
-                const fullVideoPath = '@baseVideoPath' + encodeURIComponent(videoUrl);
-
-                // Reset UI
-                $('#videoError').addClass('d-none');
-                $('#videoFallback').addClass('d-none');
-                $('#videoLoading').removeClass('d-none');
-                $('#videoProgress').removeClass('d-none');
-
-                // Set video source and title
-                $('#videoSource').attr('src', fullVideoPath);
-                $('#videoModalTitle').text(lessonTitle);
-                videoModal.show();
-
-                // Load video
-                videoPlayer.load();
-            });
-
-            // Video event listeners
-            videoPlayer.addEventListener('loadedmetadata', function() {
-                $('#videoLoading').addClass('d-none');
-                const fileSize = (videoPlayer.duration * 500).toFixed(2); // Approximate size calculation
-                $('#totalSize').text(fileSize + 'MB');
-            });
-
-            videoPlayer.addEventListener('progress', function() {
-                if (videoPlayer.buffered.length > 0) {
-                    const bufferedEnd = videoPlayer.buffered.end(videoPlayer.buffered.length - 1);
-                    const percent = (bufferedEnd / videoPlayer.duration) * 100;
-                    $('#loadedProgress').text(Math.round(percent) + '%');
-                }
-            });
-
-            videoPlayer.addEventListener('error', function() {
-                $('#videoLoading').addClass('d-none');
-                $('#videoFallback').removeClass('d-none');
-
-                let errorMessage = 'حدث خطأ أثناء تحميل الفيديو';
-                if (videoPlayer.error) {
-                    switch(videoPlayer.error.code) {
-                        case 1:
-                            errorMessage = 'تم إلغاء تحميل الفيديو';
-                            break;
-                        case 2:
-                            errorMessage = 'خطأ في الشبكة، الرجاء التحقق من اتصال الإنترنت';
-                            break;
-                        case 3:
-                            errorMessage = 'خطأ في فك تشفير الفيديو';
-                            break;
-                        case 4:
-                            errorMessage = 'تنسيق الفيديو غير مدعوم أو الملف تالف';
-                            break;
+                    // Update button icon
+                    if ($('#sidebar').hasClass('show-mobile')) {
+                        $(this).html('<i class="fas fa-times me-2"></i> إغلاق');
+                    } else {
+                        $(this).html('<i class="fas fa-bars me-2"></i> عرض الدروس');
                     }
-                }
+                });
 
-                $('#errorMessage').text(errorMessage);
-                $('#videoError').removeClass('d-none');
-            });
+                // Close sidebar when clicking overlay
+                $('.sidebar-overlay').click(function() {
+                    $('#sidebar').removeClass('show-mobile');
+                    $(this).removeClass('active');
+                    $('#toggleSidebarBtn').html('<i class="fas fa-bars me-2"></i> عرض الدروس');
+                });
 
-            videoPlayer.addEventListener('canplay', function() {
-                $('#videoLoading').addClass('d-none');
-                videoPlayer.play().catch(e => {
-                    console.log('Autoplay prevented, user interaction required');
+                // Close sidebar when clicking outside
+                $(document).click(function(e) {
+                    if (!$(e.target).closest('#sidebar').length &&
+                        !$(e.target).is('#toggleSidebarBtn')) {
+                        $('#sidebar').removeClass('show-mobile');
+                        $('.sidebar-overlay').removeClass('active');
+                        $('#toggleSidebarBtn').html('<i class="fas fa-bars me-2"></i> عرض الدروس');
+                    }
                 });
             });
+                    let touchStartX = 0;
+            let touchEndX = 0;
 
-            // Delete lesson modal handling
-            $('#deleteLessonModal').on('show.bs.modal', function(event) {
-                const button = $(event.relatedTarget);
-                currentLessonId = button.data('lesson-id');
-                $('#deleteLessonForm').attr('action', '/Lessons/Delete/' + currentLessonId);
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+
+            function handleSwipe() {
+                if (touchStartX - touchEndX > 100) { // Swipe left to close
+                    $('#sidebar').removeClass('show-mobile');
+                    $('.sidebar-overlay').removeClass('active');
+                }
+            }
+        $(document).ready(function () {
+            // Handle lesson click
+            $('.lesson-link').click(function (e) {
+                e.preventDefault();
+
+                // Get lesson data
+                const lessonId = $(this).data('lesson-id');
+                const videoUrl = $(this).data('video-url');
+                const title = $(this).data('title');
+                const supportingFiles = $(this).data('supporting-files');
+                const taskFile = $(this).data('task-file');
+
+                // Update active state in sidebar
+                $('.lesson-link').removeClass('active');
+                $(this).addClass('active');
+
+                // Update lesson title
+                $('#lessonTitle').text(title);
+                $('#defaultContent').addClass('d-none');
+
+                // Update video
+                if (videoUrl) {
+                    $('#videoSource').attr('src', '@baseVideoPath' + videoUrl);
+                    $('#lessonVideo').removeClass('d-none');
+                    $('#videoPlayer')[0].load(); // Reload the video
+                } else {
+                    $('#lessonVideo').addClass('d-none');
+                }
+
+                // Update supporting files
+                if (supportingFiles) {
+                    const files = supportingFiles.split(',');
+                    const fileCards = files.map(file => `
+                        <div class="col-md-4">
+                            <div class="card border-0 shadow-sm h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="fas fa-file-pdf text-danger me-3 fs-3"></i>
+                                    <div class="overflow-hidden">
+                                        <h6 class="mb-1 text-truncate">${file}</h6>
+                                        <small class="text-muted">PDF Document</small>
+                                    </div>
+                                    <a href="@baseSupportingPath${file}" download class="ms-auto btn btn-sm btn-outline-primary rounded-circle">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                    $('#supportingFilesList').html(fileCards);
+                    $('#lessonFiles').removeClass('d-none');
+                } else {
+                    $('#lessonFiles').addClass('d-none');
+                }
+
+                // Update task file
+                if (taskFile) {
+                    $('#taskFileLink').attr('href', '@baseSupportingPath' + taskFile);
+                    $('#lessonTask').removeClass('d-none');
+                } else {
+                    $('#lessonTask').addClass('d-none');
+                }
+
+                // Update the hidden LessonID field in the comment form
+                $('#LessonID').val(lessonId);
             });
 
-            // Hover effects for lesson items
-            $('.lesson-item').hover(
-                function() {
-                    $(this).css('background-color', 'rgba(13, 110, 253, 0.05)');
-                },
-                function() {
-                    $(this).css('background-color', '');
-                }
-            );
+            // Sidebar toggle
+            $('#toggleSidebarBtn').click(function () {
+                $('#sidebar').toggleClass('collapsed');
+                $('.main-content').toggleClass('collapsed');
 
-            // Modal clean up
-            $('#videoModal').on('hidden.bs.modal', function() {
-                videoPlayer.pause();
-                videoPlayer.currentTime = 0;
-                $('#videoSource').attr('src', '');
+                // Update button icon
+                const icon = $(this).find('i');
+                if ($('#sidebar').hasClass('collapsed')) {
+                    icon.removeClass('fa-times').addClass('fa-bars');
+                    $(this).html('<i class="fas fa-bars me-2"></i>عرض الدروس');
+                } else {
+                    icon.removeClass('fa-bars').addClass('fa-times');
+                    $(this).html('<i class="fas fa-times me-2"></i>إخفاء الدروس');
+                }
             });
         });
     </script>
-}
-
-<style>
-    /* Custom styles */
-    .hover-primary:hover {
-        color: #0d6efd !important;
-        text-decoration: underline;
-    }
-
-    .object-fit-cover {
-        object-fit: cover;
-    }
-
-    .card {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-        }
-
-    .badge {
-        transition: all 0.2s ease;
-    }
-
-        .badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        }
-
-    .dropdown-menu {
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        border: none !important;
-    }
-
-    .dropdown-item {
-        transition: all 0.2s ease;
-        border-radius: 0.25rem;
-        margin: 0.125rem;
-    }
-
-        .dropdown-item:hover {
-            background-color: rgba(13, 110, 253, 0.1);
-        }
-
-    /* Supporting files styles */
-    .file-download-card {
-        border-left: 3px solid #0d6efd;
-        transition: all 0.2s ease;
-    }
-
-        .file-download-card:hover {
-            background-color: rgba(13, 110, 253, 0.05);
-        }
-
-    .file-icon {
-        font-size: 1.2rem;
-        margin-right: 0.5rem;
-    }
-
-    .file-size {
-        font-size: 0.8rem;
-        color: #6c757d;
-    }
-
-    /* RTL specific styles */
-    [dir="rtl"] .dropdown-menu {
-        text-align: right;
-    }
-
-    [dir="rtl"] .me-1 {
-        margin-left: 0.25rem !important;
-        margin-right: 0 !important;
-    }
-
-    [dir="rtl"] .me-2 {
-        margin-left: 0.5rem !important;
-        margin-right: 0 !important;
-    }
-
-    [dir="rtl"] .me-3 {
-        margin-left: 1rem !important;
-        margin-right: 0 !important;
-    }
-
-    [dir="rtl"] .ms-auto {
-        margin-right: auto !important;
-        margin-left: 0 !important;
-    }
-
-    [dir="rtl"] .modal-header .btn-close {
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    [dir="rtl"] .dropdown-item:hover {
-        padding-right: 1rem;
-        padding-left: 1.5rem;
-    }
-
-    /* Responsive adjustments */
-    @@media (max-width: 767.98px) {
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .list-group-item {
-            padding: 1rem;
-        }
-
-        .modal-dialog {
-            margin: 0.5rem;
-        }
-    }
-</style>
+</body>
+</html>

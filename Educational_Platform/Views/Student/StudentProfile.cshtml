@@ -1,118 +1,401 @@
-﻿@model StudentProfileViewModel
+﻿@model StudentProfileViewModel;
+
 @{
     ViewData["Title"] = "Student Profile";
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Educational Platform</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .alert {
-            font-family: "Cairo", sans-serif;
-            font-size: 1rem;
-            margin-top: 20px;
-        }
-
-
-        .card {
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            }
-
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 10px 10px 0 0;
-            padding: 15px;
-            font-size: 18px;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-            .btn-primary:hover {
-                background-color: #0056b3;
-            }
-
-        .profile-picture {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-    <!-- Include Header -->
     @Html.Partial("~/Views/Shared/_Header.cshtml")
-    <div class="container py-4">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <!-- Profile Picture with Upload Option -->
-                        <div class="position-relative d-inline-block">
-                            @if (string.IsNullOrEmpty(Model.CurrentProfilePicture))
-                            {
-                                <img src="~/files/studentImage/مجهول.png"
-                                     class="profile-picture mb-3"
-                                     alt="Unknown Profile Picture"
-                                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
-                            }
-                            else
-                            {
-                                <img src="~/files/studentImage/@Model.CurrentProfilePicture"
-                                     class="profile-picture mb-3"
-                                     alt="Profile Picture"
-                                     onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
-                            }
-                          
+
+}
+<style>
+    .fo {
+        font-family: "Cairo", sans-serif;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+
+        /* Optional: Add hover effect */
+        .profile-image:hover {
+            transform: scale(1.03);
+            transition: transform 0.3s ease;
+        }
+
+    .student-info {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        transition: all 0.3s ease;
+    }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+        }
+
+    .progress-circle {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+        .progress-circle::before {
+            content: "";
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+        }
+
+    .progress-value {
+        position: relative;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #4e73df;
+    }
+
+    .stat-card {
+        transition: all 0.3s ease;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+    /* Responsive styles */
+    @@media (max-width: 991.98px) {
+        .sidebar-responsive
+
+    {
+        width: 100% !important;
+        position: relative !important;
+        top: auto !important;
+        margin-top: 20px;
+            order: -1 !important;
+    }
+
+        .main-content {
+            order: 1 !important;
+        }
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .student-info {
+        text-align: center !important;
+    }
+
+        .student-info .d-flex {
+            justify-content: center !important;
+        }
+
+    /* Center content on mobile */
+    .main-content {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    }
+
+    @@media (max-width: 767.98px) {
+        .progress-circle
+
+    {
+        width: 100px;
+        height: 100px;
+    }
+
+    .progress-circle::before {
+        width: 70px;
+        height: 70px;
+    }
+
+    .progress-value {
+        font-size: 1.2rem;
+    }
+
+    /* Ensure student info is always visible */
+    .sidebar-responsive .card {
+        display: block !important;
+    }
+
+    }
+</style>
+
+<div class="container py-4">
+    <div class="row">
+        <!-- Sidebar - responsive -->
+        <div class="col-12 col-md-4 order-md-2 sidebar-responsive mb-5">
+            <div class="card shadow-sm sticky-md-top" style="top: 20px;">
+                <div class="card-body text-center">
+                    @if (string.IsNullOrEmpty(Model.CurrentProfilePicture))
+                    {
+                        <img src="~/files/studentImage/مجهول.png"
+                             class="profile-image rounded-circle border border-4 border-light shadow"
+                             alt="صورة الطالب"
+                             onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
+                    }
+                    else
+                    {
+                        <img src="~/files/studentImage/@Model.CurrentProfilePicture"
+                             class="profile-image rounded-circle border border-4 border-light shadow"
+                             alt="صورة الطالب"
+                             onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
+                    }
+
+                    <!-- Student Info -->
+                    <h4 class="mb-2 fo">@Model.FirstName @Model.LastName</h4>
+
+                    <div class="student-info text-start mt-4" style="direction: rtl;">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-envelope me-2 text-primary p-2"> </i>
+                            <span>الايميل الالكتروني: @Model.Email</span>
                         </div>
 
-                        <!-- Student Info -->
-                        <h4 class="mb-1">@Model.FirstName @Model.LastName</h4>
-                        <p class="text-muted mb-1"><i class="fas fa-envelope"></i> @Model.Email</p>
-                        <p class="text-muted"><i class="fas fa-graduation-cap"></i> Grade Level: @Model.GradeLevel</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-user-graduate me-2 text-primary p-2"> </i>
+                            <span>الصف: @Model.GradeLevel</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-phone-alt me-2 text-primary p-2"></i>
+                            <span>رقم الهاتف: @Model.PhoneNumber</span>
+                        </div>
+                        @Html.AntiForgeryToken()
+                        <!-- edit student info -->
+                        <div class="d-flex  justify-content-center mb-3">
+                            <a asp-controller="Student" asp-action="UpdateProfile"  class="btn btn-primary fo">
+                                <i class="fas fa-edit me-2 "></i> تعديل المعلومات الشخصية
+                            </a>
+                        </div>
 
-                      
+                       
                     </div>
+
+                    
                 </div>
             </div>
         </div>
+        <!-- Sidebar - responsive -->
+        <!-- Main Content -->
+        <div class="col-md-8 order-md-1 main-content">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 fo text-white" style="direction:rtl;">
+                        <i class="fas fa-chart-line me-2"></i> مستوى تقدمك
+                    </h5>
+                </div>
 
-    <!-- Include Footer -->
-    <!-- Scripts -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</body>
-</html>
+                <div class="card-body">
+                    <p class="text-center mt-3 fo text-primary" style="font-weight: bold; direction: rtl;">
+                        ⭐ كل لحظة تركّز فيها دلوقتي، بتقربك من حلمك الكبير... اجتهد، وخلّي تعبك يوصلك لهدفك ⭐
+                    </p>
+                    <hr />
+
+                    <div class="row text-center mt-5 ">
+                        <!-- Progress Item 1 -->
+                        <div class="col-md-4 mb-4 ">
+
+                            <div class="progress-circle" style=" background: conic-gradient(#4e73df var(--progress), #e9ecef var(--progress));" data-progress="91">
+                                <span class="progress-value" style="color:#4e73df ">91%</span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#80878a">متوسط النتائج التي حصلت عليها</h6>
+                        </div>
+
+                        <!-- Progress Item 2 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="progress-circle" style=" background: conic-gradient(#ee3d5a var(--progress), #e9ecef var(--progress));" data-progress="13">
+                                <span class="progress-value" style="color:#ee3d5a">13%</span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#80878a">عدد الفيديوهات التي شاهدتها</h6>
+                        </div>
+
+                        <!-- Progress Item 3 -->
+                        <div class="col-md-4 mb-4">
+                            <div class="progress-circle" style=" background: conic-gradient(#a750f3 var(--progress), #e9ecef var(--progress));" data-progress="31">
+                                <span class="progress-value" style="color:#a750f3">31%</span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#80878a">عدد الامتحانات التي اجريتها</h6>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <!-- Enrolled Courses Section -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 text-white fo" style="direction:rtl;">
+                        <i class="fas fa-book-open me-2"></i> الدورات المسجلة
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    @if (Model.EnrolledCourses != null && Model.EnrolledCourses.Any())
+                    {
+                        <ul class="list-group">
+                            @foreach (var course in Model.EnrolledCourses)
+                            {
+                                <div class="list-group-item d-flex justify-content-between align-items-center" style="direction:rtl">
+
+                                    <div>
+                                        <h6 class="mb-0 fo">@course.Title</h6>
+                                        <small class="text-muted">@course.Description</small>
+                                    </div>
+                                    <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID"
+                                       class="btn btn-sm btn-primary fo">
+                                        عرض محتوى الكورس
+                                    </a>
+                                    <a asp-controller="Student" asp-action="AvailableExams" asp-route-courseId="@course.ID"
+                                       class="btn btn-sm btn-primary fo">
+                                        الامتحانات المتاحة
+                                    </a>
+                                </div>
+
+                            }
+                    
+                        </ul>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center" style="direction:rtl;">لا توجد دورات مسجلة</p>
+                    }
+                </div>
+            </div>
+            <!-- student grades table -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 text-white fo" style="direction:rtl;">
+                        <i class="fas fa-clipboard-check me-2"></i> نتائج الواجبات
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    @* @if (Model.Assignments != null && Model.Assignments.Any())
+                    { *@
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped" style="direction:rtl;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-end">عنوان الواجب</th>
+                                    <th class="text-center">الدرجة</th>
+                                    <th class="text-center">عدد الأسئلة</th>
+                                    <th class="text-center">الإجابات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*  @foreach (var assignment in Model.Assignments)
+                                    { *@
+                                <tr>
+                                    <td class="text-end">@* @assignment. *@Title</td>
+                                    <td class="text-center">@* @assignment. *@Grade/@* @assignment. *@TotalGrade</td>
+                                    <td class="text-center">@* @assignment. *@QuestionsCount</td>
+                                    <td class="text-center">
+                                        <a href="@* @assignment. *@SolutionFileUrl" class="btn btn-sm btn-outline-primary" target="_blank">
+                                            <i class="fas fa-file-pdf me-1"></i> عرض الإجابة
+                                        </a>
+                                    </td>
+                                </tr>
+                                @* } *@
+                            </tbody>
+                        </table>
+                    </div>
+                    @*   }
+                    else
+                    {
+                        <p class="text-muted text-center">لا توجد واجبات متاحة</p>
+                    } *@
+                </div>
+            </div>
+            <!-- Exams Results Table -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0 text-white fo" style="direction:rtl;">
+                        <i class="fas fa-file-alt me-2"></i> نتائج الامتحانات
+                    </h5>
+                </div>
+
+                <div class="card-body">
+                    @* @if (Model.Exams != null && Model.Exams.Any())
+                    { *@
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped" style="direction:rtl;">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="text-end">عنوان الامتحان</th>
+                                    <th class="text-center">الدرجة</th>
+                                    <th class="text-center">عدد الأسئلة</th>
+                                    <th class="text-center">الإجابات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*   @foreach (var exam in Model.Exams)
+                                    {
+                                        *@ <tr>
+                                    <td class="text-end">@* @exam. *@Title</td>
+                                    <td class="text-center">@* @exam. *@Grade/@* @exam. *@TotalGrade</td>
+                                    <td class="text-center">@* @exam. *@QuestionsCount</td>
+                                    <td class="text-center">
+                                        <a href="@* @exam. *@SolutionFileUrl" class="btn btn-sm btn-outline-success" target="_blank">
+                                            <i class="fas fa-file-pdf me-1"></i> عرض الإجابة
+                                        </a>
+                                    </td>
+                                </tr>
+                                @* } *@
+                            </tbody>
+                        </table>
+                    </div>
+                    @*    }
+                    else
+                    {
+                        <p class="text-muted text-center">لا توجد امتحانات متاحة</p>
+                    } *@
+                </div>
+            </div>
+        </div>
+           
+
+        </div>
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const circles = document.querySelectorAll('.progress-circle');
+        circles.forEach(circle => {
+            const progress = circle.getAttribute('data-progress');
+            circle.style.setProperty('--progress', `${progress}%`);
+        });
+    });
+
+
+
+</script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

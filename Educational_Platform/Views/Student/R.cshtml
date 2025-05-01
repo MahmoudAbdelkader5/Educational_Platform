@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "نتيجة الامتحان";
+}
+@Model.ErrorMessage
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header bg-primary text-white">
+            <h3>نتيجة الامتحان</h3>
+        </div>
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="p-3 bg-light">
+                        <h5>الدرجة الكلية</h5>
+                        <p class="display-4">@Model.TotalScore</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-light">
+                        <h5>الإجابات الصحيحة</h5>
+                        <p class="display-4">@Model.CorrectAnswers</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 bg-light">
+                        <h5>إجمالي الأسئلة</h5>
+                        <p class="display-4">@Model.TotalQuestions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

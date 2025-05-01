@@ -16,18 +16,23 @@ namespace Business_logic_layer.Repository
             _context = context;
         }
 
-        public  async Task<int> GetCountAsync()
+        public async Task<int> GetCountAsync()
         {
             return await _context.Lessons.CountAsync();
         }
 
-        
+
         public IQueryable<Lesson> searchCourseBytitle(string search)
         {
             return _context.Lessons
                 .Where(l => l.Title.ToLower().StartsWith(search.ToLower()));
         }
+        public async Task<int> GetCourseIdByLessonIdAsync(int lessonId)
+        {
+            var lesson = await _context.Lessons.FirstOrDefaultAsync(l => l.ID == lessonId);
+            return lesson?.CourseID ?? 0;
+        }
 
-      
+
     }
 }

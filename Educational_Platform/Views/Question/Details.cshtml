@@ -1,0 +1,203 @@
+﻿@model Data_access_layer.model.Questions
+
+@{
+    ViewData["Title"] = "تفاصيل السؤال | Question Details";
+    var isRTL = CultureInfo.CurrentCulture.Name.StartsWith("ar");
+}
+
+<div class="container mt-4" dir="@(isRTL ? "rtl" : "ltr")">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="@(isRTL ? "text-right" : "text-left")">
+            <i class="fas fa-info-circle"></i> @(isRTL ? "تفاصيل السؤال" : "تفاصيل السؤال")
+        </h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas @(isRTL ? "fa-arrow-right" : "fa-arrow-left")"></i>
+            @(isRTL ? "العودة إلى القائمة" : "العودة إلى القائمة")
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-question-circle"></i>
+                        @(isRTL ? "معلومات السؤال" : "معلومات السؤال")
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Question ID -->
+                    <div class="row mb-3">
+                        <div class="col-md-3 font-weight-bold">
+                            @(isRTL ? "معرف السؤال:" : "الكود:")
+                        </div>
+                        <div class="col-md-9">
+                            @Model.QuestionID
+                        </div>
+                    </div>
+
+                    <!-- Question Text -->
+                    <div class="row mb-3">
+                        <div class="col-md-3 font-weight-bold">
+                            @(isRTL ? "نص السؤال:" : "نص السؤال")
+                        </div>
+                        <div class="col-md-9">
+                            <div class="border p-3 bg-light rounded">
+                                @Model.QuestionText
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="row mb-3">
+                        <div class="col-md-3 font-weight-bold">
+                            @(isRTL ? "الخيارات:" : "الخيارات")
+                        </div>
+                        <div class="col-md-9">
+                            <div class="list-group">
+                                <div class="list-group-item @(Model.Answer == "A" ? "list-group-item-success" : "")">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>@(isRTL ? "أ:" : "A:")</strong> @Model.q1</span>
+                                        @if (Model.Answer == "A")
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> @(isRTL ? "صحيح" : "Correct")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="list-group-item @(Model.Answer == "B" ? "list-group-item-success" : "")">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>@(isRTL ? "ب:" : "B:")</strong> @Model.q2</span>
+                                        @if (Model.Answer == "B")
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> @(isRTL ? "صحيح" : "Correct")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="list-group-item @(Model.Answer == "C" ? "list-group-item-success" : "")">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>@(isRTL ? "ج:" : "C:")</strong> @Model.q3</span>
+                                        @if (Model.Answer == "C")
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> @(isRTL ? "صحيح" : "Correct")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="list-group-item @(Model.Answer == "D" ? "list-group-item-success" : "")">
+                                    <div class="d-flex justify-content-between">
+                                        <span><strong>@(isRTL ? "د:" : "D:")</strong> @Model.q4</span>
+                                        @if (Model.Answer == "D")
+                                        {
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> @(isRTL ? "صحيح" : "Correct")
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Correct Answer -->
+                    <div class="row mb-3">
+                        <div class="col-md-3 font-weight-bold">
+                            @(isRTL ? "الإجابة الصحيحة:" : "Correct Answer:")
+                        </div>
+                        <div class="col-md-9">
+                            <div class="alert alert-success p-2">
+                                <strong>
+                                    @(Model.Answer == "A" ? $"{(!isRTL ? "A: " : "")}{Model.q1}" :
+                                        Model.Answer == "B" ? $"{(!isRTL ? "B: " : "")}{Model.q2}" :
+                                        Model.Answer == "C" ? $"{(!isRTL ? "C: " : "")}{Model.q3}" :
+                                        Model.Answer == "D" ? $"{(!isRTL ? "D: " : "")}{Model.q4}" :
+                                        isRTL ? "غير محدد" : "Not specified")
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@Model.QuestionID" class="btn btn-warning">
+                                <i class="fas fa-edit"></i> @(isRTL ? "تعديل السؤال" : "تعديل السؤال")
+                            </a>
+                            <a asp-action="Index" class="btn btn-secondary ml-2">
+                                <i class="fas @(isRTL ? "fa-arrow-right" : "fa-arrow-left")"></i>
+                                @(isRTL ? "العودة للقائمة" : "العودة للقائمة")
+                            </a>
+                        </div>
+                        <form asp-action="Delete" asp-route-id="@Model.QuestionID" method="post" class="d-inline">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('@(isRTL ? "هل أنت متأكد من حذف هذا السؤال؟" : "هل أنت متأكد من حذف هذا السؤال؟")')">
+                                <i class="fas fa-trash-alt"></i> @(isRTL ? "حذف السؤال" : "حذف السؤال")
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <i class="fas fa-info-circle"></i>
+                        @(isRTL ? "آخر تحديث: " : "Last updated: ")
+                        @DateTime.Now.ToString(isRTL ? "yyyy/M/d HH:mm" : "M/d/yyyy h:mm tt")
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        /* RTL specific styles */
+        html[dir="rtl"] .card-header, html[dir="rtl"] .card-footer {
+            text-align: right;
+        }
+
+        html[dir="rtl"] .ml-2 {
+            margin-left: 0 !important;
+            margin-right: 0.5rem !important;
+        }
+
+        /* General styles */
+        .list-group-item-success {
+            border-left: 4px solid #28a745 !important;
+        }
+
+        html[dir="rtl"] .list-group-item-success {
+            border-left: none !important;
+            border-right: 4px solid #28a745 !important;
+        }
+
+        .card {
+            border-radius: 0.5rem;
+        }
+
+        .card-header {
+            border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <script>
+        $(document).ready(function() {
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // RTL specific adjustments
+            if ($('html').attr('dir') === 'rtl') {
+                $('.list-group-item-success').css('border-left', 'none').css('border-right', '4px solid #28a745');
+            }
+        });
+    </script>
+}

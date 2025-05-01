@@ -1,12 +1,15 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model IEnumerable<Course>
+@model IEnumerable<CourseViewModel>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> userManager
 
 @{
     ViewData["Title"] = "Courses";
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
+    var user = await userManager.GetUserAsync(User);
 }
 @Html.Partial("_Header")
 
@@ -25,10 +28,10 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
-    .course-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-    }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
 
     .course-img-container {
         height: 200px;
@@ -98,37 +101,11 @@
         transition: all 0.3s;
     }
 
-    .enroll-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-    .section-header {
-        margin-bottom: 50px;
-    }
-
-    .section-title {
-        display: inline-block;
-        padding: 0 20px;
-        position: relative;
-    }
-
-    .section-title:before, .section-title:after {
-        content: "";
-        position: absolute;
-        height: 2px;
-        width: 50px;
-        background: #3498db;
-        top: 50%;
-    }
-
-    .section-title:before {
-        left: -50px;
-    }
-
-    .section-title:after {
-        right: -50px;
-    }
 </style>
 
 <!-- Courses Start -->
@@ -148,10 +125,31 @@
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a asp-controller="Course" asp-action="EnrollInCourse" asp-route-id="@course.ID"
-                                       class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
-                                        اشترك في الكورس
-                                    </a>
+                                    if (User.IsInRole("Student"))
+                                    {
+                                        @if (course.IsEnrolled == true)
+                                        {
+                                            <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID" class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                                استكمال الدورة
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Checkout" asp-action="Index"
+                                               asp-route-amount="@course.Price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)"
+                                               asp-route-courseId="@course.ID" class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                                اشترك في الدورة
+                                            </a>
+                                        }
+
+                                    }
+                                    else if (User.IsInRole("Instructor"))
+                                    {
+                                        <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID"
+                                           class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                            تفاصيل الكورس
+                                        </a>
+                                    }
                                 }
                                 else
                                 {
@@ -182,6 +180,7 @@
                 </div>
             }
         </div>
+
     </div>
 </div>
 <!-- Courses End -->

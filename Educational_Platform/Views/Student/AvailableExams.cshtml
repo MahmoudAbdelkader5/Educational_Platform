@@ -1,0 +1,237 @@
+﻿@model IEnumerable<Exam>
+@{
+    ViewData["Title"] = "الامتحانات المتاحة";
+    var courseName = Model.FirstOrDefault()?.Course?.Title;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts - Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #6C4DF6; /* لون بنفسجي جذاب */
+            --secondary: #FF7E67; /* لون برتقالي مرجاني */
+            --accent: #42E6A4; /* لون أخضر نيون */
+            --dark: #2D3047; /* لون أزرق داكن */
+            --light: #F8F9FA; /* لون خلفية فاتح */
+        }
+
+        body {
+            background-color: #F0F4FF;
+            font-family: 'Tajawal', sans-serif;
+            color: var(--dark);
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(108, 77, 246, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .header-section::before {
+                content: "";
+                position: absolute;
+                top: -50px;
+                right: -50px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+        .course-title {
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .exam-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            background: white;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+            .exam-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, var(--accent), var(--primary));
+            }
+
+            .exam-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            }
+
+        .exam-icon {
+            font-size: 2.5rem;
+            color: rgba(108, 77, 246, 0.1);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .exam-badge {
+            background: rgba(66, 230, 164, 0.1);
+            color: var(--dark);
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .btn-start-exam {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 30px;
+            padding: 8px 25px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(108, 77, 246, 0.3);
+            transition: all 0.3s;
+        }
+
+            .btn-start-exam:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 7px 20px rgba(108, 77, 246, 0.4);
+            }
+
+        .duration-badge {
+            background: rgba(255, 126, 103, 0.1);
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .empty-state {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="header-section text-center">
+            <h1 class="course-title mb-3">@courseName</h1>
+            <p class="lead fs-4">اختر الامتحان الذي ترغب في البدء به</p>
+            <span class="badge bg-light text-dark fs-6 mt-2">
+                <i class="fas fa-book-open me-2"></i> @Model.Count() امتحانات متاحة
+            </span>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <div class="empty-state-icon">
+                    <i class="fas fa-calendar-times"></i>
+                </div>
+                <h3 class="mb-3">لا توجد امتحانات متاحة حالياً</h3>
+                <p class="text-muted mb-4">سيتم إضافة امتحانات جديدة قريباً</p>
+                <button class="btn btn-outline-primary">
+                    <i class="fas fa-sync-alt me-2"></i>تحديث الصفحة
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4">
+                @foreach (var exam in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="exam-card p-4">
+                            <i class="fas fa-file-alt exam-icon"></i>
+
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h3 class="h5 mb-2 fw-bold">@exam.Title</h3>
+                                    <span class="exam-badge">
+                                        <i class="fas fa-star me-1"></i> الدرجة الكلية: @exam.ExamQuestions.Count
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                                <span class="duration-badge">
+                                    <i class="fas fa-clock me-1"></i> @exam.duration دقيقة
+                                </span>
+                                <a asp-action="TakeExam" asp-route-examId="@exam.Id"
+                                   class="btn btn-start-exam">
+                                    <i class="fas fa-play-circle me-2"></i> ابدأ الآن
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // تأثيرات عند المرور على البطاقات
+            $('.exam-card').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-10px)');
+                    $(this).find('.exam-icon').css('color', 'rgba(108, 77, 246, 0.2)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                    $(this).find('.exam-icon').css('color', 'rgba(108, 77, 246, 0.1)');
+                }
+            );
+
+            // تأثيرات الأزرار
+            $('.btn-start-exam').hover(
+                function() {
+                    $(this).css('transform', 'translateY(-3px)');
+                },
+                function() {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+        });
+    </script>
+</body>
+</html>

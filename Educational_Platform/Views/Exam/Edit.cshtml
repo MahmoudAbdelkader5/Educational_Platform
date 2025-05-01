@@ -1,0 +1,223 @@
+﻿@model Data_access_layer.model.Exam
+@{
+    ViewData["Title"] = "تعديل الامتحان";
+    var courses = new SelectList(ViewBag.Courses, "ID", "Title");
+    var isRTL = true;
+}
+
+<div class="container-fluid py-4" dir="rtl">
+    <div class="card shadow-lg">
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="h4 mb-0 text-center text-white">
+                        <i class="fas fa-edit ml-2"></i> تعديل الامتحان
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            @await Html.PartialAsync("_Alerts")
+
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger text-right rounded-lg"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label asp-for="Title" class="form-label fw-bold">عنوان الامتحان</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="fas fa-heading"></i>
+                                </span>
+                                <input asp-for="Title" class="form-control rounded-end" required />
+                            </div>
+                            <span asp-validation-for="Title" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label asp-for="CourseId" class="form-label fw-bold">المادة الدراسية</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="fas fa-book"></i>
+                                </span>
+                                <select asp-for="CourseId" class="form-select rounded-end" asp-items="courses" required>
+                                    <option value="">-- اختر المادة --</option>
+                                </select>
+                            </div>
+                            <span asp-validation-for="CourseId" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label asp-for="duration" class="form-label fw-bold">مدة الامتحان (دقائق)</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light">
+                                    <i class="fas fa-clock"></i>
+                                </span>
+                                <input asp-for="duration" type="number" class="form-control rounded-end" min="1" required />
+                            </div>
+                            <span asp-validation-for="duration" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header mt-5 mb-3">
+                    <h4 class="fw-bold text-primary">
+                        <i class="fas fa-question-circle ml-2"></i>
+                        الأسئلة
+                    </h4>
+                    <hr class="border-primary" />
+                </div>
+
+                @if (ViewBag.AllQuestions != null && ((IEnumerable<Questions>)ViewBag.AllQuestions).Any())
+                {
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-header bg-light">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0 fw-bold">اختر الأسئلة المطلوبة</h5>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="selectAllQuestions">
+                                    <label class="form-check-label" for="selectAllQuestions">تحديد الكل</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach (var question in (IEnumerable<Questions>)ViewBag.AllQuestions)
+                                {
+                                    <div class="col-md-6 mb-3">
+                                        <div class="question-card card h-100 border-0 shadow-sm">
+                                            <div class="card-body">
+                                                <div class="form-check">
+                                                    <input class="form-check-input question-checkbox"
+                                                           type="checkbox"
+                                                           name="selectedQuestionIds"
+                                                           value="@question.QuestionID"
+                                                           id="q_@question.QuestionID"
+                                                    @(ViewBag.SelectedQuestionIds != null && ((List<int>)ViewBag.SelectedQuestionIds).Contains(question.QuestionID) ? "checked" : "") />
+                                                    <label class="form-check-label fw-bold" for="q_@question.QuestionID">
+                                                        @question.QuestionText
+                                                    </label>
+                                                    <div class="d-flex justify-content-between mt-2">
+                                                        <a asp-controller="Question" asp-action="Edit" asp-route-id="@question.QuestionID"
+                                                           class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i> تعديل
+                                                        </a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-warning rounded-lg">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-exclamation-triangle fa-2x me-3"></i>
+                            <div>
+                                <h5 class="alert-heading">لا توجد أسئلة متاحة</h5>
+                                <p class="mb-0">يمكنك <a asp-controller="Question" asp-action="Create" class="alert-link">إنشاء سؤال جديد</a> ثم العودة لتحديده</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group text-left mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-4">
+                        <i class="fas fa-save me-2"></i> حفظ التعديلات
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill px-4 ms-2">
+                        <i class="fas fa-undo me-2"></i> إلغاء
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .section-header hr {
+            margin-top: 0.5rem;
+            opacity: 0.3;
+        }
+
+        .question-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+            .question-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                border-left-color: #2dce89;
+            }
+
+        .form-check-input:checked + .form-check-label {
+            color: #2dce89;
+            font-weight: bold;
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+        }
+
+        .input-group-text {
+            min-width: 45px;
+            justify-content: center;
+        }
+    </style>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Select all questions functionality
+            $('#selectAllQuestions').change(function() {
+                $('.question-checkbox').prop('checked', $(this).prop('checked'));
+            });
+
+            // Validate all checkboxes when one changes
+            $('.question-checkbox').change(function() {
+                if (!$('.question-checkbox:checked').length) {
+                    $('#selectAllQuestions').prop('checked', false);
+                } else if ($('.question-checkbox:checked').length === $('.question-checkbox').length) {
+                    $('#selectAllQuestions').prop('checked', true);
+                }
+            });
+
+            // Form validation
+            (function () {
+                'use strict'
+                var forms = document.querySelectorAll('.needs-validation')
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+        });
+    </script>
+}

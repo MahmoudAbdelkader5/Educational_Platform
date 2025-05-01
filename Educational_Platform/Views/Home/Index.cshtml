@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Course>
+﻿@model IEnumerable<CourseViewModel>
 
 @{
     ViewData["Title"] = "Home";
@@ -70,7 +70,7 @@
 
         .course-item .d-flex {
             flex: 0 0 auto;
-            background-color: #f8f9fa;
+            
         }
 
         .course-item h3 {
@@ -80,7 +80,6 @@
         }
 
     .position-absolute.bottom-0 {
-        opacity: 0;
         transition: opacity 0.3s ease;
     }
 
@@ -88,17 +87,7 @@
         opacity: 1;
     }
 
-    /* Button styling */
-    .btn-primary {
-        background-color: #4e73df;
-        border-color: #4e73df;
-    }
-
-        .btn-primary:hover {
-            background-color: #3a60c8;
-            border-color: #3a60c8;
-        }
-
+   
     /* Responsive adjustments */
     @@media (max-width: 768px) {
         .course-item {
@@ -116,6 +105,9 @@
         }
     }
 </style>
+
+<script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/04/26/04/20250426045504-IYRYAM1V.js"></script>
 
 <body>
 
@@ -279,46 +271,72 @@
             </div>
             <div class="row g-4 justify-content-center">
 
+
                 @foreach (var course in Model)
                 {
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="course-item bg-light">
-                            <div class="position-relative overflow-hidden">
-                                <img class="img-fluid" src="~/files/imgCourse/@course.Image" alt="Course Image">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="course-item bg-light course-card">
+                            <div class="position-relative overflow-hidden course-img-container">
+                                <img class="img-fluid course-img" src="~/files/imgCourse/@course.Image" alt="@course.Title">
                                 <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        <a asp-controller="Course" asp-action="EnrollInCourse" asp-route-id="@course.ID" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">
-                                            اشترك في الكورس
-                                        </a>
+                                        if (User.IsInRole("Student"))
+                                        {
+                                            @if (course.IsEnrolled == true)
+                                            {
+                                                <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID" class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                                    استكمال الدورة
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Checkout" asp-action="Index"
+                                                   asp-route-amount="@course.Price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)"
+                                                   asp-route-courseId="@course.ID" class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                                    اشترك في الدورة
+                                                </a>
+                                            }
+
+                                        }
+                                        else if (User.IsInRole("Instructor"))
+                                        {
+                                            <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID"
+                                               class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                                تفاصيل الكورس
+                                            </a>
+                                        }
                                     }
                                     else
                                     {
-                                        <a asp-controller="Account" asp-action="Login" class="flex-shrink-0 btn btn-sm btn-primary fo px-3" style="border-radius: 0 30px 30px 0;">اشترك الآن</a>
+                                        <a asp-controller="Account" asp-action="Login"
+                                           class="flex-shrink-0 btn btn-sm btn-primary enroll-btn fo">
+                                            اشترك الآن
+                                        </a>
                                     }
                                 </div>
                             </div>
-                            <div class="text-center p-4 pb-0">
-                                <h3 class="mb-0">@course.Price.ToString("C")</h3>
-                                <h5 class="mb-4 fo">@course.Title</h5>
-                                <p class="mb-4 fo">@course.Description</p>
+                            <div class="text-center p-4 pb-0 course-content">
+                                <h3 class="course-price">@course.Price.ToString("C")</h3>
+                                <h5 class="course-title fo">@course.Title</h5>
+                                <p class="course-description fo">@course.Description</p>
                             </div>
-                            <div class="d-flex border-top">
-                                <small class="flex-fill text-center border-end py-2">
+                            <div class="d-flex border-top course-meta">
+                                <small class="flex-fill text-center border-end py-2 course-meta-item">
                                     <i class="fa fa-user-tie text-primary me-2"></i>م/ علاء الدين
                                 </small>
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-clock text-primary me-2"></i>@course.Duration اسابيع
+                                <small class="flex-fill text-center border-end py-2 course-meta-item">
+                                    <i class="fa fa-clock text-primary me-2"></i>@course.Duration أسابيع
                                 </small>
-                                <small class="flex-fill text-center py-2">
-                                    <i class="fa fa-user text-primary me-2"></i> متوفر
+                                <small class="flex-fill text-center py-2 course-meta-item">
+                                    <i class="fa fa-user text-primary me-2"></i>متوفر
                                 </small>
                             </div>
                         </div>
                     </div>
                 }
-
             </div>
+        </div>
         </div>
     </div>
     <!-- Courses End -->

@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Educational_Platform.ViewModel
 {
@@ -33,7 +33,7 @@ namespace Educational_Platform.ViewModel
         public IFormFile? ProfilePictureFile { get; set; }  // For uploading the file
 
         [Display(Name = "Profile Picture")]
-        public string? ProfilePicture { get; set; } = "default.png";  // For storing the path
+        public string? ProfilePicture { get; set; } = "مجهول.png";  // For storing the path
         [Required]
         [StringLength(100, ErrorMessage = "The password must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

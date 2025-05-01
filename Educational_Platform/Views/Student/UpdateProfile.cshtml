@@ -1,0 +1,179 @@
+﻿
+@using Educational_Platform.ViewModel
+@model UpdateStudentProfileViewModel
+
+@{
+    ViewData["Title"] = "تحديث الملف الشخصي";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+    Layout = null;
+    @Html.Partial("~/Views/Shared/_Header.cshtml")
+
+}
+<!-- داخل الفورم -->
+<input type="hidden" asp-for="CurrentProfilePicture" />
+<style>
+    .fo {
+        font-family: "Cairo", sans-serif;
+    }
+</style>
+
+<div class="container py-5" dir="rtl">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="btn-primary text-white py-3">
+                    <h3 class="mb-0 text-center fo"><i class="fa fa-user-edit me-2"></i> تحديث الملف الشخصي</h3>
+                </div>
+
+                <div class="card-body p-4 p-lg-5">
+                    <form id="updateForm" asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+                        @if (ViewData.ModelState.IsValid == false)
+                        {
+                            <div asp-validation-summary="All" class="text-danger mb-4 alert alert-danger py-2" id="validationSummary"></div>
+                        }
+
+                        <!-- المعلومات الشخصية -->
+                        <div class="registration-section mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo" >تحديث المعلومات الشخصية</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Name" class="form-label fw-semibold"><i class="fa fa-user me-1"></i> الاسم الكامل</label>
+                                    <input asp-for="Name" class="form-control form-control-lg" placeholder="أدخل الاسم الكامل" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="Email" class="form-label fw-semibold"><i class="fa fa-envelope me-1"></i> البريد الإلكتروني</label>
+                                    <input asp-for="Email" class="form-control form-control-lg" placeholder="name@example.com" readonly />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- معلومات التواصل -->
+                        <div class="registration-section mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo"> تحديث معلومات التواصل</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="PhoneNumber" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> رقم الهاتف</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">+20</span>
+                                        <input asp-for="PhoneNumber" class="form-control form-control-lg" placeholder="1XXXXXXXXX" />
+                                    </div>
+                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="FatherPhone" class="form-label fw-semibold"><i class="fa fa-phone me-1"></i> رقم ولي الأمر</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">+20</span>
+                                        <input asp-for="FatherPhone" class="form-control form-control-lg" placeholder="1XXXXXXXXX" />
+                                    </div>
+                                    <span asp-validation-for="FatherPhone" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- قسم المعلومات الأكاديمية -->
+                        <div class="registration-section mb-4" dir="rtl">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-graduation-cap"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo"> تحديث المعلومات الأكاديمية</h5>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="GradeLevel" class="form-label fw-semibold">
+                                    <i class="fa fa-graduation-cap ms-1"></i> المرحلة الدراسية
+                                </label>
+                                <select asp-for="GradeLevel" class="form-select form-select-lg">
+                                    <option value="" selected disabled>اختر المرحلة الدراسية</option>
+                                    <optgroup>
+                                        <option value="First_Secondary">الصف الأول الثانوي</option>
+                                        <option value="Second_Secondary">الصف الثاني الثانوي</option>
+                                        <option value="Third_Secondary">الصف الثالث الثانوي</option>
+                                    </optgroup>
+                                </select>
+                                <span asp-validation-for="GradeLevel" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+<!-- ... existing view code ... -->
+
+<!-- Profile Picture Section -->
+                        <!-- Profile Picture Section -->
+                        <div class="registration-section mb-4" dir="rtl">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="section-icon rounded-circle bg-primary text-white d-flex align-items-center justify-content-center ms-3" style="width: 32px; height: 32px;">
+                                    <i class="fa fa-image"></i>
+                                </div>
+                                <h5 class="mb-0 border-bottom pb-2 w-100 fo">تحديث صورة الملف الشخصي </h5>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="text-center mb-3">
+                                    <img id="imagePreview" src="~/files/studentImage/@Model.CurrentProfilePicture"
+                                         class="rounded-circle img-thumbnail"
+                                         style="width: 150px; height: 150px; object-fit: cover;"
+                                         onerror="this.src='/img/avatar.png'" />
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light"><i class="fa fa-upload"></i></span>
+                                    <input type="file" asp-for="ProfilePictureFile" class="form-control" accept="image/*" onchange="previewImage(this)" />
+                                </div>
+                                <small class="form-text text-muted">قم برفع صورة للملف الشخصي (JPEG أو PNG، بحد أقصى 2 ميجابايت)</small>
+                            </div>
+
+                            <!-- Hidden field to preserve current picture -->
+                            <input type="hidden" asp-for="CurrentProfilePicture" />
+                           <div class="d-grid gap-2" dir="rtl">
+                                <button type="submit" class="btn btn-primary btn-lg py-3 fo">
+                                    <i class="fa fa-save ms-2"></i>حفظ التغييرات
+                                </button>
+                                <a asp-action="StudentProfile" class="btn btn-outline-secondary btn-lg py-3 fo">
+                                    <i class="fa fa-times ms-2"></i> إلغاء
+                                </a>
+                            </div>
+
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+                function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                // If user cancels file selection, revert to current image
+                var currentImage = '@Url.Content("~/files/studentImage/" + Model.CurrentProfilePicture)';
+                $('#imagePreview').attr('src', currentImage);
+            }
+        }
+    </script>
+}
+    

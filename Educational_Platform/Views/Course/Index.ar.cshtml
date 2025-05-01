@@ -1,1 +1,114 @@
-﻿
+﻿@model IEnumerable<Data_access_layer.model.Questions>
+
+@{
+    ViewData["Title"] = "Questions List";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="fas fa-question-circle"></i> @ViewData["Title"]
+        </h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="fas fa-plus"></i> Create New
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (Model == null || !Model.Any())
+            {
+                <div class="alert alert-info">
+                    No questions found. Would you like to <a asp-action="Create">create one</a>?
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.QuestionID)</th>
+                                <th>@Html.DisplayNameFor(model => model.QuestionText)</th>
+                                <th>Options</th>
+                                <th>Correct Answer</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.QuestionID)</td>
+                                    <td>
+                                        @{
+                                            var questionText = item.QuestionText ?? string.Empty;
+                                            var shortText = questionText.Length > 50
+                                            ? questionText.Substring(0, 50) + "..."
+                                            : questionText;
+                                        }
+                                        <span title="@questionText">@shortText</span>
+                                    </td>
+                                    <td>
+                                        <div><strong>A:</strong> @(item.q1 ?? "N/A")</div>
+                                        <div><strong>B:</strong> @(item.q2 ?? "N/A")</div>
+                                        <div><strong>C:</strong> @(item.q3 ?? "N/A")</div>
+                                        <div><strong>D:</strong> @(item.q4 ?? "N/A")</div>
+                                    </td>
+                                    <td class="text-success font-weight-bold">
+                                        @(item.Answer ?? "Not set")
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Details" asp-route-id="@item.QuestionID"
+                                               class="btn btn-sm btn-info" title="Details">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.QuestionID"
+                                               class="btn btn-sm btn-warning" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.QuestionID"
+                                               class="btn btn-sm btn-danger" title="Delete">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Table enhancements -->
+    <script>
+        $(document).ready(function() {
+            $('.table').DataTable({
+                responsive: true,
+                dom: '<"top"lf>rt<"bottom"ip>',
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search questions...",
+                }
+            });
+        });
+    </script>
+}

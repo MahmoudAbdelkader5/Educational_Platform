@@ -19,6 +19,7 @@ namespace Data_access_layer.model
         [ForeignKey(nameof(Student))]
         public int StudentID { get; set; }
 
+        //public int Totalgrade { get; set; } = 0;
         public string AnswerText { get; set; }
 
         // Navigation properties

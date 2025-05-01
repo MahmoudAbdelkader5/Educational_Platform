@@ -23,6 +23,10 @@ namespace Business_logic_layer.Repository
             return context.Courses.Where(_context => _context.Title.ToLower().StartsWith(search));
 
         }
+        public async Task<int> GetCountAsync()
+        {
+            return await context.Courses.CountAsync();
+        }
     }
     
 }

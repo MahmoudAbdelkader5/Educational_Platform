@@ -12,6 +12,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     }
 
     // DbSets for all your entities
+    public DbSet<Message> Message { get; set; }
     public DbSet<student_answers> Answers { get; set; }
     public DbSet<Assignment> Assignments { get; set; }
     public DbSet<assignment_question> AssignmentQuestions { get; set; }

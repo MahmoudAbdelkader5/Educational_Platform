@@ -7,34 +7,34 @@ namespace Educational_Platform.ViewModel
 {
     public class LessonViewModel
     {
-        
-            [Key]
-            public int ID { get; set; }
 
-            [Required]
-            [StringLength(255)]
-            public string Title { get; set; }
+        [Key]
+        public int ID { get; set; }
 
-            [StringLength(255)]
-            public string VideoURL { get; set; } // Ensure this is properly populated
-            public string SupportingFiles { get; set; }
-            public string TaskFileName { get; set; }
-            public DateTime Create_date { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string Title { get; set; }
 
-            [Required]
-            public int CourseID { get; set; } // Add the missing CourseID property
+        [StringLength(255)]
+        public string VideoURL { get; set; }
+        public string SupportingFiles { get; set; }
+        public string TaskFileName { get; set; }
+        public DateTime Create_date { get; set; }
 
-            [ForeignKey("CourseID")]
-            public Course Course { get; set; } // Add the missing Course property
+        [Required]
+        public int CourseID { get; set; }
 
-            [NotMapped]
-            public IFormFile videoFile { get; set; } // Property to handle uploaded video files
+        [ForeignKey("CourseID")]
+        public Course Course { get; set; }
 
-            [NotMapped]
-            public IFormFile TaskFile { get; set; }
+        [NotMapped]
+        public IFormFile videoFile { get; set; }
 
-            [NotMapped]
-            public IFormFile Files { get; set; } // Property to handle uploaded supporting files
-        
+        [NotMapped]
+        public IFormFile TaskFile { get; set; }
+
+        [NotMapped]
+        public IFormFile Files { get; set; }
+
     }
 }

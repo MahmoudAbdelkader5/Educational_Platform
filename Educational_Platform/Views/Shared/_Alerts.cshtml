@@ -1,0 +1,46 @@
+﻿@using System.ComponentModel
+
+@{
+   // Define the isRTL variable to determine if the layout is Right-To-Left
+   bool isRTL = ViewData["IsRTL"] != null && (bool)ViewData["IsRTL"];
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+       <i class="fas fa-check-circle ml-2"></i> @TempData["SuccessMessage"]
+       <button type="button" class="close" data-dismiss="alert" aria-label="@(isRTL ? "إغلاق" : "Close")">
+           <span aria-hidden="true">&times;</span>
+       </button>
+   </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+   <div class="alert alert-danger alert-dismissible fade show" role="alert">
+       <i class="fas fa-exclamation-circle ml-2"></i> @TempData["ErrorMessage"]
+       <button type="button" class="close" data-dismiss="alert" aria-label="@(isRTL ? "إغلاق" : "Close")">
+           <span aria-hidden="true">&times;</span>
+       </button>
+   </div>
+}
+
+@if (TempData["InfoMessage"] != null)
+{
+   <div class="alert alert-info alert-dismissible fade show" role="alert">
+       <i class="fas fa-info-circle ml-2"></i> @TempData["InfoMessage"]
+       <button type="button" class="close" data-dismiss="alert" aria-label="@(isRTL ? "إغلاق" : "Close")">
+           <span aria-hidden="true">&times;</span>
+       </button>
+   </div>
+}
+
+@if (TempData["WarningMessage"] != null)
+{
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+       <i class="fas fa-exclamation-triangle ml-2"></i> @TempData["WarningMessage"]
+       <button type="button" class="close" data-dismiss="alert" aria-label="@(isRTL ? "إغلاق" : "Close")">
+           <span aria-hidden="true">&times;</span>
+       </button>
+   </div>
+}

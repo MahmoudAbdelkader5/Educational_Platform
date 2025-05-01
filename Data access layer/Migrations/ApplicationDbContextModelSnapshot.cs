@@ -168,28 +168,6 @@ namespace Data_access_layer.Migrations
                     b.ToTable("Assignments");
                 });
 
-            modelBuilder.Entity("Data_access_layer.model.Choice", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MCQQuestionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("MCQQuestionID");
-
-                    b.ToTable("Choice");
-                });
-
             modelBuilder.Entity("Data_access_layer.model.Comment", b =>
                 {
                     b.Property<int>("ID")
@@ -212,7 +190,6 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Reply")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StudentID")
@@ -275,27 +252,16 @@ namespace Data_access_layer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
-
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsTimed")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("MaxGrade")
-                        .HasColumnType("decimal(5, 2)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("duration")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -393,27 +359,36 @@ namespace Data_access_layer.Migrations
                     b.ToTable("Lessons");
                 });
 
-            modelBuilder.Entity("Data_access_layer.model.MCQ", b =>
+            modelBuilder.Entity("Data_access_layer.model.Message", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("MessageID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageID"));
 
-                    b.Property<string>("Content")
+                    b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("QuestionID")
-                        .HasColumnType("int");
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
-                    b.HasKey("ID");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.HasIndex("QuestionID")
-                        .IsUnique();
+                    b.Property<string>("Subject")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.ToTable("MCQ");
+                    b.HasKey("MessageID");
+
+                    b.ToTable("Message");
                 });
 
             modelBuilder.Entity("Data_access_layer.model.Questions", b =>
@@ -428,21 +403,27 @@ namespace Data_access_layer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("AssignmentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("QuestionText")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("q1")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("q2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("q3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("q4")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("QuestionID");
-
-                    b.HasIndex("AssignmentID");
 
                     b.ToTable("Questions");
                 });
@@ -593,29 +574,6 @@ namespace Data_access_layer.Migrations
                     b.HasIndex("StudentID");
 
                     b.ToTable("StudentExams");
-                });
-
-            modelBuilder.Entity("Data_access_layer.model.Written", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("QuestionID")
-                        .IsUnique();
-
-                    b.ToTable("Written");
                 });
 
             modelBuilder.Entity("Data_access_layer.model.assignment_Answer", b =>
@@ -926,17 +884,6 @@ namespace Data_access_layer.Migrations
                     b.Navigation("Lesson");
                 });
 
-            modelBuilder.Entity("Data_access_layer.model.Choice", b =>
-                {
-                    b.HasOne("Data_access_layer.model.MCQ", "MCQ")
-                        .WithMany("Choices")
-                        .HasForeignKey("MCQQuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MCQ");
-                });
-
             modelBuilder.Entity("Data_access_layer.model.Comment", b =>
                 {
                     b.HasOne("Data_access_layer.model.Instructor", "Instructor")
@@ -964,9 +911,7 @@ namespace Data_access_layer.Migrations
                 {
                     b.HasOne("Data_access_layer.model.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourseId");
 
                     b.Navigation("Course");
                 });
@@ -980,26 +925,6 @@ namespace Data_access_layer.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("Data_access_layer.model.MCQ", b =>
-                {
-                    b.HasOne("Data_access_layer.model.Questions", "Question")
-                        .WithOne("MCQ")
-                        .HasForeignKey("Data_access_layer.model.MCQ", "QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("Data_access_layer.model.Questions", b =>
-                {
-                    b.HasOne("Data_access_layer.model.Assignment", "Assignment")
-                        .WithMany()
-                        .HasForeignKey("AssignmentID");
-
-                    b.Navigation("Assignment");
                 });
 
             modelBuilder.Entity("Data_access_layer.model.Revision", b =>
@@ -1051,17 +976,6 @@ namespace Data_access_layer.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Data_access_layer.model.Written", b =>
-                {
-                    b.HasOne("Data_access_layer.model.Questions", "Question")
-                        .WithOne("Written")
-                        .HasForeignKey("Data_access_layer.model.Written", "QuestionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
             modelBuilder.Entity("Data_access_layer.model.assignment_Answer", b =>
                 {
                     b.HasOne("Data_access_layer.model.Student", "Student")
@@ -1090,7 +1004,7 @@ namespace Data_access_layer.Migrations
                         .IsRequired();
 
                     b.HasOne("Data_access_layer.model.Questions", "Question")
-                        .WithMany("AssignmentQuestions")
+                        .WithMany()
                         .HasForeignKey("QuestionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1246,24 +1160,11 @@ namespace Data_access_layer.Migrations
                     b.Navigation("Comment");
                 });
 
-            modelBuilder.Entity("Data_access_layer.model.MCQ", b =>
-                {
-                    b.Navigation("Choices");
-                });
-
             modelBuilder.Entity("Data_access_layer.model.Questions", b =>
                 {
                     b.Navigation("Answers");
 
-                    b.Navigation("AssignmentQuestions");
-
                     b.Navigation("ExamQuestions");
-
-                    b.Navigation("MCQ")
-                        .IsRequired();
-
-                    b.Navigation("Written")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Data_access_layer.model.Student", b =>
