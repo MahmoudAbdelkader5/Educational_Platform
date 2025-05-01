@@ -3676,7 +3676,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "Data access layer": "1.0.0"
+          "Data access layer": "1.0.0",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "2.3.0",
+          "Microsoft.Extensions.Hosting.Abstractions": "8.0.1"
         },
         "compile": {
           "bin/placeholder/Business logic layer.dll": {}
@@ -9591,29 +9593,31 @@
     "net8.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "Business logic layer >= 1.0.0",
+      "Microsoft.AspNetCore.Hosting.Abstractions >= 2.3.0",
       "Microsoft.AspNetCore.Mvc.Localization >= 2.3.0",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.15",
+      "Microsoft.Extensions.Hosting.Abstractions >= 8.0.1",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.7"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\youssef\\.nuget\\packages\\": {},
+    "C:\\Users\\master\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Educational_Platform\\Educational_Platform.csproj",
+      "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\Educational_Platform.csproj",
       "projectName": "Educational_Platform",
-      "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Educational_Platform\\Educational_Platform.csproj",
-      "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
-      "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Educational_Platform\\obj\\",
+      "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\Educational_Platform.csproj",
+      "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
+      "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Educational_Platform\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\master\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -9622,14 +9626,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Business logic layer\\Business logic layer.csproj": {
-              "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (7)\\Business logic layer\\Business logic layer.csproj"
+            "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj": {
+              "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj"
             }
           }
         }
@@ -9654,6 +9659,10 @@
             "target": "Package",
             "version": "[12.0.1, )"
           },
+          "Microsoft.AspNetCore.Hosting.Abstractions": {
+            "target": "Package",
+            "version": "[2.3.0, )"
+          },
           "Microsoft.AspNetCore.Mvc.Localization": {
             "target": "Package",
             "version": "[2.3.0, )"
@@ -9663,6 +9672,10 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "[8.0.15, )"
+          },
+          "Microsoft.Extensions.Hosting.Abstractions": {
+            "target": "Package",
+            "version": "[8.0.1, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
