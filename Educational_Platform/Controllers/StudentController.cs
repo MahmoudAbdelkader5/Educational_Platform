@@ -192,7 +192,7 @@ namespace Educational_Platform.Controllers
                 // Update the student in the database
                 _unitOfWork.Student.UpdateAsync(student);
                 await _unitOfWork.SaveAsync();
-            
+
 
 
 
@@ -265,44 +265,47 @@ namespace Educational_Platform.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitExam(int examId, string answersJson)
         {
-                var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
+            var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
 
-                var user = await _userManager.GetUserAsync(User);
-                var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
-                int studentId = student.ID;
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+            int studentId = student.ID;
+            int totalScore = 0;
+            int correctAnswers = 0;
 
             try
             {
                 // Deserialize the JSON to dictionary
                 // Process answers and calculate score
-                int totalScore = 0;
-                int correctAnswers = 0;
                 var examQuestions = await _unitOfWork.ExamQuestion.GetAllAsync(eq => eq.ExamID == examId);
 
                 foreach (var answer in answers)
                 {
-                    var question = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    var EXquestion = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    int qid = EXquestion.QuestionID;
+                    var question = await _unitOfWork.questions.GetByIdAsync(qid);
                     if (question != null)
                     {
                         bool isCorrect;
                         string qw = "0";
                         //= question.Question.Answer == answer.Value;
-                        if (question.Question.Answer == "A")
-                                { qw ="1" ;
-                                }
-                        else if (question.Question.Answer == "B")
+                        if (question.Answer == "A")
+                        {
+                            qw = "1";
+                        }
+                        else if (question.Answer == "B")
                         {
                             qw = "2";
                         }
-                        else if (question.Question.Answer == "C")
+                        else if (question.Answer == "C")
                         {
                             qw = "3";
                         }
-                        else if (question.Question.Answer == "D")
+                        else if (question.Answer == "D")
                         {
                             qw = "4";
                         }
-                        isCorrect = qw == answer.Value;
+                        isCorrect = (qw == answer.Value);
 
 
 
@@ -311,17 +314,17 @@ namespace Educational_Platform.Controllers
                             totalScore += 1;
                             correctAnswers++;
                         }
-                       
-                        string answerText = isCorrect.ToString();
-                        var studentAnswer = new student_answers
-                        {
-                            examQuestionID = question.ID,
-                            StudentID = studentId,
-                            AnswerText = answerText,
-                          
-                        };
 
-                        await _unitOfWork.student_answers.AddAsync(studentAnswer);
+                        //string answerText = isCorrect.ToString();
+                        //var studentAnswer = new student_answers
+                        //{
+                        //    examQuestionID = question.ID,
+                        //    StudentID = studentId,
+                        //    AnswerText = answerText,
+
+                        //};
+
+                        //await _unitOfWork.student_answers.AddAsync(studentAnswer);
                     }
                 }
 
@@ -341,12 +344,14 @@ namespace Educational_Platform.Controllers
                 await _unitOfWork.student_Exam.AddAsync(examResult);
                 await _unitOfWork.Save();
 
-                TempData["TotalScore"] = totalScore;
-                TempData["CorrectAnswers"] = correctAnswers;
+                int qn = answers.Count;
+                // في الـ Action الأول
+                ViewBag.TotalScore = totalScore;
+                ViewBag.CorrectAnswers = correctAnswers;
+                ViewBag.TotalQuestions = qn;
 
-                TempData["TotalQuestions"] = answers;
-
-                return RedirectToAction("R", new { examId, studentId });
+                //return RedirectToAction("R", new { examId, studentId });
+                return View("R");
 
             }
             catch (Exception ex)
@@ -356,20 +361,26 @@ namespace Educational_Platform.Controllers
             }
         }
 
-        public IActionResult R(int examId, int studentId)
-        {
-            if (TempData["TotalScore"] == null)
-            {
-                return RedirectToAction("AvailableExams");
-            }
+        // في الـ Action الثاني (R)
+        //public IActionResult R(int examId, int studentId)
+        //{
+        //    //// تحقق من وجود البيانات في TempData
+        //    //if (TempData["TotalScore"] == null)
+        //    //{
+        //    //    return RedirectToAction("AvailableExams");
+        //    //}
 
-            ViewBag.TotalScore = TempData["TotalScore"];
-            ViewBag.CorrectAnswers = TempData["CorrectAnswers"];
-            ViewBag.TotalQuestions = TempData["TotalQuestions"];
-            ViewBag.ErrorMessage = TempData["ErrorMessage"];
+        //    // احتفظ بالبيانات للعرض (View) باستخدام ViewBag
+        //    ViewBag.TotalScore = TempData.Peek("TotalScore");
+        //    ViewBag.CorrectAnswers = TempData.Peek("CorrectAnswers");
+        //    ViewBag.TotalQuestions = TempData.Peek("TotalQuestions");
+        //    ViewBag.ErrorMessage = TempData.Peek("ErrorMessage");
 
-            return View();
-        }
+        //    // إذا أردت الاحتفاظ بالبيانات في TempData لطلب آخر
+        //    // TempData.Keep(); // أو TempData.Keep("key");
+
+        //    return View();
+        //}
 
 
 

@@ -1,34 +1,213 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "نتيجة الامتحان";
+    Layout = null;
 }
-@Model.ErrorMessage
-<div class="container">
-    <div class="card mt-5">
-        <div class="card-header bg-primary text-white">
-            <h3>نتيجة الامتحان</h3>
-        </div>
-        <div class="card-body">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <div class="p-3 bg-light">
-                        <h5>الدرجة الكلية</h5>
-                        <p class="display-4">@Model.TotalScore</p>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --success-color: #4ad66d;
+            --light-color: #f8f9fa;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .exam-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1.5rem;
+        }
+
+        .score-box {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+            .score-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+        .total-score {
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            color: white;
+        }
+
+        .correct-answers {
+            background: linear-gradient(135deg, #4ad66d, #3a86ff);
+            color: white;
+        }
+
+        .total-questions {
+            background: linear-gradient(135deg, #f8961e, #f3722c);
+            color: white;
+        }
+
+        .display-4 {
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.9s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .celebrate {
+            font-size: 2rem;
+            color: gold;
+            animation: bounce 1s infinite alternate;
+        }
+
+        @@keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* تنسيقات الطباعة */
+        @@media print {
+            body {
+                background: white;
+            }
+
+            .exam-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="exam-card">
+                    <div class="card-header text-white text-center">
+                        <h2 class="mb-0"><i class="fas fa-trophy me-2"></i> نتيجة الامتحان</h2>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-3 bg-light">
-                        <h5>الإجابات الصحيحة</h5>
-                        <p class="display-4">@Model.CorrectAnswers</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-3 bg-light">
-                        <h5>إجمالي الأسئلة</h5>
-                        <p class="display-4">@Model.TotalQuestions</p>
+                    <div class="card-body p-4">
+                        <div class="row text-center g-4">
+                            <!-- النتيجة الكلية -->
+                            <div class="col-md-4">
+                                <div class="score-box total-score">
+                                    <svg class="progress-ring" viewBox="0 0 100 100">
+                                        <circle class="progress-ring__circle" stroke="white" stroke-width="6" fill="transparent" r="40" cx="50" cy="50"
+                                                stroke-dasharray="251.2"
+                                                stroke-dashoffset="@(251.2 * (1 - ((double)ViewBag.TotalScore / ViewBag.TotalQuestions)))" />
+                                    </svg>
+                                    <h5>الدرجة الكلية</h5>
+                                    <p class="display-4">@ViewBag.TotalScore<span class="fs-6">/@ViewBag.TotalQuestions</span></p>
+                                    @if (ViewBag.TotalScore == ViewBag.TotalQuestions)
+                                    {
+                                        <div class="celebrate">
+                                            <i class="fas fa-star"></i> ممتاز!
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- الإجابات الصحيحة -->
+                            <div class="col-md-4">
+                                <div class="score-box correct-answers">
+                                    <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                    <h5>الإجابات الصحيحة</h5>
+                                    <p class="display-4">@ViewBag.CorrectAnswers</p>
+                                    <small>@((ViewBag.CorrectAnswers * 100 / ViewBag.TotalQuestions))% نجاح</small>
+                                </div>
+                            </div>
+
+                            <!-- إجمالي الأسئلة -->
+                            <div class="col-md-4">
+                                <div class="score-box total-questions">
+                                    <i class="fas fa-question-circle fa-3x mb-3"></i>
+                                    <h5>إجمالي الأسئلة</h5>
+                                    <p class="display-4">@ViewBag.TotalQuestions</p>
+                                    <small>@(ViewBag.TotalQuestions - ViewBag.CorrectAnswers) إجابات خاطئة</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- نص تشجيعي -->
+                        <div class="text-center mt-5">
+                            @{
+                                var percentage = (ViewBag.TotalScore * 100) / ViewBag.TotalQuestions;
+                                var message = "";
+                                if (percentage >= 90)
+                                {
+                                    message = "متفوق! أحسنت العمل، استمر في التميز!";
+                                }
+                                else if (percentage >= 70)
+                                {
+                                    message = "جيد جداً! أنت على الطريق الصحيح.";
+                                }
+                                else if (percentage >= 50)
+                                {
+                                    message = "ليس سيئاً، ولكن يمكنك بذل المزيد من الجهد.";
+                                }
+                                else
+                                {
+                                    message = "تحتاج للمزيد من التركيز والمذاكرة.";
+                                }
+                            }
+                            <div class="alert alert-info" style="background-color: var(--accent-color); color: white;">
+                                <h4 class="alert-heading"><i class="fas fa-comment-dots me-2"></i>@message</h4>
+                            </div>
+                        </div>
+
+                        <!-- الأزرار -->
+                        <div class="text-center mt-4 no-print">
+                            <a href="@Url.Action("StudentProfile", "Student", new { id = ViewBag.StudentId })"
+                               class="btn btn-primary btn-lg rounded-pill px-4">
+                                <i class="fas fa-user-circle me-2"></i>العودة إلى الملف الشخصي
+                            </a>
+
+                            <button onclick="window.print()" class="btn btn-outline-primary btn-lg rounded-pill px-4 ms-2">
+                                <i class="fas fa-print me-2"></i>طباعة النتيجة
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

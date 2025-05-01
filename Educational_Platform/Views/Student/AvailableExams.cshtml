@@ -3,6 +3,8 @@
     ViewData["Title"] = "الامتحانات المتاحة";
     var courseName = Model.FirstOrDefault()?.Course?.Title;
     Layout = null;
+    // int totalquestion = 0;
+
 }
 
 <!DOCTYPE html>
@@ -175,6 +177,8 @@
             <div class="row g-4">
                 @foreach (var exam in Model)
                 {
+                    @* int totalquestion = exam.ExamQuestions.Count; *@
+
                     <div class="col-md-6 col-lg-4">
                         <div class="exam-card p-4">
                             <i class="fas fa-file-alt exam-icon"></i>
@@ -182,9 +186,9 @@
                             <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div>
                                     <h3 class="h5 mb-2 fw-bold">@exam.Title</h3>
-                                    <span class="exam-badge">
-                                        <i class="fas fa-star me-1"></i> الدرجة الكلية: @exam.ExamQuestions.Count
-                                    </span>
+                                    @*  <span class="exam-badge">
+                                        <i class="fas fa-star me-1"></i> الدرجة الكلية: @totalquestion
+                                    </span> *@
                                 </div>
                             </div>
 

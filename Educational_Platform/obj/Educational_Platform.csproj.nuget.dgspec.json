@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Educational_Platform\\Educational_Platform.csproj": {}
+    "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Educational_Platform\\Educational_Platform.csproj": {}
   },
   "projects": {
-    "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\Business logic layer.csproj": {
+    "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\Business logic layer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\Business logic layer.csproj",
+        "projectUniqueName": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\Business logic layer.csproj",
         "projectName": "Business logic layer",
-        "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\Business logic layer.csproj",
-        "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
-        "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\obj\\",
+        "projectPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\Business logic layer.csproj",
+        "packagesPath": "C:\\Users\\RAMEZ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\RAMEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj": {
-                "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj"
+              "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\Data access layer.csproj": {
+                "projectPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\Data access layer.csproj"
               }
             }
           }
@@ -79,24 +79,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj": {
+    "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\Data access layer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj",
+        "projectUniqueName": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\Data access layer.csproj",
         "projectName": "Data access layer",
-        "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj",
-        "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
-        "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\obj\\",
+        "projectPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\Data access layer.csproj",
+        "packagesPath": "C:\\Users\\RAMEZ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Data access layer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\RAMEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -170,24 +170,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Educational_Platform\\Educational_Platform.csproj": {
+    "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Educational_Platform\\Educational_Platform.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Educational_Platform\\Educational_Platform.csproj",
+        "projectUniqueName": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Educational_Platform\\Educational_Platform.csproj",
         "projectName": "Educational_Platform",
-        "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Educational_Platform\\Educational_Platform.csproj",
-        "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
-        "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Educational_Platform\\obj\\",
+        "projectPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Educational_Platform\\Educational_Platform.csproj",
+        "packagesPath": "C:\\Users\\RAMEZ\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Educational_Platform\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\RAMEZ\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -202,8 +202,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\Business logic layer.csproj": {
-                "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Business logic layer\\Business logic layer.csproj"
+              "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\Business logic layer.csproj": {
+                "projectPath": "C:\\Users\\RAMEZ\\source\\repos\\Educational_Platform-now\\Business logic layer\\Business logic layer.csproj"
               }
             }
           }
@@ -270,7 +270,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
