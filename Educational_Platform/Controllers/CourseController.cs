@@ -117,6 +117,9 @@ namespace Educational_Platform.Controllers
             var lessons = await _unitOfWork.Lesson.GetAllAsync();
             var courseLessons = lessons.Where(l => l.CourseID == id);
 
+            var user = await _userManager.GetUserAsync(User);
+            var currentProfilePicture = user?.ProfilePicture ?? "default.png";
+
             // Retrieve comments for the course's lessons
             var comments = await _unitOfWork.Comment.GetAllAsync(
                 c => courseLessons.Select(l => l.ID).Contains(c.LessonID),
@@ -155,7 +158,8 @@ namespace Educational_Platform.Controllers
                         : c.Instructor != null
                             ? "/img/alaaphote.jpg"
                             : "img/default-instructor.png"
-                }).ToList()
+                }).ToList(),
+                CurrentProfilePicture = currentProfilePicture
             };
 
             return View(courseDetailsViewModel);

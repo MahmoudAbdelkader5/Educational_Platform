@@ -305,62 +305,27 @@
                                     </div>
                                 </div>
                         
-                                <!-- Comment Section -->
-                                <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
-                                    <div class="card-header bg-white border-0 py-3 px-4">
-                                        <h3 class="text-dark mb-0 fw-bold fs-4 fo">التعليقات</h3>
-                                    </div>
-										<div class="card-body p-4">
-											
-                                        <!-- Display Comments -->
-                                        <div id="commentsList">
-                                            @if (Model.Comments != null && Model.Comments.Any())
-                                            {
-                                                var lessonComments = Model.Comments.Where(c => c.LessonID == Model.ID).ToList();
-                                                if (lessonComments.Any())
-                                                {
-                                                    foreach (var comment in lessonComments)
-                                                    {
-                                                        <div class="mb-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <img src="~/files/studentImage/@(comment.StudentPhoto ?? "/img/alaaphote.jpg")"
-                                                                     alt="@comment.StudentName"
-                                                                     class="rounded-circle me-3"
-                                                                     style="width: 50px; height: 50px; object-fit: cover;" . />
-                                                                <div>
-                                                                    <h6 class="mb-0 fo">@comment.StudentName</h6>
-                                                                    <small class="text-muted">@comment.CommentDate.ToString("g")</small>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mt-2">@comment.Content</p>
-                                                            <hr />
-                                                        </div>
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    <p class="text-muted">لا توجد تعليقات بعد. كن أول من يعلق!</p>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <p class="text-muted">لا توجد تعليقات بعد. كن أول من يعلق!</p>
-                                            }
-
-                                        </div>
-
-
-                                        <!-- Add Comment Form -->
-                                        <form id="addCommentForm" method="post" action="/Course/AddComment">
-                                            <input type="hidden" name="LessonID" value="@Model.ID" />
-                                            <div class="mb-3">
-                                                <textarea class="form-control" name="Content" rows="3" placeholder="اكتب تعليقك هنا..." required></textarea>
+                                        <!-- Comment Section -->
+                                        <div class="card shadow-sm border-0 rounded-4 overflow-hidden mb-4">
+                                            <div class="card-header bg-white border-0 py-3 px-4">
+                                                <h3 class="text-dark mb-0 fw-bold fs-4">التعليقات</h3>
                                             </div>
-                                            <button type="submit" class="btn btn-primary fo">نشر التعليق</button>
-                                        </form>
+                                            <div class="card-body p-4">
+                                                <!-- Display Comments -->
+                                                <div id="commentsList">
+                                                    <p class="text-muted">اختر درسًا لعرض التعليقات.</p>
+                                                </div>
 
-                                    </div>
-                                </div>
+                                                <!-- Comment Form -->
+                                                <form method="post" action="/Course/AddComment" id="commentForm" class="d-none">
+                                                    <input type="hidden" name="LessonID" id="LessonID" />
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" name="Content" rows="3" placeholder="اكتب تعليقك هنا..." required></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">نشر التعليق</button>
+                                                </form>
+                                            </div>
+                                        </div>
 
                           @*       <!-- Send Feedback Button -->
                                 <div class="d-flex justify-content-start mt-3">
@@ -423,76 +388,109 @@
             }, false);
 
             function handleSwipe() {
-                if (touchStartX - touchEndX > 100) { // Swipe left to close
+                if (touchStartX - touchEndX > 100) { 
                     $('#sidebar').removeClass('show-mobile');
                     $('.sidebar-overlay').removeClass('active');
                 }
             }
         $(document).ready(function () {
-            // Handle lesson click
             $('.lesson-link').click(function (e) {
                 e.preventDefault();
 
-                // Get lesson data
-                const lessonId = $(this).data('lesson-id');
-                const videoUrl = $(this).data('video-url');
-                const title = $(this).data('title');
-                const supportingFiles = $(this).data('supporting-files');
-                const taskFile = $(this).data('task-file');
+                             // Get lesson data
+                            const lessonId = $(this).data('lesson-id');
+                            const videoUrl = $(this).data('video-url');
+                            const title = $(this).data('title');
+                            const supportingFiles = $(this).data('supporting-files');
+                            const taskFile = $(this).data('task-file');
 
-                // Update active state in sidebar
-                $('.lesson-link').removeClass('active');
-                $(this).addClass('active');
+                            // Update active state in sidebar
+                            $('.lesson-link').removeClass('active');
+                            $(this).addClass('active');
 
-                // Update lesson title
-                $('#lessonTitle').text(title);
-                $('#defaultContent').addClass('d-none');
+                            // Update lesson title
+                            $('#lessonTitle').text(title);
+                            $('#defaultContent').addClass('d-none');
 
-                // Update video
-                if (videoUrl) {
-                    $('#videoSource').attr('src', '@baseVideoPath' + videoUrl);
-                    $('#lessonVideo').removeClass('d-none');
-                    $('#videoPlayer')[0].load(); // Reload the video
-                } else {
-                    $('#lessonVideo').addClass('d-none');
-                }
+                            // Update video
+                            if (videoUrl) {
+                                $('#videoSource').attr('src', '/files/video/' + videoUrl);
+                                $('#lessonVideo').removeClass('d-none');
+                                $('#videoPlayer')[0].load(); // Reload the video
+                            } else {
+                                $('#lessonVideo').addClass('d-none');
+                            }
 
-                // Update supporting files
-                if (supportingFiles) {
-                    const files = supportingFiles.split(',');
-                    const fileCards = files.map(file => `
-                        <div class="col-md-4">
-                            <div class="card border-0 shadow-sm h-100">
-                                <div class="card-body d-flex align-items-center">
-                                    <i class="fas fa-file-pdf text-danger me-3 fs-3"></i>
-                                    <div class="overflow-hidden">
-                                        <h6 class="mb-1 text-truncate">${file}</h6>
-                                        <small class="text-muted">PDF Document</small>
+                            // Update supporting files
+                            if (supportingFiles) {
+                                const files = supportingFiles.split(',');
+                                const fileCards = files.map(file => `
+                                    <div class="col-md-4">
+                                        <div class="card border-0 shadow-sm h-100 hover-scale">
+                                            <div class="card-body d-flex align-items-center">
+                                                <i class="fas fa-file-pdf text-danger me-3 fs-3"></i>
+                                                <div class="overflow-hidden">
+                                                    <h6 class="mb-1 text-truncate">${file}</h6>
+                                                    <small class="text-muted">PDF Document</small>
+                                                </div>
+                                                <a href="/files/file/${file}" download class="ms-auto btn btn-sm btn-outline-primary rounded-circle">
+                                                    <i class="fas fa-download"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <a href="@baseSupportingPath${file}" download class="ms-auto btn btn-sm btn-outline-primary rounded-circle">
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                    $('#supportingFilesList').html(fileCards);
-                    $('#lessonFiles').removeClass('d-none');
-                } else {
-                    $('#lessonFiles').addClass('d-none');
-                }
+                                `).join('');
+                                $('#supportingFilesList').html(fileCards);
+                                $('#lessonFiles').removeClass('d-none');
+                            } else {
+                                $('#lessonFiles').addClass('d-none');
+                            }
 
-                // Update task file
-                if (taskFile) {
-                    $('#taskFileLink').attr('href', '@baseSupportingPath' + taskFile);
-                    $('#lessonTask').removeClass('d-none');
-                } else {
-                    $('#lessonTask').addClass('d-none');
-                }
+                            // Update task file
+                            if (taskFile) {
+                                $('#taskFileLink').attr('href', '/files/file/' + taskFile);
+                                $('#lessonTask').removeClass('d-none');
+                            } else {
+                                $('#lessonTask').addClass('d-none');
+                            }
 
-                // Update the hidden LessonID field in the comment form
-                $('#LessonID').val(lessonId);
-            });
+                            // Update the hidden LessonID field in the comment form
+                            $('#LessonID').val(lessonId);
+
+                            // Fetch and update comments for the selected lesson
+                            const lessonComments = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Comments));
+                            const filteredComments = lessonComments.filter(comment => comment.LessonID === lessonId);
+
+                            const commentsList = $('#commentsList');
+                            commentsList.empty();
+
+                            if (filteredComments.length > 0) {
+                                filteredComments.forEach(comment => {
+                                    const commentHtml = `
+                                        <div class="mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <img src="/files/studentImage/${comment.StudentPhoto || 'alaaphote.jpg'}"
+                                                     alt="${comment.StudentName}"
+                                                     class="rounded-circle me-3"
+                                                     style="width: 50px; height: 50px; object-fit: cover;" />
+                                                <div>
+                                                    <h6 class="mb-0">${comment.StudentName}</h6>
+                                                    <small class="text-muted">${new Date(comment.CommentDate).toLocaleString()}</small>
+                                                </div>
+                                            </div>
+                                            <p class="mt-2">${comment.Content}</p>
+                                            <hr />
+                                        </div>
+                                    `;
+                                    commentsList.append(commentHtml);
+                                });
+                            } else {
+                                commentsList.html('<p class="text-muted">لا توجد تعليقات بعد. كن أول من يعلق!</p>');
+                            }
+
+                            // Show the comment form
+                            $('#commentForm').removeClass('d-none');
+                        });
 
             // Sidebar toggle
             $('#toggleSidebarBtn').click(function () {

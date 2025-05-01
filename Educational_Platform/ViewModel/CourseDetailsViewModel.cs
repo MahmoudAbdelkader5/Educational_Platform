@@ -10,8 +10,10 @@ namespace Educational_Platform.ViewModel
         public string Description { get; set; }
         public string Duration { get; set; }
         public string Image { get; set; }
-        public List<LessonViewModel> Lessons { get; set; } = new List<LessonViewModel>();
-        public List<CommentViewModel> Comments { get; set; } = new List<CommentViewModel>();
+        public List<LessonViewModel> Lessons { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
 
+        // Add this property
+        public string CurrentProfilePicture { get; set; }
     }
 }
