@@ -4310,23 +4310,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\youssef\\.nuget\\packages\\": {},
+    "C:\\Users\\master\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj",
+      "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
       "projectName": "Data access layer",
-      "projectPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\Data access layer.csproj",
-      "packagesPath": "C:\\Users\\youssef\\.nuget\\packages\\",
-      "outputPath": "D:\\STUDY\\ITI - .NET\\PROJECTS\\Final Project\\New folder (18)\\Data access layer\\obj\\",
+      "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
+      "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
+      "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\youssef\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\master\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4335,6 +4335,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
