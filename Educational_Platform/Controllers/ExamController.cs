@@ -34,11 +34,8 @@ namespace Educational_Platform.Controllers
                 var exams = await _unitOfWork.Exam.GetAllAsync(includeProperties: "Course");
                 ViewBag.ExamCount = await _unitOfWork.Exam.GetCountAsync();
                 ViewBag.QuestionCount = await _unitOfWork.questions.GetCountAsync();
-                ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
-                ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-                ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
-                ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
-                ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+                await SetViewDataCounts();
+
 
                 return View(exams);
             }
@@ -47,11 +44,22 @@ namespace Educational_Platform.Controllers
                 return View(new List<Exam>());
             }
         }
+        private async Task SetViewDataCounts()
+        {
+            ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+        }
         // GET: Exam/Details/5
         public async Task<IActionResult> Details(int id)
         {
             try
             {
+                await SetViewDataCounts();
+
                 var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
                     filter: e => e.Id == id,
                     includeProperties: "Course");
@@ -76,6 +84,8 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
+
                 await PopulateCreateViewBags();
                 return View(new Exam());
             }
@@ -93,6 +103,8 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
+
                 await PopulateCreateViewBags();
 
                 await _unitOfWork.Exam.AddAsync(exam);
@@ -127,6 +139,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
                     e => e.Id == id,
                     includeProperties: "ExamQuestions.Question");
@@ -159,7 +172,8 @@ namespace Educational_Platform.Controllers
 
             try
             {
-                
+                await SetViewDataCounts();
+
                 await PopulateEditViewBags(exam);
 
                 // Update exam
@@ -185,6 +199,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var exam = await _unitOfWork.Exam.GetByIdAsync(id);
                 if (exam == null)
                 {

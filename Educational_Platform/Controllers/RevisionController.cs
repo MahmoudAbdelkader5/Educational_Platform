@@ -39,11 +39,8 @@ namespace Educational_Platform.Controllers
                     revisions =  _unitOfWork.Revision.searchCourseBytitle(search);
                 }
 
-                ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
-                ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
-                ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
-                ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-                ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+                await SetViewDataCounts();
+
                 if (!revisions.Any())
                 {
                     ViewData["RevisionCount"] = 0;
@@ -57,12 +54,21 @@ namespace Educational_Platform.Controllers
                 return View(new List<Revision>());
             }
         }
-
+        private async Task SetViewDataCounts()
+        {
+            ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+        }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             try
             {
+                await SetViewDataCounts();
                 ViewBag.Courses = await _unitOfWork.Course.GetAllAsync();
 
                 var revision = await _unitOfWork.Revision.GetByIdAsync(id);
@@ -87,6 +93,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 await PopulateCoursesViewBag();
                 return View();
             }
@@ -103,6 +110,8 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
+
                 var revision = _mapper.Map<Revision>(revisionViewModel);
 
                 // Handle file uploads
@@ -135,6 +144,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var revision = await _unitOfWork.Revision.GetByIdAsync(id);
 
                 if (revision == null)
@@ -166,6 +176,7 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                await SetViewDataCounts();
                 var revision = _mapper.Map<Revision>(revisionViewModel);
 
                 // Handle file uploads if new files are provided

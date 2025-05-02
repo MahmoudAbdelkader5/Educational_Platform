@@ -32,50 +32,36 @@ namespace Educational_Platform.Controllers
         }
 
 
-        public async Task<IActionResult> StudentProfile()
+        // Fix for CS0103: The name 'examId' does not exist in the current context
+
+        // The variable 'examId' is not defined in the current context. To fix this, you need to ensure that 'examId' is either passed as a parameter to the method or declared and initialized within the method's scope. 
+
+        // Assuming 'examId' is required for the logic and should be passed as a parameter to the 'StudentProfile' method, update the method signature and usage as follows:
+
+        public async Task<IActionResult> StudentProfile(int examId)
         {
-            // Get the currently logged-in user
             var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
+            if (user == null) return RedirectToAction("Login", "Account");
+            if (user.StudentId == null) return NotFound("Student profile not found.");
 
-            // Ensure the user is linked to a student profile
-            if (user.StudentId == null)
-            {
-                return NotFound("Student profile not found.");
-            }
-
-            // Retrieve student information
             var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
-            if (student == null)
-            {
-                return NotFound("Student not found.");
-            }
+            if (student == null) return NotFound("Student not found.");
 
-            // Retrieve courses the student is enrolled in
             var studentCourses = await _unitOfWork.student_CourseRepo
                 .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Course");
 
-            // Retrieve exam results for the student
             var examResults = await _unitOfWork.student_Exam
-                .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Exam");
-            // Calculate total score across all exams (if needed for display)
-            var totalScoreAcrossAllExams = examResults.Sum(e => e.Score);
+                .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Exam,Exam.ExamQuestions");
 
-            // Map exam results to view model
             var examResultViewModels = examResults.Select(e => new ExamResultViewModel
             {
+                ExamId = e.ExamID,  // Added for details link
                 ExamTitle = e.Exam.Title,
-                Score = (int)e.Score, // No need to cast to int unless necessary
+                CorrectAnswers = (int)e.Score,  // Assuming Score = number of correct answers
                 TotalQuestions = e.Exam.ExamQuestions.Count,
-                ExamDate = e.ExamDate,
-                CorrectAnswers = e.Exam.ExamQuestions.Count(q => q.Question.Answer == e.Score.ToString()), // Assuming Score is the number of correct answers
-                Percentage = (double)(e.Score / examResults.Sum(er => er.Score)) * 100, // Assuming Score is out of total questions
+                ExamDate = e.ExamDate
             }).ToList();
 
-            // Map data to the StudentProfileViewModel
             var studentProfileViewModel = new StudentProfileViewModel
             {
                 Id = student.ID,
@@ -94,12 +80,11 @@ namespace Educational_Platform.Controllers
                     Price = e.Course.Price,
                     Image = e.Course.Image
                 }).ToList(),
-                ExamResults = examResultViewModels // Add this property to your StudentProfileViewModel
+                ExamResults = examResultViewModels
             };
 
             return View(studentProfileViewModel);
         }
-
         // GET: Update Profile
         [HttpGet]
         public async Task<IActionResult> UpdateProfile()

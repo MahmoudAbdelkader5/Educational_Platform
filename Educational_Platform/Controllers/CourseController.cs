@@ -40,11 +40,8 @@ namespace Educational_Platform.Controllers
                 courses = _unitOfWork.Course.searchCourseBytitle(search);
             }
             var courseCount = courses.Count();
-            ViewData["CourseCount"] = courseCount;
-            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
-            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
-            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            await SetViewDataCounts();
+
 
 
             if (courses == null || !courses.Any())
@@ -56,12 +53,23 @@ namespace Educational_Platform.Controllers
             var mappedCourses = Mapper.Map<IEnumerable<CourseViewModel>>(courses);
             return View(mappedCourses);
         }
+        private async Task SetViewDataCounts()
+        {
+            ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+        }
 
         [HttpGet]
         [Authorize(Roles = "Instructor")]
 
         public async Task<IActionResult> Create()
         {
+            await SetViewDataCounts();
+
             return View();
         }
 
@@ -72,6 +80,8 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
+
                 var courses = Mapper.Map<Course>(courseVm);
 
                 if (courseVm.ImageFile != null)
@@ -96,6 +106,8 @@ namespace Educational_Platform.Controllers
         [Authorize(Roles = "Instructor")]
         public async Task<IActionResult> Details(int id)
         {
+            await SetViewDataCounts();
+
             var course = await _unitOfWork.Course.GetByIdAsync(id);
             if (course == null)
             {
@@ -196,6 +208,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var courses = Mapper.Map<Course>(course);
 
                 if (course.ImageFile != null)

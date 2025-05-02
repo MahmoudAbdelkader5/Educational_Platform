@@ -33,11 +33,8 @@ namespace Educational_Platform.Controllers
                 lessons = await _unitOfWork.Lesson
                         .GetAllAsync(includeProperties: "Course");
 
-                ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
-                ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
-                ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
-                ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-                ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+                await SetViewDataCounts();
+
                 return View(lessons);
             }
             catch (Exception ex)
@@ -47,11 +44,22 @@ namespace Educational_Platform.Controllers
             }
         }
 
+        private async Task SetViewDataCounts()
+        {
+            ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+        }
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             try
             {
+                await SetViewDataCounts();
+
                 var lesson = await _unitOfWork.Lesson.GetByIdAsync(id);
                 ViewBag.Courses = await _unitOfWork.Course.GetAllAsync();
 
@@ -79,6 +87,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 await PopulateCoursesViewBag();
                 return View();
             }
@@ -95,6 +104,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 // Validate CourseID
                 if (lessonVm.CourseID <= 0)
                 {
@@ -148,6 +158,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var lesson = await _unitOfWork.Lesson.GetByIdAsync(id);
 
                 if (lesson == null)
@@ -179,6 +190,7 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                await SetViewDataCounts();
                 // Validate CourseID
                 if (lessonViewModel.CourseID <= 0)
                 {

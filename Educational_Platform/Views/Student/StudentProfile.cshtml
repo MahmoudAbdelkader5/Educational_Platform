@@ -311,7 +311,6 @@
                 </div>
             </div>
 
-            <!-- Exams Results -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
                     <h5 class="mb-0 text-white fo" style="direction:rtl;">
@@ -326,7 +325,6 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th class="text-end">عنوان الامتحان</th>
-                                        <th class="text-center">الدرجة</th>
                                         <th class="text-center">الإجابات الصحيحة</th>
                                         <th class="text-center">النسبة</th>
                                         <th class="text-center">التاريخ</th>
@@ -340,11 +338,8 @@
                                             <td class="text-end">@result.ExamTitle</td>
                                             <td class="text-center">
                                                 <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
-                                                    @result.Score / @result.TotalQuestions
+                                                    @result.CorrectAnswers / @result.TotalQuestions
                                                 </span>
-                                            </td>
-                                            <td class="text-center">
-                                                @result.CorrectAnswers / @result.TotalQuestions
                                             </td>
                                             <td class="text-center">
                                                 @result.Percentage.ToString("0.00")%
@@ -353,7 +348,7 @@
                                                 @result.ExamDate.ToString("yyyy/MM/dd")
                                             </td>
                                             <td class="text-center">
-                                                <a href="@Url.Action("Answers", "Exam")"
+                                                <a href="@Url.Action("R", "student")"
                                                    class="btn btn-sm btn-outline-primary"
                                                    target="_blank">
                                                     <i class="fas fa-eye me-1"></i> عرض
@@ -366,17 +361,15 @@
                                     <tr class="table-active">
                                         <th class="text-end">المجموع</th>
                                         <th class="text-center">
-                                            @Model.ExamResults.Sum(r => r.Score) / @Model.ExamResults.Sum(r => r.TotalQuestions)
-                                        </th>
-                                        <th class="text-center">
                                             @Model.ExamResults.Sum(r => r.CorrectAnswers) / @Model.ExamResults.Sum(r => r.TotalQuestions)
                                         </th>
                                         <th class="text-center">
                                             @{
+                                                var totalCorrect = Model.ExamResults.Sum(r => r.CorrectAnswers);
                                                 var totalQuestions = Model.ExamResults.Sum(r => r.TotalQuestions);
                                                 var overallPercentage = totalQuestions > 0
-                                                    ? (Model.ExamResults.Sum(r => r.Score) * 100 / totalQuestions)
-                                                    : 0;
+                                                ? totalCorrect * 100.0 / totalQuestions
+                                                : 0;
                                             }
                                             @overallPercentage.ToString("0.00")%
                                         </th>
@@ -399,9 +392,6 @@
                     }
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

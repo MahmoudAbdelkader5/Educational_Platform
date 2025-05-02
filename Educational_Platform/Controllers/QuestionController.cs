@@ -25,12 +25,8 @@ namespace Educational_Platform.Controllers
             try
             {
                 var questions = await _unitOfWork.questions.GetAllAsync();
-                ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
-                ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
 
-                ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
-                ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-                ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+                await SetViewDataCounts();
 
                 return View(questions);
             }
@@ -42,6 +38,15 @@ namespace Educational_Platform.Controllers
             }
         }
 
+        private async Task SetViewDataCounts()
+        {
+            ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
+            ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
+            ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
+            ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+        }
         // GET: Question/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -53,6 +58,7 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                await SetViewDataCounts();
                 var question = await _unitOfWork.questions.GetByIdAsync(id.Value);
                 if (question == null)
                 {
@@ -70,8 +76,10 @@ namespace Educational_Platform.Controllers
         }
 
         // GET: Question/Create
-        public IActionResult Create()
+        public  async Task<IActionResult> Create()
         {
+            await SetViewDataCounts();
+
             return View();
         }
 
@@ -87,6 +95,7 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                await SetViewDataCounts();
                 await _unitOfWork.questions.AddAsync(question);
                 var res = await _unitOfWork.Save();
 
@@ -113,6 +122,7 @@ namespace Educational_Platform.Controllers
         {
             try
             {
+                await SetViewDataCounts();
                 var question = await _unitOfWork.questions.GetByIdAsync(id);
                 if (question == null)
                 {
@@ -147,6 +157,7 @@ namespace Educational_Platform.Controllers
 
             try
             {
+                await SetViewDataCounts();
                 var existingQuestion = await _unitOfWork.questions.GetByIdAsync(id);
                 if (existingQuestion == null)
                 {

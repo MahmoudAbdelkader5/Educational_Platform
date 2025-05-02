@@ -89,20 +89,27 @@ foreach (var course in courses)
     public async Task<IActionResult> Courses()
     {
         var courses = await _unitOfWork.Course.GetAllAsync();
-        var courseViewModels = courses.Select(course => new CourseViewModel
+        var courseViewModels = new List<CourseViewModel>();
+
+        foreach (var course in courses)
         {
-            ID = course.ID,
-            Title = course.Title,
-            Description = course.Description,
-            Price = course.Price,
-            Duration = course.Duration,
-            Image = course.Image,
-            status = course.Status
-        }).ToList();
+            var isEnrolled = await IsStudentEnrolledInCourse(course.ID);
+            courseViewModels.Add(new CourseViewModel
+            {
+                ID = course.ID,
+                Title = course.Title,
+                Description = course.Description,
+                Price = course.Price,
+                Duration = course.Duration,
+                Image = course.Image,
+                status = course.Status,
+                IsEnrolled = isEnrolled
+            });
+        }
 
         return View(courseViewModels);
     }
-   
+
     public IActionResult Privacy()
     {
         return View();

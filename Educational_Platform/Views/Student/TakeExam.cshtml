@@ -281,7 +281,7 @@
    
     <script>
         // مؤقت الامتحان
-        let timeLeft = 10;//60 * @Model.duration;
+        let timeLeft = 60*@Model.duration;//60 * @Model.duration;
         const timerElement = document.getElementById("timer");
         const timer = setInterval(() => {
             timeLeft--;
