@@ -272,7 +272,7 @@ namespace Educational_Platform.Controllers
                     if (question != null)
                     {
                         bool isCorrect;
-                        string qw = "0";
+                        string qw = "-1";
                         //= question.Question.Answer == answer.Value;
                         if (question.Answer == "A")
                         {
