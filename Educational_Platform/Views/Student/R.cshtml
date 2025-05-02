@@ -1,7 +1,11 @@
-﻿@{
+﻿@model Exam
+@{
     ViewData["Title"] = "نتيجة الامتحان";
     Layout = null;
+    var userAnswers = @ViewBag.answers;
+
 }
+
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -13,104 +17,124 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4361ee;
-            --secondary-color: #3f37c9;
-            --accent-color: #4cc9f0;
-            --success-color: #4ad66d;
-            --light-color: #f8f9fa;
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --success-color: #4ad66d;
+        --light-color: #f8f9fa;
         }
 
         body {
-            background-color: #f5f7fa;
-            font-family: 'Tajawal', sans-serif;
+        background-color: #f5f7fa;
+        font-family: 'Tajawal', sans-serif;
         }
 
         .exam-card {
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: none;
-            overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+        overflow: hidden;
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            padding: 1.5rem;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 1.5rem;
         }
 
         .score-box {
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            padding: 1.5rem;
-            height: 100%;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        padding: 1.5rem;
+        height: 100%;
         }
 
-            .score-box:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            }
+        .score-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
         .total-score {
-            background: linear-gradient(135deg, #4cc9f0, #4361ee);
-            color: white;
+        background: linear-gradient(135deg, #4cc9f0, #4361ee);
+        color: white;
         }
 
         .correct-answers {
-            background: linear-gradient(135deg, #4ad66d, #3a86ff);
-            color: white;
+        background: linear-gradient(135deg, #4ad66d, #3a86ff);
+        color: white;
         }
 
         .total-questions {
-            background: linear-gradient(135deg, #f8961e, #f3722c);
-            color: white;
+        background: linear-gradient(135deg, #f8961e, #f3722c);
+        color: white;
         }
 
         .display-4 {
-            font-weight: 700;
-            margin-top: 10px;
+        font-weight: 700;
+        margin-top: 10px;
         }
 
         .progress-ring {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
         }
 
         .progress-ring__circle {
-            transition: stroke-dashoffset 0.9s;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
+        transition: stroke-dashoffset 0.9s;
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
         }
 
         .celebrate {
-            font-size: 2rem;
-            color: gold;
-            animation: bounce 1s infinite alternate;
+        font-size: 2rem;
+        color: gold;
+        animation: bounce 1s infinite alternate;
+        }
+        /* --------------- */
+        /* إضافة إلى الجزء Style */
+        .answer-details {
+        margin-top: 3rem;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
 
-        @@keyframes bounce {
-            from {
-                transform: translateY(0);
-            }
+        .card-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        }
 
-            to {
-                transform: translateY(-10px);
-            }
+        .alert h6 {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        }
+        /* ----------------- */
+
+        @@keyframes bounce {
+        from {
+        transform: translateY(0);
+        }
+
+        to {
+        transform: translateY(-10px);
+        }
         }
 
         /* تنسيقات الطباعة */
         @@media print {
-            body {
-                background: white;
-            }
+        body {
+        background: white;
+        }
 
-            .exam-card {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
+        .exam-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        }
 
-            .no-print {
-                display: none !important;
-            }
+        .no-print {
+        display: none !important;
+        }
         }
     </style>
 </head>
@@ -129,8 +153,8 @@
                                 <div class="score-box total-score">
                                     <svg class="progress-ring" viewBox="0 0 100 100">
                                         <circle class="progress-ring__circle" stroke="white" stroke-width="6" fill="transparent" r="40" cx="50" cy="50"
-                                                stroke-dasharray="251.2"
-                                                stroke-dashoffset="@(251.2 * (1 - ((double)ViewBag.TotalScore / ViewBag.TotalQuestions)))" />
+                                        stroke-dasharray="251.2"
+                                        stroke-dashoffset="@(251.2 * (1 - ((double)ViewBag.TotalScore / ViewBag.TotalQuestions)))" />
                                     </svg>
                                     <h5>الدرجة الكلية</h5>
                                     <p class="display-4">@ViewBag.TotalScore<span class="fs-6">/@ViewBag.TotalQuestions</span></p>
@@ -190,6 +214,117 @@
                                 <h4 class="alert-heading"><i class="fas fa-comment-dots me-2"></i>@message</h4>
                             </div>
                         </div>
+
+                        <!-- الأسئلة والإجابات -->
+                        <div class="mt-5">
+                            <h3 class="text-center mb-4"><i class="fas fa-list-ol me-2"></i>تفاصيل الإجابات</h3>
+
+                            @{
+                                int questionNum = 1;
+                                int totalQuestions = Model.ExamQuestions.Count;
+                            }
+
+                            @foreach (var eq in Model.ExamQuestions)
+                            {
+                                <div class="question-card">
+                                    <h4 class="question-text">
+                                        <span class="question-number">(@questionNum)</span>
+                                        @eq.Question.QuestionText
+                                    </h4>
+                                    <div class="mt-4">
+                                        <h6>إجابتك:</h6>
+
+                                        @{
+                                            string questionanswer=eq.Question.Answer;
+                                            string uAnswer = userAnswers[eq.Question.QuestionID];
+                                            string qw = "";
+                                            string question_answer_content="";
+                                            string user_answer_content="";
+                                            @if (uAnswer == "1")
+                                            {
+                                                qw = "A";
+                                                user_answer_content = eq.Question.q1;
+
+                                            }
+                                            else if (uAnswer == "2")
+                                            {
+                                                qw = "B";
+                                                user_answer_content = eq.Question.q2;
+
+
+                                            }
+                                            else if (uAnswer == "3")
+                                            {
+                                                qw = "C";
+                                                user_answer_content = eq.Question.q3;
+
+
+                                            }
+                                            else if (uAnswer == "4")
+                                            {
+                                                qw = "D";
+                                                user_answer_content = eq.Question.q4;
+
+                                            }
+											@if (questionanswer == "A")
+                                             {
+												question_answer_content = eq.Question.q1;
+                                                
+                                            }
+				                          	else if (questionanswer == "B")
+											{
+												question_answer_content = eq.Question.q2;
+											}
+											else if (questionanswer == "C")
+											{
+												question_answer_content = eq.Question.q3;
+											}
+											else if (questionanswer == "D")
+											{
+												question_answer_content = eq.Question.q4;
+											}
+
+
+
+                                        }
+                                        <div class="alert @(qw == questionanswer ? " alert-success" : "alert-danger" )">
+
+                                            @if (!string.IsNullOrEmpty(@ViewBag.answers[eq.Question.QuestionID]) && @ViewBag.answers[eq.Question.QuestionID]!="0")
+                                            {
+                                                <span> (@qw)  </span>
+                                                <span>   @user_answer_content </span>
+                                                if ((qw) != questionanswer)
+                                                {
+                                                    <span class="text-danger"> (إجابة خاطئة)</span>
+
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-success"> (إجابة صحيحة)</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span class="text-danger">لم يتم الإجابة على هذا السؤال</span>
+                                            }
+                                        </div> 
+
+                                        <h6>الإجابة الصحيحة:</h6>
+                                        <div class="alert alert-info">
+                                            <span>(@eq.Question.Answer)</span>
+                                            <span> @question_answer_content  </span>
+                                               
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                                questionNum++;
+                            }
+
+
+                       
+                        </div>
+
 
                         <!-- الأزرار -->
                         <div class="text-center mt-4 no-print">

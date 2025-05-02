@@ -278,99 +278,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    @* <script>
-        // مؤقت الامتحان
-        let timeLeft = 60 * @Model.duration;
-        const timerElement = document.getElementById("timer");
-        const timer = setInterval(() => {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerElement.innerHTML = `<i class="fas fa-clock me-2"></i><span>${minutes}:${seconds.toString().padStart(2, '0')}</span>`;
-
-            // تغيير لون المؤقت عندما يقل الوقت عن 5 دقائق
-            if (timeLeft <= 300) {
-                timerElement.style.background = "linear-gradient(135deg, #FF7E67, #FF4757)";
-            }
-
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                alert("انتهى وقت الامتحان!");
-                // Redirect to SubmitExam view with the examId as a query parameter
-                window.location.href = '/Student/SubmitExam?examId=@Model.Id';
-            }
-        }, 1000);
-
-        // شريط التقدم
-        const progressBar = document.getElementById("examProgress");
-        const totalQuestions = @Model.ExamQuestions.Count;
-        let answeredQuestions = 0;
-
-        // تحديث شريط التقدم عند اختيار إجابة
-        $(document).ready(function() {
-            $('.option-radio').change(function() {
-                answeredQuestions = $('.option-radio:checked').length;
-                const progressPercent = (answeredQuestions / totalQuestions) * 100;
-                progressBar.style.width = `${progressPercent}%`;
-
-                // تغيير لون شريط التقدم بناءً على النسبة
-                if (progressPercent < 30) {
-                    progressBar.style.background = "linear-gradient(90deg, #FF7E67, #FF4757)";
-                } else if (progressPercent < 70) {
-                    progressBar.style.background = "linear-gradient(90deg, #FFD166, #FF7E67)";
-                } else {
-                    progressBar.style.background = "linear-gradient(90deg, #42E6A4, #6C4DF6)";
-                }
-            });
-
-            // تأثيرات عند اختيار الإجابات
-            $('.option-label').click(function() {
-                $(this).parent().find('.option-label').removeClass('active');
-                $(this).addClass('active');
-            });
-        });
-
-        // Modify the form submission to build the answers dictionary
-        $('form').submit(function(e) {
-            e.preventDefault();
-
-            // Create the answers dictionary
-            const answers = {};
-            let allAnswered = true;
-
-            // Loop through all questions
-            $('.question-card').each(function() {
-                const questionId = $(this).find('input[type="radio"]').first().attr('name').match(/\[(\d+)\]/)[1];
-                const selectedOption = $(this).find('input[type="radio"]:checked').val();
-
-                if (selectedOption) {
-                    answers[questionId] = selectedOption;
-                } else {
-                    allAnswered = false;
-                    $(this).css('border-left', '3px solid #FF4757');
-                }
-            });
-
-            if (!allAnswered) {
-                alert('الرجاء الإجابة على جميع الأسئلة قبل التسليم');
-                return;
-            }
-
-            // Add the answers dictionary to a hidden input
-            $('<input>').attr({
-                type: 'hidden',
-                name: 'answersJson',
-                value: JSON.stringify(answers)
-            }).appendTo('form');
-
-            // Submit the form
-            this.submit();
-        });
-<<<<<<< HEAD
-=======
-
-
-    </script> *@
+   
     <script>
         // مؤقت الامتحان
         let timeLeft = 10;//60 * @Model.duration;
@@ -493,7 +401,6 @@
                 this.submit();
             }
         });
->>>>>>> 80d9b73cf905c9ae3b7e77df5f35e37b3e381990
     </script>
 </body>
 </html>

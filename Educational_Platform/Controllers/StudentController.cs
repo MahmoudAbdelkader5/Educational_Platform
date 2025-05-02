@@ -32,8 +32,6 @@ namespace Educational_Platform.Controllers
         }
 
 
-        // GET: Update Profile
-        [HttpGet]
         public async Task<IActionResult> StudentProfile()
         {
             // Get the currently logged-in user
@@ -101,6 +99,42 @@ namespace Educational_Platform.Controllers
 
             return View(studentProfileViewModel);
         }
+
+        // GET: Update Profile
+        [HttpGet]
+        public async Task<IActionResult> UpdateProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            if (user.StudentId == null)
+            {
+                return NotFound("Student profile not found.");
+            }
+
+            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+            if (student == null)
+            {
+                return NotFound("Student not found.");
+            }
+
+            var model = new UpdateStudentProfileViewModel
+            {
+                Id = student.ID,
+                Name = student.Name,
+                Email = student.Email,
+                PhoneNumber = student.PhoneNumber,
+                FatherPhone = student.FatherPhone,
+                GradeLevel = student.GradeLevel,
+                CurrentProfilePicture = student.ProfilePicture // تأكد من تعيين الصورة الحالية
+            };
+
+            return View(model);
+        }
+
         // POST: Update Profile
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(UpdateStudentProfileViewModel model)
@@ -300,16 +334,7 @@ namespace Educational_Platform.Controllers
                             correctAnswers++;
                         }
 
-                        //string answerText = isCorrect.ToString();
-                        //var studentAnswer = new student_answers
-                        //{
-                        //    examQuestionID = question.ID,
-                        //    StudentID = studentId,
-                        //    AnswerText = answerText,
-
-                        //};
-
-                        //await _unitOfWork.student_answers.AddAsync(studentAnswer);
+                     
                     }
                 }
 
@@ -330,13 +355,18 @@ namespace Educational_Platform.Controllers
                 await _unitOfWork.Save();
 
                 int qn = answers.Count;
+                var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
+               e => e.Id == examId,
+               includeProperties: "ExamQuestions.Question");
                 // في الـ Action الأول
                 ViewBag.TotalScore = totalScore;
                 ViewBag.CorrectAnswers = correctAnswers;
                 ViewBag.TotalQuestions = qn;
+                ViewBag.answers = answers;
+                ViewBag.exam = exam;
 
                 //return RedirectToAction("R", new { examId, studentId });
-                return View("R");
+                return View("R", exam);
 
             }
             catch (Exception ex)
@@ -346,7 +376,31 @@ namespace Educational_Platform.Controllers
             }
         }
 
-        
+        // في الـ Action الثاني (R)
+        //public IActionResult R(int examId, int studentId)
+        //{
+        //    //// تحقق من وجود البيانات في TempData
+        //    //if (TempData["TotalScore"] == null)
+        //    //{
+        //    //    return RedirectToAction("AvailableExams");
+        //    //}
+
+        //    // احتفظ بالبيانات للعرض (View) باستخدام ViewBag
+        //    ViewBag.TotalScore = TempData.Peek("TotalScore");
+        //    ViewBag.CorrectAnswers = TempData.Peek("CorrectAnswers");
+        //    ViewBag.TotalQuestions = TempData.Peek("TotalQuestions");
+        //    ViewBag.ErrorMessage = TempData.Peek("ErrorMessage");
+
+        //    // إذا أردت الاحتفاظ بالبيانات في TempData لطلب آخر
+        //    // TempData.Keep(); // أو TempData.Keep("key");
+
+        //    return View();
+        //}
+
+
+
+
+
 
 
 
