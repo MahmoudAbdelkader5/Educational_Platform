@@ -280,7 +280,7 @@
 
     <script>
         // مؤقت الامتحان
-        let timeLeft = 20;
+        let timeLeft = 60 * @Model.duration;
         const timerElement = document.getElementById("timer");
         const timer = setInterval(() => {
             timeLeft--;
@@ -296,7 +296,8 @@
             if (timeLeft <= 0) {
                 clearInterval(timer);
                 alert("انتهى وقت الامتحان!");
-                document.querySelector("form").submit();
+                // Redirect to SubmitExam view with the examId as a query parameter
+                window.location.href = '/Student/SubmitExam?examId=@Model.Id';
             }
         }, 1000);
 
@@ -329,8 +330,7 @@
             });
         });
 
-
-             // Modify the form submission to build the answers dictionary
+        // Modify the form submission to build the answers dictionary
         $('form').submit(function(e) {
             e.preventDefault();
 
@@ -366,8 +366,6 @@
             // Submit the form
             this.submit();
         });
-
-
     </script>
 </body>
 </html>

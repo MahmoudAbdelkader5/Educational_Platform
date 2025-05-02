@@ -1,1 +1,22 @@
-﻿
+﻿@model ExamResultViewModel
+
+@{
+    ViewData["Title"] = "نتيجة الامتحان";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0 fo text-white" style="direction:rtl;">
+                <i class="fas fa-check-circle me-2"></i> نتيجة الامتحان
+            </h5>
+        </div>
+        <div class="card-body text-center">
+            <h4 class="fo">عنوان الامتحان: @Model.ExamTitle</h4>
+            <p class="fo">الدرجة الكلية: @Model.TotalScore</p>
+            <p class="fo">عدد الإجابات الصحيحة: @Model.CorrectAnswers</p>
+            <p class="fo">النسبة المئوية: @Model.Percentage%</p>
+            <p class="fo">تاريخ الامتحان: @Model.ExamDate.ToString("yyyy-MM-dd HH:mm")</p>
+        </div>
+    </div>
+</div>

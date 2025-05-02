@@ -5,9 +5,17 @@
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
     @Html.Partial("~/Views/Shared/_Header.cshtml")
-
 }
+
 <style>
+    :root {
+        --primary-color: #4e73df;
+        --secondary-color: #f8f9fa;
+        --success-color: #1cc88a;
+        --danger-color: #ee3d5a;
+        --purple-color: #a750f3;
+    }
+
     .fo {
         font-family: "Cairo", sans-serif;
     }
@@ -17,16 +25,15 @@
         height: 150px;
         object-fit: cover;
         margin-bottom: 1rem;
+        transition: transform 0.3s ease;
     }
 
-        /* Optional: Add hover effect */
         .profile-image:hover {
             transform: scale(1.03);
-            transition: transform 0.3s ease;
         }
 
     .student-info {
-        background-color: #f8f9fa;
+        background-color: var(--secondary-color);
         padding: 15px;
         border-radius: 8px;
     }
@@ -34,10 +41,18 @@
     .card {
         border-radius: 10px;
         overflow: hidden;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+        }
 
     .card-header {
         font-weight: bold;
+        background-color: var(--primary-color);
     }
 
     .list-group-item {
@@ -45,7 +60,7 @@
     }
 
         .list-group-item:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(78, 115, 223, 0.1);
         }
 
     .progress-circle {
@@ -73,85 +88,72 @@
         position: relative;
         font-size: 1.5rem;
         font-weight: bold;
-        color: #4e73df;
     }
 
-    .stat-card {
-        transition: all 0.3s ease;
+    .motivational-quote {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        padding: 15px;
+        background-color: rgba(78, 115, 223, 0.1);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 4px;
     }
 
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    .empty-state {
+        padding: 2rem;
+        text-align: center;
+        color: #6c757d;
+    }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #dee2e6;
         }
 
-    /* Responsive styles */
     @@media (max-width: 991.98px) {
-        .sidebar-responsive
-
-    {
-        width: 100% !important;
-        position: relative !important;
-        top: auto !important;
-        margin-top: 20px;
+        .sidebar-responsive {
+            width: 100% !important;
+            position: relative !important;
+            top: auto !important;
+            margin-top: 20px;
             order: -1 !important;
-    }
-
-        .main-content {
-            order: 1 !important;
-        }
-    .profile-image {
-        width: 120px;
-        height: 120px;
-    }
-
-    .student-info {
-        text-align: center !important;
-    }
-
-        .student-info .d-flex {
-            justify-content: center !important;
         }
 
-    /* Center content on mobile */
-    .main-content {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
-    }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+        }
 
+        .student-info {
+            text-align: center !important;
+        }
+
+            .student-info .d-flex {
+                justify-content: center !important;
+            }
     }
 
     @@media (max-width: 767.98px) {
-        .progress-circle
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+        }
 
-    {
-        width: 100px;
-        height: 100px;
-    }
+            .progress-circle::before {
+                width: 70px;
+                height: 70px;
+            }
 
-    .progress-circle::before {
-        width: 70px;
-        height: 70px;
-    }
-
-    .progress-value {
-        font-size: 1.2rem;
-    }
-
-    /* Ensure student info is always visible */
-    .sidebar-responsive .card {
-        display: block !important;
-    }
-
+        .progress-value {
+            font-size: 1.2rem;
+        }
     }
 </style>
 
 <div class="container py-4">
     <div class="row">
-        <!-- Sidebar - responsive -->
+        <!-- Sidebar -->
         <div class="col-12 col-md-4 order-md-2 sidebar-responsive mb-5">
             <div class="card shadow-sm sticky-md-top" style="top: 20px;">
                 <div class="card-body text-center">
@@ -170,88 +172,98 @@
                              onerror="this.onerror=null;this.src='https://via.placeholder.com/150?text=No+Image';" />
                     }
 
-                    <!-- Student Info -->
                     <h4 class="mb-2 fo">@Model.FirstName @Model.LastName</h4>
+                    <p class="text-muted mb-3">@Model.GradeLevel</p>
 
                     <div class="student-info text-start mt-4" style="direction: rtl;">
                         <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-envelope me-2 text-primary p-2"> </i>
-                            <span>الايميل الالكتروني: @Model.Email</span>
+                            <i class="fas fa-envelope me-2 text-primary p-2"></i>
+                            <span>@Model.Email</span>
                         </div>
 
-                        <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-user-graduate me-2 text-primary p-2"> </i>
-                            <span>الصف: @Model.GradeLevel</span>
-                        </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="fas fa-phone-alt me-2 text-primary p-2"></i>
-                            <span>رقم الهاتف: @Model.PhoneNumber</span>
+                            <span>@Model.PhoneNumber</span>
                         </div>
+
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-phone-square me-2 text-primary p-2"></i>
+                            <span>@Model.FatherPhone</span>
+                        </div>
+
                         @Html.AntiForgeryToken()
-                        <!-- edit student info -->
-                        <div class="d-flex  justify-content-center mb-3">
-                            <a asp-controller="Student" asp-action="UpdateProfile"  class="btn btn-primary fo">
-                                <i class="fas fa-edit me-2 "></i> تعديل المعلومات الشخصية
+                        <div class="d-flex justify-content-center mt-4">
+                            <a asp-controller="Student" asp-action="UpdateProfile" class="btn btn-primary fo w-100">
+                                <i class="fas fa-edit me-2"></i> تعديل الملف الشخصي
                             </a>
                         </div>
-
-                       
                     </div>
-
-                    
                 </div>
             </div>
         </div>
-        <!-- Sidebar - responsive -->
+
         <!-- Main Content -->
         <div class="col-md-8 order-md-1 main-content">
+            <!-- Progress Section -->
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header">
                     <h5 class="mb-0 fo text-white" style="direction:rtl;">
                         <i class="fas fa-chart-line me-2"></i> مستوى تقدمك
                     </h5>
                 </div>
 
                 <div class="card-body">
-                    <p class="text-center mt-3 fo text-primary" style="font-weight: bold; direction: rtl;">
+                    <div class="motivational-quote fo text-center">
                         ⭐ كل لحظة تركّز فيها دلوقتي، بتقربك من حلمك الكبير... اجتهد، وخلّي تعبك يوصلك لهدفك ⭐
-                    </p>
-                    <hr />
-
-                    <div class="row text-center mt-5 ">
-                        <!-- Progress Item 1 -->
-                        <div class="col-md-4 mb-4 ">
-
-                            <div class="progress-circle" style=" background: conic-gradient(#4e73df var(--progress), #e9ecef var(--progress));" data-progress="91">
-                                <span class="progress-value" style="color:#4e73df ">91%</span>
-                            </div>
-                            <h6 class="mt-3 fo" style="color:#80878a">متوسط النتائج التي حصلت عليها</h6>
-                        </div>
-
-                        <!-- Progress Item 2 -->
-                        <div class="col-md-4 mb-4">
-                            <div class="progress-circle" style=" background: conic-gradient(#ee3d5a var(--progress), #e9ecef var(--progress));" data-progress="13">
-                                <span class="progress-value" style="color:#ee3d5a">13%</span>
-                            </div>
-                            <h6 class="mt-3 fo" style="color:#80878a">عدد الفيديوهات التي شاهدتها</h6>
-                        </div>
-
-                        <!-- Progress Item 3 -->
-                        <div class="col-md-4 mb-4">
-                            <div class="progress-circle" style=" background: conic-gradient(#a750f3 var(--progress), #e9ecef var(--progress));" data-progress="31">
-                                <span class="progress-value" style="color:#a750f3">31%</span>
-                            </div>
-                            <h6 class="mt-3 fo" style="color:#80878a">عدد الامتحانات التي اجريتها</h6>
-                        </div>
                     </div>
 
+                    <div class="row text-center mt-4">
+                        <!-- Average Results -->
+                        <div class="col-md-4 mb-4">
+                            @{
+                                var averagePercentage = Model.ExamResults.Any() ? Model.ExamResults.Average(e => e.Percentage) : 0;
+                                var safeAverage = double.IsNaN(averagePercentage) ? 0 : averagePercentage;
+                            }
+                            <div class="progress-circle" style="background: conic-gradient(var(--primary-color) @(safeAverage)%, #e9ecef @(safeAverage)%);">
+                                <span class="progress-value" style="color:var(--primary-color)">
+                                    @safeAverage.ToString("0")%
+                                </span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#6c757d">متوسط النتائج</h6>
+                        </div>
 
+                        <!-- Completed Exams -->
+                        <div class="col-md-4 mb-4">
+                            @{
+                                var examsProgress = Model.ExamResults.Count > 0 ? 100 : 0;
+                            }
+                            <div class="progress-circle" style="background: conic-gradient(var(--danger-color) @(examsProgress)%, #e9ecef @(examsProgress)%);">
+                                <span class="progress-value" style="color:var(--danger-color)">
+                                    @Model.ExamResults.Count
+                                </span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#6c757d">الامتحانات المكتملة</h6>
+                        </div>
 
+                        <!-- Enrolled Courses -->
+                        <div class="col-md-4 mb-4">
+                            @{
+                                var coursesProgress = Model.EnrolledCourses.Count > 0 ? 100 : 0;
+                            }
+                            <div class="progress-circle" style="background: conic-gradient(var(--purple-color) @(coursesProgress)%, #e9ecef @(coursesProgress)%);">
+                                <span class="progress-value" style="color:var(--purple-color)">
+                                    @Model.EnrolledCourses.Count
+                                </span>
+                            </div>
+                            <h6 class="mt-3 fo" style="color:#6c757d">الدورات المسجلة</h6>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Enrolled Courses Section -->
+
+            <!-- Enrolled Courses -->
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white">
+                <div class="card-header">
                     <h5 class="mb-0 text-white fo" style="direction:rtl;">
                         <i class="fas fa-book-open me-2"></i> الدورات المسجلة
                     </h5>
@@ -260,142 +272,158 @@
                 <div class="card-body">
                     @if (Model.EnrolledCourses != null && Model.EnrolledCourses.Any())
                     {
-                        <ul class="list-group">
+                        <div class="list-group">
                             @foreach (var course in Model.EnrolledCourses)
                             {
                                 <div class="list-group-item d-flex justify-content-between align-items-center" style="direction:rtl">
-
-                                    <div>
-                                        <h6 class="mb-0 fo">@course.Title</h6>
-                                        <small class="text-muted">@course.Description</small>
+                                    <div class="d-flex align-items-center">
+                                        <img src="~/files/imgCourse/@course.Image" alt="@course.Title" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px; margin-left: 15px;">
+                                        <div>
+                                            <h6 class="mb-0 fo">@course.Title</h6>
+                                            <small class="text-muted">@course.Description</small>
+                                        </div>
                                     </div>
-                                    <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID"
-                                       class="btn btn-sm btn-primary fo">
-                                        عرض محتوى الكورس
-                                    </a>
-                                    <a asp-controller="Student" asp-action="AvailableExams" asp-route-courseId="@course.ID"
-                                       class="btn btn-sm btn-primary fo">
-                                        الامتحانات المتاحة
-                                    </a>
-                                </div>
-
-                            }
-                    
-                        </ul>
-                    }
-                    else
-                    {
-                        <p class="text-muted text-center" style="direction:rtl;">لا توجد دورات مسجلة</p>
-                    }
-                </div>
-            </div>
-            <!-- student grades table -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0 text-white fo" style="direction:rtl;">
-                        <i class="fas fa-clipboard-check me-2"></i> نتائج الواجبات
-                    </h5>
-                </div>
-
-                <div class="card-body">
-                    @* @if (Model.Assignments != null && Model.Assignments.Any())
-                    { *@
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" style="direction:rtl;">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="text-end">عنوان الواجب</th>
-                                    <th class="text-center">الدرجة</th>
-                                    <th class="text-center">عدد الأسئلة</th>
-                                    <th class="text-center">الإجابات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @*  @foreach (var assignment in Model.Assignments)
-                                    { *@
-                                <tr>
-                                    <td class="text-end">@* @assignment. *@Title</td>
-                                    <td class="text-center">@* @assignment. *@Grade/@* @assignment. *@TotalGrade</td>
-                                    <td class="text-center">@* @assignment. *@QuestionsCount</td>
-                                    <td class="text-center">
-                                        <a href="@* @assignment. *@SolutionFileUrl" class="btn btn-sm btn-outline-primary" target="_blank">
-                                            <i class="fas fa-file-pdf me-1"></i> عرض الإجابة
+                                    <div class="btn-group" role="group">
+                                        <a asp-controller="Course" asp-action="DetailsWithLessons" asp-route-id="@course.ID"
+                                           class="btn btn-sm btn-outline-primary fo">
+                                            <i class="fas fa-play-circle me-1"></i> المحتوى
                                         </a>
-                                    </td>
-                                </tr>
-                                @* } *@
-                            </tbody>
-                        </table>
-                    </div>
-                    @*   }
+                                        <a asp-controller="Student" asp-action="AvailableExams" asp-route-courseId="@course.ID"
+                                           class="btn btn-sm btn-outline-success fo">
+                                            <i class="fas fa-file-alt me-1"></i> الامتحانات
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
                     else
                     {
-                        <p class="text-muted text-center">لا توجد واجبات متاحة</p>
-                    } *@
+                        <div class="empty-state">
+                            <i class="fas fa-book-open"></i>
+                            <h5 class="fo">لا توجد دورات مسجلة</h5>
+                            <p class="text-muted">يمكنك تصفح الدورات المتاحة وتسجيل في أي دورة تريدها</p>
+                            <a asp-controller="Course" asp-action="Index" class="btn btn-primary fo">
+                                <i class="fas fa-search me-1"></i> استكشاف الدورات
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
-            <!-- Exams Results Table -->
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
+
+            <!-- Exams Results -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
                     <h5 class="mb-0 text-white fo" style="direction:rtl;">
                         <i class="fas fa-file-alt me-2"></i> نتائج الامتحانات
                     </h5>
                 </div>
-
                 <div class="card-body">
-                    @* @if (Model.Exams != null && Model.Exams.Any())
-                    { *@
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped" style="direction:rtl;">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="text-end">عنوان الامتحان</th>
-                                    <th class="text-center">الدرجة</th>
-                                    <th class="text-center">عدد الأسئلة</th>
-                                    <th class="text-center">الإجابات</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @*   @foreach (var exam in Model.Exams)
+                    @if (Model.ExamResults.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" style="direction:rtl;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-end">عنوان الامتحان</th>
+                                        <th class="text-center">الدرجة</th>
+                                        <th class="text-center">الإجابات الصحيحة</th>
+                                        <th class="text-center">النسبة</th>
+                                        <th class="text-center">التاريخ</th>
+                                        <th class="text-center">الإجابات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var result in Model.ExamResults.OrderByDescending(r => r.ExamDate))
                                     {
-                                        *@ <tr>
-                                    <td class="text-end">@* @exam. *@Title</td>
-                                    <td class="text-center">@* @exam. *@Grade/@* @exam. *@TotalGrade</td>
-                                    <td class="text-center">@* @exam. *@QuestionsCount</td>
-                                    <td class="text-center">
-                                        <a href="@* @exam. *@SolutionFileUrl" class="btn btn-sm btn-outline-success" target="_blank">
-                                            <i class="fas fa-file-pdf me-1"></i> عرض الإجابة
-                                        </a>
-                                    </td>
-                                </tr>
-                                @* } *@
-                            </tbody>
-                        </table>
-                    </div>
-                    @*    }
+                                        <tr>
+                                            <td class="text-end">@result.ExamTitle</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
+                                                    @result.Score / @result.TotalQuestions
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                @result.CorrectAnswers / @result.TotalQuestions
+                                            </td>
+                                            <td class="text-center">
+                                                @result.Percentage.ToString("0.00")%
+                                            </td>
+                                            <td class="text-center">
+                                                @result.ExamDate.ToString("yyyy/MM/dd")
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="@Url.Action("Answers", "Exam")"
+                                                   class="btn btn-sm btn-outline-primary"
+                                                   target="_blank">
+                                                    <i class="fas fa-eye me-1"></i> عرض
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="table-active">
+                                        <th class="text-end">المجموع</th>
+                                        <th class="text-center">
+                                            @Model.ExamResults.Sum(r => r.Score) / @Model.ExamResults.Sum(r => r.TotalQuestions)
+                                        </th>
+                                        <th class="text-center">
+                                            @Model.ExamResults.Sum(r => r.CorrectAnswers) / @Model.ExamResults.Sum(r => r.TotalQuestions)
+                                        </th>
+                                        <th class="text-center">
+                                            @{
+                                                var totalQuestions = Model.ExamResults.Sum(r => r.TotalQuestions);
+                                                var overallPercentage = totalQuestions > 0
+                                                    ? (Model.ExamResults.Sum(r => r.Score) * 100 / totalQuestions)
+                                                    : 0;
+                                            }
+                                            @overallPercentage.ToString("0.00")%
+                                        </th>
+                                        <th colspan="2"></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    }
                     else
                     {
-                        <p class="text-muted text-center">لا توجد امتحانات متاحة</p>
-                    } *@
+                        <div class="empty-state">
+                            <i class="fas fa-file-alt"></i>
+                            <h5 class="fo">لا توجد نتائج امتحانات</h5>
+                            <p class="text-muted">عند إجراء أي امتحان، ستظهر نتائجك هنا</p>
+                            <a asp-controller="Student" asp-action="AvailableExams" class="btn btn-primary fo">
+                                <i class="fas fa-file-alt me-1"></i> عرض الامتحانات المتاحة
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-           
-
-        </div>
     </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Animate progress circles
         const circles = document.querySelectorAll('.progress-circle');
         circles.forEach(circle => {
             const progress = circle.getAttribute('data-progress');
             circle.style.setProperty('--progress', `${progress}%`);
         });
+
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     });
-
-
-
 </script>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

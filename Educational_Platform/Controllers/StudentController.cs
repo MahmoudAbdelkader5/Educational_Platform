@@ -31,13 +31,16 @@ namespace Educational_Platform.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+
+        // GET: Update Profile
+        [HttpGet]
         public async Task<IActionResult> StudentProfile()
         {
             // Get the currently logged-in user
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return RedirectToAction("Login", "Account"); // Redirect to login if no user is logged in
+                return RedirectToAction("Login", "Account");
             }
 
             // Ensure the user is linked to a student profile
@@ -57,6 +60,23 @@ namespace Educational_Platform.Controllers
             var studentCourses = await _unitOfWork.student_CourseRepo
                 .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Course");
 
+            // Retrieve exam results for the student
+            var examResults = await _unitOfWork.student_Exam
+                .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Exam");
+            // Calculate total score across all exams (if needed for display)
+            var totalScoreAcrossAllExams = examResults.Sum(e => e.Score);
+
+            // Map exam results to view model
+            var examResultViewModels = examResults.Select(e => new ExamResultViewModel
+            {
+                ExamTitle = e.Exam.Title,
+                Score = (int)e.Score, // No need to cast to int unless necessary
+                TotalQuestions = e.Exam.ExamQuestions.Count,
+                ExamDate = e.ExamDate,
+                CorrectAnswers = e.Exam.ExamQuestions.Count(q => q.Question.Answer == e.Score.ToString()), // Assuming Score is the number of correct answers
+                Percentage = (double)(e.Score / examResults.Sum(er => er.Score)) * 100, // Assuming Score is out of total questions
+            }).ToList();
+
             // Map data to the StudentProfileViewModel
             var studentProfileViewModel = new StudentProfileViewModel
             {
@@ -75,47 +95,12 @@ namespace Educational_Platform.Controllers
                     Duration = e.Course.Duration,
                     Price = e.Course.Price,
                     Image = e.Course.Image
-                }).ToList()
+                }).ToList(),
+                ExamResults = examResultViewModels // Add this property to your StudentProfileViewModel
             };
 
             return View(studentProfileViewModel);
         }
-
-        // GET: Update Profile
-        [HttpGet]
-        public async Task<IActionResult> UpdateProfile()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            if (user.StudentId == null)
-            {
-                return NotFound("Student profile not found.");
-            }
-
-            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
-            if (student == null)
-            {
-                return NotFound("Student not found.");
-            }
-
-            var model = new UpdateStudentProfileViewModel
-            {
-                Id = student.ID,
-                Name = student.Name,
-                Email = student.Email,
-                PhoneNumber = student.PhoneNumber,
-                FatherPhone = student.FatherPhone,
-                GradeLevel = student.GradeLevel,
-                CurrentProfilePicture = student.ProfilePicture // تأكد من تعيين الصورة الحالية
-            };
-
-            return View(model);
-        }
-
         // POST: Update Profile
         [HttpPost]
         public async Task<IActionResult> UpdateProfile(UpdateStudentProfileViewModel model)
@@ -192,7 +177,7 @@ namespace Educational_Platform.Controllers
                 // Update the student in the database
                 _unitOfWork.Student.UpdateAsync(student);
                 await _unitOfWork.SaveAsync();
-            
+
 
 
 
@@ -265,44 +250,47 @@ namespace Educational_Platform.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitExam(int examId, string answersJson)
         {
-                var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
+            var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
 
-                var user = await _userManager.GetUserAsync(User);
-                var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
-                int studentId = student.ID;
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+            int studentId = student.ID;
+            int totalScore = 0;
+            int correctAnswers = 0;
 
             try
             {
                 // Deserialize the JSON to dictionary
                 // Process answers and calculate score
-                int totalScore = 0;
-                int correctAnswers = 0;
                 var examQuestions = await _unitOfWork.ExamQuestion.GetAllAsync(eq => eq.ExamID == examId);
 
                 foreach (var answer in answers)
                 {
-                    var question = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    var EXquestion = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    int qid = EXquestion.QuestionID;
+                    var question = await _unitOfWork.questions.GetByIdAsync(qid);
                     if (question != null)
                     {
                         bool isCorrect;
                         string qw = "0";
                         //= question.Question.Answer == answer.Value;
-                        if (question.Question.Answer == "A")
-                                { qw ="1" ;
-                                }
-                        else if (question.Question.Answer == "B")
+                        if (question.Answer == "A")
+                        {
+                            qw = "1";
+                        }
+                        else if (question.Answer == "B")
                         {
                             qw = "2";
                         }
-                        else if (question.Question.Answer == "C")
+                        else if (question.Answer == "C")
                         {
                             qw = "3";
                         }
-                        else if (question.Question.Answer == "D")
+                        else if (question.Answer == "D")
                         {
                             qw = "4";
                         }
-                        isCorrect = qw == answer.Value;
+                        isCorrect = (qw == answer.Value);
 
 
 
@@ -311,17 +299,17 @@ namespace Educational_Platform.Controllers
                             totalScore += 1;
                             correctAnswers++;
                         }
-                       
-                        string answerText = isCorrect.ToString();
-                        var studentAnswer = new student_answers
-                        {
-                            examQuestionID = question.ID,
-                            StudentID = studentId,
-                            AnswerText = answerText,
-                          
-                        };
 
-                        await _unitOfWork.student_answers.AddAsync(studentAnswer);
+                        //string answerText = isCorrect.ToString();
+                        //var studentAnswer = new student_answers
+                        //{
+                        //    examQuestionID = question.ID,
+                        //    StudentID = studentId,
+                        //    AnswerText = answerText,
+
+                        //};
+
+                        //await _unitOfWork.student_answers.AddAsync(studentAnswer);
                     }
                 }
 
@@ -341,12 +329,14 @@ namespace Educational_Platform.Controllers
                 await _unitOfWork.student_Exam.AddAsync(examResult);
                 await _unitOfWork.Save();
 
-                TempData["TotalScore"] = totalScore;
-                TempData["CorrectAnswers"] = correctAnswers;
+                int qn = answers.Count;
+                // في الـ Action الأول
+                ViewBag.TotalScore = totalScore;
+                ViewBag.CorrectAnswers = correctAnswers;
+                ViewBag.TotalQuestions = qn;
 
-                TempData["TotalQuestions"] = answers;
-
-                return RedirectToAction("R", new { examId, studentId });
+                //return RedirectToAction("R", new { examId, studentId });
+                return View("R");
 
             }
             catch (Exception ex)
@@ -356,25 +346,7 @@ namespace Educational_Platform.Controllers
             }
         }
 
-        public IActionResult R(int examId, int studentId)
-        {
-            if (TempData["TotalScore"] == null)
-            {
-                return RedirectToAction("AvailableExams");
-            }
-
-            ViewBag.TotalScore = TempData["TotalScore"];
-            ViewBag.CorrectAnswers = TempData["CorrectAnswers"];
-            ViewBag.TotalQuestions = TempData["TotalQuestions"];
-            ViewBag.ErrorMessage = TempData["ErrorMessage"];
-
-            return View();
-        }
-
-
-
-
-
+        
 
 
 
