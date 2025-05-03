@@ -223,8 +223,8 @@
             <div class="progress-bar" id="examProgress" style="width: 0%"></div>
         </div>
 
-        <form asp-action="SubmitAssessment" method="post" class="mt-2">
-            <input type="hidden" name="assessmentId" value="@Model.ID" />
+        <form asp-action="SubmitAssignment" method="post" class="mt-2">
+            <input type="hidden" name="assignmentId" value="@Model.ID" />
 
             @{
                 int questionNum = 1;
@@ -296,7 +296,7 @@
 
             if (timeLeft <= 0) {
                 clearInterval(timer);
-                submitExamWithAnswers(); // استدعاء دورة إرسال الإجابات عند انتهاء الوقت
+                submitAssignmentWithAnswers(); // استدعاء دورة إرسال الإجابات عند انتهاء الوقت
             }
         }, 1000);
 
@@ -330,7 +330,7 @@
         });
 
         // دالة لإنشاء وإرسال الإجابات
-        function submitExamWithAnswers() {
+        function submitAssignmentWithAnswers() {
             // Create the answers dictionary
             const answers = {};
 
@@ -349,7 +349,7 @@
 
             // إضافة رسالة تنبيه بأن الوقت انتهى مع عدد الأسئلة المجابة
             const answeredCount = Object.keys(answers).length;
-            alert(`انتهى وقت الامتحان! تم تسجيل ${answeredCount} من أصل ${totalQuestions} أسئلة`);
+            alert(`انتهى وقت الواجب! تم تسجيل ${answeredCount} من أصل ${totalQuestions} أسئلة`);
 
             // Add the answers dictionary to a hidden input
             $('<input>').attr({

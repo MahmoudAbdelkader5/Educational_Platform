@@ -513,7 +513,6 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Feedback")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Grade")
@@ -575,6 +574,9 @@ namespace Data_access_layer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("QuestionsQuestionID")
+                        .HasColumnType("int");
+
                     b.Property<int>("StudentID")
                         .HasColumnType("int");
 
@@ -582,6 +584,8 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("QuestionsQuestionID");
 
                     b.HasIndex("StudentID");
 
@@ -965,6 +969,10 @@ namespace Data_access_layer.Migrations
 
             modelBuilder.Entity("Data_access_layer.model.assignment_Answer", b =>
                 {
+                    b.HasOne("Data_access_layer.model.Questions", null)
+                        .WithMany("assignment_Answer")
+                        .HasForeignKey("QuestionsQuestionID");
+
                     b.HasOne("Data_access_layer.model.Student", "Student")
                         .WithMany("assignment_Answer")
                         .HasForeignKey("StudentID")
@@ -991,7 +999,7 @@ namespace Data_access_layer.Migrations
                         .IsRequired();
 
                     b.HasOne("Data_access_layer.model.Questions", "Question")
-                        .WithMany()
+                        .WithMany("Assignment_Questions")
                         .HasForeignKey("QuestionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1151,7 +1159,11 @@ namespace Data_access_layer.Migrations
                 {
                     b.Navigation("Answers");
 
+                    b.Navigation("Assignment_Questions");
+
                     b.Navigation("ExamQuestions");
+
+                    b.Navigation("assignment_Answer");
                 });
 
             modelBuilder.Entity("Data_access_layer.model.Student", b =>

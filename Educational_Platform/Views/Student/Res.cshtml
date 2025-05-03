@@ -1,11 +1,9 @@
 ﻿@model Assignment
 @{
-    ViewData["Title"] = "نتيجة الواحب";
+    ViewData["Title"] = "نتيجة الواجب";
     Layout = null;
     var userAnswers = @ViewBag.answers;
-
 }
-
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -90,8 +88,7 @@
             color: gold;
             animation: bounce 1s infinite alternate;
         }
-        /* --------------- */
-        /* إضافة إلى الجزء Style */
+
         .answer-details {
             margin-top: 3rem;
             padding: 2rem;
@@ -109,7 +106,6 @@
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-        /* ----------------- */
 
         @@keyframes bounce {
             from {
@@ -121,7 +117,6 @@
             }
         }
 
-        /* تنسيقات الطباعة */
         @@media print {
             body {
                 background: white;
@@ -244,32 +239,25 @@
                                             {
                                                 qw = "A";
                                                 user_answer_content = eq.Question.q1;
-
                                             }
                                             else if (uAnswer == "2")
                                             {
                                                 qw = "B";
                                                 user_answer_content = eq.Question.q2;
-
-
                                             }
                                             else if (uAnswer == "3")
                                             {
                                                 qw = "C";
                                                 user_answer_content = eq.Question.q3;
-
-
                                             }
                                             else if (uAnswer == "4")
                                             {
                                                 qw = "D";
                                                 user_answer_content = eq.Question.q4;
-
                                             }
                                             @if (questionanswer == "A")
                                             {
                                                 question_answer_content = eq.Question.q1;
-
                                             }
                                             else if (questionanswer == "B")
                                             {
@@ -283,20 +271,15 @@
                                             {
                                                 question_answer_content = eq.Question.q4;
                                             }
-
-
-
                                         }
-                                        <div class="alert @(qw == questionanswer ? " alert-success" : "alert-danger" )">
-
+                                        <div class="alert @(qw == questionanswer ? "alert-success" : "alert-danger")">
                                             @if (!string.IsNullOrEmpty(@ViewBag.answers[eq.Question.QuestionID]) && @ViewBag.answers[eq.Question.QuestionID] != "0")
                                             {
-                                                <span> (@qw)  </span>
-                                                <span>   @user_answer_content </span>
+                                                <span> (@qw) </span>
+                                                <span> @user_answer_content </span>
                                                 if ((qw) != questionanswer)
                                                 {
                                                     <span class="text-danger"> (إجابة خاطئة)</span>
-
                                                 }
                                                 else
                                                 {
@@ -312,19 +295,13 @@
                                         <h6>الإجابة الصحيحة:</h6>
                                         <div class="alert alert-info">
                                             <span>(@eq.Question.Answer)</span>
-                                            <span> @question_answer_content  </span>
-
+                                            <span> @question_answer_content </span>
                                         </div>
                                     </div>
-
                                 </div>
                                 questionNum++;
                             }
-
-
-
                         </div>
-
 
                         <!-- الأزرار -->
                         <div class="text-center mt-4 no-print">

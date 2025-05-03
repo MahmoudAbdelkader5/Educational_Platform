@@ -22,7 +22,7 @@ namespace Data_access_layer.model
         [Column(TypeName = "decimal(5, 2)")]
         public decimal? Grade { get; set; }
 
-        public string Feedback { get; set; }
+        public string? Feedback { get; set; }
 
         // Navigation properties
         [ForeignKey(nameof(AssignmentID))]
