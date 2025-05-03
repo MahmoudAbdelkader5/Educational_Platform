@@ -361,30 +361,98 @@ namespace Educational_Platform.Controllers
             }
         }
 
-        // في الـ Action الثاني (R)
-        //public IActionResult R(int examId, int studentId)
-        //{
-        //    //// تحقق من وجود البيانات في TempData
-        //    //if (TempData["TotalScore"] == null)
-        //    //{
-        //    //    return RedirectToAction("AvailableExams");
-        //    //}
+        public async Task<IActionResult> AnswerDetails(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user?.StudentId == null)
+            {
+                return Content("<div class='alert alert-danger'>يجب تسجيل الدخول أولاً</div>");
+            }
 
-        //    // احتفظ بالبيانات للعرض (View) باستخدام ViewBag
-        //    ViewBag.TotalScore = TempData.Peek("TotalScore");
-        //    ViewBag.CorrectAnswers = TempData.Peek("CorrectAnswers");
-        //    ViewBag.TotalQuestions = TempData.Peek("TotalQuestions");
-        //    ViewBag.ErrorMessage = TempData.Peek("ErrorMessage");
+            try
+            {
+                // Get exam result with questions
+                var examResult = await _unitOfWork.student_Exam.GetFirstOrDefaultAsync(
+                    se => se.ExamID == id && se.StudentID == user.StudentId.Value,
+                    includeProperties: "Exam,Exam.ExamQuestions,Exam.ExamQuestions.Question");
 
-        //    // إذا أردت الاحتفاظ بالبيانات في TempData لطلب آخر
-        //    // TempData.Keep(); // أو TempData.Keep("key");
+                if (examResult == null)
+                {
+                    return Content("<div class='alert alert-danger'>لم يتم العثور على نتائج الامتحان</div>");
+                }
 
-        //    return View();
-        //}
+                // Fix for CS1061: 'student_answers' does not contain a definition for 'ExamID'
 
+                // The error occurs because the 'student_answers' class does not have a property named 'ExamID'.
+                // Based on the context, it seems the correct property to use is 'examQuestionID', which links to the exam question.
+                // Update the code to use 'examQuestionID' instead of 'ExamID'.
 
+                var studentAnswers = await _unitOfWork.student_answers
+                    .GetAllAsync(sa => sa.StudentID == user.StudentId.Value && sa.examQuestionID == id);
 
+                var viewModel = new AnswerDetailsViewModel
+                {
+                    ExamTitle = examResult.Exam.Title,
+                    ExamDate = examResult.ExamDate,
+                    Score = (int)examResult.Score,
+                    TotalQuestions = examResult.Exam.ExamQuestions.Count,
+                    Questions = examResult.Exam.ExamQuestions.Select(eq =>
+                    {
+                        // Find the student's answer for this specific question
+                        var studentAnswer = studentAnswers.FirstOrDefault(sa =>
+                            sa.ID == eq.QuestionID ||
+                            sa.examQuestionID == eq.QuestionID);
 
+                        // Determine answer correctness
+                        bool isCorrect = false;
+                        string studentAnswerText = "لم يتم الإجابة";
+                        string correctAnswer = eq.Question.Answer;
+
+                        if (studentAnswer != null && !string.IsNullOrEmpty(studentAnswer.AnswerText))
+                        {
+                            studentAnswerText = studentAnswer.AnswerText;
+
+                            // Handle both letter answers (A/B/C/D) and full text answers
+                            if (correctAnswer.Length == 1 && studentAnswerText.Length == 1)
+                            {
+                                // Compare single-letter answers (case insensitive)
+                                isCorrect = char.ToUpper(correctAnswer[0]) == char.ToUpper(studentAnswerText[0]);
+                            }
+                            else
+                            {
+                                // Compare full text answers (case insensitive, trimmed)
+                                isCorrect = string.Equals(
+                                    correctAnswer?.Trim(),
+                                    studentAnswerText?.Trim(),
+                                    StringComparison.OrdinalIgnoreCase);
+                            }
+                        }
+
+                        return new QuestionResultViewModel
+                        {
+                            QuestionId = eq.QuestionID,
+                            QuestionText = eq.Question.QuestionText,
+                            Options = new List<string>
+                    {
+                        eq.Question.q1,
+                        eq.Question.q2,
+                        eq.Question.q3,
+                        eq.Question.q4
+                    }.Where(opt => !string.IsNullOrEmpty(opt)).ToList(),
+                            CorrectAnswer = correctAnswer,
+                            StudentAnswer = studentAnswerText,
+                            IsCorrect = isCorrect
+                        };
+                    }).ToList()
+                };
+
+                return PartialView("_AnswerDetailsPartial", viewModel);
+            }
+            catch (Exception ex)
+            {
+                return Content("<div class='alert alert-danger'>حدث خطأ أثناء تحميل تفاصيل الإجابات</div>");
+            }
+        }
 
 
 

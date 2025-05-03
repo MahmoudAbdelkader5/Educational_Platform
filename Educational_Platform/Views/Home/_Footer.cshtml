@@ -1,94 +1,118 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿<style>
+    .fo{
+     font-family: "Cairo", sans-serif;
+    }
+</style>
 <!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s" dir="rtl">
-    <div class="container py-5">
-        <div class="row g-5">
-            <div class="col-lg-3 col-md-6 text-end" dir="rtl">
-                <h4 class="text-white mb-3 fo">روابط سريعة</h4>
-                <a class="d-block text-light mb-2" href="">
-                    من نحن <i class="fa fa-angle-left ms-2"></i>
-                </a>
-                <a class="d-block text-light mb-2" href="">
-                    تواصل معنا <i class="fa fa-angle-left ms-2"></i>
-                </a>
-                <a class="d-block text-light mb-2" href="">
-                    سياسة الخصوصية <i class="fa fa-angle-left ms-2"></i>
-                </a>
-                <a class="d-block text-light mb-2" href="">
-                    الشروط والأحكام <i class="fa fa-angle-left ms-2"></i>
-                </a>
-                <a class="d-block text-light mb-2" href="">
-                    الأسئلة الشائعة والمساعدة <i class="fa fa-angle-left ms-2"></i>
-                </a>
-            </div>
-
-
-            <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3 fo">معلومات التواصل</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt ms-3"></i>123 شارع، الفيوم، مصر</p>
-                <p class="mb-2"><i class="fa fa-phone-alt ms-3"></i>0101 153 1956</p>
-                <p class="mb-2"><i class="fa fa-envelope ms-3"></i>info@example.com</p>
-                <div class="d-flex pt-2">
-                    <a class="btn btn-outline-light btn-social ms-2" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-light btn-social ms-2" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-light btn-social ms-2" href=""><i class="fab fa-youtube"></i></a>
-                    <a class="btn btn-outline-light btn-social ms-2" href=""><i class="fab fa-linkedin-in"></i></a>
+<div class="container-fluid bg-dark text-light footer pt-4" dir="rtl">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <!-- Added align-items-start -->
+            <!-- Quick Links Column -->
+            <div class="col-lg-3 col-md-6 text-end">
+                <h5 class="text-white mb-3 border-bottom border-primary pb-2 d-inline-block fo">روابط سريعة</h5>
+                <div class="d-flex flex-column">
+                    <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-chevron-left ms-2"></i>الرئيسية 
+                    </a>
+                    <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="About">
+                        <i class="fas fa-chevron-left ms-2"></i> من نحن
+                    </a>
+                    <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="Contact">
+                        <i class="fas fa-chevron-left ms-2"></i> تواصل معنا
+                    </a>
+                    <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="Privacy">
+                        <i class="fas fa-chevron-left ms-2"></i> سياسة الخصوصية
+                    </a>
+                   
                 </div>
             </div>
+
+            <!-- Contact Information Column -->
             <div class="col-lg-3 col-md-6">
-                <h4 class="text-white mb-3 fo">معرض الصور</h4>
-                <div class="row g-2 pt-2">
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-1.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-2.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-3.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-2.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-3.jpg" alt="">
-                    </div>
-                    <div class="col-4">
-                        <img class="img-fluid bg-light p-1" src="~/img/course-1.jpg" alt="">
-                    </div>
+                <h5 class="text-white mb-3 border-bottom border-primary pb-2 d-inline-block fo">معلومات التواصل</h5>
+                <div class="mb-2">
+                    <i class="fas fa-map-marker-alt ms-2 text-primary"></i>
+                    <span>مركز سنورس، الفيوم، مصر</span>
+                </div>
+                <div class="mb-2">
+                    <i class="fas fa-phone-alt ms-2 text-primary"></i>
+                    <a href="tel:+201011531956" class="text-light">0101 153 1956</a>
+                </div>
+                <div class="mb-3">
+                    <i class="fas fa-envelope ms-2 text-primary"></i>
+                    <a href="mailto:alaa6033@gmail.com" class="text-light">alaa6033@gmail.com</a>
+                </div>
+                <div class="d-flex">
+                    <a class="btn btn-sm btn-outline-light rounded-circle ms-2" href="https://www.facebook.com/alaa.aldein.902">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-light rounded-circle ms-2" href="https://wa.me/201011531956">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="btn btn-sm btn-outline-light rounded-circle ms-2" href="#">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 fo">
-                <h4 class="text-white mb-3 fo">النشرة البريدية</h4>
-                <p>اشترك في النشرة البريدية للحصول على أحدث الأخبار والعروض.</p>
-                <div class="position-relative mx-auto" style="max-width: 400px;">
-                    <input class="form-control border-0 w-100 py-3 pe-4 ps-5" type="text" placeholder="بريدك الإلكتروني">
-                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 start-0 mt-2 ms-2">اشترك</button>
+
+            <!-- Google Map Column - Adjusted height -->
+            <div class="col-lg-6 col-md-12 mb-2">
+                <h5 class="text-white mb-3 border-bottom border-primary pb-2 d-inline-block fo"> موقعنا الجغرافي</h5>
+                <div class="map-container" style="height: 160px;">
+                    <!-- Fixed height -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d30.80210846928799!3d29.419235200000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1459859e9ec1fb13%3A0x3a9c9a6e5a5b5b5b!2sSinnuris%2C%20Faiyum%20Governorate!5e0!3m2!1sen!2seg!4v1620000000000!5m2!1sen!2seg"
+                            style="border:0; width:100%; height:100%;"
+                            allowfullscreen=""
+                            loading="lazy">
+                    </iframe>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="copyright">
             <div class="row">
-                <div class="col-md-6 text-center text-md-end mb-3 mb-md-0">
-                    <a class="border-bottom" href="#">مفهوم</a>  &copy; ، جميع الحقوق محفوظة.
-             
+                <div class="col-md-6 text-center text-md-end mb-1 mb-md-0">
+                    <a class="" href="#">مفهوم</a>  &copy; ، جميع الحقوق محفوظة.
+
                 </div>
                 <div class="col-md-6 text-center text-md-start">
-                    <div class="footer-menu">
-                        <a href="">الرئيسية</a>
-                        <a href="">ملفات تعريف الارتباط</a>
-                        <a href="">المساعدة</a>
-                        <a href="">الأسئلة الشائعة</a>
-                    </div>
+                    <span>تم صنع هذه المنصة بهدف تهيئة الطالب لـ كامل جوانب الثانوية العامة و ما بعدها</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Footer End -->
+
+<style>
+    .hover-text-primary:hover {
+        color: #06BBCC !important;
+    }
+
+    .btn-outline-light {
+        transition: all 0.3s;
+        width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+        }
+
+    .map-container {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+</style>
+
+<script>
+    // Auto-update copyright year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>

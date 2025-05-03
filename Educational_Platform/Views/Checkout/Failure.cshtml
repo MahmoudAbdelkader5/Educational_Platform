@@ -2,6 +2,8 @@
     ViewData["Title"] = "فشل الدفع";
     var reason = ViewBag.Reason ?? "غير معروف";
     var errorMessage = ViewBag.ErrorMessage ?? "لم نتمكن من معالجة الدفع الخاص بك.";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+
     Layout = "_AuthLayout";
 }
 

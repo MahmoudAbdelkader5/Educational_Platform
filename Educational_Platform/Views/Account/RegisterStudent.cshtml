@@ -111,16 +111,10 @@
                                 <select asp-for="GradeLevel" class="form-select form-select-lg" data-field="required">
                                     <option value="" selected disabled>اختر المرحلة الدراسية</option>
 
-                                    <optgroup label="المرحلة الإعدادية (المدرسة المتوسطة)">
-                                        <option value="First_Preparatory">الصف الأول الإعدادي (الصف السابع)</option>
-                                        <option value="Second_Preparatory">الصف الثاني الإعدادي (الصف الثامن)</option>
-                                        <option value="Third_Preparatory">الصف الثالث الإعدادي (الصف التاسع)</option>
-                                    </optgroup>
-
-                                    <optgroup label="المرحلة الثانوية (المدرسة الثانوية)">
-                                        <option value="First_Secondary">الصف الأول الثانوي (الصف العاشر)</option>
-                                        <option value="Second_Secondary">الصف الثاني الثانوي (الصف الحادي عشر)</option>
-                                        <option value="Third_Secondary">الصف الثالث الثانوي (الصف الثاني عشر)</option>
+                                    <optgroup label="المرحلة الثانوية">
+                                        <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                                        <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                                        <option value="الصف الثالث الثانوي">الصف الثالث الثانوي</option>
                                     </optgroup>
                                 </select>
                                 <span asp-validation-for="GradeLevel" class="text-danger"></span>

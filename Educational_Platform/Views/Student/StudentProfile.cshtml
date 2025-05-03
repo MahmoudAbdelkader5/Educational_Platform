@@ -8,14 +8,6 @@
 }
 
 <style>
-    :root {
-        --primary-color: #4e73df;
-        --secondary-color: #f8f9fa;
-        --success-color: #1cc88a;
-        --danger-color: #ee3d5a;
-        --purple-color: #a750f3;
-    }
-
     .fo {
         font-family: "Cairo", sans-serif;
     }
@@ -25,42 +17,60 @@
         height: 150px;
         object-fit: cover;
         margin-bottom: 1rem;
-        transition: transform 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 
         .profile-image:hover {
-            transform: scale(1.03);
+            transform: scale(1.08);
+            border-color: rgba(78, 115, 223, 0.5);
+            box-shadow: 0 8px 25px rgba(78, 115, 223, 0.3);
         }
 
     .student-info {
         background-color: var(--secondary-color);
-        padding: 15px;
-        border-radius: 8px;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
     }
 
     .card {
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+        transition: all 0.4s ease;
+        border: none;
     }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 0.5rem 2rem rgba(58, 59, 69, 0.2);
         }
 
     .card-header {
         font-weight: bold;
         background-color: var(--primary-color);
+        color: white;
+        border-bottom: none;
+        padding: 1.25rem 1.5rem;
     }
 
     .list-group-item {
         transition: all 0.3s ease;
+        border-left: none;
+        border-right: none;
+        padding: 1.25rem 1.5rem;
+        border-color: rgba(0, 0, 0, 0.05);
     }
 
+        .list-group-item:first-child {
+            border-top: none;
+        }
+
         .list-group-item:hover {
-            background-color: rgba(78, 115, 223, 0.1);
+            background-color: rgba(78, 115, 223, 0.08);
+            transform: translateX(5px);
         }
 
     .progress-circle {
@@ -72,8 +82,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.4s ease;
     }
+
+        .progress-circle:hover {
+            transform: scale(1.1);
+        }
 
         .progress-circle::before {
             content: "";
@@ -82,12 +97,18 @@
             height: 90px;
             border-radius: 50%;
             background: white;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
     .progress-value {
         position: relative;
         font-size: 1.5rem;
         font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .progress-circle:hover .progress-value {
+        transform: scale(1.1);
     }
 
     .motivational-quote {
@@ -96,61 +117,96 @@
         padding: 15px;
         background-color: rgba(78, 115, 223, 0.1);
         border-left: 4px solid var(--primary-color);
-        border-radius: 4px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
+
+        .motivational-quote:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(78, 115, 223, 0.1);
+        }
 
     .empty-state {
-        padding: 2rem;
+        padding: 3rem 2rem;
         text-align: center;
         color: #6c757d;
+        background-color: rgba(248, 249, 252, 0.5);
+        border-radius: 8px;
+        transition: all 0.3s ease;
     }
+
+        .empty-state:hover {
+            background-color: rgba(248, 249, 252, 0.8);
+            transform: translateY(-3px);
+        }
 
         .empty-state i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: #dee2e6;
+            color: #e9ecef;
+            transition: all 0.3s ease;
         }
 
-    @@media (max-width: 991.98px) {
-        .sidebar-responsive {
-            width: 100% !important;
-            position: relative !important;
-            top: auto !important;
-            margin-top: 20px;
-            order: -1 !important;
+        .empty-state:hover i {
+            color: var(--primary-color);
+            transform: scale(1.1);
         }
 
-        .profile-image {
-            width: 120px;
-            height: 120px;
-        }
-
-        .student-info {
-            text-align: center !important;
-        }
-
-            .student-info .d-flex {
-                justify-content: center !important;
-            }
+    .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
+        transition: all 0.3s ease;
+        padding: 0.5rem 1.25rem;
+        border-radius: 8px;
     }
 
-    @@media (max-width: 767.98px) {
-        .progress-circle {
-            width: 100px;
-            height: 100px;
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(78, 115, 223, 0.4);
         }
 
-            .progress-circle::before {
-                width: 70px;
-                height: 70px;
-            }
+    .btn-outline-primary {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+    }
 
-        .progress-value {
-            font-size: 1.2rem;
+        .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(78, 115, 223, 0.3);
         }
+
+    .table-hover tbody tr {
+        transition: all 0.2s ease;
+    }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+            transform: translateX(5px);
+        }
+
+    .badge {
+        padding: 0.5em 0.8em;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+        .badge:hover {
+            transform: scale(1.05);
+        }
+
+  
+    .sidebar-responsive .card {
+        animation: float 6s ease-in-out infinite;
+    }
+
+   
     }
 </style>
-
 <div class="container py-4">
     <div class="row">
         <!-- Sidebar -->
@@ -173,7 +229,7 @@
                     }
 
                     <h4 class="mb-2 fo">@Model.FirstName @Model.LastName</h4>
-                    <p class="text-muted mb-3">@Model.GradeLevel</p>
+                    <p class="text-muted mb-3">⭐أجمد طالب ثانوية عامة⭐</p>
 
                     <div class="student-info text-start mt-4" style="direction: rtl;">
                         <div class="d-flex align-items-center mb-3">
@@ -182,13 +238,15 @@
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-phone-alt me-2 text-primary p-2"></i>
-                            <span>@Model.PhoneNumber</span>
+                            <i class="fas fa-user-graduate me-2 text-primary p-2"> </i>
+                            <span>@Model.GradeLevel</span>
+
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
-                            <i class="fas fa-phone-square me-2 text-primary p-2"></i>
-                            <span>@Model.FatherPhone</span>
+                            <i class="fas fa-phone-alt me-2 text-primary p-2"></i>
+                            <span>@Model.PhoneNumber</span>
+
                         </div>
 
                         @Html.AntiForgeryToken()
@@ -203,7 +261,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="col-md-8 order-md-1 main-content">
+        <div class=" main-content col-lg-8 col-12 order-lg-1">
             <!-- Progress Section -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
@@ -328,7 +386,6 @@
                                         <th class="text-center">الإجابات الصحيحة</th>
                                         <th class="text-center">النسبة</th>
                                         <th class="text-center">التاريخ</th>
-                                        <th class="text-center">الإجابات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -347,13 +404,7 @@
                                             <td class="text-center">
                                                 @result.ExamDate.ToString("yyyy/MM/dd")
                                             </td>
-                                            <td class="text-center">
-                                                <a href="@Url.Action("R", "student")"
-                                                   class="btn btn-sm btn-outline-primary"
-                                                   target="_blank">
-                                                    <i class="fas fa-eye me-1"></i> عرض
-                                                </a>
-                                            </td>
+                                            
                                         </tr>
                                     }
                                 </tbody>

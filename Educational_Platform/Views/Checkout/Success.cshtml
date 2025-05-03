@@ -4,6 +4,8 @@
     var amount = ViewBag.Amount ?? "0.00";
     var courseId = TempData["CourseId"];
     var courseTitle = ViewBag.CourseTitle ?? "الدورة التدريبية";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+
     Layout = "_AuthLayout";
 }
 

@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @{
     ViewData["Title"] = "إتمام الدفع";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
 
     // Fix: Make sure we're working with decimal values, not strings
     decimal originalAmount = ViewBag.Amount != null ? Convert.ToDecimal(ViewBag.Amount) : 0m;
