@@ -381,7 +381,7 @@ namespace Educational_Platform.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> SubmitAssessment(int assessmentId, string answersJson)
+        public async Task<IActionResult> SubmitAssignment(int assignmentId, string answersJson)
         {
             var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
 
@@ -395,18 +395,17 @@ namespace Educational_Platform.Controllers
             {
                 // Deserialize the JSON to dictionary
                 // Process answers and calculate score
-                var examQuestions = await _unitOfWork.AssignmentQuestion.GetAllAsync(eq => eq.AssignmentID == assessmentId);
+                var assignmentQuestions = await _unitOfWork.AssignmentQuestion.GetAllAsync(aq => aq.AssignmentID == assignmentId);
 
                 foreach (var answer in answers)
                 {
-                    var EXquestion = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
-                    int qid = EXquestion.QuestionID;
+                    var assignmentQuestion = assignmentQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    int qid = assignmentQuestion.QuestionID;
                     var question = await _unitOfWork.questions.GetByIdAsync(qid);
                     if (question != null)
                     {
                         bool isCorrect;
                         string qw = "-1";
-                        //= question.Question.Answer == answer.Value;
                         if (question.Answer == "A")
                         {
                             qw = "1";
@@ -425,67 +424,50 @@ namespace Educational_Platform.Controllers
                         }
                         isCorrect = (qw == answer.Value);
 
-
-
                         if (isCorrect)
                         {
                             totalScore += 1;
                             correctAnswers++;
                         }
-
-
                     }
                 }
 
                 await _unitOfWork.Save();
 
-                // Save exam result
-                var examResult = new Student_Assignment
+                // Save assignment result
+                var assignmentResult = new Student_Assignment
                 {
-                    AssignmentID = assessmentId,
+                    AssignmentID = assignmentId,
                     StudentID = studentId,
                     Grade = totalScore,
-                    SubmissionDate = DateTime.Now,
-                    //CorrectAnswersCount = correctAnswers,
-                    //TotalQuestionsCount = examQuestions.Count
+                    SubmissionDate = DateTime.Now
                 };
 
-                await _unitOfWork.Student_Assignment.AddAsync(examResult);
+                await _unitOfWork.Student_Assignment.AddAsync(assignmentResult);
                 await _unitOfWork.Save();
 
                 int qn = answers.Count;
-                var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
-               e => e.Id == assessmentId,
-               includeProperties: "ExamQuestions.Question");
+                var assignment = await _unitOfWork.Assessment.GetFirstOrDefaultAsync(
+                    a => a.ID == assignmentId,
+                    includeProperties: "assignment_Question.Question");
+
                 // في الـ Action الأول
                 ViewBag.TotalScore = totalScore;
                 ViewBag.CorrectAnswers = correctAnswers;
                 ViewBag.TotalQuestions = qn;
                 ViewBag.answers = answers;
-                ViewBag.exam = exam;
+                ViewBag.assignment = assignment;
 
-                //return RedirectToAction("R", new { examId, studentId });
-                return View("Res", exam);
-
+                //return View("Res", new {assignmentId,studentId});
+                return View("Res", assignment);
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = "حدث خطأ أثناء حفظ الإجابات، يرجى المحاولة مرة أخرى";
-                return RedirectToAction("Res", new { assessmentId, studentId });
+                return RedirectToAction("Res", new { assignmentId, studentId });
             }
         }
-        // Helper to convert answer letter to code
-        private string GetAnswerCode(string answerLetter)
-        {
-            var map = new Dictionary<string, string>
-    {
-        { "A", "1" },
-        { "B", "2" },
-        { "C", "3" },
-        { "D", "4" }
-    };
-            return map.TryGetValue(answerLetter.ToUpper(), out var code) ? code : null;
-        }
+
 
         [Authorize]
         public async Task<IActionResult> AvailableAssessments(int id)

@@ -571,7 +571,6 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Feedback")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Grade")
