@@ -14,14 +14,11 @@ namespace Data_access_layer.model
         public int ID { get; set; }
 
         [Required]
-        [StringLength(255)]
         public string Title { get; set; }
 
-        [Required]
-        public string Type { get; set; }
 
-        public DateTime? Deadline { get; set; }
-        public string Instructions { get; set; }
+
+        public int duration { get; set; }
 
         [Column(TypeName = "decimal(5, 2)")]
         public decimal MaxGrade { get; set; }

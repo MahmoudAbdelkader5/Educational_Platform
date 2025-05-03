@@ -12,6 +12,8 @@ namespace Business_logic_layer.Repository
 {
     public class unitOfWork : IunitofWork,IDisposable
     {
+        public IAssignmentRepo Assessment { get; set; }
+
         public IMessageRepo Message { get; set; }
 
         private readonly ApplicationDbContext dbcontext;
@@ -28,9 +30,18 @@ namespace Business_logic_layer.Repository
         public IExamQuestionsRepo ExamQuestion { get; set; }
         public Istudent_answers student_answers { get; set; }
         public IStudent_Exam student_Exam { get; set; }
+        public IAssignmentQuestionRepo AssignmentQuestion { get; set; }
+        public Iassignment_AnswerRepo Iassignment_AnswerRepo { get; set; }
+        public IStudent_AssignmentRepo Student_Assignment { get; set; }
 
         public unitOfWork(ApplicationDbContext dbcontext)
         {
+
+            // 
+            Student_Assignment = new Student_AssignmentRepo(dbcontext);
+            Iassignment_AnswerRepo = new assignment_AnswerRepo(dbcontext);
+            AssignmentQuestion = new AssignmentQuestionRepo(dbcontext);
+            Assessment = new AssignmentRepo(dbcontext);
             ExamQuestion = new ExamQuestionsRepo(dbcontext);
             Message = new MessageRepo(dbcontext);
             Exam = new ExamRepo(dbcontext);

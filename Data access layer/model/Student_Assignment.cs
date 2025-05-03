@@ -16,7 +16,6 @@ namespace Data_access_layer.model
         public int AssignmentID { get; set; }
         public int StudentID { get; set; }
 
-        public string SubmittedFiles { get; set; }
 
         public DateTime SubmissionDate { get; set; } = DateTime.UtcNow;
 

@@ -600,6 +600,14 @@
                 </li>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" asp-controller="Assessment" asp-action="Index">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span class="nav-link-text">الواجب</span>
+                        <span class="badge bg-info me-auto">@(ViewData["AssessmentCount"] ?? 0)</span>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" asp-controller="Message" asp-action="Index">
                         <i class="fa-solid fa-message"></i>
                         <span class="nav-link-text">رسائل الصفحة</span>

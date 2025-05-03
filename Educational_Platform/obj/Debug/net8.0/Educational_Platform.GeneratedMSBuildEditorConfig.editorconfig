@@ -48,6 +48,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3RlclN0dWRlbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Assessment/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXNzbWVudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Assessment/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXNzbWVudFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Assessment/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXNzbWVudFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Assessment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXNzZXNzbWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Checkout/Failure.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hlY2tvdXRcRmFpbHVyZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -220,12 +236,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/AvailableAssessments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxBdmFpbGFibGVBc3Nlc3NtZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/AvailableExams.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxBdmFpbGFibGVFeGFtcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/R.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxSLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/Res.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxSZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/StudentProfile.cshtml]
@@ -238,6 +262,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/SubmitExam.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxTdWJtaXRFeGFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/TakeAssessment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFxUYWtlQXNzZXNzbWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/AI/prproject/Educational_Platform/Educational_Platform/Views/Student/TakeExam.cshtml]

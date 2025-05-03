@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Microsoft.VisualBasic;
 
 namespace Educational_Platform.Controllers
 {
@@ -361,104 +362,162 @@ namespace Educational_Platform.Controllers
             }
         }
 
-        public async Task<IActionResult> AnswerDetails(int id)
+
+
+        public async Task<IActionResult> TakeAssessment(int assessmentId)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user?.StudentId == null)
+            var assessment = await _unitOfWork.Assessment.GetFirstOrDefaultAsync(
+                a => a.ID == assessmentId,
+                includeProperties: "assignment_Question.Question");
+
+            if (assessment == null)
             {
-                return Content("<div class='alert alert-danger'>يجب تسجيل الدخول أولاً</div>");
+                TempData["ErrorMessage"] = "الواجب غير موجود.";
+                return RedirectToAction(nameof(AvailableAssessments));
             }
+
+            return View(assessment);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> SubmitAssessment(int assessmentId, string answersJson)
+        {
+            var answers = JsonConvert.DeserializeObject<Dictionary<int, string>>(answersJson);
+
+            var user = await _userManager.GetUserAsync(User);
+            var student = await _unitOfWork.Student.GetByIdAsync(user.StudentId.Value);
+            int studentId = student.ID;
+            int totalScore = 0;
+            int correctAnswers = 0;
 
             try
             {
-                // Get exam result with questions
-                var examResult = await _unitOfWork.student_Exam.GetFirstOrDefaultAsync(
-                    se => se.ExamID == id && se.StudentID == user.StudentId.Value,
-                    includeProperties: "Exam,Exam.ExamQuestions,Exam.ExamQuestions.Question");
+                // Deserialize the JSON to dictionary
+                // Process answers and calculate score
+                var examQuestions = await _unitOfWork.AssignmentQuestion.GetAllAsync(eq => eq.AssignmentID == assessmentId);
 
-                if (examResult == null)
+                foreach (var answer in answers)
                 {
-                    return Content("<div class='alert alert-danger'>لم يتم العثور على نتائج الامتحان</div>");
-                }
-
-                // Fix for CS1061: 'student_answers' does not contain a definition for 'ExamID'
-
-                // The error occurs because the 'student_answers' class does not have a property named 'ExamID'.
-                // Based on the context, it seems the correct property to use is 'examQuestionID', which links to the exam question.
-                // Update the code to use 'examQuestionID' instead of 'ExamID'.
-
-                var studentAnswers = await _unitOfWork.student_answers
-                    .GetAllAsync(sa => sa.StudentID == user.StudentId.Value && sa.examQuestionID == id);
-
-                var viewModel = new AnswerDetailsViewModel
-                {
-                    ExamTitle = examResult.Exam.Title,
-                    ExamDate = examResult.ExamDate,
-                    Score = (int)examResult.Score,
-                    TotalQuestions = examResult.Exam.ExamQuestions.Count,
-                    Questions = examResult.Exam.ExamQuestions.Select(eq =>
+                    var EXquestion = examQuestions.FirstOrDefault(q => q.QuestionID == answer.Key);
+                    int qid = EXquestion.QuestionID;
+                    var question = await _unitOfWork.questions.GetByIdAsync(qid);
+                    if (question != null)
                     {
-                        // Find the student's answer for this specific question
-                        var studentAnswer = studentAnswers.FirstOrDefault(sa =>
-                            sa.ID == eq.QuestionID ||
-                            sa.examQuestionID == eq.QuestionID);
-
-                        // Determine answer correctness
-                        bool isCorrect = false;
-                        string studentAnswerText = "لم يتم الإجابة";
-                        string correctAnswer = eq.Question.Answer;
-
-                        if (studentAnswer != null && !string.IsNullOrEmpty(studentAnswer.AnswerText))
+                        bool isCorrect;
+                        string qw = "-1";
+                        //= question.Question.Answer == answer.Value;
+                        if (question.Answer == "A")
                         {
-                            studentAnswerText = studentAnswer.AnswerText;
+                            qw = "1";
+                        }
+                        else if (question.Answer == "B")
+                        {
+                            qw = "2";
+                        }
+                        else if (question.Answer == "C")
+                        {
+                            qw = "3";
+                        }
+                        else if (question.Answer == "D")
+                        {
+                            qw = "4";
+                        }
+                        isCorrect = (qw == answer.Value);
 
-                            // Handle both letter answers (A/B/C/D) and full text answers
-                            if (correctAnswer.Length == 1 && studentAnswerText.Length == 1)
-                            {
-                                // Compare single-letter answers (case insensitive)
-                                isCorrect = char.ToUpper(correctAnswer[0]) == char.ToUpper(studentAnswerText[0]);
-                            }
-                            else
-                            {
-                                // Compare full text answers (case insensitive, trimmed)
-                                isCorrect = string.Equals(
-                                    correctAnswer?.Trim(),
-                                    studentAnswerText?.Trim(),
-                                    StringComparison.OrdinalIgnoreCase);
-                            }
+
+
+                        if (isCorrect)
+                        {
+                            totalScore += 1;
+                            correctAnswers++;
                         }
 
-                        return new QuestionResultViewModel
-                        {
-                            QuestionId = eq.QuestionID,
-                            QuestionText = eq.Question.QuestionText,
-                            Options = new List<string>
-                    {
-                        eq.Question.q1,
-                        eq.Question.q2,
-                        eq.Question.q3,
-                        eq.Question.q4
-                    }.Where(opt => !string.IsNullOrEmpty(opt)).ToList(),
-                            CorrectAnswer = correctAnswer,
-                            StudentAnswer = studentAnswerText,
-                            IsCorrect = isCorrect
-                        };
-                    }).ToList()
+
+                    }
+                }
+
+                await _unitOfWork.Save();
+
+                // Save exam result
+                var examResult = new Student_Assignment
+                {
+                    AssignmentID = assessmentId,
+                    StudentID = studentId,
+                    Grade = totalScore,
+                    SubmissionDate = DateTime.Now,
+                    //CorrectAnswersCount = correctAnswers,
+                    //TotalQuestionsCount = examQuestions.Count
                 };
 
-                return PartialView("_AnswerDetailsPartial", viewModel);
+                await _unitOfWork.Student_Assignment.AddAsync(examResult);
+                await _unitOfWork.Save();
+
+                int qn = answers.Count;
+                var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
+               e => e.Id == assessmentId,
+               includeProperties: "ExamQuestions.Question");
+                // في الـ Action الأول
+                ViewBag.TotalScore = totalScore;
+                ViewBag.CorrectAnswers = correctAnswers;
+                ViewBag.TotalQuestions = qn;
+                ViewBag.answers = answers;
+                ViewBag.exam = exam;
+
+                //return RedirectToAction("R", new { examId, studentId });
+                return View("Res", exam);
+
             }
             catch (Exception ex)
             {
-                return Content("<div class='alert alert-danger'>حدث خطأ أثناء تحميل تفاصيل الإجابات</div>");
+                TempData["ErrorMessage"] = "حدث خطأ أثناء حفظ الإجابات، يرجى المحاولة مرة أخرى";
+                return RedirectToAction("Res", new { assessmentId, studentId });
             }
         }
+        // Helper to convert answer letter to code
+        private string GetAnswerCode(string answerLetter)
+        {
+            var map = new Dictionary<string, string>
+    {
+        { "A", "1" },
+        { "B", "2" },
+        { "C", "3" },
+        { "D", "4" }
+    };
+            return map.TryGetValue(answerLetter.ToUpper(), out var code) ? code : null;
+        }
 
+        [Authorize]
+        public async Task<IActionResult> AvailableAssessments(int id)
+        {
+            try
+            {
+                // Get all assignments where LessonID matches the provided lessonId
+                var assignments = await _unitOfWork.Assessment.GetAllAsync(
+                    a => a.LessonID == id,
+                    includeProperties: "Lesson"
+                );
 
+                if (assignments == null || !assignments.Any())
+                {
+                    TempData["InfoMessage"] = "No assignments found for the specified lesson.";
+                    return View(new List<Assignment>());
+                }
 
-
-
-
+                return View(assignments);
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while fetching assignments.";
+                return View(new List<Assignment>());
+            }
+        }
+        private int GetCurrentStudentId()
+        {
+            // Implement your logic to get the current student's ID
+            // This might come from claims, session, or other authentication mechanism
+            return 1; // Example - replace with actual implementation
+        }
 
 
 
