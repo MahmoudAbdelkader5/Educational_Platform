@@ -46,7 +46,8 @@ namespace Educational_Platform
                 option.Password.RequireNonAlphanumeric = false;
                 option.SignIn.RequireConfirmedEmail = true;
             })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+            ;
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 .AddCookie(options =>
 {

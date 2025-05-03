@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data_access_layer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250503123620_AddConFirmationEmailAndResetPassword")]
-    partial class AddConFirmationEmailAndResetPassword
+    [Migration("20250503135822_AddConfirmEmailAndResetPassword")]
+    partial class AddConfirmEmailAndResetPassword
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -574,7 +574,6 @@ namespace Data_access_layer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Feedback")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Grade")

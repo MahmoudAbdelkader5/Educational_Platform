@@ -2,15 +2,15 @@
 @{
     ViewData["Title"] = "Email Confirmation";
     Layout = "_AuthLayout";
+    @Html.Partial("~/Views/Shared/Styling.cshtml")
+
 }
 
 <style>
-    body {
-        font-family: 'Cairo', Arial, sans-serif;
-        background: #f0fafb;
-        margin: 0;
-        padding: 0;
+    .fo {
+        font-family: "Cairo", sans-serif;
     }
+
 
     .email-container {
         max-width: 500px;
@@ -69,14 +69,14 @@
 <div class="email-container">
     <div class="header">
         <i class="fa fa-exclamation-triangle"></i>
-        <h2>رابط التفعيل غير صالح أو منتهي</h2>
+        <h3 class="fo" style="color:aliceblue">رابط التفعيل غير صالح أو منتهي</h3>
     </div>
     <div class="content">
         <p>
             عذرًا، الرابط الذي استخدمته لتأكيد بريدك الإلكتروني غير صالح أو تم استخدامه من قبل أو انتهت صلاحيته.<br>
             إذا كنت بحاجة إلى رابط جديد، يمكنك إعادة طلب التفعيل من خلال صفحة تسجيل الدخول.
         </p>
-        <a asp-controller="Account" asp-action="Login" class="btn">
+        <a asp-controller="Account" asp-action="Login" class="btn fo">
             <i class="fa fa-sign-in-alt"></i> العودة لتسجيل الدخول
         </a>
     </div>

@@ -234,9 +234,15 @@
                 <h6>٤. قواعد السلوك</h6>
                 <p>تتعهد باستخدام المنصة بطريقة محترمة وبنّاءة، وتجنب أي نشاط مسيء أو ضار.</p>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="document.getElementById('termsCheck').checked = true;">أوافق</button>
+            <div class="mb-4" dir="rtl">
+                <div class="form-check" style="display: flex; align-items: center; gap: 8px;">
+                    <input class="form-check-input m-0" type="checkbox" id="termsCheck" required
+                           style="flex-shrink: 0; width: 1.2em; height: 1.2em;">
+                    <label class="form-check-label" for="termsCheck" style="line-height: 1.5;">
+                        أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط والأحكام</a> و
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">سياسة الخصوصية</a>
+                    </label>
+                </div>
             </div>
         </div>
     </div>

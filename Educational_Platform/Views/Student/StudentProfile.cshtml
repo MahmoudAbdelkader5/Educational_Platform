@@ -199,12 +199,50 @@
             transform: scale(1.05);
         }
 
-  
+
     .sidebar-responsive .card {
         animation: float 6s ease-in-out infinite;
     }
 
-   
+    @@media (max-width: 991.98px) {
+        .sidebar-responsive {
+            width: 100% !important;
+            position: relative !important;
+            top: auto !important;
+            margin-top: 20px;
+            order: -1 !important;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+        }
+
+        .student-info {
+            text-align: center !important;
+        }
+
+            .student-info .d-flex {
+                justify-content: center !important;
+            }
+    }
+
+    @@media (max-width: 767.98px) {
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+        }
+
+            .progress-circle::before {
+                width: 70px;
+                height: 70px;
+            }
+
+        .progress-value {
+            font-size: 1.2rem;
+        }
+    }
+
     }
 </style>
 <div class="container py-4">
@@ -404,7 +442,7 @@
                                             <td class="text-center">
                                                 @result.ExamDate.ToString("yyyy/MM/dd")
                                             </td>
-                                            
+
                                         </tr>
                                     }
                                 </tbody>
@@ -444,27 +482,27 @@
                 </div>
             </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Animate progress circles
-        const circles = document.querySelectorAll('.progress-circle');
-        circles.forEach(circle => {
-            const progress = circle.getAttribute('data-progress');
-            circle.style.setProperty('--progress', `${progress}%`);
-        });
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Animate progress circles
+                    const circles = document.querySelectorAll('.progress-circle');
+                    circles.forEach(circle => {
+                        const progress = circle.getAttribute('data-progress');
+                        circle.style.setProperty('--progress', `${progress}%`);
+                    });
 
-        // Add smooth scrolling to all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+                    // Add smooth scrolling to all links
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        });
+                    });
                 });
-            });
-        });
-    });
-</script>
+            </script>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,10 +1,14 @@
 ﻿<style>
-    .fo{
-     font-family: "Cairo", sans-serif;
+    .fo {
+        font-family: "Cairo", sans-serif;
+    }
+
+    .container-fluid.footer {
+        margin-top: auto; /* This pushes the footer to the bottom */
     }
 </style>
 <!-- Footer Start -->
-<div class="container-fluid bg-dark text-light footer pt-4" dir="rtl">
+<div class="container-fluid bg-dark text-light footer pt-4 .container-fluid.footer" dir="rtl">
     <div class="container">
         <div class="row g-4 align-items-start">
             <!-- Added align-items-start -->
@@ -13,7 +17,7 @@
                 <h5 class="text-white mb-3 border-bottom border-primary pb-2 d-inline-block fo">روابط سريعة</h5>
                 <div class="d-flex flex-column">
                     <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-chevron-left ms-2"></i>الرئيسية 
+                        <i class="fas fa-chevron-left ms-2"></i>الرئيسية
                     </a>
                     <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="About">
                         <i class="fas fa-chevron-left ms-2"></i> من نحن
@@ -24,7 +28,7 @@
                     <a class="text-light mb-2 hover-text-primary" asp-controller="Home" asp-action="Privacy">
                         <i class="fas fa-chevron-left ms-2"></i> سياسة الخصوصية
                     </a>
-                   
+
                 </div>
             </div>
 

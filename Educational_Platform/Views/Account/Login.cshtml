@@ -132,3 +132,46 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function() {
+            // Focus on email field on page load
+            $("#Email").focus();
+
+            // Show validation summary if there are any
+            if ($('.text-danger').length > 0) {
+                $('.validation-summary-errors').show();
+            }
+
+            // Add validation on form submission
+            $("#loginForm").on("submit", function(event) {
+                if (!validateForm()) {
+                    event.preventDefault();
+                }
+            });
+
+        });
+
+        
+
+        function togglePassword(fieldId) {
+            const passwordField = document.getElementById(fieldId);
+            const fieldType = passwordField.getAttribute('type');
+            const eyeIcon = document.querySelector(`button[onclick="togglePassword('${fieldId}')"] i`);
+
+            if (fieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.setAttribute('type', 'password');
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+
+    </script>
+}

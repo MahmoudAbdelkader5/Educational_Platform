@@ -44,6 +44,7 @@ namespace Educational_Platform.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -58,13 +59,11 @@ namespace Educational_Platform.Controllers
                         ModelState.AddModelError(string.Empty, "بريدك الإلكتروني غير مفعل. اضغط لإعادة إرسال رابط التفعيل.");
                         return View(model);
                     }
+
                     var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, model.RememberMe);
                     if (result.Succeeded)
                     {
-                        // THIS LINE IS CRITICAL - actually sign in the user and create the auth cookie
-                        await _signInManager.SignInAsync(user, model.RememberMe);
-
-                        // Build custom claims if needed
+                        // Build custom claims
                         var userClaims = new List<Claim>
                 {
                     new Claim("FullName", user.FullName),
@@ -72,10 +71,11 @@ namespace Educational_Platform.Controllers
                     new Claim("ProfilePicture", user.ProfilePicture ?? "")
                 };
 
-                        // Add these claims to the user
-                        await _userManager.AddClaimsAsync(user, userClaims);
+                        // Add custom claims to the user
+                        var identity = new ClaimsIdentity(userClaims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        await _signInManager.SignInWithClaimsAsync(user, model.RememberMe, identity.Claims);
 
-                        // Now redirect based on role
+                        // Redirect based on role
                         if (await _userManager.IsInRoleAsync(user, "Student"))
                         {
                             return RedirectToAction("Index", "Home");
@@ -92,7 +92,6 @@ namespace Educational_Platform.Controllers
                     else
                     {
                         ModelState.AddModelError(string.Empty, "المستخدم غير موجود.");
-
                     }
                 }
                 else
@@ -102,6 +101,8 @@ namespace Educational_Platform.Controllers
             }
             return View(model);
         }
+
+
 
         // Registration for Students
         [HttpGet]
