@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Register Confirmation";
+    Layout = "_AuthLayout";
+}
+
+<style>
+    :root {
+        --turquoise: #06BBCC;
+        --dark-turquoise: #035F69;
+        --gradient-start: #06BBCC;
+        --gradient-end: #4ad7e6;
+        --light-bg: #f0fafb;
+    }
+
+    body {
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .custom-turquoise-bg {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) !important;
+    }
+
+    .custom-turquoise-btn {
+        background: var(--turquoise) !important;
+        border-color: var(--turquoise) !important;
+        color: #fff !important;
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        padding: 12px 30px;
+    }
+
+        .custom-turquoise-btn:hover {
+            background: var(--dark-turquoise) !important;
+        }
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .card-header {
+        border-bottom: none;
+        padding: 2rem;
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: #fff;
+        text-align: center;
+    }
+
+        .card-header h3 {
+            font-weight: 700;
+        }
+
+    .card-body {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .success-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(6, 187, 204, 0.15);
+        animation: pulse 2s infinite;
+    }
+
+        .success-icon i {
+            font-size: 50px;
+            color: var(--turquoise);
+        }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card position-relative">
+                <div class="card-header">
+                    <h3><i class="fa fa-envelope me-2"></i>تم إرسال رسالة التفعيل</h3>
+                </div>
+                <div class="card-body">
+                    <div class="success-icon">
+                        <i class="fa fa-paper-plane"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">تم إرسال رابط تفعيل الحساب إلى بريدك الإلكتروني</h4>
+                    <p class="text-muted lead mb-4">
+                        يرجى التحقق من بريدك الإلكتروني وتفعيل الحساب قبل تسجيل الدخول.<br />
+                        إذا لم تجد الرسالة، تحقق من مجلد الرسائل غير المرغوب فيها (Spam).
+                    </p>
+                    <div class="d-grid gap-3 mt-4 mx-auto" style="max-width: 400px">
+                        <a asp-controller="Home" asp-action="Index"
+                           class="btn custom-turquoise-btn btn-lg fw-bold py-3">
+                            <i class="fa fa-home me-2"></i>العودة إلى الصفحة الرئيسية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

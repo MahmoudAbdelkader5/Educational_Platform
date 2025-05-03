@@ -1,0 +1,183 @@
+﻿@{
+    ViewData["Title"] = "Email Confirmation";
+    Layout = "_AuthLayout";
+}
+
+<style>
+    :root {
+        --turquoise: #06BBCC;
+        --dark-turquoise: #035F69;
+        --gradient-start: #06BBCC;
+        --gradient-end: #4ad7e6;
+        --light-bg: #f0fafb;
+    }
+
+
+
+    body {
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .custom-turquoise-bg {
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end)) !important;
+    }
+
+    .custom-turquoise-text {
+        color: var(--turquoise) !important;
+    }
+
+    .custom-turquoise-btn {
+        background: var(--turquoise) !important;
+        border-color: var(--turquoise) !important;
+        color: #fff !important;
+        transition: all 0.3s ease;
+        border-radius: 50px;
+        padding: 12px 30px;
+    }
+
+        .custom-turquoise-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(6, 187, 204, 0.25);
+        }
+
+    .btn-outline-turquoise {
+        color: var(--turquoise) !important;
+        border: 2px solid var(--turquoise) !important;
+        background-color: transparent !important;
+        transition: all 0.3s ease;
+        border-radius: 50px;
+        padding: 12px 30px;
+    }
+
+        .btn-outline-turquoise:hover {
+            color: #fff !important;
+            background: var(--turquoise) !important;
+            box-shadow: 0 5px 15px rgba(6, 187, 204, 0.2);
+        }
+
+    .success-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 25px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(6, 187, 204, 0.15);
+        animation: pulse 2s infinite;
+    }
+
+        .success-icon i {
+            font-size: 50px;
+            color: var(--turquoise);
+        }
+
+    .card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+
+    .card-header {
+        border-bottom: none;
+        padding: 2rem;
+        position: relative;
+        background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+        color: #fff;
+        text-align: center;
+    }
+
+        .card-header h3 {
+            font-weight: 700;
+        }
+
+    .card-body {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .decorative-shape {
+        position: absolute;
+        z-index: -1;
+        opacity: 0.5;
+    }
+
+    .shape-1 {
+        width: 150px;
+        height: 150px;
+        background: var(--turquoise);
+        border-radius: 72% 28% 70% 30% / 30% 52% 48% 70%;
+        top: -75px;
+        right: -75px;
+    }
+
+    .shape-2 {
+        width: 100px;
+        height: 100px;
+        background: var(--gradient-start);
+        border-radius: 30% 70% 70% 30% / 30% 52% 48% 70%;
+        bottom: -50px;
+        left: -50px;
+    }
+
+    .custom-turquoise-btn {
+        background: var(--turquoise) !important;
+        border-color: var(--turquoise) !important;
+        color: #fff !important;
+        transition: all 0.3s ease;
+        border-radius: 8px; /* Changed from 50px */
+        padding: 12px 30px;
+    }
+
+    .btn-outline-turquoise {
+        color: var(--turquoise) !important;
+        border: 2px solid var(--turquoise) !important;
+        background-color: transparent !important;
+        transition: all 0.3s ease;
+        border-radius: 8px; /* Changed from 50px */
+        padding: 12px 30px;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card position-relative">
+                <!-- Decorative elements -->
+                <div class="decorative-shape shape-1"></div>
+                <div class="decorative-shape shape-2"></div>
+
+                <div class="card-header">
+                    <h3><i class="fa fa-check-circle me-2"></i>تم تأكيد البريد الإلكتروني بنجاح!</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="success-icon">
+                        <i class="fa fa-envelope-open-text"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">شكرًا لتأكيد عنوان بريدك الإلكتروني</h4>
+                    <p class="text-muted lead mb-4">لقد تم تفعيل حسابك الآن ويمكنك الاستفادة من جميع خدمات منصتنا التعليمية.</p>
+
+                    <div class="d-grid gap-3 mt-4 mx-auto" style="max-width: 400px">
+                        <a asp-controller="Account" asp-action="Login"
+                           class="btn custom-turquoise-btn btn-lg fw-bold py-3">
+                            <i class="fa fa-sign-in-alt me-2"></i>تسجيل الدخول إلى حسابك
+                        </a>
+                        <a asp-controller="Home" asp-action="Index"
+                           class="btn btn-outline-turquoise btn-lg fw-bold py-3">
+                            <i class="fa fa-home me-2"></i>العودة إلى الصفحة الرئيسية
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

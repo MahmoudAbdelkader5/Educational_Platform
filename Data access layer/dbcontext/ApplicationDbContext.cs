@@ -29,6 +29,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<Student_Assignment> StudentAssignments { get; set; }
     public DbSet<Student_Exam> StudentExams { get; set; }
     public DbSet<assignment_Answer> AssignmentAnswers { get; set; }
+    public DbSet<EmailConfirmationToken> EmailConfirmationTokens { get; set; }
+    public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -56,6 +58,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithOne(i => i.User)
             .HasForeignKey<ApplicationUser>(a => a.InstructorId)
             .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<EmailConfirmationToken>()
+    .HasOne(t => t.User)
+    .WithMany()
+    .HasForeignKey(t => t.UserId)
+    .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<PasswordResetToken>()
+    .HasOne(t => t.User)
+    .WithMany()
+    .HasForeignKey(t => t.UserId)
+    .OnDelete(DeleteBehavior.Cascade);
     }
 
 }
