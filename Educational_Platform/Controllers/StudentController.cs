@@ -38,7 +38,6 @@ namespace Educational_Platform.Controllers
         // The variable 'examId' is not defined in the current context. To fix this, you need to ensure that 'examId' is either passed as a parameter to the method or declared and initialized within the method's scope. 
 
         // Assuming 'examId' is required for the logic and should be passed as a parameter to the 'StudentProfile' method, update the method signature and usage as follows:
-
         public async Task<IActionResult> StudentProfile(int examId)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -54,13 +53,34 @@ namespace Educational_Platform.Controllers
             var examResults = await _unitOfWork.student_Exam
                 .GetAllAsync(e => e.StudentID == student.ID, includeProperties: "Exam,Exam.ExamQuestions");
 
+            // Include Course and Lesson information when getting assignments
+            var assessmentResults = await _unitOfWork.Student_Assignment
+                .GetAllAsync(e => e.StudentID == student.ID,
+                includeProperties: "Assignment,Assignment.assignment_Question,Assignment.Course,Assignment.Lesson");
+
             var examResultViewModels = examResults.Select(e => new ExamResultViewModel
             {
-                ExamId = e.ExamID,  // Added for details link
+                ExamId = e.ExamID,
                 ExamTitle = e.Exam.Title,
-                CorrectAnswers = (int)e.Score,  // Assuming Score = number of correct answers
+                CorrectAnswers = (int)e.Score,
+                CourseId = e.Exam.Course?.ID ?? 0,
+                CourseTitle = e.Exam.Course?.Title ?? "No Course",
                 TotalQuestions = e.Exam.ExamQuestions.Count,
                 ExamDate = e.ExamDate
+            }).ToList();
+
+            var assessmentResultViewModels = assessmentResults.Select(e => new AssessmentResultViewModel
+            {
+                AssessmentId = e.AssignmentID,
+                AssessmentTitle = e.Assignment.Title,
+                CorrectAnswers = (int)e.Grade,
+                TotalQuestions = e.Assignment.assignment_Question.Count,
+                AssessmentDate = e.SubmissionDate,
+                // Add course and lesson information
+                CourseId = e.Assignment.Course?.ID ?? 0,
+                CourseTitle = e.Assignment.Course?.Title ?? "No Course",
+                LessonId = e.Assignment.Lesson?.ID,
+                LessonTitle = e.Assignment.Lesson?.Title
             }).ToList();
 
             var studentProfileViewModel = new StudentProfileViewModel
@@ -81,7 +101,8 @@ namespace Educational_Platform.Controllers
                     Price = e.Course.Price,
                     Image = e.Course.Image
                 }).ToList(),
-                ExamResults = examResultViewModels
+                ExamResults = examResultViewModels,
+                AssessmentResults = assessmentResultViewModels
             };
 
             return View(studentProfileViewModel);
@@ -254,6 +275,7 @@ namespace Educational_Platform.Controllers
         // بدء الامتحان
         public async Task<IActionResult> TakeExam(int examId)
         {
+            // الحصول على معلومات الامتحان
             var exam = await _unitOfWork.Exam.GetFirstOrDefaultAsync(
                 e => e.Id == examId,
                 includeProperties: "ExamQuestions.Question");
@@ -262,6 +284,30 @@ namespace Educational_Platform.Controllers
             {
                 TempData["ErrorMessage"] = "الامتحان غير موجود.";
                 return RedirectToAction(nameof(AvailableExams));
+            }
+
+            // الحصول على معلومات الطالب
+            var user = await _userManager.GetUserAsync(User);
+            var studentId = user.StudentId.Value;
+
+            // التحقق مما إذا كان الطالب قد أجرى الامتحان مسبقًا
+            var existingResult = await _unitOfWork.student_Exam.GetFirstOrDefaultAsync(
+                se => se.ExamID == examId && se.StudentID == studentId);
+
+            if (existingResult != null)
+            {
+                // Calculate total questions
+                //var totalQuestions = await _unitOfWork.ExamQuestion.GetCountAsync();
+                var totalQuestions = await _unitOfWork.ExamQuestion.GetQuestionsForExamAsync(examId);
+                int totalQuestionsCount = totalQuestions.Count();
+                // Pass data to view
+                ViewBag.TotalScore = existingResult.Score;
+                ViewBag.TotalQuestions = totalQuestionsCount;
+                ViewBag.ExamResult = existingResult;
+
+
+                // Redirect to old exam view
+                return View("oldexam", exam);
             }
 
             return View(exam);
@@ -366,6 +412,7 @@ namespace Educational_Platform.Controllers
 
         public async Task<IActionResult> TakeAssessment(int assessmentId)
         {
+            // الحصول على معلومات الواجب
             var assessment = await _unitOfWork.Assessment.GetFirstOrDefaultAsync(
                 a => a.ID == assessmentId,
                 includeProperties: "assignment_Question.Question");
@@ -374,6 +421,29 @@ namespace Educational_Platform.Controllers
             {
                 TempData["ErrorMessage"] = "الواجب غير موجود.";
                 return RedirectToAction(nameof(AvailableAssessments));
+            }
+
+            // الحصول على معلومات الطالب
+            var user = await _userManager.GetUserAsync(User);
+            var studentId = user.StudentId.Value;
+
+            // التحقق مما إذا كان الطالب قد أتم الواجب مسبقاً
+            var existingResult = await _unitOfWork.Student_Assignment.GetFirstOrDefaultAsync(
+                sa => sa.AssignmentID == assessmentId && sa.StudentID == studentId);
+
+            if (existingResult != null)
+            {
+                // حساب عدد الأسئلة
+                var totalQuestions = await _unitOfWork.AssignmentQuestion.GetQuestionsForAssignmentAsync(assessmentId);
+                int totalQuestionsCount = totalQuestions.Count();
+
+                // تمرير البيانات للعرض
+                ViewBag.TotalScore = existingResult.Grade; // لاحظ استخدام Grade بدلاً من Score
+                ViewBag.TotalQuestions = totalQuestionsCount;
+                ViewBag.AssignmentResult = existingResult;
+
+                // التوجيه إلى عرض الواجب القديم
+                return View("oldassignment", assessment);
             }
 
             return View(assessment);

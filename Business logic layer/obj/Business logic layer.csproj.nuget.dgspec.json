@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Business logic layer\\Business logic layer.csproj": {}
+    "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj": {}
   },
   "projects": {
-    "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Business logic layer\\Business logic layer.csproj": {
+    "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
+        "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
         "projectName": "Business logic layer",
-        "projectPath": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
-        "packagesPath": "C:\\Users\\FLOPPY\\.nuget\\packages\\",
-        "outputPath": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Business logic layer\\obj\\",
+        "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\Business logic layer.csproj",
+        "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
+        "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Business logic layer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\FLOPPY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\Data access layer.csproj": {
-                "projectPath": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\Data access layer.csproj"
+              "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj": {
+                "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj"
               }
             }
           }
@@ -79,24 +80,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\Data access layer.csproj": {
+    "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\Data access layer.csproj",
+        "projectUniqueName": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
         "projectName": "Data access layer",
-        "projectPath": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\Data access layer.csproj",
-        "packagesPath": "C:\\Users\\FLOPPY\\.nuget\\packages\\",
-        "outputPath": "D:\\iti\\FinalProject\\oneday\\Educational_Platform\\Data access layer\\obj\\",
+        "projectPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\Data access layer.csproj",
+        "packagesPath": "C:\\Users\\master\\.nuget\\packages\\",
+        "outputPath": "F:\\AI\\prproject\\Educational_Platform\\Data access layer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\FLOPPY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -105,6 +106,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -170,7 +172,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

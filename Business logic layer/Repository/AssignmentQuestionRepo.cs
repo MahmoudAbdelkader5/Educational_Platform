@@ -19,11 +19,11 @@ namespace Business_logic_layer.Repository
         }
 
         // Method to get questions for a specific exam
-        public async Task<IEnumerable<assignment_question>> GetQuestionsForExamAsync(int examId)
+        public async Task<IEnumerable<assignment_question>> GetQuestionsForAssignmentAsync(int assignmentId)
         {
             return await Context.AssignmentQuestions
-                .Include(eq => eq.Question) // Eager load the Question navigation property
-                .Where(eq => eq.AssignmentID == examId)
+                .Where(aq => aq.AssignmentID == assignmentId)
+                .Include(aq => aq.Question)  // Include related Question if needed
                 .ToListAsync();
         }
 

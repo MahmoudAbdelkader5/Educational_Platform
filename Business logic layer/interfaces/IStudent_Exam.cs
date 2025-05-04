@@ -12,9 +12,8 @@ namespace Business_logic_layer.interfaces
     public interface IStudent_Exam : IGenericRepo<Student_Exam>
     {
         Task<Student_Exam> GetFirstOrDefaultAsync(
-            Expression<Func<Student_Exam, bool>> filter = null,
-            Func<IQueryable<Student_Exam>, IOrderedQueryable<Student_Exam>> orderBy = null,
-            string includeProperties = null,
-            bool tracking = true);
+        Expression<Func<Student_Exam, bool>> filter = null,
+        string includeProperties = null,
+        bool tracked = true);
     }
 }
