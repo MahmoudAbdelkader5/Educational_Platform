@@ -2,6 +2,7 @@
 using Business_logic_layer.interfaces;
 using Data_access_layer.model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -104,36 +105,47 @@ namespace Educational_Platform.Controllers
             try
             {
                 await SetViewDataCounts();
-
                 await PopulateCreateViewBags();
 
+               
+
+                // Validate at least one question is selected
+                if (selectedQuestionIds == null || selectedQuestionIds.Count == 0)
+                {
+                    ModelState.AddModelError("selectedQuestionIds", "You must select at least one question");
+                    
+                    return View(exam);
+                }
+
+                // Add the exam first to get its ID
                 await _unitOfWork.Exam.AddAsync(exam);
                 await _unitOfWork.Save();
 
-                if (selectedQuestionIds != null && selectedQuestionIds.Any())
+                // Add selected questions to the exam
+                foreach (var questionId in selectedQuestionIds)
                 {
-                    foreach (var questionId in selectedQuestionIds)
+                    await _unitOfWork.ExamQuestion.AddAsync(new examQuestion
                     {
-                        await _unitOfWork.ExamQuestion.AddAsync(new examQuestion
-                        {
-                            ExamID = exam.Id,
-                            QuestionID = questionId,
-                            mark = 1 // Default mark
-                        });
-                    }
-                    await _unitOfWork.Save();
+                        ExamID = exam.Id,
+                        QuestionID = questionId,
+                        mark = 1 // Default mark
+                    });
                 }
+
+                await _unitOfWork.Save();
 
                 return RedirectToAction(nameof(Details), new { id = exam.Id });
             }
             catch (Exception ex)
             {
-                
+                // Log the exception here
+                // _logger.LogError(ex, "Error creating exam");
+
+                ModelState.AddModelError("", "An error occurred while creating the exam. Please try again.");
                 await PopulateCreateViewBags();
                 return View(exam);
             }
         }
-
         // GET: Exam/Edit/5
         public async Task<IActionResult> Edit(int id)
         {

@@ -33,9 +33,25 @@ namespace Data_access_layer.model
 
         [ForeignKey(nameof(LessonID))]
         public virtual Lesson Lesson { get; set; }
+        [Required(ErrorMessage = "At least one question is required")]
+        [MinLength(1, ErrorMessage = "At least one question is required")]
+        [ValidateAtLeastOneQuestion(ErrorMessage = "You must select at least one question")]
+
         public virtual ICollection<assignment_question> assignment_Question { get; set; } = new HashSet<assignment_question>();
         public virtual ICollection<Student_Assignment> Student_Assignment { get; set; } = new List<Student_Assignment>();
     }
+    public class ValidateAtLeastOneQuestion : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value is ICollection<examQuestion> questions && questions.Count > 0)
+            {
+                return ValidationResult.Success;
+            }
 
-
+            return new ValidationResult(ErrorMessage ?? "You must select at least one question");
+        }
+    }
 }
+
+

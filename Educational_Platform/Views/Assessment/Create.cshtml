@@ -9,7 +9,7 @@
         <h6 class="m-0 font-weight-bold text-white">@ViewData["Title"]</h6>
     </div>
     <div class="card-body">
-        <form asp-action="Create" class="form-group" dir="rtl">
+        <form asp-action="Create" class="form-group" dir="rtl" id="assignmentForm">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
             <div class="form-row">
@@ -52,6 +52,7 @@
 
             <div class="form-group">
                 <label class="font-weight-bold">الأسئلة</label>
+                <span class="text-danger field-validation-valid" data-valmsg-for="SelectedQuestionIds" data-valmsg-replace="true"></span>
 
                 @if (ViewBag.QuestionsList != null && ViewBag.QuestionsList.Count > 0)
                 {
@@ -65,8 +66,8 @@
                                 {
                                     <div class="col-md-6 mb-2">
                                         <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input"
-                                                   name="selectedQuestionIds" value="@question.QuestionID"
+                                            <input type="checkbox" class="custom-control-input question-checkbox"
+                                                   name="SelectedQuestionIds" value="@question.QuestionID"
                                                    id="q_@question.QuestionID">
                                             <label class="custom-control-label" for="q_@question.QuestionID">
                                                 @question.QuestionText
@@ -146,17 +147,52 @@
             padding-right: 1.5rem;
             padding-left: 0;
         }
+
+        .field-validation-error {
+            display: block;
+            margin-top: 5px;
+        }
     </style>
 }
 
 @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/lib/select2/js/select2.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Initialize Select2
             $('.select2').select2({
                 placeholder: "اختر عنصرًا",
                 allowClear: true,
                 dir: "rtl"
+            });
+
+            // Custom validation for at least one question selected
+            $.validator.addMethod("atLeastOneQuestion", function(value, element) {
+                return $('.question-checkbox:checked').length > 0;
+            }, "يجب اختيار سؤال واحد على الأقل");
+
+            // Apply custom validation to the form
+            $("#assignmentForm").validate({
+                rules: {
+                    SelectedQuestionIds: {
+                        atLeastOneQuestion: true
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") === "SelectedQuestionIds") {
+                        error.insertAfter(element.closest(".form-group").find("[data-valmsg-for='SelectedQuestionIds']"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+
+            // Revalidate when checkboxes change
+            $('.question-checkbox').change(function() {
+                $("#assignmentForm").validate().element("[name='SelectedQuestionIds']");
             });
         });
     </script>

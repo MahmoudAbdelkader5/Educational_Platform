@@ -4,45 +4,48 @@ namespace Educational_Platform.ViewModel
 {
     public class RegisterStudentViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Required(ErrorMessage = "البريد الإلكتروني مطلوب")]
+        [EmailAddress(ErrorMessage = "البريد الإلكتروني غير صحيح")]
+        [Display(Name = "البريد الإلكتروني")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "الاسم الأول مطلوب")]
+        [StringLength(100, ErrorMessage = "الاسم الأول يجب أن لا يتجاوز {1} حرف")]
+        [Display(Name = "الاسم الأول")]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "الاسم الأخير مطلوب")]
+        [StringLength(100, ErrorMessage = "الاسم الأخير يجب أن لا يتجاوز {1} حرف")]
+        [Display(Name = "الاسم الأخير")]
         public string LastName { get; set; }
 
-        [Required]
-        [Display(Name = "Phone Number")]
+        [Required(ErrorMessage = "رقم الهاتف مطلوب")]
+        [Display(Name = "رقم الهاتف")]
         public string PhoneNumber { get; set; }
-        [Required]
-        [Display(Name = "Father Phone Number")]
+
+        [Required(ErrorMessage = "رقم هاتف الأب مطلوب")]
+        [Display(Name = "رقم هاتف الأب")]
         public string FatherPhoneNumber { get; set; }
-        [Required]
-        [Display(Name = "Grade Level")]
+
+        [Required(ErrorMessage = "الصف الدراسي مطلوب")]
+        [Display(Name = "الصف الدراسي")]
         public string GradeLevel { get; set; }
-        // ...existing code...
-        [Display(Name = "Profile Picture")]
+
+        [Display(Name = "صورة الملف الشخصي")]
         public IFormFile? ProfilePictureFile { get; set; }  // For uploading the file
 
-        [Display(Name = "Profile Picture")]
+        [Display(Name = "صورة الملف الشخصي")]
         public string? ProfilePicture { get; set; } = "مجهول.png";  // For storing the path
-        [Required]
-        [StringLength(100, ErrorMessage = "The password must be at least {2} characters long.", MinimumLength = 6)]
+
+        [Required(ErrorMessage = "كلمة المرور مطلوبة")]
+        [StringLength(100, ErrorMessage = "يجب أن تكون كلمة المرور على الأقل {2} أحرف", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "كلمة المرور")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "تأكيد كلمة المرور")]
+        [Compare("Password", ErrorMessage = "كلمة المرور وتأكيدها غير متطابقين")]
         public string ConfirmPassword { get; set; }
     }
 }

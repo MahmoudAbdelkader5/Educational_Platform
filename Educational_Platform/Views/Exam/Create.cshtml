@@ -12,8 +12,10 @@
     <hr />
 
     <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div asp-validation-summary="All" class="alert alert-danger"></div>
+        }
         <div class="form-group mb-3">
             <label asp-for="Title" class="form-label">عنوان الامتحان</label>
             <input asp-for="Title" class="form-control" />
@@ -34,36 +36,41 @@
             <span asp-validation-for="duration" class="text-danger"></span>
         </div>
 
-        <h4 class="mt-4 mb-3">
-            <i class="fas fa-question-circle ml-2"></i>
-            اختيار الأسئلة
-        </h4>
 
-        @if (ViewBag.Questions != null && ((IEnumerable<Questions>)ViewBag.Questions).Any())
-        {
-            <div class="card mb-4">
-                <div class="card-body">
-                    @foreach (var question in (IEnumerable<Questions>)ViewBag.Questions)
-                    {
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="checkbox"
-                                   name="selectedQuestionIds" value="@question.QuestionID"
-                                   id="q_@question.QuestionID" />
-                            <label class="form-check-label" for="q_@question.QuestionID">
-                                @question.QuestionText
-                            </label>
-                        </div>
-                    }
+        <div class="form-group mb-3">
+            <h4 class="mt-4 mb-3">
+                <i class="fas fa-question-circle ml-2"></i>
+                اختيار الأسئلة
+                <span class="text-danger">*</span>
+            </h4>
+
+            @if (ViewBag.Questions != null && ((IEnumerable<Questions>)ViewBag.Questions).Any())
+            {
+                <div class="card mb-4">
+                    <div class="card-body">
+                        @foreach (var question in (IEnumerable<Questions>)ViewBag.Questions)
+                        {
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox"
+                                       name="selectedQuestionIds" value="@question.QuestionID"
+                                       id="q_@question.QuestionID" />
+                                <label class="form-check-label" for="q_@question.QuestionID">
+                                    @question.QuestionText
+                                </label>
+                            </div>
+                        }
+                    </div>
                 </div>
-            </div>
-        }
-        else
-        {
-            <div class="alert alert-warning">
-                لا توجد أسئلة متاحة
-                <a asp-controller="Question" asp-action="Create" class="mr-2">إنشاء سؤال جديد</a>
-            </div>
-        }
+                <span id="questionsValidation" class="text-danger"></span>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    لا توجد أسئلة متاحة
+                    <a asp-controller="Question" asp-action="Create" class="mr-2">إنشاء سؤال جديد</a>
+                </div>
+            }
+        </div>
 
         <div class="form-group mt-4">
             <button type="submit" class="btn btn-primary">حفظ</button>
@@ -76,4 +83,27 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}
+
+
+    <script>
+        $(document).ready(function() {
+            $('form').submit(function(e) {
+                // Check if at least one question is selected
+                if ($('input[name="selectedQuestionIds"]:checked').length === 0) {
+                    $('#questionsValidation').text('You must select at least one question');
+                    e.preventDefault();
+                } else {
+                    $('#questionsValidation').text('');
+                }
+            });
+
+            // Validate on checkbox change
+            $('input[name="selectedQuestionIds"]').change(function() {
+                if ($('input[name="selectedQuestionIds"]:checked').length > 0) {
+                    $('#questionsValidation').text('');
+                }
+            });
+        });
+    </script>
 }
