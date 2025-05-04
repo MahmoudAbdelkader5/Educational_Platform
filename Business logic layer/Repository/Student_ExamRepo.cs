@@ -2,8 +2,10 @@
 using Data_access_layer.model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Business_logic_layer.Repository
@@ -11,25 +13,26 @@ namespace Business_logic_layer.Repository
     class Student_ExamRepo : genericRepo<Student_Exam>, IStudent_Exam
     {
         private readonly ApplicationDbContext context;
-        private readonly DbSet<Student_Exam> _dbSet;
-
         public Student_ExamRepo(ApplicationDbContext context) : base(context)
         {
             this.context = context;
-            _dbSet = context.Set<Student_Exam>();
         }
 
-        public async Task<Student_Exam> GetFirstOrDefaultAsync(
-            Expression<Func<Student_Exam, bool>> filter = null,
-            Func<IQueryable<Student_Exam>, IOrderedQueryable<Student_Exam>> orderBy = null,
-            string includeProperties = null,
-            bool tracking = true)
-        {
-            IQueryable<Student_Exam> query = _dbSet;
 
-            if (!tracking)
+        public async Task<Student_Exam> GetFirstOrDefaultAsync(
+                  Expression<Func<Student_Exam, bool>> filter = null,
+                  string includeProperties = null,
+                  bool tracked = true)
+        {
+            IQueryable<Student_Exam> query;
+
+            if (tracked)
             {
-                query = query.AsNoTracking();
+                query = context.Set<Student_Exam>();
+            }
+            else
+            {
+                query = context.Set<Student_Exam>().AsNoTracking();
             }
 
             if (filter != null)
@@ -39,18 +42,16 @@ namespace Business_logic_layer.Repository
 
             if (!string.IsNullOrEmpty(includeProperties))
             {
-                foreach (var includeProperty in includeProperties.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var includeProperty in includeProperties.Split(
+                    new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(includeProperty.Trim());
                 }
             }
 
-            if (orderBy != null)
-            {
-                query = orderBy(query);
-            }
-
             return await query.FirstOrDefaultAsync();
         }
+    
     }
+    
 }

@@ -1,12 +1,10 @@
-﻿@model StudentProfileViewModel;
-
+﻿@model StudentProfileViewModel
 @{
     ViewData["Title"] = "Student Profile";
     @Html.Partial("~/Views/Shared/Styling.cshtml")
     Layout = null;
     @Html.Partial("~/Views/Shared/_Header.cshtml")
 }
-
 <style>
     .fo {
         font-family: "Cairo", sans-serif;
@@ -243,8 +241,7 @@
         }
     }
 
-    }
-</style>
+    }</style>
 <div class="container py-4">
     <div class="row">
         <!-- Sidebar -->
@@ -278,13 +275,11 @@
                         <div class="d-flex align-items-center mb-3">
                             <i class="fas fa-user-graduate me-2 text-primary p-2"> </i>
                             <span>@Model.GradeLevel</span>
-
                         </div>
 
                         <div class="d-flex align-items-center mb-3">
                             <i class="fas fa-phone-alt me-2 text-primary p-2"></i>
                             <span>@Model.PhoneNumber</span>
-
                         </div>
 
                         @Html.AntiForgeryToken()
@@ -299,7 +294,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class=" main-content col-lg-8 col-12 order-lg-1">
+        <div class="main-content col-lg-8 col-12 order-lg-1">
             <!-- Progress Section -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
@@ -309,49 +304,52 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="motivational-quote fo text-center">
+                    <div class="motivational-quote fo text-center mb-4">
                         ⭐ كل لحظة تركّز فيها دلوقتي، بتقربك من حلمك الكبير... اجتهد، وخلّي تعبك يوصلك لهدفك ⭐
                     </div>
 
-                    <div class="row text-center mt-4">
+                    <div class="row text-center">
                         <!-- Average Results -->
                         <div class="col-md-4 mb-4">
                             @{
-                                var averagePercentage = Model.ExamResults.Any() ? Model.ExamResults.Average(e => e.Percentage) : 0;
-                                var safeAverage = double.IsNaN(averagePercentage) ? 0 : averagePercentage;
+                                var assementCount = Model.AssessmentResults.Count;
+                                var assemenstProgress = assementCount > 0 ? 100 : 0;
                             }
-                            <div class="progress-circle" style="background: conic-gradient(var(--primary-color) @(safeAverage)%, #e9ecef @(safeAverage)%);">
-                                <span class="progress-value" style="color:var(--primary-color)">
-                                    @safeAverage.ToString("0")%
+                            <div class="progress-circle" style="background: conic-gradient(var(--danger-color) @(assemenstProgress)%, transparent @(assemenstProgress)%);">
+                                <span class="progress-value" style="color:var(--danger-color)">
+                                    @assementCount
                                 </span>
                             </div>
-                            <h6 class="mt-3 fo" style="color:#6c757d">متوسط النتائج</h6>
+                            <h6 class="metric-title fo" style="margin-top: 15px;">الواجبات المكتملة</h6>
                         </div>
+
 
                         <!-- Completed Exams -->
                         <div class="col-md-4 mb-4">
                             @{
-                                var examsProgress = Model.ExamResults.Count > 0 ? 100 : 0;
+                                var examsCount = Model.ExamResults.Count;
+                                var examsProgress = examsCount > 0 ? 100 : 0;
                             }
-                            <div class="progress-circle" style="background: conic-gradient(var(--danger-color) @(examsProgress)%, #e9ecef @(examsProgress)%);">
+                            <div class="progress-circle" style="background: conic-gradient(var(--danger-color) @(examsProgress)%, transparent @(examsProgress)%);">
                                 <span class="progress-value" style="color:var(--danger-color)">
-                                    @Model.ExamResults.Count
+                                    @examsCount
                                 </span>
                             </div>
-                            <h6 class="mt-3 fo" style="color:#6c757d">الامتحانات المكتملة</h6>
+                            <h6 class="metric-title fo" style="margin-top: 15px;">الامتحانات المكتملة</h6>
                         </div>
 
                         <!-- Enrolled Courses -->
                         <div class="col-md-4 mb-4">
                             @{
-                                var coursesProgress = Model.EnrolledCourses.Count > 0 ? 100 : 0;
+                                var coursesCount = Model.EnrolledCourses.Count;
+                                var coursesProgress = coursesCount > 0 ? 100 : 0;
                             }
-                            <div class="progress-circle" style="background: conic-gradient(var(--purple-color) @(coursesProgress)%, #e9ecef @(coursesProgress)%);">
-                                <span class="progress-value" style="color:var(--purple-color)">
-                                    @Model.EnrolledCourses.Count
+                            <div class="progress-circle" style="background: conic-gradient(var(--primary-color) @(coursesProgress)%, transparent @(coursesProgress)%);">
+                                <span class="progress-value" style="color:var(--primary-color)">
+                                    @coursesCount
                                 </span>
                             </div>
-                            <h6 class="mt-3 fo" style="color:#6c757d">الدورات المسجلة</h6>
+                            <h6 class="metric-title fo" style="margin-top: 15px;">الدورات المسجلة</h6>
                         </div>
                     </div>
                 </div>
@@ -407,6 +405,7 @@
                 </div>
             </div>
 
+            <!-- Exam Results -->
             <div class="card shadow-sm mb-4">
                 <div class="card-header">
                     <h5 class="mb-0 text-white fo" style="direction:rtl;">
@@ -420,9 +419,11 @@
                             <table class="table table-hover table-striped" style="direction:rtl;">
                                 <thead class="table-light">
                                     <tr>
+                                        <th class="text-end">الدورة</th>
                                         <th class="text-end">عنوان الامتحان</th>
                                         <th class="text-center">الإجابات الصحيحة</th>
                                         <th class="text-center">النسبة</th>
+                                        <th class="text-center">الحالة</th>
                                         <th class="text-center">التاريخ</th>
                                     </tr>
                                 </thead>
@@ -430,6 +431,9 @@
                                     @foreach (var result in Model.ExamResults.OrderByDescending(r => r.ExamDate))
                                     {
                                         <tr>
+                                            <td class="text-end">
+                                                <div class="fo">@result.CourseTitle</div>
+                                            </td>
                                             <td class="text-end">@result.ExamTitle</td>
                                             <td class="text-center">
                                                 <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
@@ -440,31 +444,16 @@
                                                 @result.Percentage.ToString("0.00")%
                                             </td>
                                             <td class="text-center">
+                                                <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
+                                                    @(result.Percentage >= 50 ? "ناجح" : "راسب")
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
                                                 @result.ExamDate.ToString("yyyy/MM/dd")
                                             </td>
-
                                         </tr>
                                     }
                                 </tbody>
-                                <tfoot>
-                                    <tr class="table-active">
-                                        <th class="text-end">المجموع</th>
-                                        <th class="text-center">
-                                            @Model.ExamResults.Sum(r => r.CorrectAnswers) / @Model.ExamResults.Sum(r => r.TotalQuestions)
-                                        </th>
-                                        <th class="text-center">
-                                            @{
-                                                var totalCorrect = Model.ExamResults.Sum(r => r.CorrectAnswers);
-                                                var totalQuestions = Model.ExamResults.Sum(r => r.TotalQuestions);
-                                                var overallPercentage = totalQuestions > 0
-                                                ? totalCorrect * 100.0 / totalQuestions
-                                                : 0;
-                                            }
-                                            @overallPercentage.ToString("0.00")%
-                                        </th>
-                                        <th colspan="2"></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     }
@@ -482,27 +471,123 @@
                 </div>
             </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Animate progress circles
-                    const circles = document.querySelectorAll('.progress-circle');
-                    circles.forEach(circle => {
-                        const progress = circle.getAttribute('data-progress');
-                        circle.style.setProperty('--progress', `${progress}%`);
-                    });
+            <!-- Assessment Results -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0 text-white fo" style="direction:rtl;">
+                        <i class="fas fa-clipboard-check me-2"></i> عرض نتائج الواجبات
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.AssessmentResults.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" style="direction:rtl;">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th class="text-end">الدورة / الدرس</th>
+                                        <th class="text-end">عنوان الواجب</th>
+                                        <th class="text-center">الإجابات الصحيحة</th>
+                                        <th class="text-center">النسبة</th>
+                                        <th class="text-center">الحالة</th>
+                                        <th class="text-center">تاريخ التسليم</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var result in Model.AssessmentResults.OrderByDescending(r => r.AssessmentDate))
+                                    {
+                                        <tr>
+                                            <td class="text-end">
+                                                <div class="d-flex align-items-center justify-content-end">
+                                                    <div>
+                                                        <div class="fo">@result.CourseTitle</div>
+                                                        @if (!string.IsNullOrEmpty(result.LessonTitle))
+                                                        {
+                                                            <small class="text-muted">@result.LessonTitle</small>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-end">@result.AssessmentTitle</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
+                                                    @result.CorrectAnswers / @result.TotalQuestions
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                @result.Percentage.ToString("0.00")%
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="badge bg-@(result.Percentage >= 50 ? "success" : "danger")">
+                                                    @(result.Percentage >= 50 ? "ناجح" : "راسب")
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                @result.AssessmentDate.ToString("yyyy/MM/dd")
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h5 class="fo">لا توجد نتائج واجبات</h5>
+                            <p class="text-muted">عند تسليم أي واجب، ستظهر نتائجك هنا</p>
+                            <a asp-controller="Student" asp-action="AvailableAssessments" class="btn btn-primary fo">
+                                <i class="fas fa-clipboard-list me-1"></i> عرض الواجبات المتاحة
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    // Add smooth scrolling to all links
-                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                        anchor.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        });
-                    });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate progress circles
+        const circles = document.querySelectorAll('.progress-circle');
+        circles.forEach(circle => {
+            const progress = circle.getAttribute('data-progress');
+            circle.style.setProperty('--progress', `${progress}%`);
+        });
+
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-            </script>
+            });
+        });
 
-            <script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
+        // Add counting animation to progress values
+        const progressValues = document.querySelectorAll('.progress-value');
+        progressValues.forEach(valueElement => {
+            const target = parseInt(valueElement.textContent);
+            if (target > 0) {
+                let current = 0;
+                const increment = target / 20;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        clearInterval(timer);
+                        current = target;
+                    }
+                    valueElement.textContent = Math.round(current);
+                }, 50);
+            }
+        });
+    });
+</script>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

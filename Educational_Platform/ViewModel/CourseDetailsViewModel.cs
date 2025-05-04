@@ -1,3 +1,4 @@
+using Data_access_layer.model;
 using System;
 using System.Collections.Generic;
 
@@ -13,6 +14,7 @@ namespace Educational_Platform.ViewModel
         public List<LessonViewModel> Lessons { get; set; }
         public List<CommentViewModel> Comments { get; set; }
 
+        public List<Student_Assignment> Assignments { get; set; }
         // Add this property
         public string CurrentProfilePicture { get; set; }
     }

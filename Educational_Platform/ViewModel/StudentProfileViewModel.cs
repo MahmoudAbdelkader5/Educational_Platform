@@ -34,6 +34,8 @@ namespace Educational_Platform.ViewModel
         [Display(Name = "Enrolled Courses")]
         public List<CourseViewModel> EnrolledCourses { get; set; }
         public List<ExamResultViewModel> ExamResults { get; set; }
+        public List<AssessmentResultViewModel> AssessmentResults { get; set; }
+
         public double AverageScore { get; set; }
         public int ExamsCount { get; set; }
 

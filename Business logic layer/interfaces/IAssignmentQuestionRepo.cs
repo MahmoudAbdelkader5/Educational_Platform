@@ -11,7 +11,7 @@ namespace Business_logic_layer.interfaces
     {
         Task<int> GetCountAsync();
 
-        public Task<IEnumerable<assignment_question>> GetQuestionsForExamAsync(int examId);
+        public Task<IEnumerable<assignment_question>> GetQuestionsForAssignmentAsync(int assignmentId);
 
     }
 }
