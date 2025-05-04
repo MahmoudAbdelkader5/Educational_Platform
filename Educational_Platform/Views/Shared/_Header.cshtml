@@ -252,7 +252,7 @@
                                             @User.Identity.Name.Substring(0, 1).ToUpper()
                                         </span>
                                     }
-                                    <span class="d-none d-lg-inline">@User.Identity.Name</span>
+                            <span class="d-none d-lg-inline">@User.FindFirst("FullName")?.Value</span>
                                 </a>
 
                                 <ul class="dropdown-menu" aria-labelledby="userDropdown">

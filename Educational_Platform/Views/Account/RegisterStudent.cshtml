@@ -176,10 +176,12 @@
 
 
                         <div class="mb-4" dir="rtl">
-                            <div class="form-check d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" id="termsCheck" required data-field="required">
-                                <label class="form-check-label" for="termsCheck">
-                                    أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط والأحكام</a> و <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">سياسة الخصوصية</a>
+                            <div class="form-check" style="display: flex; align-items: center; gap: 8px;">
+                                <input class="form-check-input m-0" type="checkbox" id="termsCheck" required
+                                       style="flex-shrink: 0; width: 1.2em; height: 1.2em;">
+                                <label class="form-check-label" for="termsCheck" style="line-height: 1.5;">
+                                    أوافق على <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">الشروط والأحكام</a> و
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">سياسة الخصوصية</a>
                                 </label>
                             </div>
                         </div>
@@ -341,6 +343,13 @@
                 $(event.target).removeClass('fa-eye-slash').addClass('fa-eye');
             }
         }
+                $('#registrationForm').on('submit', function (e) {
+            const isChecked = $('#termsCheck').is(':checked');
+            if (!isChecked) {
+               
+                e.preventDefault();
+            } 
+        });
 
         function checkPasswordStrength(password) {
             // Password strength logic
