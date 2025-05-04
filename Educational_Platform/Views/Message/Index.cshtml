@@ -5,127 +5,94 @@
 }
 
 <div class="container-fluid py-4" dir="rtl">
-    <div class="card shadow-lg">
-        <div class="card-header bg-gradient-primary text-white py-3">
-            <div class="row align-items-center">
-                <div class="col">
-                    <h2 class="h4 mb-0 text-center text-white">
-                        <i class="fas fa-envelope ml-2"></i> الرسائل المستلمة
-                    </h2>
+    <div class="card shadow-lg border-0">
+        <!-- Card Header with Gradient and Stats -->
+        <div class="card-header bg-gradient-primary text-white py-4">
+            <div class="row align-items-center g-3">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-shape icon-lg bg-white-10 rounded-circle me-3">
+                            <i class="fas fa-envelope-open-text text-white"></i>
+                        </div>
+                        <div>
+                            <h2 class="h4 mb-0 text-white">الرسائل المستلمة</h2>
+                            <p class="mb-0 text-white-50">إدارة جميع الرسائل الواردة من الطلاب والزوار</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <span class="badge bg-white text-primary fs-6">
-                        <i class="fas fa-inbox me-1"></i> @Model.Count() رسالة
-                    </span>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-md-end">
+                        <div class="me-4 text-center">
+                            <span class="d-block fs-2 fw-bold text-white">@Model.Count()</span>
+                            <span class="text-white-50">إجمالي الرسائل</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card-body p-4">
+        <!-- Card Body with Messages Table -->
+        <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
                     <thead class="bg-light">
                         <tr>
-                            <th width="15%" class="pe-4 py-3 text-uppercase small fw-bold">المرسل</th>
-                            <th width="20%" class="pe-4 py-3 text-uppercase small fw-bold">البريد الإلكتروني</th>
-                            <th width="15%" class="pe-4 py-3 text-uppercase small fw-bold">العنوان</th>
-                            <th width="30%" class="pe-4 py-3 text-uppercase small fw-bold">نص الرسالة</th>
-                            <th width="20%" class="pe-4 py-3 text-uppercase small fw-bold text-center">الإجراءات</th>
+                            <th width="15%" class="ps-4 py-3 text-uppercase small fw-bold">المرسل</th>
+                            <th width="20%" class="ps-4 py-3 text-uppercase small fw-bold">البريد الإلكتروني</th>
+                            <th width="15%" class="ps-4 py-3 text-uppercase small fw-bold">العنوان</th>
+                            <th width="30%" class="ps-4 py-3 text-uppercase small fw-bold">نص الرسالة</th>
+                            <th width="20%" class="ps-4 py-3 text-uppercase small fw-bold text-center">الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var message in Model)
                         {
-                            <tr class="position-relative message-row ">
-                                <td class="pe-4 fw-bold">@message.Name</td>
-                                <td class="pe-4">
-                                    <a href="mailto:@message.Email" class="text-primary">
+                            <tr class="position-relative message-row" data-message-id="@message.MessageID">
+                                <td class="ps-4 fw-bold">
+                                    @message.Name
+                                </td>
+                                <td class="ps-4">
+                                    <a href="mailto:@message.Email" class="text-primary text-truncate d-inline-block" style="max-width: 200px;">
                                         @message.Email
                                     </a>
                                 </td>
-                                <td class="pe-4">@message.Subject</td>
-                                <td class="pe-4">
-                                    <span class="message-preview" data-bs-toggle="modal" data-bs-target="#messageModal_@message.MessageID">
-                                        @(message.MessageBody.Length > 30 ? message.MessageBody.Substring(0, 30) + "..." : message.MessageBody)
-                                    </span>
+                                <td class="ps-4 text-truncate" style="max-width: 150px;">@message.Subject</td>
+                                <td class="ps-4 text-truncate" style="max-width: 250px;">
+                                    @(message.MessageBody.Length > 50 ? message.MessageBody.Substring(0, 50) + "..." : message.MessageBody)
                                 </td>
-                                <td class="pe-4">
+                                <td class="ps-4">
                                     <div class="d-flex justify-content-center">
-                                        <a href="mailto:@message.Email?subject=رد على رسالتك&body=شكرا لتواصلك معنا على منصة مفهوم."
-                                           class="btn btn-sm btn-primary me-2" title="الرد">
+                                        <!-- Reply Button -->
+                                        <a href="mailto:@message.Email?subject=رد: @message.Subject&body=%0D%0A%0D%0A---------------------%0D%0Aالرسالة الأصلية:%0D%0A@message.MessageBody"
+                                           class="btn btn-sm btn-outline-primary me-2"
+                                           title="الرد"
+                                           data-bs-toggle="tooltip">
                                             <i class="fas fa-reply"></i>
                                         </a>
 
-                                       
-
+                                        <!-- Delete Button -->
                                         <form asp-action="DeleteMessage" asp-route-id="@message.MessageID" method="post"
-                                              class="d-inline" onsubmit="return confirm('هل أنت متأكد من حذف هذه الرسالة؟');">
-                                            <button type="submit" class="btn btn-sm btn-danger" title="حذف">
-                                                <i class="fas fa-trash"></i>
+                                              class="d-inline delete-message-form">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    title="حذف"
+                                                    data-bs-toggle="tooltip">
+                                                <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
                                     </div>
                                 </td>
                             </tr>
-
-                            <!-- Message Modal -->
-                            <div class="modal fade" id="messageModal_@message.MessageID" tabindex="-1"
-                                 aria-labelledby="messageModalLabel_@message.MessageID" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title" id="messageModalLabel_@message.MessageID">
-                                                <i class="fas fa-envelope-open-text me-2"></i> تفاصيل الرسالة
-                                            </h5>
-                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="إغلاق"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <p><strong><i class="fas fa-user me-2"></i>الاسم:</strong> @message.Name</p>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>
-                                                        <strong><i class="fas fa-envelope me-2"></i>البريد الإلكتروني:</strong>
-                                                        <a href="mailto:@message.Email" class="text-primary">@message.Email</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div class="row mb-3">
-                                                <div class="col-12">
-                                                    <p><strong><i class="fas fa-tag me-2"></i>الموضوع:</strong> @message.Subject</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <p><strong><i class="fas fa-align-left me-2"></i>الرسالة:</strong></p>
-                                                    <div class="border p-3 rounded bg-light">
-                                                        @message.MessageBody
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <a href="mailto:@message.Email?subject=رد على رسالتك&body=شكرا لتواصلك معنا على منصة مفهوم."
-                                               class="btn btn-primary me-2">
-                                                <i class="fas fa-reply me-2"></i> الرد
-                                            </a>
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                <i class="fas fa-times me-2"></i> إغلاق
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         }
                     </tbody>
                 </table>
             </div>
         </div>
 
+        <!-- Card Footer -->
         @if (Model.Any())
         {
-            <div class="card-footer bg-light">
+            <div class="card-footer bg-light py-3">
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <p class="mb-0 text-muted">
@@ -133,16 +100,26 @@
                             <span class="fw-bold">@Model.Count()</span> رسالة معروضة
                         </p>
                     </div>
-                    
+                    <div class="col-md-6 text-md-end">
+                        <button id="printBtn" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-print me-1"></i> طباعة
+                        </button>
+                    </div>
                 </div>
             </div>
         }
         else
         {
-            <div class="card-footer bg-light text-center py-4">
+            <div class="card-footer bg-light text-center py-5">
                 <div class="empty-state">
-                    <i class="fas fa-inbox fa-4x text-muted mb-3"></i>
-                    <h5 class="text-muted">لا توجد رسائل لعرضها</h5>
+                    <div class="icon-shape bg-primary-soft rounded-circle icon-lg mb-4 mx-auto">
+                        <i class="fas fa-inbox text-primary"></i>
+                    </div>
+                    <h4 class="text-muted mb-3">لا توجد رسائل لعرضها</h4>
+                    <p class="text-muted mb-4">سيظهر هنا أي رسائل تتلقاها من الطلاب أو الزوار</p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-sync-alt me-2"></i> تحديث الصفحة
+                    </a>
                 </div>
             </div>
         }
@@ -151,41 +128,116 @@
 
 @section Styles {
     <style>
+        /* Custom Card Styling */
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            border-bottom: none;
+        }
+
+        /* Gradient Background */
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #2dce89 0%, #2dcecc 100%) !important;
+        }
+
+        /* Icon Shapes */
+        .icon-shape {
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-lg {
+            width: 64px;
+            height: 64px;
+        }
+
+        .bg-primary-soft {
+            background-color: rgba(45, 206, 137, 0.1) !important;
+        }
+
+        /* Table Styling */
+        .table {
+            margin-bottom: 0;
+        }
+
+            .table thead th {
+                border-bottom: 2px solid #f1f1f1;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-size: 0.75rem;
+            }
+
+            .table tbody td {
+                vertical-align: middle;
+                border-top: 1px solid #f8f9fa;
+            }
+
+        /* Message Row Styling */
         .message-row {
             transition: all 0.3s ease;
         }
 
             .message-row:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                background-color: #f8f9fa !important;
             }
 
-        .unread {
-            background-color: rgba(45, 206, 137, 0.08);
-            border-left: 4px solid #2dce89;
-        }
-
-        .message-preview {
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-            .message-preview:hover {
-                color: #2dce89;
-                text-decoration: underline;
-            }
-
-        .bg-gradient-primary {
-            background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
-        }
-
+        /* Empty State */
         .empty-state {
-            opacity: 0.6;
+            opacity: 0.8;
         }
 
-        .modal-content {
-            border: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        /* Responsive Adjustments */
+        @@media (max-width: 768px) {
+            .table-responsive {
+                border: none;
+            }
+
+            .table thead {
+                display: none;
+            }
+
+            .table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #f1f1f1;
+                border-radius: 0.5rem;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            }
+
+            .table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem;
+                border: none;
+                border-bottom: 1px solid #f8f9fa;
+            }
+
+                .table tbody td::before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    margin-right: 1rem;
+                    color: #6c757d;
+                }
+
+                .table tbody td:last-child {
+                    border-bottom: none;
+                }
+
+            .message-row:hover {
+                transform: none;
+            }
         }
     </style>
 }
@@ -194,19 +246,33 @@
     <script>
         $(document).ready(function () {
             // Initialize tooltips
-            $('[title]').tooltip({
-                placement: 'top',
+            $('[data-bs-toggle="tooltip"]').tooltip({
                 trigger: 'hover'
             });
 
-            // Print functionality
-            $('#printBtn').click(function () {
-                window.print();
+            // Delete message with confirmation
+            $('.delete-message-form').on('submit', function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'هل أنت متأكد؟',
+                    text: "لن تتمكن من استعادة هذه الرسالة بعد الحذف!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#2dce89',
+                    cancelButtonColor: '#f5365c',
+                    confirmButtonText: 'نعم، احذفها!',
+                    cancelButtonText: 'إلغاء'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
             });
 
-            // Mark as read when viewing message
-            $('.message-preview').click(function() {
-                $(this).closest('tr').removeClass('unread');
+            // Print functionality
+            $('#printBtn').on('click', function() {
+                window.print();
             });
         });
     </script>

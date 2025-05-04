@@ -4,56 +4,55 @@
     ViewData["Title"] = "قائمة الواجبات";
 }
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3 bg-primary">
-        <h6 class="m-0 font-weight-bold text-white">@ViewData["Title"]</h6>
+<div class="card shadow-lg border-0">
+    <div class="card-header py-3 bg-gradient-primary">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-white">@ViewData["Title"]</h6>
+            <a asp-action="Create" class="btn btn-light btn-icon-split rounded-pill">
+                <span class="icon text-primary">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">إضافة واجب جديد</span>
+            </a>
+        </div>
     </div>
 
-    <div class="text-right mt-3">
-        <a asp-action="Create" class="btn btn-success btn-icon-split">
-            <span class="icon text-white-50">
-                <i class="fas fa-plus"></i>
-            </span>
-            <span class="text">إضافة واجب جديد</span>
-        </a>
-    </div>
-    <br>
-    </br>
     <div class="card-body">
         <div class="table-responsive">
-            <table class="table table-bordered table-hover text-right" dir="rtl" id="dataTable" width="100%" cellspacing="0">
-                <thead class="bg-light">
+            <table class="table table-hover table-striped text-right" dir="rtl" id="dataTable" width="100%" cellspacing="0">
+                <thead class="bg-primary text-white">
                     <tr>
-                        <th>العنوان</th>
-                        <th>المدة</th>
-                        <th>أعلى درجة</th>
-                        <th>المقرر</th>
-                        <th>الدرس</th>
-                        <th class="text-center">الإجراءات</th>
+                        <th class="py-3">العنوان</th>
+                        <th class="py-3">المدة</th>
+                        <th class="py-3">أعلى درجة</th>
+                        <th class="py-3">المقرر</th>
+                        <th class="py-3">الدرس</th>
+                        <th class="text-center py-3">الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@item.Title</td>
-                            <td>@item.duration دقائق</td>
-                            <td>@item.MaxGrade</td>
-                            <td>@item.Course?.Title</td>
-                            <td>@(item.Lesson?.Title ?? "لا يوجد")</td>
-                            <td class="text-center">
-                                <div class="btn-group" role="group">
-                                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-info mx-1" title="التفاصيل">
+                        <tr class="transition-all">
+                            <td class="align-middle font-weight-bold">@item.Title</td>
+                            <td class="align-middle">@item.duration دقائق</td>
+                            <td class="align-middle">@item.MaxGrade</td>
+                            <td class="align-middle">@item.Course?.Title</td>
+                            <td class="align-middle">@(item.Lesson?.Title ?? "لا يوجد")</td>
+                            <td class="text-center align-middle">
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-info rounded-circle mx-1" title="التفاصيل" data-toggle="tooltip">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-primary mx-1" title="تعديل">
+                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-outline-primary rounded-circle mx-1" title="تعديل" data-toggle="tooltip">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <form asp-action="Delete" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="@item.ID" />
-                                        <button type="submit" class="btn btn-sm btn-danger mx-1"
-                                                title="حذف" onclick="return confirm('هل أنت متأكد من حذف هذا الواجب؟')">
-                                            <i class="fas fa-trash"></i>
+                                        <button type="submit" class="btn btn-outline-danger rounded-circle mx-1"
+                                                title="حذف" data-toggle="tooltip"
+                                                onclick="return confirm('هل أنت متأكد من حذف هذا الواجب؟')">
+                                            <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -68,59 +67,124 @@
 
 @section Styles {
     <style>
-        /* Table styling for aesthetics */
-        #dataTable {
-            border-radius: 8px;
+        /* Modern table styling */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+            .table thead th {
+                border: none;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(0, 123, 255, 0.03);
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 123, 255, 0.1);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .transition-all {
+            transition: all 0.25s ease;
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 0.5rem;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            border: none;
         }
 
-            #dataTable thead th {
-                background-color: #f8f9fc !important;
-                font-weight: 700;
-                cursor: pointer; /* optional for sort indication */
-                transition: background-color 0.3s;
-            }
+        .card-header {
+            border-bottom: none;
+        }
 
-                #dataTable thead th:hover {
-                    background-color: #e9ecef;
-                }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
+        }
 
-            #dataTable tbody tr:hover {
-                background-color: #f1f1f1;
-            }
-
-        /* Buttons styling for better UX */
+        /* Button styling */
         .btn {
-            border-radius: 20px;
-            padding: 5px 12px;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            padding: 0.375rem 0.75rem;
         }
 
-        /* Hover effects for different buttons */
-        .btn-info:hover {
-            background-color: #17a2b8;
-            color: #fff;
+        .btn-outline-info {
+            border-color: #36b9cc;
+            color: #36b9cc;
         }
 
-        .btn-primary:hover {
-            background-color: #007bff;
-            color: #fff;
+        .btn-outline-primary {
+            border-color: #4e73df;
+            color: #4e73df;
         }
 
-        .btn-danger:hover {
-            background-color: #dc3545;
-            color: #fff;
+        .btn-outline-danger {
+            border-color: #e74a3b;
+            color: #e74a3b;
         }
 
-        /* Icon size inside buttons */
-        .btn i {
-            font-size: 14px;
+        .btn-outline-info:hover {
+            background-color: #36b9cc;
+            color: white;
         }
 
-        /* Center button group */
-        .btn-group {
-            justify-content: center; /* Flex container */
+        .btn-outline-primary:hover {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #e74a3b;
+            color: white;
+        }
+
+        .rounded-circle {
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tooltip styling */
+        .tooltip-inner {
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+                .btn-group .btn {
+                    margin-bottom: 0.25rem;
+                }
         }
     </style>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Add animation to table rows
+            $('tbody tr').each(function(i) {
+                $(this).delay(i * 50).animate({
+                    opacity: 1
+                }, 200);
+            });
+        });
+    </script>
 }
