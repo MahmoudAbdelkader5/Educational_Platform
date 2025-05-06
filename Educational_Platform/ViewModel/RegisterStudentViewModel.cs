@@ -30,9 +30,11 @@ namespace Educational_Platform.ViewModel
         [Required(ErrorMessage = "الصف الدراسي مطلوب")]
         [Display(Name = "الصف الدراسي")]
         public string GradeLevel { get; set; }
+        [Required(ErrorMessage = "صورة الملف الشخصي مطلوب")]
 
         [Display(Name = "صورة الملف الشخصي")]
         public IFormFile? ProfilePictureFile { get; set; }  // For uploading the file
+        [Required(ErrorMessage = "صورة الملف الشخصي مطلوب")]
 
         [Display(Name = "صورة الملف الشخصي")]
         public string? ProfilePicture { get; set; } = "مجهول.png";  // For storing the path

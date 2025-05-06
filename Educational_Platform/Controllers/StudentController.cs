@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
 using Business_logic_layer.interfaces;
-using Business_logic_layer.Repository;
 using Data_access_layer.model;
 using Educational_Platform.ViewModel;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+
 using Newtonsoft.Json;
-using Microsoft.VisualBasic;
 
 namespace Educational_Platform.Controllers
 {

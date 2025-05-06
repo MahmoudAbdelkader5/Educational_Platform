@@ -10,8 +10,11 @@
     </div>
     <div class="card-body">
         <form asp-action="Create" class="form-group" dir="rtl" id="assignmentForm">
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+            }
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="Title" class="font-weight-bold">العنوان</label>
@@ -193,6 +196,20 @@
             // Revalidate when checkboxes change
             $('.question-checkbox').change(function() {
                 $("#assignmentForm").validate().element("[name='SelectedQuestionIds']");
+            });
+
+            // Cascade dropdown for lessons based on course selection
+            $('#CourseID').change(function() {
+                var courseId = $(this).val();
+                $('#LessonID').empty().append('<option value="">-- اختر الدرس --</option>');
+
+                if (courseId) {
+                    $.getJSON('/Assignments/GetLessonsByCourse', { courseId: courseId }, function(data) {
+                        $.each(data, function(index, item) {
+                            $('#LessonID').append($('<option></option>').val(item.value).text(item.text));
+                        });
+                    });
+                }
             });
         });
     </script>

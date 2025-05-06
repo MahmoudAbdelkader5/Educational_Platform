@@ -15,24 +15,16 @@ namespace Data_access_layer.model
         [Key]
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(255)]
         public string Email { get; set; }
 
-        [StringLength(20)]
         public string PhoneNumber { get; set; }
-        [StringLength(20)]
         public string FatherPhone { get; set; }
 
 
-        [Required]
-        [StringLength(100)]
         public string Name { get; set; }
 
-        [StringLength(50)]
         public string GradeLevel { get; set; }
 
-        [StringLength(255)]
         public string ProfilePicture { get; set; } = "مجهول.png";
 
         public string UserId { get; set; }

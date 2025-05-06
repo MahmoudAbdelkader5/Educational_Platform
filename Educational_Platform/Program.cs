@@ -65,6 +65,7 @@ namespace Educational_Platform
                 new CultureInfo("en-US"),
                 new CultureInfo("ar")
             };
+          
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {

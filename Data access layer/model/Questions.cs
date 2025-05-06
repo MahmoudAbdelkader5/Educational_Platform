@@ -9,32 +9,36 @@ namespace Data_access_layer.model
         [Key]
         public int QuestionID { get; set; }
 
-        [Required(ErrorMessage = "Question text is required")]
-        [StringLength(1000, MinimumLength = 10,
-    ErrorMessage = "Question must be between 10 and 1000 characters")]
-        [Display(Name = "Question Text")]
+        [Required(ErrorMessage = "نص السؤال مطلوب")]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "يجب أن يتراوح نص السؤال بين 10 و 1000 حرف")]
+        [Display(Name = "نص السؤال")]
         public string QuestionText { get; set; }
-        [Required(ErrorMessage = "Option 1 is required")]
-        [StringLength(500, MinimumLength = 1,
-     ErrorMessage = "Option must be between 1 and 500 characters")]
-        [Display(Name = "Option 1")]
+
+        [Required(ErrorMessage = "الخيار 1 مطلوب")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "يجب أن يتراوح طول الخيار بين 1 و 500 حرف")]
+        [Display(Name = "الخيار 1")]
         public string q1 { get; set; }
-        [Required(ErrorMessage = "Option 2 is required")]
-        [StringLength(500, MinimumLength = 1,
-    ErrorMessage = "Option must be between 1 and 500 characters")]
-        [Display(Name = "Option 2")]
+
+        [Required(ErrorMessage = "الخيار 2 مطلوب")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "يجب أن يتراوح طول الخيار بين 1 و 500 حرف")]
+        [Display(Name = "الخيار 2")]
         public string q2 { get; set; }
-       [ Required(ErrorMessage = "Option 3 is required")]
-[StringLength(500, MinimumLength = 1,
-    ErrorMessage = "Option must be between 1 and 500 characters")]
-        [Display(Name = "Option 3")]
+
+        [Required(ErrorMessage = "الخيار 3 مطلوب")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "يجب أن يتراوح طول الخيار بين 1 و 500 حرف")]
+        [Display(Name = "الخيار 3")]
         public string q3 { get; set; }
-        [Required(ErrorMessage = "Option 4 is required")]
-        [StringLength(500, MinimumLength = 1,
-    ErrorMessage = "Option must be between 1 and 500 characters")]
-        [Display(Name = "Option 4")]
+
+        [Required(ErrorMessage = "الخيار 4 مطلوب")]
+        [StringLength(500, MinimumLength = 1, ErrorMessage = "يجب أن يتراوح طول الخيار بين 1 و 500 حرف")]
+        [Display(Name = "الخيار 4")]
         public string q4 { get; set; }
-        public string Answer { get; set; } // Ensure this property is correctly mapped in the database
+        [Required(ErrorMessage = "مطلوب الاجابه السوال")]
+
+
+        // تأكد من أن هذا الحقل يسمى بشكل صحيح في قاعدة البيانات
+        public string Answer { get; set; }
+
         public virtual ICollection<assignment_question> Assignment_Questions { get; set; } = new HashSet<assignment_question>();
 
         public virtual ICollection<assignment_Answer> assignment_Answer { get; set; } = new HashSet<assignment_Answer>();

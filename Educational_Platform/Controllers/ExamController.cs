@@ -112,7 +112,6 @@ namespace Educational_Platform.Controllers
                 // Validate at least one question is selected
                 if (selectedQuestionIds == null || selectedQuestionIds.Count == 0)
                 {
-                    ModelState.AddModelError("selectedQuestionIds", "You must select at least one question");
                     
                     return View(exam);
                 }
@@ -181,9 +180,19 @@ namespace Educational_Platform.Controllers
                 TempData["ErrorMessage"] = "Exam ID mismatch.";
                 return RedirectToAction(nameof(Index));
             }
+            if (selectedQuestionIds == null || selectedQuestionIds.Count == 0)
+            {
+                await SetViewDataCounts();
+
+                await PopulateEditViewBags(exam);
+
+                return View(exam);
+            }
 
             try
             {
+                // Validate at least one question is selected
+                
                 await SetViewDataCounts();
 
                 await PopulateEditViewBags(exam);

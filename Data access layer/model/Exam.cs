@@ -9,34 +9,35 @@ namespace Data_access_layer.model
     public class Exam
     {
         [Key]
-        public int Id { get; set; }  // Changed from ID to Id for consistency
+        public int Id { get; set; }
+        [Required(ErrorMessage = "المادة الدراسية مطلوب")]
 
         [ForeignKey(nameof(Course))]
-        [Display(Name = "Course")]
+        [Display(Name = "المادة الدراسية")]
         public int? CourseId { get; set; }
 
-        [Required(ErrorMessage = "Exam title is required")]
+        [Required(ErrorMessage = "عنوان الامتحان مطلوب")]
         [StringLength(255, MinimumLength = 5,
-            ErrorMessage = "Title must be between 5 and 255 characters")]
-        [Display(Name = "Exam Title")]
+            ErrorMessage = "يجب أن يكون العنوان بين 5 و 255 حرفًا")]
+        [Display(Name = "عنوان الامتحان")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Duration is required")]
-        [Range(1, 480, ErrorMessage = "Duration must be between 1 and 480 minutes")]
-        [Display(Name = "Duration (minutes)")]
-        public int duration { get; set; }  // Changed to PascalCase
+        [Required(ErrorMessage = "مدة الامتحان مطلوبة")]
+        [Range(1, 480, ErrorMessage = "يجب أن تكون المدة بين 1 و 480 دقيقة")]
+        [Display(Name = "المدة (بالدقائق)")]
+        public int duration { get; set; }
 
         // Navigation properties
+        [Required(ErrorMessage = "المادة الدراسية مطلوب")]
+
         public virtual Course Course { get; set; }
 
-        // Navigation properties
-        [Required(ErrorMessage = "At least one question is required")]
-        [MinLength(1, ErrorMessage = "At least one question is required")]
-        [ValidateAtLeastOneQuestion(ErrorMessage = "You must select at least one question")]
+        [Required(ErrorMessage = "يجب إضافة سؤال واحد على الأقل")]
+        [MinLength(1, ErrorMessage = "يجب إضافة سؤال واحد على الأقل")]
+        [ValidateAtLeastOneQuestion(ErrorMessage = "يجب اختيار سؤال واحد على الأقل")]
+        public virtual ICollection<examQuestion> ExamQuestions { get; set; } = new HashSet<examQuestion>();
 
-        public virtual ICollection<examQuestion> ExamQuestions { get; set; } = new HashSet<examQuestion>();  
-
-        public virtual ICollection<Student_Exam> StudentExams { get; set; } = new HashSet<Student_Exam>();  
+        public virtual ICollection<Student_Exam> StudentExams { get; set; } = new HashSet<Student_Exam>();
     }
 
 }
@@ -49,7 +50,7 @@ public class ValidateAtLeastOneQuestion : ValidationAttribute
             return ValidationResult.Success;
         }
 
-        return new ValidationResult(ErrorMessage ?? "You must select at least one question");
+        return new ValidationResult(ErrorMessage ?? "يجب اختيار سؤال واحد على الأقل");
     }
 }
 

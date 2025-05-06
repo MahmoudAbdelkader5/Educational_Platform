@@ -9,10 +9,12 @@
         <h6 class="m-0 font-weight-bold text-dark">@ViewData["Title"]</h6>
     </div>
     <div class="card-body">
-        <form asp-action="Edit" class="form-group" dir="rtl">
+        <form asp-action="Edit" class="form-group" dir="rtl" id="assignmentForm">
             <input type="hidden" asp-for="ID" />
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div asp-validation-summary="All" class="alert alert-danger"></div>
+            }
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="Title" class="font-weight-bold">العنوان</label>
@@ -53,44 +55,45 @@
 
             <div class="form-group">
                 <label class="font-weight-bold">الأسئلة</label>
+                <span class="text-danger field-validation-valid" data-valmsg-for="selectedQuestionIds" data-valmsg-replace="true"></span>
 
                 @if (ViewBag.AllQuestions != null && ViewBag.AllQuestions.Count > 0)
                 {
-                        <div class="card border-left-info mb-3">
-                            <div class="card-header py-2 bg-info">
-                                <h6 class="m-0 font-weight-bold text-white">اختر الأسئلة</h6>
-                            </div>
-                            <div class="card-body p-3">
-                                <div class="row">
+                    <div class="card border-left-info mb-3">
+                        <div class="card-header py-2 bg-info">
+                            <h6 class="m-0 font-weight-bold text-white">اختر الأسئلة</h6>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row">
                                 @foreach (var question in ViewBag.AllQuestions)
                                 {
-                                            <div class="col-md-6 mb-2">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" 
-                                                           name="selectedQuestionIds" value="@question.Value"
-                                                           id="q_@question.Value"
+                                    <div class="col-md-6 mb-2">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input question-checkbox"
+                                                   name="selectedQuestionIds" value="@question.Value"
+                                                   id="q_@question.Value"
                                             @(question.Selected ? "checked" : "")>
-                                                    <label class="custom-control-label" for="q_@question.Value">
+                                            <label class="custom-control-label" for="q_@question.Value">
                                                 @question.Text
-                                                    </label>
-                                                </div>
-                                            </div>
+                                            </label>
+                                        </div>
+                                    </div>
                                 }
-                                </div>
                             </div>
                         </div>
+                    </div>
                 }
                 else
                 {
-                        <div class="alert alert-warning d-flex align-items-center">
-                            <i class="fas fa-exclamation-triangle mr-2"></i>
-                            <div>
-                                لا توجد أسئلة متاحة
-                                <a asp-controller="Questions" asp-action="Create" class="btn btn-sm btn-link mr-2">
-                                    <i class="fas fa-plus"></i> إنشاء سؤال جديد
-                                </a>
-                            </div>
+                    <div class="alert alert-warning d-flex align-items-center">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <div>
+                            لا توجد أسئلة متاحة
+                            <a asp-controller="Questions" asp-action="Create" class="btn btn-sm btn-link mr-2">
+                                <i class="fas fa-plus"></i> إنشاء سؤال جديد
+                            </a>
                         </div>
+                    </div>
                 }
             </div>
 
@@ -119,47 +122,102 @@
 </div>
 
 @section Styles {
-        <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
-        <style>
-            .select2-container--default .select2-selection--multiple, 
-            .select2-container--default .select2-selection--single {
-                border: 1px solid #d1d3e2;
-                border-radius: 0.35rem;
-                padding: 0.375rem 0.75rem;
-            }
-            .select2-container--default .select2-selection--multiple {
-                min-height: calc(1.5em + 0.75rem + 2px);
-            }
-            .card {
-                border-radius: 0.35rem;
-            }
-            .form-control, .select2-selection {
-                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-            }
-            .custom-checkbox .custom-control-label::before {
-                right: -1.5rem;
-                left: auto;
-            }
-            .custom-checkbox .custom-control-label::after {
-                right: -1.5rem;
-                left: auto;
-            }
-            .custom-control {
-                padding-right: 1.5rem;
-                padding-left: 0;
-            }
-        </style>
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2-container--default .select2-selection--multiple,
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+            padding: 0.375rem 0.75rem;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+            min-height: calc(1.5em + 0.75rem + 2px);
+        }
+
+        .card {
+            border-radius: 0.35rem;
+        }
+
+        .form-control, .select2-selection {
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        .custom-checkbox .custom-control-label::before {
+            right: -1.5rem;
+            left: auto;
+        }
+
+        .custom-checkbox .custom-control-label::after {
+            right: -1.5rem;
+            left: auto;
+        }
+
+        .custom-control {
+            padding-right: 1.5rem;
+            padding-left: 0;
+        }
+
+        .field-validation-error {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
 }
 
 @section Scripts {
-        <script src="~/lib/select2/js/select2.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('.select2').select2({
-                    placeholder: "اختر عنصرًا",
-                    allowClear: true,
-                    dir: "rtl"
-                });
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize Select2
+            $('.select2').select2({
+                placeholder: "اختر عنصرًا",
+                allowClear: true,
+                dir: "rtl"
             });
-        </script>
+
+            // Custom validation for at least one question selected
+            $.validator.addMethod("atLeastOneQuestion", function(value, element) {
+                return $('.question-checkbox:checked').length > 0;
+            }, "يجب اختيار سؤال واحد على الأقل");
+
+            // Apply custom validation to the form
+            $("#assignmentForm").validate({
+                rules: {
+                    selectedQuestionIds: {
+                        atLeastOneQuestion: true
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("name") === "selectedQuestionIds") {
+                        error.insertAfter(element.closest(".form-group").find("[data-valmsg-for='selectedQuestionIds']"));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+
+            // Revalidate when checkboxes change
+            $('.question-checkbox').change(function() {
+                $("#assignmentForm").validate().element("[name='selectedQuestionIds']");
+            });
+
+            // Cascade dropdown for lessons based on course selection
+            $('#CourseID').change(function() {
+                var courseId = $(this).val();
+                $('#LessonID').empty().append('<option value="">-- اختر الدرس --</option>');
+
+                if (courseId) {
+                    $.getJSON('/Assignments/GetLessonsByCourse', { courseId: courseId }, function(data) {
+                        $.each(data, function(index, item) {
+                            $('#LessonID').append($('<option></option>').val(item.value).text(item.text));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
 }

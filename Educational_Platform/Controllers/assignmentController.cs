@@ -109,6 +109,14 @@ namespace Educational_Platform.Controllers
                 await SetViewDataCounts();
 
                 {
+                    // Validate at least one question is selected
+                    if (selectedQuestionIds == null || selectedQuestionIds.Count == 0)
+                    {
+                        await PopulateCreateViewBags();
+
+
+                        return View(assessment);
+                    }
                     await _unitOfWork.Assessment.AddAsync(assessment);
                     await _unitOfWork.Save();
 
@@ -174,7 +182,13 @@ namespace Educational_Platform.Controllers
                 TempData["ErrorMessage"] = "تعارض في معرّف التقييم";
                 return RedirectToAction(nameof(Index));
             }
+            if (selectedQuestionIds == null || selectedQuestionIds.Count == 0)
+            {
+                await PopulateEditViewBags(assessment);
 
+
+                return View(assessment);
+            }
             try
             {
                 await SetViewDataCounts();

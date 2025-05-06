@@ -9,6 +9,7 @@ namespace Business_logic_layer.interfaces
 {
     public interface ICommentRepo: IGenericRepo<Comment>
     {
+        Task<int> GetCountAsync();
 
     }
 }

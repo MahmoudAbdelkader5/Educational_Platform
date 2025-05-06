@@ -8,10 +8,8 @@ namespace Data_access_layer.model
 {
     public class ApplicationUser : IdentityUser
     {
-        [StringLength(100)]
         public string FirstName { get; set; }
 
-        [StringLength(100)]
         public string LastName { get; set; }
 
         public bool IsActive { get; set; } = true;
@@ -19,7 +17,6 @@ namespace Data_access_layer.model
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        [StringLength(255)]
         public string? ProfilePicture { get; set; }
 
 

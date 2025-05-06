@@ -616,6 +616,15 @@
                     </a>
 
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Comments" asp-action="Index">
+                        <i class="fa-solid fa-message"></i>
+                        <span class="nav-link-text">الكومنتات </span>
+                        <span class="badge bg-info me-auto">@(ViewData["CommentCount"] ?? 0)</span>
+
+                    </a>
+
+                </li>
                 <li class="nav-item mt-4">
                     <a class="nav-link text-danger" asp-controller="Account" asp-action="SignOut">
                         <i class="fas fa-sign-out-alt"></i>
