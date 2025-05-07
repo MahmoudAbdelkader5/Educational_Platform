@@ -49,9 +49,13 @@ namespace Educational_Platform.Controllers
             ViewData["messagesCount"] = await _unitOfWork.Message.GetCountAsync();
             ViewData["StudentCount"] = await _unitOfWork.student_CourseRepo.GetCountAsync();
             ViewData["LessonCount"] = await _unitOfWork.Lesson.GetCountAsync();
-            ViewData["RevisionCount"] = await _unitOfWork.Lesson.GetCountAsync();
+            ViewData["RevisionCount"] = await _unitOfWork.Revision.GetCountAsync();
             ViewData["questionCount"] = await _unitOfWork.questions.GetCountAsync();
             ViewData["CourseCount"] = await _unitOfWork.Course.GetCountAsync();
+            ViewData["AssessmentCount"] = await _unitOfWork.Assessment.GetCountAsync();
+            ViewData["examCount"] = await _unitOfWork.Exam.GetCountAsync();
+            ViewData["CommentCount"] = await _unitOfWork.Comment.GetCountAsync();
+
         }
         [HttpGet]
         public async Task<IActionResult> Details(int id)

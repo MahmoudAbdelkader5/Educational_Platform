@@ -14,35 +14,36 @@ namespace Data_access_layer.model
         public int ID { get; set; }
 
         [Required(ErrorMessage = "عنوان الواجب مطلوب")]
-        [StringLength(255, MinimumLength = 5,
-            ErrorMessage = "يجب أن يكون العنوان بين 5 و 255 حرفًا")]
-        [Display(Name = "العنوان")]
+        [StringLength(255, MinimumLength = 5, ErrorMessage = "يجب أن يكون العنوان بين 5 و 255 حرفًا")]
+        [Display(Name = "عنوان الواجب")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "مدة الواجب مطلوبة")]
+        [Range(1, 480, ErrorMessage = "يجب أن تكون المدة بين 1 و 480 دقيقة")]
         [Display(Name = "المدة")]
         public int duration { get; set; }
 
         [Required(ErrorMessage = "الدرجة الكاملة مطلوبة")]
-        [Range(0.01, 100.00, ErrorMessage = "يجب أن تكون الدرجة بين 1 و 100")]
+        [Range(0.01, 100.00, ErrorMessage = "يجب أن تكون الدرجة بين 0.01 و 100")]
+        [Column(TypeName = "decimal(5, 2)")]
         [Display(Name = "أعلى درجة")]
         public decimal MaxGrade { get; set; }
 
         // Navigation properties
         [Required(ErrorMessage = "يجب تحديد المادة الدراسية")]
-        [Display(Name = "رقم المادة")]
+        [Display(Name = "المادة الدراسية")]
         public int CourseID { get; set; }
 
-        [Display(Name = "رقم الدرس")]
+        [Display(Name = "الدرس")]
         public int? LessonID { get; set; }
 
+        [ForeignKey(nameof(CourseID))]
         [Required(ErrorMessage = "يجب تحديد المادة الدراسية")]
         public virtual Course Course { get; set; }
 
-        [Required(ErrorMessage = "يجب تحديد الدرس الدراسية")]
+        [ForeignKey(nameof(LessonID))]
         public virtual Lesson Lesson { get; set; }
 
-        [Required]
         [ValidateAtLeastOneQuestion(ErrorMessage = "يجب اختيار سؤال واحد على الأقل")]
         [Display(Name = "أسئلة الواجب")]
         public virtual ICollection<assignment_question> assignment_Question { get; set; } = new HashSet<assignment_question>();
@@ -60,7 +61,7 @@ namespace Data_access_layer.model
                 return ValidationResult.Success;
             }
 
-            return new ValidationResult(ErrorMessage);
+            return new ValidationResult(ErrorMessage ?? "يجب اختيار سؤال واحد على الأقل");
         }
     }
 }

@@ -68,6 +68,25 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     .WithMany()
     .HasForeignKey(t => t.UserId)
     .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Assignment>()
+           .HasOne(a => a.Lesson)
+           .WithMany()  // Or .WithMany(l => l.Assignments) if Lesson has collection
+           .HasForeignKey(a => a.LessonID)
+           .OnDelete(DeleteBehavior.ClientSetNull);  // Critical change
+
+        // Also configure Course relationship to be safe
+        modelBuilder.Entity<Assignment>()
+            .HasOne(a => a.Lesson)
+            .WithMany(c => c.Assignments)
+            .HasForeignKey(a => a.CourseID)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Assignment>()
+            .HasOne(a => a.Lesson)
+            .WithMany(l => l.Assignments)
+            .HasForeignKey(a => a.LessonID)
+            .OnDelete(DeleteBehavior.NoAction); // Specify NoAction to avoid cascade paths
     }
+
 
 }

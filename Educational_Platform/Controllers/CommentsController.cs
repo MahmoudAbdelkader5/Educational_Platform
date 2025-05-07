@@ -54,10 +54,13 @@ public class CommentsController : Controller
         ViewData["messagesCount"] = await IunitofWork.Message.GetCountAsync();
         ViewData["StudentCount"] = await IunitofWork.student_CourseRepo.GetCountAsync();
         ViewData["LessonCount"] = await IunitofWork.Lesson.GetCountAsync();
-        ViewData["RevisionCount"] = await IunitofWork.Lesson.GetCountAsync();
+        ViewData["RevisionCount"] = await IunitofWork.Revision.GetCountAsync();
         ViewData["questionCount"] = await IunitofWork.questions.GetCountAsync();
         ViewData["CourseCount"] = await IunitofWork.Course.GetCountAsync();
+        ViewData["AssessmentCount"] = await IunitofWork.Assessment.GetCountAsync();
+        ViewData["examCount"] = await IunitofWork.Exam.GetCountAsync();
         ViewData["CommentCount"] = await IunitofWork.Comment.GetCountAsync();
+
     }
     // Display list of comments by student
     public async Task<IActionResult> ByStudent(int studentId)
